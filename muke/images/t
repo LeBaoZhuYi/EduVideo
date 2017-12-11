@@ -1,0 +1,55 @@
+demo.html:661 GET file:///home/guoguo/lebao/edu_video/muke/images/hot.png net::ERR_FILE_NOT_FOUND
+demo.html:690 GET file:///home/guoguo/lebao/edu_video/muke/images/jp.png net::ERR_FILE_NOT_FOUND
+demo.html:690 GET file:///home/guoguo/lebao/edu_video/muke/images/down.png net::ERR_FILE_NOT_FOUND
+jquery.SuperSlide.2.1.1.js:1 Uncaught SyntaxError: Unexpected identifier
+zhuce.js:25 Uncaught TypeError: Cannot set property 'onclick' of null
+    at zhuce.js:25
+(anonymous) @ zhuce.js:25
+demo.html:112 Uncaught TypeError: jQuery(...).slide is not a function
+    at demo.html:112
+(anonymous) @ demo.html:112
+demo.html:111 GET file:///home/guoguo/lebao/edu_video/muke/images/rbg1.png net::ERR_FILE_NOT_FOUND
+demo.html:430 Uncaught TypeError: jQuery(...).slide is not a function
+    at demo.html:430
+(anonymous) @ demo.html:430
+demo.html:570 Uncaught TypeError: jQuery(...).slide is not a function
+    at demo.html:570
+(anonymous) @ demo.html:570
+demo.html:616 Uncaught TypeError: jQuery(...).slide is not a function
+    at demo.html:616
+(anonymous) @ demo.html:616
+demo.html:735 Uncaught TypeError: jQuery(...).slide is not a function
+    at demo.html:735
+(anonymous) @ demo.html:735
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/leftnav.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/timebg.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/patx.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/arrow.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/ycbg.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/play.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/play1.png net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
+jquery1.42.min.js:36 GET file:///home/guoguo/lebao/edu_video/muke/images/link_bg.jpg net::ERR_FILE_NOT_FOUND
+(anonymous) @ jquery1.42.min.js:36
+ready @ jquery1.42.min.js:26
+L @ jquery1.42.min.js:33
