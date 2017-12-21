@@ -93,7 +93,7 @@ a,input{
     font-size: 14px;
     color: #999999;
     padding-left: 25px;
-    background: url("../images_new/c_login_icon.png") no-repeat;
+    background: url("../img/images_new/c_login_icon.png") no-repeat;
 }
 .help_info dd a.d_app{
     background-position: 0 -670px;
@@ -145,25 +145,25 @@ a,input{
     cursor: default;
 }
 .cl_banner li a.clb_1{
-    background: #001d51 url("../images_new/index_banner/cl_banner1.png") no-repeat center center;
+    background: #001d51 url("../img/images_new/index_banner/cl_banner1.png") no-repeat center center;
 }
 .cl_banner li a.clb_2{
-    background: #062146 url("../images_new/index_banner/cl_banner2.jpg") no-repeat center center;
+    background: #062146 url("../img/images_new/index_banner/cl_banner2.jpg") no-repeat center center;
 }
 .cl_banner li a.clb_3{
-    background: #fff url("../images_new/index_banner/cl_banner3.jpg") no-repeat center center;
+    background: #fff url("../img/images_new/index_banner/cl_banner3.jpg") no-repeat center center;
     background-size: auto 100%;
 }
 .cl_banner li a.clb_4{
-    background: #fff url("../images_new/index_banner/cl_banner4.jpg") no-repeat center center;
+    background: #fff url("../img/images_new/index_banner/cl_banner4.jpg") no-repeat center center;
     background-size: cover;
 }
 .cl_banner li a.clb_5{
-    background: #fff url("../images_new/index_banner/cl_banner5.jpg") no-repeat center center;
+    background: #fff url("../img/images_new/index_banner/cl_banner5.jpg") no-repeat center center;
     background-size: cover;
 }
 .cl_banner li a.clb_6{
-    background: #7136e8 url("../images_new/index_banner/cl_banner6.jpg") no-repeat center center;
+    background: #7136e8 url("../img/images_new/index_banner/cl_banner6.jpg") no-repeat center center;
     background-size: auto 100%;
 }
 .cl_banner dl{
@@ -216,7 +216,7 @@ a,input{
     line-height: 16px;
     color: #ff5151;
     padding-left: 15px;
-    background: url("../images_new/c_login_icon.png") no-repeat 0 -365px;
+    background: url("../img/images_new/c_login_icon.png") no-repeat 0 -365px;
 }
 .cl_login_head span:first-child{
     display: block;
@@ -239,7 +239,7 @@ a,input{
     line-height: 16px;
     font-weight: 600;
     padding-right: 15px;
-    background: url("../images_new/c_login_icon.png") no-repeat 51px -787px;
+    background: url("../img/images_new/c_login_icon.png") no-repeat 51px -787px;
 }
 .par_reg:hover{
     opacity: .7;
@@ -270,7 +270,7 @@ span.quick_reg a:first-child:after{
     display: block;
     position: absolute;
     height: 16px;
-    background: url("../images_new/c_login_icon.png") no-repeat;
+    background: url("../img/images_new/c_login_icon.png") no-repeat;
 }
 .cl_login_fill:before{
     top: 42px;
@@ -419,7 +419,7 @@ span.quick_reg a:first-child:after{
     font-size: 12px;
     color: #666666;
     padding-left: 42px;
-    background: url("../images_new/c_login_icon.png") no-repeat;
+    background: url("../img/images_new/c_login_icon.png") no-repeat;
 
 }
 .d_app_name>a:first-child{
@@ -448,7 +448,7 @@ span.quick_reg a:first-child:after{
     bottom: 5%;
     width: 32px;
     height: 31px;
-    background: url("../images_new/down_more.png") no-repeat center top;
+    background: url("../img/images_new/down_more.png") no-repeat center top;
     margin-left: -16px;
     margin-bottom: -15px;
     -webkit-animation: down_more_move 1s linear infinite;
@@ -477,7 +477,7 @@ span.quick_reg a:first-child:after{
     left: 50%;
     width: 298px;
     height: 53px;
-    background: url("../images_new/stu_par_change_icon.png") no-repeat center top;
+    background: url("../img/images_new/stu_par_change_icon.png") no-repeat center top;
     margin-left: -149px;
     z-index: 9;
 }
@@ -513,25 +513,25 @@ span.quick_reg a:first-child:after{
     height: 710px;
 }
 .par_stu_instr>div.v1{
-    background: #ffffff url("../images_new/ps_instr.png") no-repeat center 0;
+    background: #ffffff url("../img/images_new/ps_instr.png") no-repeat center 0;
 }
 .par_stu_instr>div.v2{
-    background: #eef7f6 url("../images_new/ps_instr.png") no-repeat center -720px;
+    background: #eef7f6 url("../img/images_new/ps_instr.png") no-repeat center -720px;
 }
 .par_stu_instr>div.v3{
-    background: #ffffff url("../images_new/ps_instr.png") no-repeat center -1442px;
+    background: #ffffff url("../img/images_new/ps_instr.png") no-repeat center -1442px;
 }
 .tea_instr>div.v1{
-    background: #ffffff url("../images_new/teacher_instr.png") no-repeat center 0;
+    background: #ffffff url("../img/images_new/teacher_instr.png") no-repeat center 0;
 }
 .tea_instr>div.v2{
-    background: #eef7f6 url("../images_new/teacher_instr.png") no-repeat center -712px;
+    background: #eef7f6 url("../img/images_new/teacher_instr.png") no-repeat center -712px;
 }
 .tea_instr>div.v3{
-    background: #ffffff url("../images_new/teacher_instr.png") no-repeat center -1435px;
+    background: #ffffff url("../img/images_new/teacher_instr.png") no-repeat center -1435px;
 }
 .tea_instr>div.v4{
-    background: #eef7f6 url("../images_new/teacher_instr.png") no-repeat center -2145px;
+    background: #eef7f6 url("../img/images_new/teacher_instr.png") no-repeat center -2145px;
 }
 .par_stu_instr>div>a,.tea_instr>div>a{
     display: block;
@@ -586,7 +586,7 @@ span.quick_reg a:first-child:after{
     vertical-align: middle;
 }
 .new_foot_login{
-    background: #0dc2b3 url("../images_new/new_footer_bg.jpg") no-repeat center;
+    background: #0dc2b3 url("../img/images_new/new_footer_bg.jpg") no-repeat center;
     background-size: cover;
 }
 .team_partner{
@@ -624,7 +624,7 @@ span.quick_reg a:first-child:after{
 .zx_slogan{
     width: 100%;
     height: 22px;
-    background: url("../images_new/new_foot_icon.png") no-repeat center top;
+    background: url("../img/images_new/new_foot_icon.png") no-repeat center top;
     margin-top: 40px;
 }
 .ves_contact_us.login{
@@ -671,7 +671,7 @@ span.quick_reg a:first-child:after{
     display: inline-block;
     line-height: 26px;
     padding-left: 30px;
-    background: url("../images_new/new_foot_icon.png") no-repeat -213px -34px;
+    background: url("../img/images_new/new_foot_icon.png") no-repeat -213px -34px;
 }
 .copyright_l1 a:hover,.copyright_l2 a:hover{
     opacity: .7;
@@ -679,17 +679,17 @@ span.quick_reg a:first-child:after{
 }
 .index_section2{
     height: 1000px;
-    background: url("../images_px/index_section2.jpg") no-repeat center;
+    background: url("../img/images_px/index_section2.jpg") no-repeat center;
     background-size: cover;
 }
 .index_section3{
     height: 1000px;
-    background: url("../images_px/index_section3.jpg") no-repeat center;
+    background: url("../img/images_px/index_section3.jpg") no-repeat center;
     background-size: cover;
 }
 .index_section4{
     height: 1000px;
-    background: url("../images_px/index_section4.jpg") no-repeat center;
+    background: url("../img/images_px/index_section4.jpg") no-repeat center;
     background-size: cover;
 }
 /** ADD By hanzhang 20170512 第三方登录 +*/
@@ -733,28 +733,28 @@ span.quick_reg a:first-child:after{
     width: 100%;
 }
 .thirdparty_box>a>.third_weibo{
-     background : url("../images_new/thrid_party_logos.png") no-repeat 0px 0px;
+     background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px 0px;
 }
 .thirdparty_box>a>.third_wechat{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -91px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -91px;
 }
 .thirdparty_box>a>.third_qq{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -183px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -183px;
 }
 .thirdparty_box>a>.third_changyan{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -274px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -274px;
 }
 .thirdparty_box>a:hover>.third_weibo{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -46px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -46px;
 }
 .thirdparty_box>a:hover>.third_wechat{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -137px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -137px;
 }
 .thirdparty_box>a:hover>.third_qq{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -228px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -228px;
 }
 .thirdparty_box>a:hover>.third_changyan{
-    background : url("../images_new/thrid_party_logos.png") no-repeat 0px -319px;
+    background : url("../img/images_new/thrid_party_logos.png") no-repeat 0px -319px;
 }
 
 .thirdparty_box>a:hover {
