@@ -23,7 +23,7 @@ hs_err_pid*
 target/*
 
 # project file
-.iml
+*.iml
 .idea
-.project
-.classpath
+*.project
+*.classpath
