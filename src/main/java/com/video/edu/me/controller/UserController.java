@@ -1,7 +1,7 @@
 package com.video.edu.me.controller;
 
 import com.video.edu.me.model.User;
-import com.video.edu.me.biz.UserBiz;
+//import com.video.edu.me.biz.UserBiz;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +20,21 @@ public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@Autowired
-	UserBiz userService;
-
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	@ResponseBody
-	private User login(String login_name, String password, HttpSession session) throws IllegalArgumentException, IllegalAccessException {
-		User user = null;
-//		user = userService.login(login_name, new Tool().encodeMD5(password));
-		//map.put相当于request.setAttribute方法
-		if(user != null){
+//	@Autowired
+//	UserBiz userService;
+//
+//	@RequestMapping(value = "/login", method = RequestMethod.GET)
+//	@ResponseBody
+//	private User login(String login_name, String password, HttpSession session) throws IllegalArgumentException, IllegalAccessException {
+//		User user = null;
+////		user = userService.login(login_name, new Tool().encodeMD5(password));
+//		//map.put相当于request.setAttribute方法
+//		if(user != null){
 //			session.setAttribute("username", user.getUsername());
 //			session.setAttribute("user_id", user.getId());
-		}
-		return user;
-	}
+//		}
+//		return user;
+//	}
 
 }
 

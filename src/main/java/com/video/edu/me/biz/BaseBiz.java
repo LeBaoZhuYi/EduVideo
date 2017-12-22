@@ -18,35 +18,6 @@ public class BaseBiz<T> {
 	 */
 	@Autowired
 	private BaseDao<T> baseDao;
-	
-	public ArrayList<T> all() {
-		return baseDao.all();
-	}
-
-	public int update(T t){
-		return baseDao.update(t);
-	}
-	
-	public int insert(T t) {
-		return baseDao.insert(t);
-	}
-
-	public int delete(int id) {
-		return baseDao.delete(id);
-	}
-
-	public ArrayList<T> find(Map map) {
-		return baseDao.find(map);
-	}
-
-	
-	public T findByIntId(int id) {
-		return baseDao.findByIntId(id);
-	}
-	
-	public T findByStringId(String t_id) {
-		return baseDao.findByStringId(t_id);
-	}
 
 	public BaseDao<T> getBaseDao() {
 		return baseDao;
