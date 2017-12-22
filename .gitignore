@@ -25,5 +25,6 @@ target/*
 # project file
 *.iml
 .idea
+.settings
 *.project
 *.classpath
