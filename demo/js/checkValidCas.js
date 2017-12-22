@@ -9,7 +9,7 @@ function checkValidCas(casUrl,serviceUrl,timeout,callback){
 	if(!timeout){
 		timeout=1000;
 	}
-	var loginURL = casUrl + "/login?service=" + encodeURIComponent(serviceUrl);
+	var loginURL = casUrl + "/login?biz=" + encodeURIComponent(serviceUrl);
 	$.ajax({
 		url: loginURL,
 		type: "GET",
