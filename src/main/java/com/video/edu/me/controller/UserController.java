@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 //你好，我是乐宝
 //哼，我才是
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
