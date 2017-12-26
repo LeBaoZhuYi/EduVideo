@@ -5,7 +5,7 @@ import com.video.edu.me.entity.WatchAuthorityExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface WatchAuthorityMapper {
+public interface WatchAuthorityMapper extends BaseDao<WatchAuthority, WatchAuthorityExample>{
     int countByExample(WatchAuthorityExample example);
 
     int deleteByExample(WatchAuthorityExample example);

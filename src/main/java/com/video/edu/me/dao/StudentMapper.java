@@ -5,7 +5,7 @@ import com.video.edu.me.entity.StudentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface StudentMapper {
+public interface StudentMapper extends BaseDao<Student, StudentExample>{
     int countByExample(StudentExample example);
 
     int deleteByExample(StudentExample example);

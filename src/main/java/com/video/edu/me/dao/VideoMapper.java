@@ -5,7 +5,7 @@ import com.video.edu.me.entity.VideoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface VideoMapper {
+public interface VideoMapper extends BaseDao<Video, VideoExample>{
     int countByExample(VideoExample example);
 
     int deleteByExample(VideoExample example);

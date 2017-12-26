@@ -5,7 +5,7 @@ import com.video.edu.me.entity.PlayPlanExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface PlayPlanMapper {
+public interface PlayPlanMapper extends BaseDao<PlayPlan, PlayPlanExample>{
     int countByExample(PlayPlanExample example);
 
     int deleteByExample(PlayPlanExample example);

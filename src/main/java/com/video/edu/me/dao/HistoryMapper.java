@@ -5,7 +5,7 @@ import com.video.edu.me.entity.HistoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface HistoryMapper {
+public interface HistoryMapper extends BaseDao<History, HistoryExample>{
     int countByExample(HistoryExample example);
 
     int deleteByExample(HistoryExample example);
