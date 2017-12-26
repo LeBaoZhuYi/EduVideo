@@ -1,6 +1,6 @@
 package com.video.edu.me.controller;
 
-import com.video.edu.me.model.User;
+import com.video.edu.me.entity.User;
 //import com.video.edu.me.biz.UserBiz;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
