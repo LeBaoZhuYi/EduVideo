@@ -18,9 +18,10 @@ public class PlayPlanController {
 
     @Autowired
     PlayPlanService playPlanService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private boolean creat(PlayPlan playPlan) throws IllegalArgumentException, IllegalAccessException{
+    private boolean creat(PlayPlan playPlan) throws IllegalArgumentException, IllegalAccessException {
         return playPlanService.insertSelective(playPlan) != 0;
     }
 
@@ -38,7 +39,7 @@ public class PlayPlanController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private boolean update(PlayPlan playPlan) throws IllegalArgumentException, IllegalAccessException{
+    private boolean update(PlayPlan playPlan) throws IllegalArgumentException, IllegalAccessException {
         return playPlanService.updateByPrimaryKey(playPlan) != 0;
     }
 

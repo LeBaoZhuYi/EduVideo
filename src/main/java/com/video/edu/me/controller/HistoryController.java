@@ -18,9 +18,10 @@ public class HistoryController {
 
     @Autowired
     HistoryService historyService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private boolean create(History history)throws IllegalArgumentException, IllegalAccessException{
+    private boolean create(History history) throws IllegalArgumentException, IllegalAccessException {
         return historyService.insertSelective(history) != 0;
     }
 
@@ -38,7 +39,7 @@ public class HistoryController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private boolean update(History history) throws IllegalArgumentException, IllegalAccessException{
+    private boolean update(History history) throws IllegalArgumentException, IllegalAccessException {
         return historyService.updateByPrimaryKey(history) != 0;
     }
 }

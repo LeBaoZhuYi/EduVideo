@@ -18,9 +18,10 @@ public class WatchAuthorityController {
 
     @Autowired
     WatchAuthorityService watchAuthorityService;
-    @RequestMapping(value = "/creat", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private boolean creat(WatchAuthority watchAuthority)throws IllegalArgumentException, IllegalAccessException{
+    private boolean creat(WatchAuthority watchAuthority) throws IllegalArgumentException, IllegalAccessException {
         return watchAuthorityService.insertSelective(watchAuthority) != 0;
     }
 
@@ -38,7 +39,7 @@ public class WatchAuthorityController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private boolean update(WatchAuthority watchAuthority) throws IllegalArgumentException, IllegalAccessException{
+    private boolean update(WatchAuthority watchAuthority) throws IllegalArgumentException, IllegalAccessException {
         return watchAuthorityService.updateByPrimaryKey(watchAuthority) != 0;
     }
 }

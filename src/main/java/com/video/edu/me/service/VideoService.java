@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class VideoService extends BaseService<Video, VideoExample>{
+public class VideoService extends BaseService<Video, VideoExample> {
     private static final Logger logger = LoggerFactory.getLogger(VideoService.class);
 
     private VideoMapper videoMapper;
 
     @Resource
-    public void setVideoMapper(VideoMapper videoMapper){
+    public void setVideoMapper(VideoMapper videoMapper) {
         this.videoMapper = videoMapper;
         super.setBaseDao(videoMapper);
     }

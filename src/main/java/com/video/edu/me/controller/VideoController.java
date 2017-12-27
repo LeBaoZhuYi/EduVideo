@@ -18,9 +18,10 @@ public class VideoController {
 
     @Autowired
     VideoService videoService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private boolean creat(Video video) throws IllegalArgumentException, IllegalAccessException{
+    private boolean creat(Video video) throws IllegalArgumentException, IllegalAccessException {
         return videoService.insertSelective(video) != 0;
     }
 
@@ -38,7 +39,7 @@ public class VideoController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private boolean update(Video video) throws IllegalArgumentException, IllegalAccessException{
+    private boolean update(Video video) throws IllegalArgumentException, IllegalAccessException {
         return videoService.updateByPrimaryKey(video) != 0;
     }
 }
