@@ -80,5 +80,11 @@ public class UserController {
 	private boolean delete(int id) throws IllegalArgumentException, IllegalAccessException {
 		return userService.deleteByPrimaryKey(id) != 0;
 	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@ResponseBody
+	private boolean update(User user) throws IllegalArgumentException, IllegalAccessException{
+		return userService.updateByPrimaryKey(user) != 0;
+	}
 }
 
