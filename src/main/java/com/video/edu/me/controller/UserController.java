@@ -1,6 +1,7 @@
 package com.video.edu.me.controller;
 
 import com.video.edu.me.entity.User;
+import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 //你好，我是乐宝
 //哼，我才是
@@ -88,6 +93,58 @@ public class UserController {
     @ResponseBody
     private boolean update(User user) throws IllegalArgumentException, IllegalAccessException {
         return userService.updateByPrimaryKey(user) != 0;
+    }
+
+    /**
+     * 获取状态在0-2的时间早于今天凌晨产生的用户，按utime排序
+     * @return
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     */
+    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    @ResponseBody
+    private List<User> test1() throws IllegalArgumentException, IllegalAccessException {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria1 = userExample.createCriteria();
+
+        /**
+         * 获取今天0点
+         */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Date zero = calendar.getTime();
+
+        /**
+         * 设置排序的变量
+         */
+        userExample.setOrderByClause("utime");
+
+        /**
+         * 添加条件
+         */
+        criteria1.andStatusBetween((byte)0, (byte)1).andCtimeGreaterThan(zero);
+
+        return userService.selectByExample(userExample);
+    }
+
+    /**
+     * 获取loginName为2或3的用户
+     * @return
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     */
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    @ResponseBody
+    private List<User> test2() throws IllegalArgumentException, IllegalAccessException {
+        UserExample userExample = new UserExample();
+
+        userExample.createCriteria().andLoginNameEqualTo("2");
+        userExample.or().andLoginNameEqualTo("3");
+
+        return userService.selectByExample(userExample);
     }
 }
 
