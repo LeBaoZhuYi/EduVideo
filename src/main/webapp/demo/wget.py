@@ -1,7 +1,7 @@
 # coding=utf8
 import re
 import os
-with open('login.bak.html', 'r') as read:
+with open('student.html', 'r') as read:
     for data in read.readlines():
         href_re = re.match('.*href="([A-Za-z0-9:\/\._\-]+)\?.*"', data)
         src_re = re.match('.*src="([A-Za-z0-9:\/\._\-]+)\?.*"', data)
