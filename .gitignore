@@ -29,4 +29,8 @@ target/*
 *.project
 *.classpath
 Procfile
+<<<<<<< Updated upstream
 /target/
+=======
+/target
+>>>>>>> Stashed changes
