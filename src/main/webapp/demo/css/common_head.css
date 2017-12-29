@@ -195,18 +195,9 @@ body{
     padding: 20px 0;
     margin: 0 auto;
 }
-.new_main{
-    float: right;
-    width: 830px;
-}
-/*banner尺寸变大调整布局*/
-.new_main_max{
-    float: left;
-    width: 1000px;
-}
 .layout{
     float: left;
-    width: 615px;
+    width: 600px;
     word-wrap: break-word;
 }
 .layout_rgt{
@@ -215,15 +206,10 @@ body{
     margin-left: 15px;
 }
 .layout_lft{
-    float: right;
-    width: 170px;
-}
-/*banner尺寸变大调整布局*/
-.layout_lft_max{
     float: left;
     width: 170px;
+    margin-right:15px;
 }
-
 /*面包屑*/
 .bread_crumbs{
     line-height: 34px;

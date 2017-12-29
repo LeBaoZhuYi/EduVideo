@@ -58,11 +58,7 @@
     display: inline-block;
     width: 21px;
     height: 14px;
-    background: url("../images_new/new_rgt_icon.png") no-repeat -149px -113px;
-    margin-left: 5px;
-}
-.person_name i.exp_vip{
-    background-position: -149px -47px;
+    margin-left: -10px;
 }
 .cls,.stu_id{
     color: #999999;

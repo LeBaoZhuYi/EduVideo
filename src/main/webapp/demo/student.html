@@ -1,678 +1,122 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-	<title>智学网-学生端-首页</title>
-	<script type="text/javascript" src="js/common.js"></script>
-	<!--template-->
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="keywords" content="智学, 智学网, 智学查分">
-	<meta name="description" content="智学网是以学生在线学习和云阅卷服务为主体，为广大师生提供海量题库、高速扫描阅卷、在线评测、错题解析、学生个性学习中心等功能的在线教育平台与应用工具。" />
-	<link type="image/x-icon" href="img/zhixue.ico" rel="shortcut icon"/>
-	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-	<!--/template-->
-	<link type="text/css" rel="stylesheet" href="css/base.css" />
-	<link type="text/css" rel="stylesheet" href="css/container_tk.css" />
-	<link type="text/css" rel="stylesheet" href="css/common_head.css" />
-	<link type="text/css" rel="stylesheet" href="css/common_left.css" />
-	<link type="text/css" rel="stylesheet" href="css/common_right.css" />
-	<link type="text/css" rel="stylesheet" href="css/common_foot.css" />
-	<link type="text/css" rel="stylesheet" href="css/stu_index.css" />
-	<link type="text/css" rel="stylesheet" href="css/operative_banner.css">
-	<link type="text/css" rel="stylesheet" href="css/ui-dialog.css" />
+    <title>北京爱特熠星多元文化</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <!--/template-->
+    <link type="text/css" rel="stylesheet" href="css/base.css"/>
+    <link type="text/css" rel="stylesheet" href="css/common_head.css"/>
+    <link type="text/css" rel="stylesheet" href="css/common_left.css"/>
+    <link type="text/css" rel="stylesheet" href="css/common_right.css"/>
+    <link type="text/css" rel="stylesheet" href="css/stu_index.css"/>
 </head>
-
-<body>
-<script type="text/javascript">
-    var basePath = 'http://www.zhixue.com:80/container';
-    var zhixuebaoRootUrl = 'http://www.zhixue.com:80/zhixuebao';
-    var studentRootUrl = 'http://www.zhixue.com:80/student';
-    var gaokaoqUrl = 'http://zhixue.gaokaoq.com';
-    var isFirstView = true;
-</script>
-<!--头部-->
-<script type="text/javascript" src="js/dialog-min.js"></script>
-<!--template-->
-<!DOCTYPE html><html><head><link href=css/header.35d7286d780acb2e4892cf157dafd587.css?3c1fdee168836e26eac0 rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=http://static.zhixue.com/commonhead/101011/static/js/manifest.1547e8f6cebb18bced2e.js?3c1fdee168836e26eac0></script><script type=text/javascript src=http://static.zhixue.com/commonhead/101011/static/js/vendor.49ee6bf4861f83e27387.js?3c1fdee168836e26eac0></script><script type=text/javascript src=http://static.zhixue.com/commonhead/101011/static/js/module/header.2bf88c62f23cbc678d5a.js?3c1fdee168836e26eac0></script></body></html>
-<script type="text/javascript" src="js/sso.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<!-- <div id="headTemplate"></div> -->
-<script type="text/javascript">
-    var currentUser = {"avatar":"http:\/\/cytkapp.bjdn.openstorage.cn\/zhixue\/avatar\/bjcssp_4444000020020446259_bjcssp_4444000020020446259_psb (10).jpg","id":"4444000020020446259","isAdmin":false,"loginName":"zx36884081","mobile":"18632212689","name":"\u7941\u5C0F\u9E4F","role":"student"};
-    var serviceUrl = 'http://www.zhixue.com:80/container/ssoservice.jsp';
-    var casUrl = 'http://sso.zhixue.com/sso_alpha/';
-    var basePath = 'http://www.zhixue.com:80/container';
-
-    /*
-        (function(window,jQuery){
-            var cookieId = $.cookie("tlsysSessionId");
-            var userId="";
-            var role="";
-            if(currentUser!=undefined||currentUser!=null){
-                userId=currentUser.id;
-                role=currentUser.role;
-            }
-            var headRole="getStudentHead";
-            $.ajax({
-                url: basePath + "/commonModule/"+headRole+"/?callback=?",
-                type: "GET",
-                data:{"r":cookieId+userId+role},
-                dataType:"JSONP",
-                cache:true,
-                jsonp: 'callback',
-                jsonpCallback: headRole,
-                success: function(data){
-                    //��HTML���н���
-                    var html=$('<div/>').html(data.html).text();
-                    $("#headTemplate").html(html);
-                },
-                error:function(){
-                }
-            });
-        })(window,jQuery);
-      */
-</script>
-<!--/template-->
 <div class="new_warp clearfix">
-	<div class="new_main_max">
-		<!-- banner1 -->
-
-		<!--左列-->
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<title>左列</title>
-		</head>
-		<body>
-		<!--左列-->
-		<div class="layout_lft_max">
-
-			<div group="null">
-				<a  class="a_menu on"
-					id="con_menu1"
-					href="/container/container/student/index/">
-					智学园地
-				</a>
-
-				<ul class="garden_drop ">
-
-					<li group="daily">
-						<a  id="con_subMenu2"  class="icon_a"  href="/container/daily/index/">
-							每日任务
-
-						</a>
-
-					</li>
-
-					<li group="">
-						<a  id="con_subMenu3"  class="icon_b"  href="/container/container/student/index/#recommond">
-							小智推荐
-
-						</a>
-
-					</li>
-
-				</ul>
-
-			</div>
-
-			<div group="">
-				<a  class="a_menu mt10 rel"
-					id="con_menu5"
-					href="/container/sns">
-					班级动态
-				</a>
-
-				<ul class="sl_drop ">
-
-					<li group="">
-						<a  id="con_subMenu7"  class="icon_e"  href="/container/sns/comment">
-							评论
-
-						</a>
-
-					</li>
-
-					<li group="">
-						<a  id="con_subMenu8"  class="icon_f"  href="/container/personal/index">
-							私信
-
-						</a>
-
-						<ul class="private_drop  hidenone">
-
-							<li><a id="con_ssubMenu9" class="complainMessage" href="javascript:void(0);">成绩申诉</a></li>
-
-						</ul>
-
-					</li>
-
-				</ul>
-
-			</div>
-
-
-
-			<script>
-                (function(window,jQuery){
-                    var conSubMenus = $("a[id^='con_subMenu']");
-                    conSubMenus.click(function() {
-                        conSubMenus.removeClass("on");
-                        $(this).addClass("on");
-                    });
-                    var conSubSubMenus = $("a[id^='con_ssubMenu']");
-                    conSubSubMenus.click(function() {
-                        conSubSubMenus.removeClass("on");
-                        $(this).addClass("on");
-                    });
-                })(window,jQuery);
-			</script>
-
-		</div>
-		</body>
-		</html>
-
-		<!--中列-->
-		<div class="layout">
-			<!-- banner2 -->
-
-			<div class="index_banner2" id="con_divBanner2">
-				<ul>
-
-					<li style="display:none;" id="con_banner0">
-						<a target="_blank" href="http://http://www.zhixue.com/pocket/student/select/course?type=28&from=banner">
-							<img src="img/96eda2184abf48c2b3cc93bc53580942.jpg" alt="寒假中考复习系统班" title="寒假中考复习系统班" style="width:100%; height:100%;" />
-						</a>
-					</li>
-
-					<li style="display:none;" id="con_banner1">
-						<a target="_blank" href="http://www.zhixue.com/login/downloadapps/?from=smallbanner_stu">
-							<img src="img/c7b222e86c554879b654eb1634dd7aa7.jpg" alt="家长端app下载" title="家长端app下载" style="width:100%; height:100%;" />
-						</a>
-					</li>
-
-				</ul>
-				<a id="con_btnCloseBnn" class="close" href="javascript:void(0);"></a>
-				<a id="con_btnLeftBnn" class="ves_arrow lft" href="javascript:void(0);"></a>
-				<a id="con_btnRightBnn" class="ves_arrow rgt" href="javascript:void(0);"></a>
-				<dl class="change_dot clearfix">
-
-					<dd>
-						<a id="con_btnCtrlBnn0" order="0" href="javascript:void(0);"></a>
-					</dd>
-
-					<dd>
-						<a id="con_btnCtrlBnn1" order="1" href="javascript:void(0);"></a>
-					</dd>
-
-				</dl>
-			</div>
-
-			<!-- 其他模块 -->
-
-			<div  id="daily"  class="day_task" group="daily">
-				<div class="new_title clearfix">
-					<span class="fl">每日任务</span>
-					<a class="fr" href="http://www.zhixue.com:80/container/daily/index/">显示全部></a>
-				</div>
-				<div id="con_com1"><div id="com_sDaily"></div>
-					<script type="remark-template" id="sDaily">
-
-						{foreach key=i item=mission from=$missions}
-						<div class="task_list" id="daily_mission_{$i}" style="display:none;">
-							<div class="task_list_top clearfix">
-								<div class="task_lft">
-									<div class="task_instr">
-										<p class="instr1"><span>{$mission.creatorName}老师布置了一项任务</span><span>截止时间：{$mission.endTime|date_format:"%m月%d日%H:%M"}</span></p>
-
-										<p class="instr2" title="{$mission.missionTitle}">{if $mission.subjectName neq ''}【{$mission.subjectName}】{/if}{$mission.missionTitle | truncate:43:"..."}</p>
-
-										<p class="instr3">
-											<span class="pro_bar"><span style="width: {100 * $mission.completedAmount / $mission.totalAmount}%"></span></span>
-											<span class="num"><span>{$mission.completedAmount}</span>/{$mission.totalAmount}</span>
-										</p>
-									</div>
-								</div>
-								{if $mission.status eq 1}
-								<a class="task_rgt" target="_blank" href="{if $mission.missionAddr neq ''}{$mission.missionAddr}{else}javascript:void(0);{/if}">去完成</a>
-								{else}
-								<a class="task_rgt over" href="javascript:void(0);">已完成</a>
-								{/if}
-							</div>
-							<div class="task_list_btm"></div>
-						</div>
-						{/foreach}
-
-					</script>
-					<script type="text/javascript" src="js/index.js"></script></div>
-			</div>
-
-			<div  id="recommond"  class="day_task" group="null">
-				<div class="new_title clearfix">
-					<span class="fl">小智推荐</span>
-				</div>
-				<div id="con_com2"><!DOCTYPE html>
-					<html>
-					<head>
-						<title>小智推荐</title>
-						<script type="text/javascript">
-                            var ajaxUrl = '/pocket/student/course/recommend';
-
-                            $(document).ready(function () {
-                                $("#common_r").hide();
-                                $("#iframe_r").hide();
-                                if(ajaxUrl != 'error'){
-                                    $.ajax({
-                                        type: "GET",
-                                        url: ajaxUrl,
-                                        dataType: "json",
-                                        async: false,
-                                        cache:false,
-                                        success: function(data){
-                                            //console.log(data);
-                                            if(data.code == '1'){
-                                                $("#pocketContentDisplay").attr("src",data.value);
-                                                $("#iframe_r").show();
-                                            }else{
-                                                $("#iframe_r").remove();
-                                                $("#common_r").show();
-                                            }
-                                        },
-                                        error: function(e){
-                                            $("#iframe_r").remove();
-                                            $("#common_r").show();
-                                        }
-                                    });
-                                }else{
-                                    $("#iframe_r").remove();
-                                    $("#common_r").show();
-                                }
-                            });
-
-						</script>
-					</head>
-
-					<body>
-					<div id="iframe_r" style="margin-top:10px;">
-						<iframe id="pocketContentDisplay" frameborder="0" scrolling="no" width="594px" height="700px"></iframe>
-					</div>
-
-					<div id="common_r">
-						<p class="step_instr">“在浓雾中有一座隐藏的白塔，据说这座塔里储存着让人梦寐以求的财富，但只有真正的智慧之人才能打开。勇敢的少年，此时你的眼前就是通往白塔的道路，要想探取神秘宝藏、获得智慧之冠，你必须查缺补漏自己的知识盲区方能集齐九把智慧之钥。快开启这段寻钥之旅，打开白塔神秘的大门吧。”
-						</p>
-						<div class="check_path" id="middle_recommend">
-							<div class="path first" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=05&from=web-container-index_middle">
-				<span class="instr_txt">
-			听老人说在路的西北有一座秘密花园，这座花园里有着世人做梦也想不到的美景，那里的白云是装在瓶子里的，
-			彩虹挂在树上，五“光”十色的辐射家谱，斑斓冷暖大气层让人目不暇接，听说能打开白塔的神秘之钥就埋在秘密花园的苹果树下，少年你何不去秘密花园一探究竟……
-		</span>
-								<a class="path_num first on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path second" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=03&from=web-container-index_middle">
-				<span class="instr_txt">
-			在海的那边有一座日不落帝国，少年你继续沿着此时方向，去寻找大不列颠的风情，别忘了去"世界时区"的起点——格林威治天文台，
-			记得带回来能打开白塔的英语之钥，听说它就放在为地球经线的起始点上哦……
-		</span>
-								<a class="path_num second on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path third" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=14&from=web-container-index_middle">
-				<span class="instr_txt">
-			路的北方有着一个神秘的海湾——好望角，在这里强劲的西风急流掀起的惊涛骇浪常年不断，想要破解洋流的奥秘，想要寻找地理之钥，少年你准备好冲锋的船只与号角了吗？
-		</span>
-								<a class="path_num third on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path fourth" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=13&from=web-container-index_middle">
-				<span class="instr_txt">
-			神秘茂盛的热带植物，可爱活泼的史前动物，少年，你真的了解你所在这个的世界么？追随达尔文的足迹，揭开物种起源的奥秘，快来寻找亚马逊雨林里暗藏的生物之钥吧。
-		</span>
-								<a class="path_num fourth on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path fifth" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=12&from=web-container-index_middle">
-				<span class="instr_txt">
-			古老的尼罗河水汩汩流过，在一望无际的沙漠尽头伫立着埃及神秘的金字塔，有人说法老的千年宝藏就放在其中，带上指南针和火把，
-			少年，想要来一场古老文明的探险之旅吗？听说法老金字塔里就有传说中的历史之钥哦。
-		</span>
-								<a class="path_num fifth on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path sixth" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=01&from=web-container-index_middle">
-				<span class="instr_txt">
-			华夏文明源远流长，想要知道象形文字的起源么？风、雅、颂，诸子百家，想要知道古老中华大地上曾经传颂的古老传说吗？少年，何不带上行李来场说走就走的旅行，不远处的长城暗藏着语文之钥，快来领略汉语文学的魅力吧。
-		</span>
-								<a class="path_num sixth on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path seventh" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=27&from=web-container-index_middle">
-				<span class="instr_txt">
-			凯撒大帝曾经说过，“Veni, Vedi, Vici （我至，我见，我征服  ）”古人曾说：“辉煌属于希腊，伟大归于罗马”，
-			作为西方民主的起源，罗马不得不去，据说在道路东北的罗马斗兽场埋藏有政治之钥，少年你准备踏上这条权力之路吗？
-		</span>
-								<a class="path_num seventh on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path eighth" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=02&from=web-container-index_middle">
-				<span class="instr_txt">
-			在遥远的东方有一座黑压压的城堡，里面蹲满了狡猾的树鸦，少年，你必须先回答了树鸦身上的算式，才能打开城堡的大门，拿到数学之钥哦。
-		</span>
-								<a class="path_num eighth on" href="javascript:void(0);"></a>
-							</div>
-							<div class="path ninth" _href="http://www.zhixue.com:80/student/student/exercise/wrongTopicsPackage/?subjectCode=06&from=web-container-index_middle">
-				<span class="instr_txt">
-			智勇双全的少年，你已经集齐了物理、英语、地理、生物、历史、语文、政治、数学这八把钥匙，恭喜你终于站到白塔的门前。不过，你还有一步之遥才能打开白塔的大门哦，少年，你做好挑战化学之钥的准备，收获最后的宝藏了么？
-		</span>
-								<a class="path_num ninth on" href="javascript:void(0);"></a>
-							</div>
-						</div>
-						<script type="text/javascript">
-
-                            $("#middle_recommend").find(".path").click(function(){
-                                var _this = $(this);
-                                window.open(_this.attr("_href"));
-                            });
-
-						</script>
-					</div>
-					</body>
-
-					</html></div>
-			</div>
-
-		</div>
-		<!--右列-->
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<title>右列</title>
-		</head>
-		<body>
-		<!--右列-->
-		<div class="layout_rgt">
-
-
-			<div class="person_info" id="com_sAccount"></div>
-			<script>
-                var portalCenterRootUrl = 'http://www.zhixue.com:80/portalcenter';
-                var zhixuebaoRootUrl = 'http://www.zhixue.com:80/zhixuebao';
-			</script>
-			<script type="remark-template" id="sAccount">
-
-				<div class="cover"><a  title="个人中心" href="{$portalCenterRootUrl}/home/index/?from=web-container-index_right"><img id="con_avatar" alt=""/></a></div>
-				<p class="person_name tc" title="{$student.name}">{$student.name| truncate:23:"..."}{if $user_vipLevel eq 0}{elseif $user_vipLevel eq 1}<i class="exp_vip"></i>{else}<i></i>{/if}</p>
-
-				{if $student.clazz}
-				<p class="cls" title="{$student.clazz.school.name}">{$student.clazz.school.name}</p>
-				<p class="cls" title="$student.clazz.name}">{$student.clazz.name}</p>
-				{/if}
-
-				<p class="stu_id">学号：{$student.code}</p>
-				{if $user_vipLevel eq 0}
-				<ul class="user_atten no_vip clearfix">
-					<li>等级<b id="acc_userLevel"></b></li>
-					<li>学币<b>{$user_score}</b></li>
-				</ul>
-				<!--<a class="ves_open_vip" href="{$zhixuebaoRootUrl}/zhixuebao/vip/member/main/?from=web-container-index_right">开通Vip</a>-->
-				{elseif $user_vipLevel eq 1}
-				<ul class="user_atten exp_vip clearfix">
-					<li>等级<b id="acc_userLevel"></b></li>
-					<li>学币<b>{$user_score}</b></li>
-					<li>体验VIP剩余<b>{$user_vipDays}天</b></li>
-				</ul>
-				{else}
-				<ul class="user_atten clearfix">
-					<li>等级<b id="acc_userLevel"></b></li>
-					<li>学币<b>{$user_score}</b></li>
-					<li>VIP剩余<b>{$user_vipDays}天</b></li>
-				</ul>
-				{/if}
-
-			</script>
-			<script type="text/javascript" src="js/index.js"></script>
-
-
-
-			<div class="ranking" id="com_sGrowUp"></div>
-			<script type="remark-template" id="sGrowUp">
-
-				{if $isShowGrowup}
-				<p class="p_rgt_tit">上周年级学习榜排名</p>
-				<div class="fire">
-					<div class="num">{$gu_rank}</div>
-					{if $isShowChange}
-					<div class="up_down">
-						{if $gu_rankChange lt 0}
-						（<i class="up"></i>{$gu_rankChange * -1}名）
-						{else}
-						（<i class="down"></i>{$gu_rankChange}名）
-						{/if}
-					</div>
-					{/if}
-				</div>
-				<div class="correct_rate clearfix">
-					<span>正确率</span>
-					<span class="rate"><span>{$gu_ratio}</span>%</span>
-				</div>
-				{else}
-				<p class="p_rgt_tit">上周年级学习榜排名</p>
-				<div class="fire ash"></div>
-				<div class="no_study_note"><b>很遗憾</b><br/>您上周没有进行自主学习,<br/>本周奋勇直追吧！</div>
-				{/if}
-
-			</script>
-			<script>
-                (function(window,jQuery){
-
-                    $(function () {
-                        var comSGrowUp = $("#com_sGrowUp");
-                        $.ajax({
-                            url: basePath+"/container/student/growup/",
-                            type: "GET",
-                            data:{userId : currentUser.id},
-                            dataType:"json",
-                            cache:true,
-                            success: function(data){
-                                if(!data) {
-                                    return;
-                                }
-                                if(typeof data == "string") {
-                                    data = eval("(" + data + ")");
-                                }
-                                var _html = __sGrowUp__({
-                                    isShowGrowup : data.isShowGrowup,
-                                    isShowChange : data.isShowChange,
-                                    gu_rank : data.gu_rank,
-                                    gu_rankChange : data.gu_rankChange,
-                                    gu_ratio : data.gu_ratio
-                                });
-                                comSGrowUp.html(_html);
-                            },
-                            error:function(){
-                            }
-                        });
-                    });
-
-                })(window,jQuery);
-			</script>
-
-		</div>
-		</body>
-		</html>
-	</div>
+    <div class="">
+        <!--左列-->
+        <div class="layout_lft">
+            <div class="person_info" id="com_sAccount">
+
+                <div class="cover"><a title="个人信息" href="#"><img id="con_avatar" alt="" src="http://cytkapp.bjdn.openstorage.cn/zhixue/avatar/bjcssp_4444000020020446259_bjcssp_4444000020020446259_psb (10).jpg"></a></div>
+                <p class="person_name tc" title="学生名">学生名</p>
+                <p class="cls" title="班级">某某年级某某班</p>
+                <p class="stu_id">学号：123456</p>
+
+            </div>
+            <div class="ranking" id="com_sGrowUp">
+                <p class="p_rgt_tit">上一次课程成绩</p>
+                <div class="fire">
+                    <div class="num">1</div>
+
+                    <div class="up_down">
+
+                        （<i class="down"></i>0名）
+
+                    </div>
+
+                </div>
+                <div class="correct_rate clearfix">
+                    <span>正确率</span>
+                    <span class="rate"><span>60</span>%</span>
+                </div>
+
+
+            </div>
+        </div>
+        <!--中列-->
+        <div class="layout">
+            <div id="daily" class="day_task" group="daily">
+                <div class="new_title clearfix">
+                    <span class="fl">今日任务</span>
+                </div>
+                <div id="con_com1">
+                    <div class="task_list_top clearfix">
+                        <div class="task_lft">
+                            <div class="task_instr">
+                                <p class="instr1"><span>老师名</span><span>截止时间：播放的截止时间</span></p>
+
+                                <p class="instr2" title="video_name">这里是视频名</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="video" class="day_task" group="null">
+                <div class="new_title clearfix">
+                    <span class="fl">课程视频</span>
+                </div>
+                <div id="con_com2">
+                    <div id="common_r">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--右列-->
+        <div class="layout_rgt">
+            <a class="a_menu on" id="con_menu1">
+                智学园地
+            </a>
+            <ul class="garden_drop ">
+                <li group="daily">
+                    <a id="con_subMenu2" class="icon_a" href="/container/daily/index/">
+                        每日任务
+                    </a>
+                </li>
+                <li group="">
+                    <a id="con_subMenu3" class="icon_b" href="/container/container/student/index/#recommond">
+                        小智推荐
+                    </a>
+                </li>
+            </ul>
+            <a class="a_menu mt10 rel"
+               id="con_menu5"
+               href="/container/sns">
+                班级动态
+            </a>
+            <ul class="sl_drop ">
+                <li group="">
+                    <a id="con_subMenu7" class="icon_e" href="/container/sns/comment">
+                        评论
+                    </a>
+                </li>
+                <li group="">
+                    <a id="con_subMenu8" class="icon_f" href="/container/personal/index">
+                        私信
+                    </a>
+                    <ul class="private_drop  hidenone">
+                        <li><a id="con_ssubMenu9" class="complainMessage" href="javascript:void(0);">成绩申诉</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 
 </div>
-<!--主体结束-->
-<!--template-->
-<script type="text/javascript" src="js/jquery.cookie.js"></script>
-<div id="footTemplate"></div>
-<script type="text/javascript">
-    var basePath = 'http://www.zhixue.com:80/container';
-    var currentUser = {"avatar":"http:\/\/cytkapp.bjdn.openstorage.cn\/zhixue\/avatar\/bjcssp_4444000020020446259_bjcssp_4444000020020446259_psb (10).jpg","id":"4444000020020446259","isAdmin":false,"loginName":"zx36884081","mobile":"18632212689","name":"\u7941\u5C0F\u9E4F","role":"student"};
-
-    (function(window,jQuery){
-        var cookieId = $.cookie("tlsysSessionId");
-        var userId="";
-        var role="";
-        if(currentUser!=undefined||currentUser!=null){
-            userId=currentUser.id;
-            role=currentUser.role;
-        }
-        $.ajax({
-            url: basePath + "/commonModule/getStudentFoot/",
-            type: "GET",
-            data:{"r":cookieId+userId+role},
-            dataType:"JSONP",
-            cache:true,
-            jsonp: 'callback',
-            jsonpCallback: "getStudentFoot",
-            success: function(data){
-                //将HTML进行解码
-                var html=$('<div/>').html(data.html).text();
-                $("#footTemplate").html(html);
-            },
-            error:function(){
-            }
-        });
-    })(window,jQuery);
-
-</script>
-
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?71f0ed158f554118b01c2f97eac16263";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-<!--/template-->
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>侧边按钮</title>
-	<link type="text/css" rel="stylesheet" href="css/container_tk.css"/>
-</head>
-<body>
-<script type="text/javascript">
-    var studentRootUrl = 'http://www.zhixue.com:80/student';
-</script>
-<!--侧边按钮-->
-<div class="side_bar">
-	<!--<a class="back_old" href="http://www.zhixue.com:80/student/student/oldIndex/?from=web-container-index_left"><span>旧版<br/>首页</span></a>-->
-	<a id="sb_btnOnline" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1272620801&site=qq&menu=yes" class="cs_online" href="javascript:void(0);">
-		<span>在线<br/>客服</span>
-		<!--<em id="sb_divOnline" class="service_on service_download" style="display:none;"><em>客服电话</em><b>400-887-8557</b></em>-->
-	</a>
-	<a id="sb_btnFeedBack" class="user_feedback" href="javascript:void(0);" target="_blank"><span>用户<br/>反馈</span></a>
-	<a id="sb_btnDownload" class="download" href="javascript:void(0);">
-		<span>下载<br/>体验</span>
-		<em id="sb_divDownload" class="download_on service_download" style="display:none;">
-			<em>教师端下载</em>
-			<i><img src="img/t_code.png" alt="teacher" /></i>
-			<em>家长端下载</em>
-			<i><img src="img/p_code.png" alt="parent" /></i>
-			<em>学生端下载</em>
-			<i><img src="img/s_code.png" alt="student" /></i>
-		</em>
-	</a>
-	<a id="sb_btnBackTop" class="back_top" href="javascript:void(0);" style="display:none;"><span>返回<br/>顶部</span></a><!--初始隐藏，向上滚动大于50显示-->
-	<script type="text/javascript" src="http://static.zhixue.com/container/public/101439/container/student/sidebar/index.js?2017-12-21T02:44:13.974Z"></script>
-	<script type="text/javascript" src="http://static.zhixue.com/container/public/101439/container/student/sidebar/feedback.js?2017-12-21T02:44:13.974Z"></script>
-	<script type="remark-template" id="sb_feedBackBox">
-
-		<!--用户提交反馈弹框-->
-		<div class="user_feedback">
-			<div class="user_fill_box">
-				<textarea id="fb_txtFeedBack" class="text_show" placeholder="请描述您的意见或建议，我们会尽快参考您的想法来优化我们的产品和服务……" ></textarea>
-			</div>
-			<p>为方便回访，请您留下你的联系方式：</p>
-			<div class="fill_contacts">
-				<span>联系方式：</span>
-				<input id="fb_txtContact" type="text" placeholder="手机号码/固定电话/QQ" />
-			</div>
-			<a id="fb_btnSumbit" class="submit_feedback" href="javascript:void(0);">提交反馈</a>
-		</div>
-
-	</script>
-</div>
-<script type="text/javascript" src="http://static.zhixue.com/container/public/101439/module/global/js/jsmart.js?2017-12-21T02:44:13.974Z"></script>
-</body>
-</html>
-
-<div id="conOperative" class="sh_pop_warp" style="display:none;">
-	<div class="sh_tk_warp" style="z-index:1000;"></div>
-	<div class="operative_banner" style="z-index:1001;">
-		<div class="cont"></div>
-		<a href="javascript:void(0);" class="closed"></a>
-	</div>
-</div>
-
-
-<script type="remark-template" id="con_changePwdBox">
-
-	<!--<div class="container_pop">-->
-	<!--<div class="container_pop_head">修改默认密码<a href="javascript:void(0);"></a></div>-->
-	<div class="container_pop_con">
-		<div class="change_old_pwd pop_common">
-			<p>为保护您的账号以及方便您登录智学网，请修改默认密码！</p>
-			<div class="p_txt_input clearfix">
-				<span>密码：</span><input id="con_txtPwd" type="password" autocomplete="off" placeholder="请输入新密码" />
-			</div>
-			<div class="p_txt_input clearfix">
-				<span>确认密码：</span><input id="con_txtRePwd" type="password" autocomplete="off" placeholder="请再次输入新密码" />
-			</div>
-			<p id="con_divPwdTips"  class="error_log">密码只支持数字、字母和下划线,且在6~16位之间！</p>
-		</div>
-	</div>
-	<div class="container_pop_btn"><a href="javascript:void(0);" id="con_pwdSubmit">确定</a></div>
-	<!--</div>-->
-
-</script>
-<script type="remark-template" id="con_vipEndBox">
-
-	<!--VIP到期提示弹框-->
-	<!--<div class="container_pop">-->
-	<!--<div class="container_pop_head">温馨提示<a href="javascript:void(0);"></a></div>-->
-	<div class="container_pop_con pop_common">
-		<div class="vip_time_over">
-			<div class="time_over_con">
-				<i></i>
-				<p>您的会员已于<span>{$endTime|date_format:"%Y-%m-%d"}</span>过期~</p>
-			</div>
-		</div>
-	</div>
-	<div class="container_pop_btn">
-		<a href="{$zhixuebaoRootUrl}/zhixuebao/vip/member/main/?from=web-container-index_left" target="_blank" >去续费</a>
-		<a id="con_btnCloseVIPBox" href="javascript:void(0);">取消</a>
-	</div>
-	<!--</div>-->
-
-</script>
-<script type="remark-template" id="con_bindMobileBox">
-
-	<!--<div class="container_pop">-->
-	<!--<div class="container_pop_head">绑定手机<a href="javascript:void(0);"></a></div>-->
-	<div class="container_pop_con">
-		<div class="change_old_pwd pop_common">
-			<p>为保护您的账号安全，请输入手机号并完成验证！</p>
-			<div class="p_txt_input clearfix">
-				<span>手机号：</span><input id="con_txtBindMobile"  type="text" autocomplete="off" placeholder="请输入手机号" />
-			</div>
-			<div class="p_txt_input change_pwd clearfix">
-				<span>验证码：</span><input id="con_txtBindCode" type="text" autocomplete="off" readonly="readonly" placeholder="请输入验证码" />
-				<a class="dis" id="con_btnGetCode" href="javascript:void(0);">获取验证码</a>
-			</div>
-			<p id="con_divMobileTips" class="error_log"></p>
-		</div>
-	</div>
-	<div class="container_pop_btn"><a id="con_btnSubmitMobile" href="javascript:void(0);">确定</a><a id="con_btnCloseBindMobile" href="javascript:void(0);">取消</a></div>
-	<!--</div>-->
-
-</script>
-<script type="text/javascript" src="js/jsmart.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<script type="text/javascript" src="js/banner.js"></script>
 </body>
 
 </html>
