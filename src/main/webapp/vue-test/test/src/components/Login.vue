@@ -1,32 +1,53 @@
 <template>
   <div>
-    <div class="login-wrap" v-show="showLogin">
-      <h3>登录</h3>
-      <p v-show="showTishi">{{tishi}}</p>
-      <input type="text" placeholder="请输入用户名" v-model="username">
-      <input type="password" placeholder="请输入密码" v-model="password">
-      <button v-on:click="login">登录</button>
-      <span v-on:click="ToRegister">没有账号？马上注册</span>
-    </div>
+    <div class="cl_login_box">
 
-    <div class="register-wrap" v-show="showRegister">
-      <h3>注册</h3>
-      <p v-show="showTishi">{{tishi}}</p>
-      <input type="text" placeholder="请输入用户名" v-model="newUsername">
-      <input type="password" placeholder="请输入密码" v-model="newPassword">
-      <button v-on:click="register">注册</button>
-      <span v-on:click="ToLogin">已有账号？马上登录</span>
+      <p id="errorMsg"></p>
+
+      <div class="cl_login_head clearfix">
+
+        <span>用户登录</span>
+
+        <span class="quick_reg"><a data="/index/demoLogin" class="collectInfo" href="#">管理员登录</a></span>
+
+      </div>
+
+      <div class="cl_login_fill" id="divLogin">
+
+        <input id="txtUserName" name="txtUserName" class="u_name" type="text" autocomplete="off" placeholder="用户名">
+
+        <input id="txtPassword" name="txtPassword" class="u_pwd" type="password" autocomplete="off" placeholder="请输入密码">
+
+        <div class="pwd_remember mt10 clearfix">
+
+          <div class="lost_pwd fr"><a data="/index/forgetPasswd" class="collectInfo" href="javascript:void(0);" id="forget_password">忘记密码？</a></div>
+
+        </div>
+
+      </div>
+
+      <div class="verified_name" id="divName" style="display: none">
+
+        <input id="txtName" name="txtName" type="text" autocomplete="off" placeholder="请输入您的真实姓名">
+
+        <p>您的密码为初始密码，为防止他人恶意操作，需要姓名验证！</p>
+
+        <a href="javascript:void(0);" class="btnReturn">&lt;&lt;返回</a>
+
+      </div>
+
+      <a href="javascript:void(0);" id="signup_button">登 录</a>
+
+      <br>
+      <br>
+      <br>
+
     </div>
   </div>
 </template>
 
 <style>
-  .login-wrap{text-align:center;}
-  input{display:block; width:250px; height:40px; line-height:40px; margin:0 auto; margin-bottom: 10px; outline:none; border:1px solid #888; padding:10px; box-sizing:border-box;}
-  p{color:red;}
-  button{display:block; width:250px; height:40px; line-height: 40px; margin:0 auto; border:none; background-color:#41b883; color:#fff; font-size:16px; margin-bottom:5px;}
-  span{cursor:pointer;}
-  span:hover{color:#41b883;}
+  @import url("../assets/css/container_login.css");
 </style>
 
 <script>
