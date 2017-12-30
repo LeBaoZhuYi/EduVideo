@@ -4,6 +4,8 @@ import PostList from '@/components/PostList'
 import Article from '@/components/Article'
 import SideBar from '@/components/SideBar'
 import UserInfo from '@/components/UserInfo'
+import Login from '@/components/Login'
+import Page from '@/components/Page'
 
 Vue.use(Router)
 
