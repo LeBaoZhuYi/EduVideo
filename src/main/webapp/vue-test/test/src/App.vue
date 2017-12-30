@@ -2,67 +2,20 @@
   <div id="app" class="app">
     <page :currentPage="currentPage">
       <cn-header></cn-header>
-      <section class="animate move-left">
-        <login></login>
+      <login></login>
+      <section class="animate">
       </section>
     </page>
     <page :currentPage="currentPage">
-      <h1 class="text-center">配置说明</h1>
-      <section class="animate move-left">
-        <p>在App.vue中修改data函数返回的内容，即为修改相应的配置。现在可以配置三个属性：currentPage、arrowAnimation和options</p>
-        <dl>
-          <dt>currentPage:</dt>
-          <dd>表示当前显示的页面，通过设置currentPage可以改变初始显示的界面</dd>
-        </dl>
-        <dl>
-          <dt>controllerOption:</dt>
-          <dd>该属性表示控制器的配置属性，可以自由扩展
-            <ul>
-              <li>arrowsType表示页面控制器的上下箭头显示类型：no（不显示箭头）、normal（显示箭头）、animate（显示有动画效果的箭头）</li>
-            </ul>
-          </dd>
-        </dl>
-        <dl>
-          <dt>options:</dt>
-          <dd>该属性是一个数组，数组的每一项都是一个对象，通过设置对象内的值，可以改变对应的page组件的样式，可以自由扩展
-            <ul>
-              <li>
-                <span class="text-bold">background:</span> 表示相应page的背景样式</li>
-              <li>
-                <span class="text-bold">color:</span> 表示相应page的文字颜色（可以手动设置css样式覆盖）</li>
-              <li>
-                <span class="text-bold">isCenter:</span> 表示相应page的内容是否居中（水平和垂直都包括）</li>
-              <li>下一页介绍options内的方法属性</li>
-            </ul>
-          </dd>
-        </dl>
+      <section class="animate">
       </section>
     </page>
     <page :currentPage="currentPage">
-      <h1 class="text-center">方法说明</h1>
-      <section class="animate move-left">
-        <p>在每个options的对象中，可以设置两种方法：beforeLeave 和 afterEnter</p>
-        <ul>
-          <li>beforeLeave 方法表示在离开当前页面前所做的操作</li>
-          <li>afterEnter 方法表示在进入当前页面后所做的操作</li>
-        </ul>
-        <p>这两个方法都有一个默认参数，该参数为当前Page的vue组件实例，方法的this为App.vue的组件实例</p>
+      <section class="animate">
       </section>
     </page>
     <page :currentPage="currentPage">
-      <h1 class="text-center">作者信息</h1>
-      <section class="animate move-left">
-        <img class="avatar" src="https://github.com/kainstar/vue-fullpage/blob/master/src/assets/avatar.jpg?raw=true" alt="头像">
-        <div class="author-info">
-          <p>昵称：KainStar</p>
-          <p>学校：南京理工大学</p>
-          <p>项目地址：
-            <a href="https://github.com/hzxszsk/vue-fullpage" target="_blank">https://github.com/hzxszsk/vue-fullpage</a>
-          </p>
-          <p>我的Github：
-            <a href="https://github.com/hzxszsk" target="_blank">https://github.com/hzxszsk</a>
-          </p>
-        </div>
+      <section class="animate">
       </section>
     </page>
     <page-controller :pageNum="pageNum" :currentPage="currentPage" @changePage="changePage" :option="controllerOption"></page-controller>
@@ -88,32 +41,25 @@ export default {
     return {
       currentPage: 1,
       options: [{
-        // the color of background
-        background: 'rgba(229, 199, 46, 1)',
-        backgroundImage:"url(" + require("./assets/cl_banner3.jpg") + ")",
-        // the color of text
-        color: '#fff',
+        backgroundImage:"url(" + require("./assets/img/index1.jpg") + ")",
         // is content center
-        isCenter: true,
+        // isCenter: true,
         // the function before page show
         afterEnter: afterEnterAnimate,
         // the function after page show
         beforeLeave: beforeLeaveAnimate
       }, {
-        background: 'rgba(79, 204, 76, 1)',
-        color: '#fff',
+        backgroundImage:"url(" + require("./assets/img/index2.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
       }, {
-        background: 'rgba(233, 84, 84, 1)',
-        color: '#fff',
+        backgroundImage:"url(" + require("./assets/img/index3.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
       }, {
-        background: 'rgba(46, 153, 229, 1)',
-        color: '#fff',
+        backgroundImage:"url(" + require("./assets/img/index4.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate

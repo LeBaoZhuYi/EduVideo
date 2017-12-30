@@ -1,31 +1,34 @@
 <template>
-    <section class="page" v-if="option"
-        :style="{background: option.background,color: option.color||'#fff',backgroundImage: option.backgroundImage}"
-        :class="{'page-before': option.index < currentPage,
+  <section class="page" v-if="option"
+           :style="{backgroundImage: option.backgroundImage,
+                  backgroundPosition:'center',
+                  backgroundAttachment:'fixed',
+                  backgroundSize:'cover'}"
+           :class="{'page-before': option.index < currentPage,
                 'page-after': option.index > currentPage,
                 'page-current': option.index === currentPage}">
-        <div :class="{'all-center': option.isCenter}">
-            <slot></slot>
-        </div>
-    </section>
+    <div :class="{'all-center': option.isCenter}">
+      <slot></slot>
+    </div>
+  </section>
 </template>
 
 <script>
-export default {
+  export default {
     name: 'page',
     props: {
-        currentPage: Number
+      currentPage: Number
     },
     data() {
-        return {
-            option: null
-        }
+      return {
+        option: null
+      }
     }
-}
+  }
 </script>
 
 <style>
-.page {
+  .page {
     overflow: hidden;
     position: fixed;
     top: 0;
@@ -34,20 +37,20 @@ export default {
     right: 0;
     transition: all 0.5s ease 0s;
     z-index: 1;
-}
-.page-before {
+  }
+  .page-before {
     z-index: 0;
     transform: translate3d(0, -100%, 0);
-}
-.page-after {
+  }
+  .page-after {
     z-index: 0;
     transform: translate3d(0, 100%, 0);
-}
-/* 水平、垂直居中 */
-.all-center {
+  }
+  /* 水平、垂直居中 */
+  .all-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+  }
 </style>
