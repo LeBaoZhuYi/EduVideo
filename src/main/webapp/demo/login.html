@@ -9,13 +9,11 @@
 
     <title>北京爱特熠星多元文化</title>
 
-    <link type="image/x-icon" href="img/zhixue.ico" rel="shortcut icon"/>	
-
     <link type="text/css" rel="stylesheet" href="css/base.css"/>
 
     <link type="text/css" rel="stylesheet" href="css/container_login.css"/>
 
-    <link type="text/css" rel="stylesheet" href="css/common_foot.css"/>
+    <!--<link type="text/css" rel="stylesheet" href="css/common_foot.css"/>-->
 
 	<link type="text/css" rel="stylesheet" href="css/fullpage.min.css"/>
 
@@ -28,50 +26,6 @@
     <script type="text/javascript" src="js/common.js"></script>
 
     <script type="text/javascript" src="js/checkValidCas.js"></script>
-
-	<script type="text/javascript">
-
-		var basePath = '/tlsysapp';
-
-		var nextpageUrl=Request.QueryString("nextpage");
-
-		if(!nextpageUrl){
-
-			nextpageUrl="./redirectIndex";
-
-		}
-
-		
-
-		$.getJSON("./loginState/", {}, function (data) {
-
-			if (data.result == "success") {
-
-				document.location.href = decodeURIComponent(nextpageUrl);
-
-			}else{
-
-				var casUrl=data["casUrl"];
-
-				var serviceUrl=data["serviceUrl"];
-
-				checkValidCas(casUrl,serviceUrl,20000,function(data){
-
-					if(data.result=="success"){
-
-						document.location.href = decodeURIComponent(nextpageUrl);
-
-					}
-
-				});
-
-			}
-
-		});
-
-	</script>	
-
-    <script type="text/javascript" src="js/jquery.cookie.js"></script>
 
     <script type="text/javascript" src="js/login.js"></script>
 

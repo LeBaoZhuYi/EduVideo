@@ -1,68 +1,59 @@
 <template>
-  <div>
-    <div class="cl_login_box">
-
-      <p id="errorMsg"></p>
-
-      <div class="cl_login_head clearfix">
-
-        <span>用户登录</span>
-
-        <span class="quick_reg"><a data="/index/demoLogin" class="collectInfo" href="#">管理员登录</a></span>
-
-      </div>
-
-      <div class="cl_login_fill" id="divLogin">
-
-        <input id="txtUserName" name="txtUserName" class="u_name" type="text" autocomplete="off" placeholder="用户名">
-
-        <input id="txtPassword" name="txtPassword" class="u_pwd" type="password" autocomplete="off" placeholder="请输入密码">
-
-        <div class="pwd_remember mt10 clearfix">
-
-          <div class="lost_pwd fr"><a data="/index/forgetPasswd" class="collectInfo" href="javascript:void(0);" id="forget_password">忘记密码？</a></div>
-
-        </div>
-
-      </div>
-
-      <div class="verified_name" id="divName" style="display: none">
-
-        <input id="txtName" name="txtName" type="text" autocomplete="off" placeholder="请输入您的真实姓名">
-
-        <p>您的密码为初始密码，为防止他人恶意操作，需要姓名验证！</p>
-
-        <a href="javascript:void(0);" class="btnReturn">&lt;&lt;返回</a>
-
-      </div>
-
-      <a href="javascript:void(0);" id="signup_button">登 录</a>
-
-      <br>
-      <br>
-      <br>
-
+  <div class="login" id="login">
+    ...
+    <div class="log-email">
+      <input type="text" placeholder="Email" :class="'log-input' + (account==''?' log-input-empty':'')" v-model="account"><input type="password" placeholder="Password" :class="'log-input' + (password==''?' log-input-empty':'')" v-model="password">
+      <a href="javascript:;" rel="external nofollow" class="log-btn" @click="login">Login</a>
     </div>
+    ...
   </div>
 </template>
-
-<style>
-  @import url("../assets/css/container_login.css");
-</style>
-
 <script>
-  export default{
-    name: 'login',
-    data(){
-      return{
-        showLogin: true,
-        showRegister: false,
-        showTishi: false,
-        tishi: '',
-        username: '',
-        password: '',
-        newUsername: '',
-        newPassword: ''
+  export default {
+    name: 'Login',
+    data() {
+      return {
+        isLoging: false,
+        account: '',
+        password: ''
+      }
+    },
+    components: {
+    },
+    methods: {
+
+      //登录逻辑
+      login() {
+        if (this.account != '' && this.password != '') {
+          this.toLogin();
+        }
+      },//登录请求
+      toLogin() {
+        //一般要跟后端了解密码的加密规则
+        //这里例子用的哈希算法来自./js/sha1.min.js
+        let password_sha = '123456';//hex_sha1(hex_sha1(this.password));
+        //需要想后端发送的登录参数
+        let loginParam = {
+          account: this.account,
+          password_sha
+        }
+        //设置在登录状态
+        this.isLoging = true;
+        //请求后端
+        this.$http.post('example.com/login.php', {
+          param: loginParam
+        }).then((response) => {
+          if(response.data.code == 1
+      )
+        {
+          //如果登录成功则保存登录状态并设置有效期
+          let expireDays = 1000 * 60 * 60 * 24 * 15;
+          this.setCookie('session', response.data.session, expireDays);
+          //跳转
+          this.$router.push('/user_info');
+        }
+      },
+        (response) =>{});
       }
     }
   }

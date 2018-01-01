@@ -92,12 +92,34 @@ export default {
       this.$nextTick(function() {
         typeof enterFunction === 'function' && enterFunction.call(this, this.$children[nextIndex]);
       })
+    },
+    //请求用户的一些信息
+    getUserInfo() {
+      this.userInfo = {
+        nick: 'Doterlin',
+        ulevel: 20,
+        uid: '10000',
+        portrait: 'images/profile.png'
+      };
+      //获取信息请求
+      ts.$http.get(url, {
+        //参数
+        "params": this.userInfo
+      }).then((response) => {
+        //Success
+        if(response.data.code == 0){
+          this.$store.commit('updateUserInfo', this.userInfo);
+        }
+      },
+      (response) =>{});
     }
   },
   components: {
     Page, PageController, Login,cnHeader
   },
   mounted() {
+    //组件开始挂载时获取用户信息
+    this.getUserInfo();
     this.$children.forEach((child, index) => {
       // 动态设置各个page内的options
       if (child.option === null) {
