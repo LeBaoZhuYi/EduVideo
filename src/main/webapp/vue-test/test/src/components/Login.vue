@@ -1,13 +1,28 @@
 <template>
-  <div class="login" id="login">
-    ...
-    <div class="log-email">
-      <input type="text" placeholder="Email" :class="'log-input' + (account==''?' log-input-empty':'')" v-model="account"><input type="password" placeholder="Password" :class="'log-input' + (password==''?' log-input-empty':'')" v-model="password">
-      <a href="javascript:;" rel="external nofollow" class="log-btn" @click="login">Login</a>
-    </div>
-    ...
+  <div style="width:0px;height:100px;margin:0 auto;">
+  <div id="container">
+    <form action="welcome.html">
+      <div class="login">LOGIN</div>
+      <div class="username-text">Username:</div>
+      <div class="password-text">Password:</div>
+      <div class="username-field">
+        <input type="text" name="username" placeholder="Email" :class="'log-input' + (account==''?' log-input-empty':'')" v-model="account">
+        <!--<input type="text" name="username" value="azmind" />-->
+      </div>
+      <div class="password-field">
+        <input type="password" name="password" placeholder="Password" :class="'log-input' + (password==''?' log-input-empty':'')" v-model="password">
+        <!--<input type="password" name="password" value="azmind" />-->
+      </div>
+      <input type="checkbox" name="remember-me" id="remember-me" /><label for="remember-me">Remember me</label>
+      <div class="forgot-usr-pwd">Forgot <a href="#">username</a> or <a href="#">password</a>?</div>
+      <input type="submit" name="submit" value="GO" />
+    </form>
+  </div>
   </div>
 </template>
+<style>
+  @import url("../assets/css/login.css");
+</style>
 <script>
   export default {
     name: 'Login',
