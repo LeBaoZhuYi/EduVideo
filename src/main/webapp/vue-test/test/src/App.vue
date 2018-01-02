@@ -102,7 +102,8 @@ export default {
         portrait: 'images/profile.png'
       };
       //获取信息请求
-      ts.$http.get(url, {
+      var url='www.baidu.com'
+      this.$http.get(url, {
         //参数
         "params": this.userInfo
       }).then((response) => {
