@@ -11,8 +11,14 @@ export default new Router({
             redirect: '/login'
         },
         {
-            path: '/api',
-            redirect: '/login'
+            path: '/user',
+            component: resolve => require(['../components/user/Video.vue'], resolve),
+            children:[
+                {
+                  path: '/video',
+                  component: resolve => require(['../components/user/Video.vue'], resolve)
+                }
+            ]
         },
         {
             path: '/admin',

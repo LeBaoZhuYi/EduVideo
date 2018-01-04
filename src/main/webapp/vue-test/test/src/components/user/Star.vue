@@ -1,0 +1,61 @@
+<template>
+  <div class="star">
+    <div class="landscape"></div>
+    <div class="filter"></div>
+    <canvas id="canvas"></canvas>
+  </div>
+</template>
+<style>
+  html,body {
+    margin:0;
+    overflow:hidden;
+    width:100%;
+    height:100%;
+    background:black;
+    background:linear-gradient(to bottom,#000000 0%,#5788fe 100%);
+  }
+  .filter {
+    width:100%;
+    height:100%;
+    position:absolute;
+    cursor:none;
+    top:0;
+    left:0;
+    background:#fe5757;
+    animation:colorChange 30s ease-in-out infinite;
+    animation-fill-mode:both;
+    mix-blend-mode:overlay;
+  }
+  @keyframes colorChange {
+    0%,100% {
+      opacity:0;
+    }
+    50% {
+      opacity:.9;
+    }
+  }
+  .landscape {
+     position:absolute;
+     bottom:0px;
+     left:0;
+     width:100%;
+     height:100%;
+     background-image:url('http://www.jq22.com/css/img/xkbg.png');
+     background-size:1000px 250px;
+     background-repeat:repeat-x;
+     background-position:center bottom;
+   }
+</style>
+<script>
+  import Test from '../../assets/star.js';
+  export default {
+    data() {
+      return {}
+    },
+    mounted() {
+      let canvas = document.getElementById('canvas');
+      let ctx = canvas.getContext('2d');
+      Test.setBackground(canvas, ctx);
+    }
+  }
+</script>

@@ -20,7 +20,8 @@
     "vue-router": "^2.7.0",
     "vue-schart": "^0.1.4",
     "vue-simplemde": "^0.3.8",
-    "vuex": "2.0.0"
+    "vuex": "2.0.0",
+    "vue-aliplayer": "0.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
