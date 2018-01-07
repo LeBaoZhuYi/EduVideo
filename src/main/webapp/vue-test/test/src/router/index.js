@@ -70,5 +70,9 @@ export default new Router({
             path: '/home',
             component: resolve => require(['../components/Home.vue'], resolve)
         },
+        {
+          path: '/test',
+          component: resolve => require(['../components/topic/Common.vue'], resolve)
+        }
     ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div style="width:0px;height:100px;margin:0 auto;">
   <div id="container">
-    <form action="welcome.html">
+    <div class="welcome">
       <div class="login">学员登录</div>
       <div class="username-text">用户名:</div>
       <div class="password-text">密码:</div>
@@ -14,9 +14,9 @@
         <!--<input type="password" name="password" value="azmind" />-->
       </div>
       <input type="checkbox" name="remember-me" id="remember-me" /><label for="remember-me">记住我</label>
-      <div class="forgot-usr-pwd">Forgot <a href="#">username</a> or <a href="#">忘记密码</a>?</div>
-      <input type="submit" name="submit" value="GO" />
-    </form>
+      <div class="forgot-usr-pwd"><a href="#">忘记密码</a>?</div>
+      <input type="submit" name="submit" value="GO" @click="toLogin()" />
+    </div>
   </div>
   </div>
 </template>
@@ -44,6 +44,8 @@
         }
       },//登录请求
       toLogin() {
+        this.$router.push('/user');
+        return;
         //一般要跟后端了解密码的加密规则
         //这里例子用的哈希算法来自./js/sha1.min.js
         let password_sha = '123456';//hex_sha1(hex_sha1(this.password));

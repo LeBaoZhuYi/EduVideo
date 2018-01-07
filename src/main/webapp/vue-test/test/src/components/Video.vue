@@ -1,14 +1,15 @@
 <template>
   <div class="row">
     <v-header></v-header>
-    <v-star></v-star>
+    <v-star v-if="topic === '1'"></v-star>
+    <v-common v-if="topic === '2'"></v-common>
     <div class="main">
       <div class="label ">
-        <p class="title">第一课：这里有一句视频课程名字</p>
+        <p class="title">第一课：XXXXX视频课程名字</p>
         <p style="text-align: center;font-size: 15px">
-          讲师：</p>
+          讲师：XXX</p>
       </div>
-      <div class="left">
+      <!--<div class="left">-->
         <div class="video">
           <ali-player :source="aplayer.source" :height="aplayer.height" :vid="aplayer.vid" :playauth="aplayer.playauth" ref="player">
           </ali-player>
@@ -16,28 +17,20 @@
           <!--<button @click="pause">暂停</button>-->
           <!--<button @click="replay">重播</button>-->
         </div>
-      </div>
-      <div class="right"><span>12312312312321</span></div>
+      <!--</div>-->
+      <!--<div class="right"><span>12312312312321</span></div>-->
     </div>
   </div>
 </template>
 <style>
-  .left {
-    width: 70%;
+  .row{
     height: 100%;
-    float: left;
-  }
-  .right{
-    margin-left: 72%;
-    height: 100%;
-    background-color: #2d2d2d;
+    width: 100%;
   }
   .label{
     height: 50px;
     width: 100%;
     margin-bottom: 1%;
-    /*background: transparent;*/
-    /*background-color: #4e6cc2;*/
     display: inline-block;
   }
 
@@ -65,12 +58,14 @@
 </style>
 <script>
   import VueAliplayer from 'vue-aliplayer'
-  import vHeader from './admin/Header.vue'
-  import vStar from './Star.vue'
-  import VHeader from "./Header";
+  import vStar from './topic/Star.vue'
+  import vCommon from './topic/Common.vue'
+  import vHeader from "./Header.vue";
+  import VCommon from "./topic/Common";
   export default {
     data(){
       return {
+        topic: "1",
         aplayer: {
           height: "100%",
           source: "",
@@ -80,9 +75,10 @@
       }
     },
     components: {
-      VHeader,
+      VCommon,
       'ali-player': VueAliplayer,
       'v-star': vStar,
+      'v-common': vCommon,
       'v-header': vHeader
     },
     methods: {
