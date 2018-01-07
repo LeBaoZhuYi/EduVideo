@@ -2,19 +2,19 @@
   <div style="width:0px;height:100px;margin:0 auto;">
   <div id="container">
     <form action="welcome.html">
-      <div class="login">LOGIN</div>
-      <div class="username-text">Username:</div>
-      <div class="password-text">Password:</div>
+      <div class="login">学员登录</div>
+      <div class="username-text">用户名:</div>
+      <div class="password-text">密码:</div>
       <div class="username-field">
-        <input type="text" name="username" placeholder="Email" :class="'log-input' + (account==''?' log-input-empty':'')" v-model="account">
+        <input type="text" name="username" placeholder="Username" :class="'log-input' + (account==''?' log-input-empty':'')" v-model="account">
         <!--<input type="text" name="username" value="azmind" />-->
       </div>
       <div class="password-field">
         <input type="password" name="password" placeholder="Password" :class="'log-input' + (password==''?' log-input-empty':'')" v-model="password">
         <!--<input type="password" name="password" value="azmind" />-->
       </div>
-      <input type="checkbox" name="remember-me" id="remember-me" /><label for="remember-me">Remember me</label>
-      <div class="forgot-usr-pwd">Forgot <a href="#">username</a> or <a href="#">password</a>?</div>
+      <input type="checkbox" name="remember-me" id="remember-me" /><label for="remember-me">记住我</label>
+      <div class="forgot-usr-pwd">Forgot <a href="#">username</a> or <a href="#">忘记密码</a>?</div>
       <input type="submit" name="submit" value="GO" />
     </form>
   </div>

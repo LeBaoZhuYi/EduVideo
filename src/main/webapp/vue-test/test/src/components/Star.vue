@@ -6,12 +6,12 @@
   </div>
 </template>
 <style>
-  html,body {
+  .star {
     margin:0;
-    overflow:hidden;
     width:100%;
     height:100%;
     background:black;
+    overflow: auto;
     background:linear-gradient(to bottom,#000000 0%,#5788fe 100%);
   }
   .filter {
@@ -21,8 +21,8 @@
     cursor:none;
     top:0;
     left:0;
-    background:#fe5757;
-    animation:colorChange 30s ease-in-out infinite;
+    /*background:#fe5757;*/
+    /*animation:colorChange 30s ease-in-out infinite;*/
     animation-fill-mode:both;
     mix-blend-mode:overlay;
   }
@@ -47,7 +47,7 @@
    }
 </style>
 <script>
-  import Test from '../../assets/star.js';
+  import Test from '../assets/star.js';
   export default {
     data() {
       return {}

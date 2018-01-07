@@ -8,15 +8,15 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/home'
         },
         {
             path: '/user',
-            component: resolve => require(['../components/user/Video.vue'], resolve),
+            component: resolve => require(['../components/Video.vue'], resolve),
             children:[
                 {
                   path: '/video',
-                  component: resolve => require(['../components/user/Video.vue'], resolve)
+                  component: resolve => require(['../components/Video.vue'], resolve)
                 }
             ]
         },
@@ -57,14 +57,18 @@ export default new Router({
                     component: resolve => require(['../components/admin/page/BaseCharts.vue'], resolve)   // vue-schart组件
                 },
                 {
+                  path: '/login',
+                  component: resolve => require(['../components/admin/page/Login.vue'], resolve)
+                },
+                {
                     path: '/drag',
                     component: resolve => require(['../components/admin/page/DragList.vue'], resolve)    // 拖拽列表组件
                 }
             ]
         },
         {
-            path: '/login',
-            component: resolve => require(['../components/admin/page/Login.vue'], resolve)
+            path: '/home',
+            component: resolve => require(['../components/Home.vue'], resolve)
         },
     ]
 })
