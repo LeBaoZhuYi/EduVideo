@@ -2,14 +2,14 @@
   <div class="header">
     <div class="logo">爱特熠星多元艺术(logo)</div>
     <div class="header-menu">
-      <el-menu :default-active=activeIndex class="el-menu-demo" mode="horizontal" background-color="#42f42" text-color="#ffffff" active-text-color="#ffd04b">
+      <el-menu :default-active=activeIndex theme="dark" class="el-menu-demo" mode="horizontal" background-color="#412f42" text-color="#ffffff" active-text-color="#ffd04b">
         <el-menu-item index="1">今日课程</el-menu-item>
         <el-menu-item index="2">个人中心</el-menu-item>
         <el-submenu index="3">
           <template slot="title">主题选择</template>
-          <el-menu-item index="2-1"></el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-menu-item index="2-1" @click="changeTopic('1')">星空护眼</el-menu-item>
+          <el-menu-item index="2-2" @click="changeTopic('2')">简洁小站</el-menu-item>
+          <el-menu-item index="2-3" @click="changeTopic('3')">不知道叫啥</el-menu-item>
         </el-submenu>
         <el-menu-item index="4">退出</el-menu-item>
       </el-menu>
@@ -21,6 +21,7 @@
     data() {
       return {
         name: 'adminHeader',
+        topic: "2",
         activeIndex: "1"
       }
     },
@@ -37,8 +38,10 @@
           this.$router.push('/login');
         }
       },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      changeTopic(id){
+        var a=1;
+        a=2;
+        this.$emit("transferTopic", id);
       }
     }
   }
@@ -49,9 +52,10 @@
     z-index:999;
     box-sizing: border-box;
     width: 100%;
-    height: 50px;
+    height: 60px;
     font-size: 22px;
     line-height: 50px;
+    background: #324157;
     color: #fff;
   }
   .header .logo{

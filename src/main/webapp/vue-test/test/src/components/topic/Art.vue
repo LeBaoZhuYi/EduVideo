@@ -1,15 +1,16 @@
 <template>
-  <div class="common">
+  <div class="art">
   </div>
 </template>
 <style>
-  .common {
+  .art {
     margin:0;
     width:100%;
     height:100%;
-    background-image: url("../../assets/img/style2.gif");
-    background-repeat: repeat;
-    /*background-size: contain;*/
+    background-image: url("../../assets/img/style3.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     overflow: auto;
   }
 </style>

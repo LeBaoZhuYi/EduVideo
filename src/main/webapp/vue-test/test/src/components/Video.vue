@@ -1,40 +1,35 @@
 <template>
-  <div class="row">
-    <v-header></v-header>
-    <v-star v-if="topic === '1'"></v-star>
-    <v-common v-if="topic === '2'"></v-common>
-    <div class="main">
-      <div class="label ">
-        <p class="title">第一课：XXXXX视频课程名字</p>
+  <div class="video-row">
+    <v-header @transferTopic="getTopic"></v-header>
+    <v-star v-show="topic1"></v-star>
+    <v-common v-show="topic2"></v-common>
+    <v-art v-show="topic3"></v-art>
+    <div class="video-main">
+      <div class="video-label">
+        <p class="video-title">第一课：XXXXX视频课程名字</p>
         <p style="text-align: center;font-size: 15px">
           讲师：XXX</p>
       </div>
-      <!--<div class="left">-->
-        <div class="video">
-          <ali-player :source="aplayer.source" :height="aplayer.height" :vid="aplayer.vid" :playauth="aplayer.playauth" ref="player">
-          </ali-player>
-          <!--<button @click="play">播放</button>-->
-          <!--<button @click="pause">暂停</button>-->
-          <!--<button @click="replay">重播</button>-->
-        </div>
-      <!--</div>-->
-      <!--<div class="right"><span>12312312312321</span></div>-->
+      <div class="video">
+        <ali-player :source="aplayer.source" :height="aplayer.height" :vid="aplayer.vid" :playauth="aplayer.playauth" ref="player">
+        </ali-player>
+      </div>
     </div>
   </div>
 </template>
 <style>
-  .row{
+  .video-row{
     height: 100%;
     width: 100%;
   }
-  .label{
+  .video-label{
     height: 50px;
     width: 100%;
     margin-bottom: 1%;
     display: inline-block;
   }
 
-  .title{
+  .video-title{
     text-align: center;
     font-size: 22px;
   }
@@ -43,9 +38,9 @@
     height: 100%;
   }
 
-  .main {
+  .video-main {
     z-index:999;
-    margin-top: -560px;
+    margin-top: -550px;
     margin-left: 20%;
     width: 63%;
     height: 400px;
@@ -53,19 +48,21 @@
     font-family: Verdana, Arial;
     font-weight: normal;
     font-size: 12px;
-    color: #ffffff;
+    color: #feec22;
   }
 </style>
 <script>
   import VueAliplayer from 'vue-aliplayer'
   import vStar from './topic/Star.vue'
   import vCommon from './topic/Common.vue'
-  import vHeader from "./Header.vue";
-  import VCommon from "./topic/Common";
+  import vArt from './topic/Art.vue'
+  import vHeader from "./Header.vue"
   export default {
     data(){
       return {
-        topic: "1",
+        topic1: true,
+        topic2: false,
+        topic3: false,
         aplayer: {
           height: "100%",
           source: "",
@@ -75,11 +72,11 @@
       }
     },
     components: {
-      VCommon,
       'ali-player': VueAliplayer,
       'v-star': vStar,
       'v-common': vCommon,
-      'v-header': vHeader
+      'v-header': vHeader,
+      'v-art': vArt
     },
     methods: {
       play: function () {
@@ -93,6 +90,18 @@
       replay: function () {
         const player = this.$refs.player.instance
         player && player.replay()
+      },
+      getTopic: function(msg){
+        this.topic1 = false;
+        this.topic2 = false;
+        this.topic3 = false;
+        if(msg == "1"){
+          this.topic1 = true;
+        } else if(msg == "2"){
+          this.topic2 = true;
+        } else if (msg == "3"){
+          this.topic3 = true;
+        }
       }
     }
   }

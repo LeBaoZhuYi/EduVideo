@@ -10,7 +10,7 @@
     margin:0;
     width:100%;
     height:100%;
-    background:black;
+    /*background:black;*/
     overflow: auto;
     background:linear-gradient(to bottom,#000000 0%,#5788fe 100%);
   }

@@ -72,7 +72,7 @@ export default new Router({
         },
         {
           path: '/test',
-          component: resolve => require(['../components/topic/Common.vue'], resolve)
+          component: resolve => require(['../components/topic/Art.vue'], resolve)
         }
     ]
 })
