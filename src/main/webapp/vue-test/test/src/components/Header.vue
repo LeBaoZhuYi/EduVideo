@@ -9,7 +9,7 @@
           <template slot="title">主题选择</template>
           <el-menu-item index="2-1" @click="changeTopic('1')">星空护眼</el-menu-item>
           <el-menu-item index="2-2" @click="changeTopic('2')">简洁小站</el-menu-item>
-          <el-menu-item index="2-3" @click="changeTopic('3')">不知道叫啥</el-menu-item>
+          <el-menu-item index="2-3" @click="changeTopic('3')">小小课堂</el-menu-item>
         </el-submenu>
         <el-menu-item index="4">退出</el-menu-item>
       </el-menu>
@@ -58,9 +58,9 @@
     background: #324157;
     color: #fff;
   }
-  .header .logo{
+  .logo{
     float: left;
-    width:250px;
+    width:300px;
     text-align: center;
   }
   .header-menu {

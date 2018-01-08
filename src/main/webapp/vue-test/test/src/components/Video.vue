@@ -25,8 +25,9 @@
   .video-label{
     height: 50px;
     width: 100%;
-    margin-bottom: 1%;
+    margin-bottom: 7%;
     display: inline-block;
+    color: #3586fe;
   }
 
   .video-title{
@@ -40,15 +41,14 @@
 
   .video-main {
     z-index:999;
-    margin-top: -550px;
-    margin-left: 20%;
-    width: 63%;
-    height: 400px;
-    text-align: left;
+    margin-top: -45%;
+    margin-left: 30%;
+    width: 40%;
+    height: 50%;
+    text-align: center;
     font-family: Verdana, Arial;
     font-weight: normal;
     font-size: 12px;
-    color: #feec22;
   }
 </style>
 <script>
@@ -60,8 +60,8 @@
   export default {
     data(){
       return {
-        topic1: true,
-        topic2: false,
+        topic1: false,
+        topic2: true,
         topic3: false,
         aplayer: {
           height: "100%",

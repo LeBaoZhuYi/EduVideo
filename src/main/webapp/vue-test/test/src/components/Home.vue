@@ -134,8 +134,7 @@ export default {
 </script>
 
 <style>
-html,
-body {
+  .row {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -145,10 +144,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #fff;
-}
-.row {
-  height: 100%;
-  width: 100%;
 }
 /* 下面的是与fullPage无关的样式 */
 .animate {
@@ -161,8 +156,7 @@ body {
   transform: translateX(1000%);
 }
 @media screen and (max-width:768px) {
-  html,
-  body {
+  .row {
     font-size: 12px;
   }
 }

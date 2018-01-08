@@ -4,7 +4,7 @@
 </template>
 <style>
   .art {
-    margin:0;
+    margin: -60px 0 0 0;
     width:100%;
     height:100%;
     background-image: url("../../assets/img/style3.jpg");
