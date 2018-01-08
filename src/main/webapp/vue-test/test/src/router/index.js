@@ -29,13 +29,17 @@ export default new Router({
                     component: resolve => require(['../components/admin/page/Readme.vue'], resolve)
                 },
                 {
-                    path: '/basetable',
-                    component: resolve => require(['../components/admin/page/BaseTable.vue'], resolve)
+                    path: '/user-table',
+                    component: resolve => require(['../components/admin/page/UserTable.vue'], resolve)
                 },
                 {
-                    path: '/vuetable',
-                    component: resolve => require(['../components/admin/page/VueTable.vue'], resolve)     // vue-datasource组件
+                    path: '/auth-table',
+                    component: resolve => require(['../components/admin/page/AuthTable.vue'], resolve)
                 },
+              {
+                path: '/history-table',
+                component: resolve => require(['../components/admin/page/HistoryTable.vue'], resolve)
+              },
                 {
                     path: '/baseform',
                     component: resolve => require(['../components/admin/page/BaseForm.vue'], resolve)

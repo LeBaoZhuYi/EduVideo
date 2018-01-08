@@ -30,7 +30,7 @@
                         title: '用户管理',
                         subs: [
                           {
-                            index: 'basetable',
+                            index: 'user-table',
                             title: '用户列表'
                           },
                           {
