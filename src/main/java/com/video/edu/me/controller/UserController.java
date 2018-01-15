@@ -101,9 +101,9 @@ public class UserController {
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
      */
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    private List<User> test1() throws IllegalArgumentException, IllegalAccessException {
+    private List<User> login() throws IllegalArgumentException, IllegalAccessException {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria1 = userExample.createCriteria();
 
