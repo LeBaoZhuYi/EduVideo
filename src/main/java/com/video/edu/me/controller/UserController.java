@@ -3,6 +3,9 @@ package com.video.edu.me.controller;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,33 +104,20 @@ public class UserController {
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
      */
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    private List<User> test1() throws IllegalArgumentException, IllegalAccessException {
-        UserExample userExample = new UserExample();
-        UserExample.Criteria criteria1 = userExample.createCriteria();
+    private String login(User user) throws IllegalArgumentException, IllegalAccessException {
+        Subject subject = SecurityUtils.getSubject() ;
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(),user.getPassword()) ;
+        try {
+            subject.login(token);
+            return "success" ;
+        }catch (Exception e){
+            //这里将异常打印关闭是因为如果登录失败的话会自动抛异常
+//            e.printStackTrace();
+            return "fail" ;
+        }
 
-        /**
-         * 获取今天0点
-         */
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        Date zero = calendar.getTime();
-
-        /**
-         * 设置排序的变量
-         */
-        userExample.setOrderByClause("utime");
-
-        /**
-         * 添加条件
-         */
-        criteria1.andStatusBetween((byte)0, (byte)1).andCtimeGreaterThan(zero);
-
-        return userService.selectByExample(userExample);
     }
 
     /**
