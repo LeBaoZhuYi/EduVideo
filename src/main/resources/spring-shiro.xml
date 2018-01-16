@@ -21,14 +21,14 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="unauthorizedUrl" value="/noLogin.jsp" />
+		<property name="loginUrl" value="/user/login" />
+		<property name="unauthorizedUrl" value="/user/noLogin" />
 		<property name="filterChainDefinitions">
 			<value>
-				/noLogin.jsp = anon
-				/view/noLogin.jsp = anon
+				/user/noLogin = anon
 				/user/login = anon
-				/admin/** = authc,roles[admin]
-				/** = user
+				<!--/admin/** = authc,roles[admin]-->
+				<!--/** = user-->
 			</value>
 		</property>
 	</bean>

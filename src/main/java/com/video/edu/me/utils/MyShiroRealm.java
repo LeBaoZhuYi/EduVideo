@@ -7,7 +7,6 @@ import java.util.Set;
 import com.video.edu.me.dao.UserMapper;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
-import com.video.edu.me.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,8 +16,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
 
 public class MyShiroRealm extends AuthorizingRealm {
 
@@ -56,7 +53,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         if (user != null){
             //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断。第三个参数传入realName。
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),
-                    "a") ;
+                    "MyShiroRealm") ;
             return authenticationInfo ;
         }else{
             return  null ;

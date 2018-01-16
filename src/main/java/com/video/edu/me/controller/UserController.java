@@ -120,6 +120,13 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/noLogin", method = RequestMethod.GET)
+    @ResponseBody
+    private String noLogin() throws IllegalArgumentException, IllegalAccessException {
+        return "no auth";
+
+    }
+
     /**
      * 获取loginName为2或3的用户
      * @return
