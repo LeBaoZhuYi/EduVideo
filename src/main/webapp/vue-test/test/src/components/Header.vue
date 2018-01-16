@@ -20,8 +20,8 @@
   export default {
     data() {
       return {
-        name: 'adminHeader',
-        topic: "2",
+        name: 'header',
+        topic: "1",
         activeIndex: "1"
       }
     },

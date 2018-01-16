@@ -76,7 +76,7 @@ export default new Router({
         },
         {
           path: '/test',
-          component: resolve => require(['../components/Accordion2.vue'], resolve)
+          component: resolve => require(['../components/Person.vue'], resolve)
         }
     ]
 })

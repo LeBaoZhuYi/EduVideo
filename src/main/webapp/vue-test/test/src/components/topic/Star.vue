@@ -11,7 +11,7 @@
     width:100%;
     height:100%;
     /*background:black;*/
-    overflow: auto;
+    overflow: hidden;
     background:linear-gradient(to bottom,#000000 0%,#5788fe 100%);
   }
   .filter {

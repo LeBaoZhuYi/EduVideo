@@ -10,7 +10,7 @@
     background-image: url("../../assets/img/style2.gif");
     background-repeat: repeat;
     /*background-size: contain;*/
-    overflow: auto;
+    overflow: hidden;
   }
 </style>
 <script>

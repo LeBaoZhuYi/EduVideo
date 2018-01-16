@@ -4,8 +4,7 @@
     <v-star v-show="topic1"></v-star>
     <v-common v-show="topic2"></v-common>
     <v-art v-show="topic3"></v-art>
-    <v-video v-show="page1"></v-video>
-    <v-accordion v-show="page2"></v-accordion>
+    <v-video></v-video>
   </div>
 </template>
 <style>
@@ -16,7 +15,6 @@
 </style>
 <script>
   import vVideo from './Video.vue'
-  import vAccordion from './Accordion2.vue'
   import vStar from './topic/Star.vue'
   import vCommon from './topic/Common.vue'
   import vArt from './topic/Art.vue'
@@ -26,9 +24,7 @@
       return {
         topic1: false,
         topic2: true,
-        topic3: false,
-        // page1: true,
-        page2: true
+        topic3: false
       }
     },
     components: {
@@ -36,8 +32,7 @@
       'v-star': vStar,
       'v-common': vCommon,
       'v-header': vHeader,
-      'v-art': vArt,
-      'v-accordion': vAccordion
+      'v-art': vArt
     },
     methods: {
       getTopic: function(msg){
