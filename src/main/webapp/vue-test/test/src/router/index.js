@@ -12,11 +12,11 @@ export default new Router({
         },
         {
             path: '/user',
-            component: resolve => require(['../components/Video.vue'], resolve),
+            component: resolve => require(['../components/Work.vue'], resolve),
             children:[
                 {
-                  path: '/video',
-                  component: resolve => require(['../components/Video.vue'], resolve)
+                  path: '/work',
+                  component: resolve => require(['../components/Work.vue'], resolve)
                 }
             ]
         },
@@ -76,7 +76,7 @@ export default new Router({
         },
         {
           path: '/test',
-          component: resolve => require(['../components/topic/Art.vue'], resolve)
+          component: resolve => require(['../components/Accordion2.vue'], resolve)
         }
     ]
 })
