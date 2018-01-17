@@ -39,8 +39,6 @@
         }
       },
       changeTopic(id){
-        var a=1;
-        a=2;
         this.$emit("transferTopic", id);
       }
     }

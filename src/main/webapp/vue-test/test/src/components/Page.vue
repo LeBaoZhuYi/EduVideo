@@ -1,10 +1,10 @@
 <template>
   <section class="page" v-if="option"
            :style="{backgroundImage: option.backgroundImage,
-                  backgroundPosition:'left',
+                  backgroundPosition:'center',
                   backgroundRepeat:'no-repeat',
                   backgroundAttachment:'fixed',
-                  backgroundSize:'contain'}"
+                  backgroundSize:'100% 100%'}"
            :class="{'page-before': option.index < currentPage,
                 'page-after': option.index > currentPage,
                 'page-current': option.index === currentPage}">
