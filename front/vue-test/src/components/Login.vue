@@ -60,9 +60,8 @@
         //设置在登录状态
         this.isLoging = true;
         //请求后端
-        this.$http.post('http://localhost:8081/user/login', {
-          param: loginParam
-        }).then((response) => {
+        this.$http.get('/api/user/login?loginName=' + loginParam.loginName + '&password=' + loginParam.password)
+          .then((response) => {
           if(response.data.code == 1){
               //如果登录成功则保存登录状态并设置有效期
               let expireDays = 1000 * 60 * 60 * 24 * 15;

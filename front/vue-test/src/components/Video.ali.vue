@@ -11,7 +11,8 @@
           讲师：{{teacherName}}</p>
       </div>
       <div class="video">
-        <div id="id_test_video" style="width:100%; height:100%;"></div>
+        <ali-player :source="aplayer.source" :height="aplayer.height" :vid="aplayer.vid" :playauth="aplayer.playauth" ref="player">
+        </ali-player>
       </div>
     </div>
   </div>
@@ -51,6 +52,7 @@
   }
 </style>
 <script>
+  import VueAliplayer from 'vue-aliplayer'
   import vStar from './topic/Star.vue'
   import vCommon from './topic/Common.vue'
   import vArt from './topic/Art.vue'
@@ -58,6 +60,12 @@
   export default {
     data(){
       return {
+        aplayer: {
+          height: "100%",
+          source: "",
+          vid: "",
+          playauth: ""
+        },
         topic1: false,
         topic2: true,
         topic3: false,
@@ -66,20 +74,14 @@
       }
     },
     mounted: function() {
-      // this.$http.get('http://localhost:8081/video/today', {
-      // }).then((response) => {
-      //   if(response.data.code == 1){
-      //   }
-      // }, (response) =>{});
-      let player = new TcPlayer('id_test_video', {
-        "m3u8": "http://2157.liveplay.myqcloud.com/2157_358535a.m3u8", //请替换成实际可用的播放地址
-        "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-        "coverpic" : "http://www.test.com/myimage.jpg",
-        "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-        "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
-      });
+      this.$http.get('http://localhost:8081/video/today', {
+      }).then((response) => {
+        if(response.data.code == 1){
+        }
+      }, (response) =>{});
     },
     components: {
+      'ali-player': VueAliplayer,
       'v-star': vStar,
       'v-common': vCommon,
       'v-header': vHeader,
