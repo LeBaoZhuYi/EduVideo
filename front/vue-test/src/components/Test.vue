@@ -1,5 +1,7 @@
 <template>
 
+  <div class="row">
+  <v-header :activeIndex="2"></v-header>
   <div id="slider">
 
     <div id="header">
@@ -13,13 +15,6 @@
     <div id="content">
 
       <div class="scroll">
-        <transition-group
-          name="fade"
-          enter-class="fade-in-enter"
-          enter-active-class="fade-in-active"
-          leave-class="fade-out-enter"
-          leave-active-class="fade-out-active"
-        >
         <div class="scrollContainer">
 
           <div v-show="scroll1" class="panel" id="home">
@@ -181,7 +176,6 @@
 
           </div>
         </div>
-        </transition-group>
       </div>
 
       <!-- end of scroll -->
@@ -204,7 +198,7 @@
     </div>
 
   </div> <!-- end of slider -->
-
+  </div>
 </template>
 <style>
   @import url('../assets/temp/coda-slider.css');

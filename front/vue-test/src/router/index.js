@@ -12,11 +12,11 @@ export default new Router({
         },
         {
             path: '/user',
-            component: resolve => require(['../components/Work.vue'], resolve),
+            component: resolve => require(['../components/Video.vue'], resolve),
             children:[
                 {
-                  path: '/work',
-                  component: resolve => require(['../components/Work.vue'], resolve)
+                  path: '/video',
+                  component: resolve => require(['../components/Video.vue'], resolve)
                 }
             ]
         },

@@ -1,17 +1,27 @@
 <template>
-  <div class="video-main">
+  <div class="row">
+    <v-header :activeIndex="1" @transferTopic="getTopic"></v-header>
+    <v-star v-show="topic1"></v-star>
+    <v-common v-show="topic2"></v-common>
+    <v-art v-show="topic3"></v-art>
+    <div class="video-main">
       <div class="video-label">
-        <p class="video-title">第一课：XXXXX视频课程名字</p>
+        <p class="video-title">{{videoName}}</p>
         <p style="text-align: center;font-size: 15px">
-          讲师：XXX</p>
+          讲师：{{teacherName}}</p>
       </div>
       <div class="video">
         <ali-player :source="aplayer.source" :height="aplayer.height" :vid="aplayer.vid" :playauth="aplayer.playauth" ref="player">
         </ali-player>
       </div>
+    </div>
   </div>
 </template>
 <style>
+  .row{
+    height: 100%;
+    width: 100%;
+  }
   .video-label{
     height: 50px;
     width: 100%;
@@ -43,6 +53,10 @@
 </style>
 <script>
   import VueAliplayer from 'vue-aliplayer'
+  import vStar from './topic/Star.vue'
+  import vCommon from './topic/Common.vue'
+  import vArt from './topic/Art.vue'
+  import vHeader from "./Header.vue"
   export default {
     data(){
       return {
@@ -51,11 +65,27 @@
           source: "",
           vid: "",
           playauth: ""
-        }
+        },
+        topic1: false,
+        topic2: true,
+        topic3: false,
+        videoName: '',
+        teacherName: ''
       }
     },
+    mounted: function() {
+      this.$http.get('http://localhost:8081/video/today', {
+      }).then((response) => {
+        if(response.data.code == 1){
+        }
+      }, (response) =>{});
+    },
     components: {
-      'ali-player': VueAliplayer
+      'ali-player': VueAliplayer,
+      'v-star': vStar,
+      'v-common': vCommon,
+      'v-header': vHeader,
+      'v-art': vArt
     },
     methods: {
       play: function () {
@@ -69,6 +99,18 @@
       replay: function () {
         const player = this.$refs.player.instance
         player && player.replay()
+      },
+      getTopic: function(msg){
+        this.topic1 = false;
+        this.topic2 = false;
+        this.topic3 = false;
+        if(msg == "1"){
+          this.topic1 = true;
+        } else if(msg == "2"){
+          this.topic2 = true;
+        } else if (msg == "3"){
+          this.topic3 = true;
+        }
       }
     }
   }
