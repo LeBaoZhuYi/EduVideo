@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 //你好，我是乐宝
 //哼，我才是
@@ -74,13 +72,25 @@ public class UserController {
      */
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     @ResponseBody
-    private List<User> test2() throws IllegalArgumentException, IllegalAccessException {
-        UserExample userExample = new UserExample();
+    private Map<String, Object> test2(){
+        Map<String, Object> res = new HashMap<>();
+        try {
+            UserExample userExample = new UserExample();
 
-        userExample.createCriteria().andLoginNameEqualTo("2");
-        userExample.or().andLoginNameEqualTo("3");
+            userExample.createCriteria().andLoginNameEqualTo("2");
+            userExample.or().andLoginNameEqualTo("3");
 
-        return userService.selectByExample(userExample);
+            res.put("status", 0);
+            res.put("msg", "");
+            res.put("data", userService.selectByExample(userExample));
+        } catch(Exception e){
+            logger.error("test2 error with exception: {}", e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+
+        }
+        return res;
     }
 }
 
