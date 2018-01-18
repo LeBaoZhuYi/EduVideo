@@ -15,6 +15,10 @@ public class Student {
 
     private Date utime;
 
+    private String intro;
+
+    private String remark;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class Student {
 
     public void setUtime(Date utime) {
         this.utime = utime;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

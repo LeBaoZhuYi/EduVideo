@@ -8,6 +8,8 @@
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="utime" jdbcType="TIMESTAMP" property="utime" />
+    <result column="stu_intro" jdbcType="VARCHAR" property="intro" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, study_id, stu_name, status, ctime, utime
+    id, study_id, stu_name, status, ctime, utime, stu_intro, remark
   </sql>
   <select id="selectByExample" parameterType="com.video.edu.me.entity.StudentExample" resultMap="BaseResultMap">
     select
@@ -102,10 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.video.edu.me.entity.Student">
     insert into student (id, study_id, stu_name, 
-      status, ctime, utime
+      status, ctime, utime, stu_intro, remark
       )
     values (#{id,jdbcType=INTEGER}, #{studyId,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}
+      #{status,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP},
+      #{intro,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.video.edu.me.entity.Student">
@@ -129,6 +132,12 @@
       <if test="utime != null">
         utime,
       </if>
+      <if test="intro != null">
+        stu_intro,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,6 +157,12 @@
       </if>
       <if test="utime != null">
         #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +193,12 @@
       <if test="record.utime != null">
         utime = #{record.utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.intro != null">
+        stu_intro = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +211,9 @@
       stu_name = #{record.stuName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      utime = #{record.utime,jdbcType=TIMESTAMP}
+      utime = #{record.utime,jdbcType=TIMESTAMP},
+      stu_intro = #{record.intro,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +236,12 @@
       <if test="utime != null">
         utime = #{utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="stu_intro != null">
+        stu_intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -222,7 +251,9 @@
       stu_name = #{stuName,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       ctime = #{ctime,jdbcType=TIMESTAMP},
-      utime = #{utime,jdbcType=TIMESTAMP}
+      utime = #{utime,jdbcType=TIMESTAMP},
+      stu_intro = #{intro,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
