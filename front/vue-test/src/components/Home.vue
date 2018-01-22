@@ -24,7 +24,8 @@
 
 <script>
   import cnHeader from './admin/Header.vue'
- import Login from './Login.vue';
+ // import Login from './Login.vue';
+  import Login from './NewLogin.vue';
 import Page from './Page.vue';
 import PageController from './PageController.vue';
 // 页面进出动画
