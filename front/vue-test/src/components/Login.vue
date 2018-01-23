@@ -1,76 +1,142 @@
 <template>
-  <div style="width:0px;height:100px;margin:0 auto;">
-  <div id="container">
-    <div class="welcome">
-      <div class="login">学生登录</div>
-      <div class="username-text">用户名:</div>
-      <div class="password-text">密码:</div>
-      <div class="username-field">
-        <input type="text" name="username" placeholder="Username" :class="'log-input' + (loginName==''?' log-input-empty':'')" v-model="loginName">
-        <!--<input type="text" name="username" value="azmind" />-->
-      </div>
-      <div class="password-field">
-        <input type="password" name="password" placeholder="Password" :class="'log-input' + (password==''?' log-input-empty':'')" v-model="password">
-        <!--<input type="password" name="password" value="azmind" />-->
-      </div>
-      <input type="checkbox" name="remember-me" id="remember-me" /><label for="remember-me">记住我</label>
-      <div class="forgot-usr-pwd"><a href="#">忘记密码</a>?</div>
-      <input type="submit" name="submit" value="GO" @click="login()" />
+  <div class="login-wrap">
+    <div class="begin">
+      <el-button class="begin-button" @click="loginViewController()" type="text">开始</el-button>
+    </div>
+    <div v-show="loginShow" class="ms-login">
+      <div class="login-bg"></div>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
+        <el-form-item prop="loginName">
+          <el-input v-model="ruleForm.loginName" placeholder="loginName"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password" placeholder="password" v-model="ruleForm.password"
+                    @keyup.enter.native="submitForm('ruleForm')"></el-input>
+        </el-form-item>
+        <div class="login-btn">
+          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+        </div>
+        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 填写学生登录名和密码。</p>
+      </el-form>
     </div>
   </div>
-  </div>
 </template>
-<style>
-  @import url("../assets/css/login.css");
-</style>
+
 <script>
   export default {
-    name: 'Login',
-    data() {
+    data: function () {
       return {
-        isLoging: false,
-        loginName: '',
-        password: ''
+        loginShow: false,
+        ruleForm: {
+          loginName: '',
+          password: ''
+        },
+        rules: {
+          loginName: [
+            {required: true, message: '请输入用户名', trigger: 'blur'}
+          ],
+          password: [
+            {required: true, message: '请输入密码', trigger: 'blur'}
+          ]
+        }
       }
     },
-    components: {
-    },
     methods: {
-
-      //登录逻辑
-      login() {
-        if (this.loginName != '' && this.password != '') {
-          this.toLogin();
-        }
-        else{
-          this.$alert('用户名或密码不能为空', '出错咯', {
-            confirmButtonText: '确定'
-          });
-        }
-      },//登录请求
-      toLogin() {
-        //一般要跟后端了解密码的加密规则
-        //这里例子用的哈希算法来自./js/sha1.min.js
-        let password_sha = '123456';//hex_sha1(hex_sha1(this.password));
-        //需要想后端发送的登录参数
-        let loginParam = {
-          loginName: this.loginName,
-          password: password_sha
-        }
-        //设置在登录状态
-        this.isLoging = true;
-        //请求后端
-        this.$http.get('/api/user/login?loginName=' + loginParam.loginName + '&password=' + loginParam.password)
+      submitForm(formName) {
+        const self = this;
+        let timeStamp = new  Date().getTime();
+        self.$refs[formName].validate((valid) => {
+          if (!valid) {
+            this.$message.success('参数有错误！');
+            return false;
+          }
+        });
+        self.$http.get('/api/user/login?loginName=' + self.ruleForm.loginName + '&password=' + self.ruleForm.password + '&timeStamp=' + timeStamp)
           .then((response) => {
-          if(response.data.code == 1){
+            if (response.data.code == 1) {
               //如果登录成功则保存登录状态并设置有效期
               let expireDays = 1000 * 60 * 60 * 24 * 15;
-              this.setCookie('session', response.data.session, expireDays);
+              self.setCookie('session', response.data.session, expireDays);
+              localStorage.setItem('loginName', self.ruleForm.loginName);
               //跳转
-              this.$router.push('/user_info');
-          }
-        }, (response) =>{});
+              self.$router.push('/user');
+            }
+            else{
+              this.$message.success('登录失败！');
+            }
+          }, (response) => {
+            this.$message.success('登录失败！');
+          });
+      },
+      loginViewController() {
+        this.loginShow = !(this.loginShow);
       }
     }
   }
 </script>
+
+<style scoped>
+  .begin {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    margin: -240px 900px;
+    background-image: url("../assets/img/begin.png");
+  }
+
+  @font-face {
+    font-family: myFirstFont;
+    src: url('../assets/temp/test.ttf')
+  }
+
+  .begin-button {
+    position: relative;
+    top: 19%;
+    left: 29%;
+    color: #00d1b2;
+    font-size: 35px;
+    font-family: myFirstFont;
+
+  }
+
+  .login-wrap {
+    position: relative;
+    margin-top: 25%;
+    width: 100%;
+    height: 100%;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+  }
+
+  .login-bg {
+    position: relative;
+    top: -15%;
+    width: 100%;
+    height: 40%;
+    background-image: url("../assets/img/logo.jpg");
+    background-repeat: no-repeat;
+
+  }
+
+  .ms-login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 250px;
+    margin: -150px 0 0 -190px;
+    padding: 40px;
+    border-radius: 5px;
+    background: #fff;
+  }
+
+  .login-btn {
+    text-align: center;
+  }
+
+  .login-btn button {
+    width: 100%;
+    height: 36px;
+  }
+</style>

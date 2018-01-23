@@ -10,6 +10,6 @@ public class UploadThread {
 
     public UploadThread(int videoId, int filePath){
         this.videoId = videoId;
-        this.filePath = filePath
+        this.filePath = filePath;
     }
 }
