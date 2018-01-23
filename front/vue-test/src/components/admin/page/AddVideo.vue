@@ -22,9 +22,9 @@
                   class="upload-demo"
                   ref="upload"
                   drag
-                  action="/api/admin/upload/video"
+                  action="/api/admin/video/upload"
                   :on-success="uploadSuccess"
-                  :auto-upload="false"
+                  :auto-upload="true"
                   :data="video"
                   >
                   <i class="el-icon-upload"></i>
@@ -55,7 +55,7 @@
         },
         methods: {
             onSubmit() {
-              this.$refs.upload.submit();
+//              this.$refs.upload.submit();
                 this.$message.success('提交成功！');
             },
 
