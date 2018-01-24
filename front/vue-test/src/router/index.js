@@ -40,6 +40,10 @@ export default new Router({
                 path: '/history-table',
                 component: resolve => require(['../components/admin/page/HistoryTable.vue'], resolve)
               },
+              {
+                path: '/add-video',
+                component: resolve => require(['../components/admin/page/AddVideo.vue'], resolve)
+              },
                 {
                     path: '/baseform',
                     component: resolve => require(['../components/admin/page/BaseForm.vue'], resolve)

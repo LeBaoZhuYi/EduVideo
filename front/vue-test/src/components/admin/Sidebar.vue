@@ -64,7 +64,7 @@
                   },
                   {
                     icon: 'el-icon-date',
-                    index: '2',
+                    index: '3',
                     title: '管理操作',
                     subs: [
                       {
