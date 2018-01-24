@@ -86,18 +86,13 @@
     background-image: url("../assets/img/begin.png");
   }
 
-  @font-face {
-    font-family: myFirstFont;
-    src: url('../assets/temp/test.ttf')
-  }
-
   .begin-button {
     position: relative;
     top: 19%;
     left: 29%;
     color: #00d1b2;
     font-size: 35px;
-    font-family: myFirstFont;
+    font-family: fengbi;
 
   }
 

@@ -47,7 +47,7 @@
    }
 </style>
 <script>
-  import Test from '../../assets/star.js';
+  import Test from '../../js/star.js';
   export default {
     data() {
       return {}

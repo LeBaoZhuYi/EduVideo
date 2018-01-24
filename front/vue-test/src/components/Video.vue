@@ -22,16 +22,16 @@
     width: 100%;
   }
   .video-label{
-    height: 50px;
+    height: 9%;
     width: 100%;
     margin-bottom: 7%;
-    display: inline-block;
     color: #3586fe;
   }
 
   .video-title{
     text-align: center;
-    font-size: 22px;
+    font-size: 40px;
+    font-family: fengbi;
   }
   .video {
     width: 100%;
@@ -39,11 +39,14 @@
   }
 
   .video-main {
+    position: absolute;
     z-index:999;
-    margin-top: -55%;
-    margin-left: 23%;
+    top: 50%;
+    left: 50%;
     width: 60%;
-    height: 55%;
+    height: 56%;
+    margin-left: -30%;
+    margin-top: -15%;
     text-align: center;
     font-family: Verdana, Arial;
     font-weight: normal;
@@ -61,8 +64,8 @@
         topic1: true,
         topic2: false,
         topic3: false,
-        videoName: '测试视频',
-        teacherName: '鸡腿'
+        videoName: '测试视频——朗诵一课',
+        teacherName: '韩老师'
       }
     },
     mounted: function() {
@@ -79,7 +82,7 @@
      // });
       let player = new qcVideo.Player('id_test_video', {
         "auto_play":"0",
-        "file_id":"4564972819047260897",
+        "file_id":"4564972819148766178",
         "stretch_full": 0,
         "app_id":"1255600123",
         "https":1

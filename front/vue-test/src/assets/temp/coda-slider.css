@@ -50,18 +50,13 @@
 #earth,#footer a {
 	color: #fff;
 }
-@font-face
-{
-  font-family: myFirstFont;
-  src: url('test.ttf')
-}
 #my_name{
   background: transparent;
   border:none;
   border-bottom:3px solid #ffffff;
   font-size: 50px;
   color: #ffffff;
-  font-family: myFirstFont;
+  font-family: fengbi;
 }
 .scroll {
     height: 415px;

@@ -44,9 +44,9 @@
 
       header(type){
         if(type == "video"){
-          window.open('/user');
+          window.open('/user/video');
         } else if(type == "person"){
-          window.open('/test');
+          window.open('/user/person');
         } else if(type == "logout"){
           this.$router.push('/');
         }
