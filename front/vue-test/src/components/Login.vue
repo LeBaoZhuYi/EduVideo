@@ -51,6 +51,8 @@
             return false;
           }
         });
+        self.$router.push('/user/video');
+        return;
         self.$http.get('/api/user/login?loginName=' + self.ruleForm.loginName + '&password=' + self.ruleForm.password + '&timeStamp=' + timeStamp)
           .then((response) => {
             if (response.data.code == 1) {
@@ -59,7 +61,7 @@
               self.setCookie('session', response.data.session, expireDays);
               localStorage.setItem('loginName', self.ruleForm.loginName);
               //跳转
-              self.$router.push('/user');
+              self.$router.push('/user/video');
             }
             else{
               this.$message.success('登录失败！');

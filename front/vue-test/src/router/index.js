@@ -11,14 +11,12 @@ export default new Router({
             redirect: '/home'
         },
         {
-            path: '/user',
-            component: resolve => require(['../components/Video.vue'], resolve),
-            children:[
-                {
-                  path: '/video',
-                  component: resolve => require(['../components/Video.vue'], resolve)
-                }
-            ]
+            path: '/user/video',
+            component: resolve => require(['../components/Video.vue'], resolve)
+        },
+        {
+          path: '/user/person',
+          component: resolve => require(['../components/Person.vue'], resolve)
         },
         {
             path: '/admin',
