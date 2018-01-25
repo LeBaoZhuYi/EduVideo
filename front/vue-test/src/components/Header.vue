@@ -70,6 +70,8 @@
     float: left;
     width:300px;
     text-align: center;
+    font-size:24px;
+    font-family: fengbi;
   }
   .header-menu {
     float: right;

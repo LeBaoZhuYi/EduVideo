@@ -21,18 +21,8 @@
     cursor:none;
     top:0;
     left:0;
-    /*background:#fe5757;*/
-    /*animation:colorChange 30s ease-in-out infinite;*/
     animation-fill-mode:both;
     mix-blend-mode:overlay;
-  }
-  @keyframes colorChange {
-    0%,100% {
-      opacity:0;
-    }
-    50% {
-      opacity:.9;
-    }
   }
   .landscape {
      position:absolute;
@@ -40,10 +30,10 @@
      left:0;
      width:100%;
      height:100%;
-     background-image:url('http://www.jq22.com/css/img/xkbg.png');
-     background-size:1000px 250px;
-     background-repeat:repeat-x;
-     background-position:center bottom;
+     /*background-image:url('http://www.jq22.com/css/img/xkbg.png');*/
+     /*background-size:1000px 250px;*/
+     /*background-repeat:repeat-x;*/
+     /*background-position:center bottom;*/
    }
 </style>
 <script>

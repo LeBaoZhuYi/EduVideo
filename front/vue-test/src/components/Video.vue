@@ -44,7 +44,7 @@
     top: 50%;
     left: 50%;
     width: 60%;
-    height: 56%;
+    height: 70%;
     margin-left: -30%;
     margin-top: -15%;
     text-align: center;
@@ -74,12 +74,12 @@
       //   if(response.data.code == 1){
       //   }
       // }, (response) =>{});
-     // let player = new TcPlayer('id_test_video', {
-     //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
-     //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-     //   "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-     //   "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
-     // });
+      // let player = new TcPlayer('id_test_video', {
+      //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
+      //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+      //   "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+      //   "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+      // });
       let player = new qcVideo.Player('id_test_video', {
         "auto_play":"0",
         "file_id":"4564972819148766178",

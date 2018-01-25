@@ -11,7 +11,7 @@
           讲师：{{teacherName}}</p>
       </div>
       <div class="video">
-        <div id="id_test_video" style="width:100%; height:100%;"></div>
+        <div id="id_test_video"></div>
       </div>
     </div>
   </div>
@@ -22,16 +22,16 @@
     width: 100%;
   }
   .video-label{
-    height: 50px;
+    height: 9%;
     width: 100%;
     margin-bottom: 7%;
-    display: inline-block;
     color: #3586fe;
   }
 
   .video-title{
     text-align: center;
-    font-size: 22px;
+    font-size: 40px;
+    font-family: fengbi;
   }
   .video {
     width: 100%;
@@ -39,11 +39,14 @@
   }
 
   .video-main {
+    position: absolute;
     z-index:999;
-    margin-top: -45%;
-    margin-left: 30%;
-    width: 40%;
-    height: 50%;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 56%;
+    margin-left: -30%;
+    margin-top: -15%;
     text-align: center;
     font-family: Verdana, Arial;
     font-weight: normal;
@@ -58,11 +61,11 @@
   export default {
     data(){
       return {
-        topic1: false,
-        topic2: true,
+        topic1: true,
+        topic2: false,
         topic3: false,
-        videoName: '',
-        teacherName: ''
+        videoName: '测试视频——朗诵一课',
+        teacherName: '韩老师'
       }
     },
     mounted: function() {
@@ -71,12 +74,18 @@
       //   if(response.data.code == 1){
       //   }
       // }, (response) =>{});
-      let player = new TcPlayer('id_test_video', {
-        "m3u8": "http://2157.liveplay.myqcloud.com/2157_358535a.m3u8", //请替换成实际可用的播放地址
-        "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-        "coverpic" : "http://www.test.com/myimage.jpg",
-        "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-        "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+      // let player = new TcPlayer('id_test_video', {
+      //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
+      //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+      //   "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+      //   "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+      // });
+      let player = new qcVideo.Player('id_test_video', {
+        "auto_play":"0",
+        "file_id":"4564972819148766178",
+        "stretch_full": 0,
+        "app_id":"1255600123",
+        "https":1
       });
     },
     components: {
