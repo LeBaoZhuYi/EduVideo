@@ -10,6 +10,10 @@ export default new Router({
             path: '/',
             redirect: '/home'
         },
+      {
+        path: '/b',
+        component: resolve => require(['../components/B.vue'], resolve)
+      },
         {
             path: '/user/video',
             component: resolve => require(['../components/Video.vue'], resolve)

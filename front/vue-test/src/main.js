@@ -15,9 +15,9 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
 // Vuex配置
-  const store = new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    domain:'http://test.example.com', //保存后台请求的地址，修改时方便（比方说从测试服改成正式服域名）
+    domain: 'http://test.example.com', //保存后台请求的地址，修改时方便（比方说从测试服改成正式服域名）
     userInfo: { //保存用户信息
       nick: null,
       ulevel: null,
@@ -37,10 +37,10 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App },
+  components: {App},
   //监听路由检查登录
-  watch:{
-    "$route" : 'checkLogin'
+  watch: {
+    "$route": 'checkLogin'
   },
   //进入页面时
   created() {
@@ -50,6 +50,9 @@ new Vue({
     checkLogin() {
       //检查是否存在session
       //cookie操作方法在源码里有或者参考网上的即可
+      if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+        this.$router.push('/b');
+      }
       if (!this.getCookie('session')) {
         //如果没有登录状态则跳转到登录页
         // this.$router.push('/login');
@@ -71,26 +74,26 @@ new Vue({
     },
   }
 })
-Vue.filter('formatDate', function(str) {
-		    if (!str) return ''
-		    var date = new Date(str)
-		    var time = new Date().getTime() - date.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
-		    if (time < 0) {
-		        return ''
-		    } else if ((time / 1000 < 30)) {
-		        return '刚刚'
-		    } else if (time / 1000 < 60) {
-		        return parseInt((time / 1000)) + '秒前'
-		    } else if ((time / 60000) < 60) {
-		        return parseInt((time / 60000)) + '分钟前'
-		    } else if ((time / 3600000) < 24) {
-		        return parseInt(time / 3600000) + '小时前'
-		    } else if ((time / 86400000) < 31) {
-		        return parseInt(time / 86400000) + '天前'
-		    } else if ((time / 2592000000) < 12) {
-		        return parseInt(time / 2592000000) + '月前'
-		    } else {
-		        return parseInt(time / 31536000000) + '年前'
-		    }
-		}
+Vue.filter('formatDate', function (str) {
+    if (!str) return ''
+    var date = new Date(str)
+    var time = new Date().getTime() - date.getTime() //现在的时间-传入的时间 = 相差的时间（单位 = 毫秒）
+    if (time < 0) {
+      return ''
+    } else if ((time / 1000 < 30)) {
+      return '刚刚'
+    } else if (time / 1000 < 60) {
+      return parseInt((time / 1000)) + '秒前'
+    } else if ((time / 60000) < 60) {
+      return parseInt((time / 60000)) + '分钟前'
+    } else if ((time / 3600000) < 24) {
+      return parseInt(time / 3600000) + '小时前'
+    } else if ((time / 86400000) < 31) {
+      return parseInt(time / 86400000) + '天前'
+    } else if ((time / 2592000000) < 12) {
+      return parseInt(time / 2592000000) + '月前'
+    } else {
+      return parseInt(time / 31536000000) + '年前'
+    }
+  }
 )
