@@ -43,7 +43,7 @@
         </g>
 		  </svg>
     </div>
-    <div class="slime" id="slime2">
+    <div class="slime" id="slime2" @click="test">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 width="125px" height="100px" viewBox="0 0 126.75 103.25" enable-background="new 0 0 126.75 103.25" xml:space="preserve">
 		<g class="corps">
@@ -86,7 +86,7 @@
 		</g>
 		</svg>
     </div>
-    <div class="slime" id="slime3">
+    <div class="slime" id="slime3" @click="test">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 width="125px" height="100px" viewBox="0 0 126.75 103.25" enable-background="new 0 0 126.75 103.25" xml:space="preserve">
 		<g class="corps">
@@ -129,7 +129,7 @@
 		</g>
 		</svg>
     </div>
-    <div id="box" class="show"></div>
+    <div id="box"><span id="text" class="test">{{spanText}}</span></div>
   </div>
 </template>
 <style>
@@ -139,13 +139,19 @@
     margin: 0;
     padding: 0;
   }
-
+  .test{
+    position: relative;
+    text-align: center;
+    top: 40%;
+    font-family: fengbi;
+    font-size: 40px;
+  }
   #box {
     position: relative;
     /*left: 100px;*/
-    top: 50%;
-    left: 50%;
-    width: 140px;
+    top: 30%;
+    left: 25%;
+    width: 50%;
     /*height: 100px;*/
     background: #088cb7;
     -moz-border-radius: 12px;
@@ -153,10 +159,12 @@
     border-radius: 12px;
   }
 
-  #box{-webkit-animation-fill-mode:both; -webkit-animation-duration: 1s;
+  #box{-webkit-animation-fill-mode:both; -webkit-animation-duration: 0.5s;
   }
   #box.show{ -webkit-animation-name: slideIn;}
   #box.hide{ -webkit-animation-name: slideOut;}
+  #text.show{ -webkit-animation-name: slideTextIn;}
+  #text.hide{ -webkit-animation-name: slideTextOut;}
 
   @-webkit-keyframes slideIn{
     0%{height: 0; display: block;}
@@ -165,6 +173,18 @@
   }
 
   @-webkit-keyframes slideOut{
+    0%{height: 100%;}
+    50%{height: 50%;}
+    100%{height: 0; display: none;}
+  }
+
+  @-webkit-keyframes slideTextIn{
+    0%{height: 0; display: block;}
+    50%{height: 50%;}
+    100%{height: 100%;}
+  }
+
+  @-webkit-keyframes slideTextOut{
     0%{height: 100px;}
     50%{height: 50px;}
     100%{height: 0; display: none;}
@@ -172,7 +192,56 @@
 </style>
 <script>
   export default {
+    data(){
+      return {
+        spanText: '',
+        spanTextList: ['嘿嘿嘿',
+          '你好，我是包子',
+          '我是窝窝头',
+          '那好吧，我是汤圆',
+          '抖一抖',
+          '因为乐宝爱吃汤圆',
+          '我又稀饭乐宝',
+          '所以乐宝是天下最可爱的汤圆',
+          '乐宝辣么萌',
+          '是的是的',
+          '不知道用什么样的言语表达对乐宝的稀饭',
+          '就希望乐宝每天都像个可爱的汤圆辣样',
+          '抖两抖',
+          '那样天真可爱',
+          '乐宝才不胖呢',
+          '对呀对呀',
+          '谁敢说我乐宝胖',
+          '就罚他这辈子吃不到窝头馒头包子汤圆',
+          '抖抖抖抖抖',
+          '乐宝明明就是我见过的最漂亮的汤圆',
+          '所以我',
+          '还有我',
+          '还有有我',
+          '都想乐宝能每天开开心心',
+          '就算有这样那样的烦恼',
+          '就算有时候钻钻钻钻',
+          '心里会有一潭清水',
+          '静静地',
+          '美美的',
+          '相信着自己的美好',
+          '相信着因自己编织出来的，自己的因缘造就的世界的美好',
+          '再抖抖',
+          '相信着',
+          '天空的尽头依偎着大地',
+          '早晚的霞光清算着年纪',
+          '时间与空间的狭间里',
+          '念着你的是我',
+          '写着我的是你',
+          '呱',
+          '还想再听一遍呀？',
+          '辣抖一抖',
+          '嗯，萌萌的'
+        ]
+      }
+    },
     mounted: function () {
+      localStorage.setItem('count', '0');
       this.changeFond();
       this.changeCouleur();
     },
@@ -261,13 +330,24 @@
         }
       },
       test(){
-        this.$message.success("哈哈哈");
         if (document.getElementById("box").classList.contains("show")) {
+          this.spanText = "";
           document.getElementById("box").classList.add("hidden");
           document.getElementById("box").classList.remove("show");
+          document.getElementById("text").classList.add("hidden");
+          document.getElementById("text").classList.remove("show");
         } else{
+          let count = parseInt(localStorage.getItem("count"));
+            this.spanText = this.spanTextList[count];
+          count += 1;
+          if (count >= 42){
+            count -= 42;
+          }
+          localStorage.setItem("count", count);
           document.getElementById("box").classList.add("show");
           document.getElementById("box").classList.remove("hidden");
+          document.getElementById("text").classList.add("show");
+          document.getElementById("text").classList.remove("hidden");
         }
       }
     }
