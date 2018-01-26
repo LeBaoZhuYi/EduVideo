@@ -1,8 +1,9 @@
 package com.video.edu.me.controller.admin;
 
-import com.video.edu.me.entity.Student;
-import com.video.edu.me.entity.StudentExample;
-import com.video.edu.me.service.StudentService;
+import com.video.edu.me.entity.History;
+import com.video.edu.me.entity.HistoryExample;
+import com.video.edu.me.entity.UserExample;
+import com.video.edu.me.service.HistoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@Controller("adminStudentController")
-@RequestMapping(value = "/admin/student")
-public class StudentController {
-
-    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+@Controller("adminHistoryController")
+@RequestMapping(value = "/admin/history")
+public class HistoryController {
+    private static final Logger logger = LoggerFactory.getLogger(HistoryController.class);
 
     @Autowired
-    StudentService studentService;
+    HistoryService historyService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> create(Student student) {
+    private Map<String, Object> create(History history) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = studentService.insertSelective(student);
+            int insertResult = historyService.insertSelective(history);
             if (insertResult == 0) {
                 res.put("status", 1);
-                res.put("msg", "未成功插入数据");
+                res.put("msg", "未成功插入历史记录");
             } else {
                 res.put("status", 0);
-                res.put("msg", "成功啦！");
+                res.put("msg", "创建历史记录成功！");
             }
             res.put("data", insertResult);
         } catch (Exception e) {
@@ -51,13 +53,13 @@ public class StudentController {
     private Map<String, Object> find(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            Student findResult = studentService.selectByPrimaryKey(id);
+            History findResult = historyService.selectByPrimaryKey(id);
             if (findResult == null) {
                 res.put("status", 1);
-                res.put("msg", "查找失败");
+                res.put("msg", "查找历史记录失败");
             } else {
                 res.put("status", 0);
-                res.put("msg", "成功");
+                res.put("msg", "查找历史成功");
             }
             res.put("data", findResult);
         } catch (Exception e) {
@@ -74,13 +76,13 @@ public class StudentController {
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = studentService.deleteByPrimaryKey(id);
+            int deleteResult = historyService.deleteByPrimaryKey(id);
             if (deleteResult == 0) {
                 res.put("status", 1);
-                res.put("msg", "删除出错");
+                res.put("msg", "删除历史出错");
             } else {
                 res.put("status", 0);
-                res.put("msg", "删除成功");
+                res.put("msg", "删除历史成功");
             }
             res.put("data", deleteResult);
         } catch (Exception e) {
@@ -92,22 +94,32 @@ public class StudentController {
         return res;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/getWatchHistoryList", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> update(Student student) {
+    private Map<String, Object> getWatchHistoryList(int id) {
+        List<Map<String, Object>> watchHistoryList = new ArrayList<>();
         Map<String, Object> res = new HashMap<>();
+        Map<String, Object> temp = new HashMap<>();
         try {
-            int updateResult = studentService.updateByPrimaryKey(student);
-            if (updateResult == 0) {
+            HistoryExample historyExample = new HistoryExample();
+            historyExample.createCriteria().andStuIdEqualTo(id);
+            List<History> recordList = historyService.selectByExample(historyExample);
+            if(recordList == null){
                 res.put("status", 1);
-                res.put("msg", "更新失败");
-            } else {
+                res.put("msg", "获取记录出错");
+            }else {
                 res.put("status", 0);
-                res.put("msg", "更新成功");
+                res.put("msg", "获取记录成功");
+                for(int i = 0; i < recordList.size(); i++) {
+                    temp.put("stuID", recordList.get(i).getStuId());
+                    temp.put("videoID", recordList.get(i).getVideoId());
+                    temp.put("watchTime", recordList.get(i).getCtime());
+                    watchHistoryList.add(temp);
+                }
+                res.put("data", watchHistoryList);
             }
-            res.put("data", updateResult);
         } catch (Exception e) {
-            logger.error("update error with exception: {}", e.getMessage());
+            logger.error("getWatchHistoryList error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -115,21 +127,20 @@ public class StudentController {
         return res;
     }
 
-    @RequestMapping(value = "/getList", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/getLoginHistoryList", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> getList() {
+    private List<Map<String, Object>> getLoginHistoryList() {
+        List<Map<String, Object>> loginHistoryList = new ArrayList<>();
         Map<String, Object> res = new HashMap<>();
+        Map<String, Object> list = getUserList();
         try {
-            StudentExample studentExample = new StudentExample();
-            studentExample.createCriteria().andStudyIdIsNotNull();
-            if(studentExample == null){
-                res.put("status", 1);
-                res.put("msg", "获取列表失败");
-            }else{
-                res.put("status", 0);
-                res.put("msg", "");
-                res.put("data", studentService.selectByExample(studentExample));
+            while (!list.isEmpty()) {
+                UserExample userExample = new UserExample();
+                userExample.createCriteria().andIdIsNotNull();
+                res.put("data", userService.selectByExample(userExample));
+                res.put("loginHistory", )
             }
+
         } catch (Exception e) {
             logger.error("getList error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -137,7 +148,5 @@ public class StudentController {
             res.put("data", null);
         }
         return res;
-    }
-
+    }*/
 }
-

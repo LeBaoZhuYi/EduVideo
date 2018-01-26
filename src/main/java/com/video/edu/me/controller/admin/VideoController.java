@@ -153,9 +153,14 @@ public class VideoController {
         try {
             VideoExample videoExample = new VideoExample();
             videoExample.createCriteria().andTeacherNameLike("a");
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", videoService.selectByExample(videoExample));
+            if(videoExample == null){
+                res.put("status", 1);
+                res.put("msg", "获取教师列表失败");
+            }else{
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", videoService.selectByExample(videoExample));
+            }
         } catch (Exception e) {
             logger.error("getList error with exception: {}", e.getMessage());
             res.put("status", -1);

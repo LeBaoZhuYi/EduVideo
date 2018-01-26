@@ -17,7 +17,7 @@ import java.util.Map;
 @Controller("adminWatchAuthorityController")
 @RequestMapping(value = "/admin/watchAuthority")
 public class WatchAuthorityController {
-    private static final Logger logger = LoggerFactory.getLogger(VideoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(WatchAuthorityController.class);
 
     @Autowired
     WatchAuthorityService watchAuthorityService;
@@ -30,7 +30,7 @@ public class WatchAuthorityController {
             int insertResult = watchAuthorityService.insertSelective(watchAuthority);
             if (insertResult == 0) {
                 res.put("status", 1);
-                res.put("msg", "未成功插入视频权限");
+                res.put("msg", "未成功插入视频授权");
             } else {
                 res.put("status", 0);
                 res.put("msg", "成功啦！");
@@ -75,9 +75,14 @@ public class WatchAuthorityController {
         try {
             WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
             watchAuthorityExample.createCriteria().andVideoIdEqualTo(videoId);
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", watchAuthorityService.selectByExample(watchAuthorityExample));
+            if(watchAuthorityExample == null){
+                res.put("status", 1);
+                res.put("msg", "根据视频ID获取学生列表失败");
+            }else{
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", watchAuthorityService.selectByExample(watchAuthorityExample));
+            }
         } catch (Exception e) {
             logger.error("getList error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -94,9 +99,14 @@ public class WatchAuthorityController {
         try {
             WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
             watchAuthorityExample.createCriteria().andStuIdEqualTo(stuId);
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", watchAuthorityService.selectByExample(watchAuthorityExample));
+            if(watchAuthorityExample == null){
+                res.put("status", 1);
+                res.put("msg", "根据学生ID获取视频列表失败");
+            }else{
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", watchAuthorityService.selectByExample(watchAuthorityExample));
+            }
         } catch (Exception e) {
             logger.error("getList error with exception: {}", e.getMessage());
             res.put("status", -1);
