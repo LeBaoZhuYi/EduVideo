@@ -23,9 +23,11 @@
 </template>
 
 <script>
+  import crypto from 'crypto'
   export default {
     data: function () {
       return {
+        loginUrl: 'static/UserTable.json',
         loginShow: false,
         ruleForm: {
           loginName: '',
@@ -51,11 +53,13 @@
             return false;
           }
         });
-        self.$router.push('/user/video');
-        return;
-        self.$http.get('/api/user/login?loginName=' + self.ruleForm.loginName + '&password=' + self.ruleForm.password + '&timeStamp=' + timeStamp)
+        // self.$route
+        let passwd = crypto.createHash("md5").update(self.ruleForm.password).digest("hex");
+        let token = crypto.createHash("md5").update(passwd + String(timeStamp)).digest("hex");
+        alert(token);
+        self.$http.get('/api/user/login?loginName=' + self.ruleForm.loginName + '&token=' + token + '&timeStamp=' + timeStamp)
           .then((response) => {
-            if (response.data.code == 1) {
+            if (response.data.status == 0) {
               //如果登录成功则保存登录状态并设置有效期
               let expireDays = 1000 * 60 * 60 * 24 * 15;
               self.setCookie('session', response.data.session, expireDays);
@@ -82,7 +86,7 @@
     position: absolute;
     width: 150px;
     height: 100px;
-    margin: -240px 900px;
+    margin: -20% 75%;
     background-image: url("../assets/img/begin.png");
   }
 

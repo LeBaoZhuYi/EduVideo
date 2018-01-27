@@ -2,23 +2,24 @@ package com.video.edu.me.utils;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.video.edu.me.dao.UserMapper;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MyShiroRealm extends AuthorizingRealm {
 
+    private static final Logger logger = LoggerFactory.getLogger(MyShiroRealm.class);
     @Autowired
     UserMapper userMapper;
 
@@ -44,20 +45,26 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
-            AuthenticationToken authcToken) throws AuthenticationException {//获取用户账号
-        String userName = authcToken.getPrincipal().toString() ;
+            AuthenticationToken authenticationToken) throws AuthenticationException {//获取用户账号
+        String loginName = authenticationToken.getPrincipal().toString() ;
+        String token = String.valueOf((char[])authenticationToken.getCredentials());
+        String [] pairs = token.split("[+]");
         UserExample userExample = new UserExample();
-        userExample.createCriteria().andLoginNameEqualTo(userName);
-        User user = userMapper.selectByExample(userExample).get(0);
-
-        if (user != null){
-            //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断。第三个参数传入realName。
-            AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),
-                    "MyShiroRealm") ;
-            return authenticationInfo ;
-        }else{
-            return  null ;
+        userExample.createCriteria().andLoginNameEqualTo(loginName);
+        List<User> users = userMapper.selectByExample(userExample);
+        AuthenticationInfo authenticationInfo = null;
+        if (users != null && users.size() > 0){
+            User user = users.get(0);
+            if (EncryptUtil.checkPassword(user.getPassword() + pairs[1], pairs[0])) {
+                //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断。第三个参数传入realName。
+                authenticationInfo = new SimpleAuthenticationInfo(user.getLoginName(), token,
+                        "MyShiroRealm");
+                return authenticationInfo;
+            } else{
+                throw new AuthenticationException();
+            }
+        } else {
+            throw new UnknownAccountException();
         }
     }
-
 }

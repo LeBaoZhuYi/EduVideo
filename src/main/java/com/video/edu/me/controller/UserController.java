@@ -3,8 +3,11 @@ package com.video.edu.me.controller;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.service.UserService;
-import com.video.edu.me.utils.EncryptUtil;
+import com.video.edu.me.utils.ObjectMapTransformUtil;
+import com.video.edu.me.utils.RemoveEntityParamsUtil;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -42,19 +45,37 @@ public class UserController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    private String login(User user, long timeStamp){
+    private Map<String, Object> login(String loginName, String token, long timeStamp){
+        Map<String, Object> res = new HashMap<>();
         try {
-            Subject subject = SecurityUtils.getSubject() ;
-            String encryptPassword = EncryptUtil.encoderByMd5(user.getPassword() + String.valueOf(timeStamp));
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), encryptPassword) ;
-            subject.login(token);
-            return "success" ;
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(loginName, String.format("%s+%d", token, timeStamp));
+            subject.login(usernamePasswordToken);
+            UserExample userExample = new UserExample();
+            userExample.createCriteria().andLoginNameEqualTo(loginName);
+            User user = userService.selectByExample(userExample).get(0);
+            Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
+            RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.USER_USELESS_PARAMS);
+            res.put("status", 1);
+            res.put("msg", "");
+            res.put("data", userMap);
+        } catch (UnknownAccountException ue){
+            logger.error("login error with status: {}, loginName: {}, exception: {}", 1, loginName, ue.getMessage());
+            res.put("status", 1);
+            res.put("msg", "用户名不存在");
+            res.put("data", null);
+        } catch (AuthenticationException ae){
+            logger.error("login error with status: {}, loginName: {}, exception: {}", 2, loginName, ae.getMessage());
+            res.put("status", 2);
+            res.put("msg", "密码错误");
+            res.put("data", null);
         }catch (Exception e){
-            //这里将异常打印关闭是因为如果登录失败的话会自动抛异常
-//            e.printStackTrace();
-            return "fail" ;
+            logger.error("login error with status: {}, loginName: {}, exception: {}", -1, loginName, e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
         }
-
+        return res;
     }
 
     @RequestMapping(value = "/noLogin", method = RequestMethod.GET)
