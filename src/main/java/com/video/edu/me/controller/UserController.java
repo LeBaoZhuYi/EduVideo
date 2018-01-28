@@ -56,7 +56,7 @@ public class UserController {
             User user = userService.selectByExample(userExample).get(0);
             Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
             RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.USER_USELESS_PARAMS);
-            res.put("status", 1);
+            res.put("status", 0);
             res.put("msg", "");
             res.put("data", userMap);
         } catch (UnknownAccountException ue){

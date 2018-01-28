@@ -64,12 +64,15 @@
         topic1: true,
         topic2: false,
         topic3: false,
-        videoName: '测试视频——朗诵一课',
-        teacherName: '韩老师'
+        videoName: '',
+        teacherName: ''
       }
     },
     mounted: function() {
-      // this.$http.get('http://localhost:8081/video/today', {
+      if (localStorage.getItem("isLogined") == "false"){
+        return;
+      }
+      // this.$http.get('http://localhost:8081/video/today?userId=' + userId, {
       // }).then((response) => {
       //   if(response.data.code == 1){
       //   }

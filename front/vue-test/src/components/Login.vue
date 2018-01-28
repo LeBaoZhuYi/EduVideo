@@ -24,10 +24,10 @@
 
 <script>
   import crypto from 'crypto'
+
   export default {
     data: function () {
       return {
-        loginUrl: 'static/UserTable.json',
         loginShow: false,
         ruleForm: {
           loginName: '',
@@ -45,33 +45,27 @@
     },
     methods: {
       submitForm(formName) {
-        const self = this;
-        let timeStamp = new  Date().getTime();
-        self.$refs[formName].validate((valid) => {
+        let timeStamp = new Date().getTime();
+        this.$refs[formName].validate((valid) => {
           if (!valid) {
             this.$message.success('参数有错误！');
             return false;
           }
         });
-        // self.$route
-        let passwd = crypto.createHash("md5").update(self.ruleForm.password).digest("hex");
+        let passwd = crypto.createHash("md5").update(this.ruleForm.password).digest("hex");
         let token = crypto.createHash("md5").update(passwd + String(timeStamp)).digest("hex");
-        alert(token);
-        self.$http.get('/api/user/login?loginName=' + self.ruleForm.loginName + '&token=' + token + '&timeStamp=' + timeStamp)
+        this.$http.get('/api/user/login?loginName=' + this.ruleForm.loginName + '&token=' + token + '&timeStamp=' + timeStamp)
           .then((response) => {
             if (response.data.status == 0) {
-              //如果登录成功则保存登录状态并设置有效期
-              let expireDays = 1000 * 60 * 60 * 24 * 15;
-              self.setCookie('session', response.data.session, expireDays);
-              localStorage.setItem('loginName', self.ruleForm.loginName);
-              //跳转
-              self.$router.push('/user/video');
+              this.setLocalStorage('loginName', response.data.data.loginName);
+              this.setLocalStorage('userId', response.data.data.id);
+              localStorage.setItem("isLogined", "true");
+              this.$router.push('/user/video');
+            } else if (response.data.status > 0) {
+              this.$message.error('登录失败！' + response.data.msg);
+            } else{
+              this.$message.error('登录失败！请稍后再试');
             }
-            else{
-              this.$message.success('登录失败！');
-            }
-          }, (response) => {
-            this.$message.success('登录失败！');
           });
       },
       loginViewController() {
