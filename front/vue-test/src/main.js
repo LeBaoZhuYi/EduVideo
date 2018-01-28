@@ -38,11 +38,11 @@ new Vue({
   components: {App},
   //监听路由检查登录
   watch: {
-    "$route": 'checkLogin'
+    // "$route": 'checkLogin'
   },
   //进入页面时
   mounted() {
-    this.checkLogin();
+    // this.checkLogin();
   },
   methods: {
     checkLogin() {

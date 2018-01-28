@@ -1,5 +1,9 @@
 package com.video.edu.me.controller;
 
+import com.video.edu.me.entity.UserExample;
+import com.video.edu.me.entity.VideoExample;
+import com.video.edu.me.service.StudentService;
+import com.video.edu.me.service.UserService;
 import com.video.edu.me.service.VideoService;
 import com.video.edu.me.entity.Video;
 import org.slf4j.Logger;
@@ -18,11 +22,14 @@ public class VideoController {
 
     @Autowired
     VideoService videoService;
+    @Autowired
+    StudentService studentService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/today", method = RequestMethod.GET)
     @ResponseBody
-    private boolean creat(Video video) throws IllegalArgumentException, IllegalAccessException {
-        return videoService.insertSelective(video) != 0;
+    private boolean today(int userId) throws IllegalArgumentException, IllegalAccessException {
+        VideoExample videoExample = new VideoExample();
+        return false;
     }
 
     @RequestMapping(value = "/find", method = RequestMethod.GET)

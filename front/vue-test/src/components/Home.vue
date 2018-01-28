@@ -15,6 +15,7 @@
       </section>
     </page>
     <page :currentPage="currentPage">
+      <index4></index4>
       <section class="animate">
       </section>
     </page>
@@ -23,10 +24,10 @@
 </template>
 
 <script>
-import cnHeader from './admin/Header.vue'
 import Login from './Login.vue';
 import Page from './Page.vue';
 import PageController from './PageController.vue';
+import Index4 from './Index4.vue'
 // 页面进出动画
 function afterEnterAnimate($child) {
   $child.$el.querySelector('.animate').classList.remove('move-left', 'move-right');
@@ -116,7 +117,7 @@ export default {
     }
   },
   components: {
-    Page, PageController, Login,cnHeader
+    Page, PageController, Login, Index4
   },
   mounted() {
     //组件开始挂载时获取用户信息

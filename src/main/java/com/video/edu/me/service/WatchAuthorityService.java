@@ -21,4 +21,19 @@ public class WatchAuthorityService extends BaseService<WatchAuthority, WatchAuth
 		this.watchAuthorityMapper = watchAuthorityMapper;
 		super.setBaseDao(watchAuthorityMapper);
 	}
+
+	public boolean checkAuthority(int stuId, int videoId){
+		try {
+			WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
+			watchAuthorityExample.createCriteria().andStuIdEqualTo(stuId)
+					.andVideoIdEqualTo(videoId);
+			if (watchAuthorityMapper.countByExample(watchAuthorityExample) > 0) {
+				return true;
+			}
+		} catch (Exception e){
+			logger.error("checkAuthority error with stuId: {}, videoId: {}, exception: {}", stuId, videoId, e.getMessage());
+		}
+		return false;
+
+	}
 }
