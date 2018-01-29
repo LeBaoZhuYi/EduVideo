@@ -20,4 +20,10 @@ public class VideoService extends BaseService<Video, VideoExample> {
         this.videoMapper = videoMapper;
         super.setBaseDao(videoMapper);
     }
+
+    public void addWatchTimes(int videoId){
+        Video video = videoMapper.selectByPrimaryKey(videoId);
+        video.setWatchedTimes(video.getWatchedTimes() + 1);
+        videoMapper.updateByPrimaryKey(video);
+    }
 }

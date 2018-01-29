@@ -64,7 +64,7 @@
             } else if (response.data.status > 0) {
               this.$message.error('登录失败！' + response.data.msg);
             } else{
-              this.$message.error('登录失败！请稍后再试');
+              this.$message.error('登录失败！请稍后再试或联系管理员');
             }
           });
       },

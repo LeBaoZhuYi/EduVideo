@@ -76,9 +76,15 @@
       this.$http.get('http://localhost:8081/video/today?userId=' + userId, {
       }).then((response) => {
         if(response.data.status == 0){
-          fileId = response.data.data.router
+          fileId = response.data.data.route;
+          this.videoName = response.data.data.title;
+          this.videoName = response.data.data.videoName;
+        } else if (response.data.status > 0) {
+          this.$message.error('获取今日课程失败！' + response.data.msg);
+        } else{
+          this.$message.error('获取今日课程失败！请稍后再试或联系管理员');
         }
-      }, (response) =>{});
+      });
       // let player = new TcPlayer('id_test_video', {
       //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
       //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
