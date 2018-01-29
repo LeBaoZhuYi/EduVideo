@@ -82,7 +82,7 @@ export default new Router({
         },
         {
           path: '/test',
-          component: resolve => require(['../components/Index4.vue'], resolve)
+          component: resolve => require(['../components/Test.vue'], resolve)
         }
     ]
 })
