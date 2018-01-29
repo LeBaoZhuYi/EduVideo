@@ -54,7 +54,16 @@
         });
         let passwd = crypto.createHash("md5").update(this.ruleForm.password).digest("hex");
         let token = crypto.createHash("md5").update(passwd + String(timeStamp)).digest("hex");
-        this.$http.get('/api/user/login?loginName=' + this.ruleForm.loginName + '&token=' + token + '&timeStamp=' + timeStamp)
+        let url = "";
+        // let url = "/api/user/login?loginName=" + this.ruleForm.loginName + "&token=" + token + "&timeStamp=" + timeStamp
+        if (this.ruleForm.loginName != "test") {
+          url = "http://localhost:8080/static/ErrorLoginName.json"
+        } else if (this.ruleForm.password != "123456") {
+          url = "http://localhost:8080/static/ErrorPassword.json"
+        } else {
+          url = "http://localhost:8080/static/Login.json"
+        }
+        this.$http.get(url)
           .then((response) => {
             if (response.data.status == 0) {
               this.setLocalStorage('loginName', response.data.data.loginName);
@@ -63,7 +72,7 @@
               this.$router.push('/user/video');
             } else if (response.data.status > 0) {
               this.$message.error('登录失败！' + response.data.msg);
-            } else{
+            } else {
               this.$message.error('登录失败！请稍后再试或联系管理员');
             }
           });

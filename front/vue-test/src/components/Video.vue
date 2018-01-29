@@ -73,30 +73,34 @@
         return;
       }
       let fileId = "";
-      this.$http.get('http://localhost:8081/video/today?userId=' + userId, {
+      // let url = "http://localhost:8081/video/today?userId=" + userId
+      let url = "http://localhost:8080/static/Video.json"
+      this.$http.get(url, {
       }).then((response) => {
         if(response.data.status == 0){
           fileId = response.data.data.route;
           this.videoName = response.data.data.title;
           this.videoName = response.data.data.videoName;
+          // let player = new TcPlayer('id_test_video', {
+          //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
+          //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
+          //   "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
+          //   "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
+          // });
+          let player = new qcVideo.Player('id_test_video', {
+            "auto_play":"0",
+            "file_id": fileId,
+            "stretch_full": 0,
+            "app_id":"1255600123",
+            "https":1
+          });
         } else if (response.data.status > 0) {
           this.$message.error('获取今日课程失败！' + response.data.msg);
+          return;
         } else{
           this.$message.error('获取今日课程失败！请稍后再试或联系管理员');
+          return;
         }
-      });
-      // let player = new TcPlayer('id_test_video', {
-      //   "m3u8": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/c073d9154564972819133100100/v.f20.mp4", //请替换成实际可用的播放地址
-      //   "autoplay" : true,      //iOS下safari浏览器，以及大部分移动端浏览器是不开放视频自动播放这个能力的
-      //   "width" :  '480',//视频的显示宽度，请尽量使用视频分辨率宽度
-      //   "height" : '320'//视频的显示高度，请尽量使用视频分辨率高度
-      // });
-      let player = new qcVideo.Player('id_test_video', {
-        "auto_play":"0",
-        "file_id": fileId,
-        "stretch_full": 0,
-        "app_id":"1255600123",
-        "https":1
       });
     },
     components: {

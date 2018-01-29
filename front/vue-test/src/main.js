@@ -13,6 +13,9 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 Vue.prototype.setLocalStorage = function (key, value) {
+  if(value == null){
+    return;
+  }
   let curTime = new Date().getTime();
   localStorage.setItem(key, JSON.stringify({data: value, time: curTime}));
 }
@@ -38,11 +41,11 @@ new Vue({
   components: {App},
   //监听路由检查登录
   watch: {
-    // "$route": 'checkLogin'
+    "$route": 'checkLogin'
   },
   //进入页面时
   mounted() {
-    // this.checkLogin();
+    this.checkLogin();
   },
   methods: {
     checkLogin() {
