@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,17 +42,28 @@ public class VideoController {
                 res.put("msg", "今日没有课程");
                 res.put("data", null);
             } else {
-                WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
-                watchAuthorityExample.createCriteria().andStuIdEqualTo(stuId).andVideoIdEqualTo(videoClass.getVideoId());
-                if (watchAuthorityService.countByExample(watchAuthorityExample) > 0) {
-                    VideoExample videoExample = new VideoExample();
-                    videoExample.createCriteria().andIdEqualTo(videoClass.getVideoId()).andStatusEqualTo(VideoStatus.NORMAL.getId());
-                    List<Video> videoList = videoService.selectByExample(videoExample);
-                    Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(videoList.get(0));
-                    RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.VIDEO_USELESS_PARAMS);
-                    res.put("status", "0");
-                    res.put("msg", "");
-                    res.put("data", userMap);
+                Date now = new Date();
+                if (now.compareTo(videoClass.getStartTime()) < 0){
+                    res.put("status", "2");
+                    res.put("msg", "未到课程开始时间");
+                    res.put("data", null);
+                } else if(now.compareTo(videoClass.getEndTime()) > 0){
+                    res.put("status", "2");
+                    res.put("msg", "今日课程已经结束");
+                    res.put("data", null);
+                } else {
+                    WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
+                    watchAuthorityExample.createCriteria().andStuIdEqualTo(stuId).andVideoIdEqualTo(videoClass.getVideoId());
+                    if (watchAuthorityService.countByExample(watchAuthorityExample) > 0) {
+                        VideoExample videoExample = new VideoExample();
+                        videoExample.createCriteria().andIdEqualTo(videoClass.getVideoId()).andStatusEqualTo(VideoStatus.NORMAL.getId());
+                        List<Video> videoList = videoService.selectByExample(videoExample);
+                        Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(videoList.get(0));
+                        RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.VIDEO_USELESS_PARAMS);
+                        res.put("status", "0");
+                        res.put("msg", "");
+                        res.put("data", userMap);
+                    }
                 }
             }
         } catch (Exception e){

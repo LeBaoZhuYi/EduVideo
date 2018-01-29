@@ -50,10 +50,6 @@
         </javaClientGenerator>
 
         <!-- 配置表信息,tableName 表名，domainObjectName  生成实体类名称 -->
-        <table schema="" tableName="video_class" domainObjectName="videoClass"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
             <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
                 是否生成 example类   -->
 
@@ -61,7 +57,11 @@
                      <!--<ignoreColumn column="FRED" /> -->
             <!-- 指定列的java数据类型 -->
                       <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
-        </table>
+        <!--<table schema="" tableName="score" domainObjectName="Score"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
         <!--<table schema="" tableName="student" domainObjectName="Student"-->
                <!--enableCountByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
