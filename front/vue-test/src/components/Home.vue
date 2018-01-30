@@ -15,7 +15,7 @@
       </section>
     </page>
     <page :currentPage="currentPage">
-      <index4></index4>
+      <!--<index4></index4>-->
       <section class="animate">
       </section>
     </page>
@@ -42,7 +42,7 @@ export default {
     return {
       currentPage: 1,
       options: [{
-        backgroundImage:"url(" + require("../assets/img/index1.jpg") + ")",
+        backgroundImage:"url(" + require("../assets/img/index1_new.jpg") + ")",
         // is content center
         // isCenter: true,
         // the function before page show
@@ -50,17 +50,17 @@ export default {
         // the function after page show
         beforeLeave: beforeLeaveAnimate
       }, {
-        backgroundImage:"url(" + require("../assets/img/index2.jpg") + ")",
+        backgroundImage:"url(" + require("../assets/img/index2_new.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
       }, {
-        backgroundImage:"url(" + require("../assets/img/index3.jpg") + ")",
+        backgroundImage:"url(" + require("../assets/img/index3_new.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
       }, {
-//        backgroundImage:"url(" + require("../assets/img/index4.jpg") + ")",
+        backgroundImage:"url(" + require("../assets/img/index4_new.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate

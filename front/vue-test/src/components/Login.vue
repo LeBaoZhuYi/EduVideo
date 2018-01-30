@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="begin">
-      <el-button class="begin-button" @click="loginViewController()" type="text">开始</el-button>
+      <el-button class="begin-button" @click="loginViewController()" type="text">点击登录</el-button>
     </div>
     <div v-show="loginShow" class="ms-login">
       <div class="login-bg"></div>
@@ -87,16 +87,18 @@
 <style scoped>
   .begin {
     position: absolute;
-    width: 150px;
-    height: 100px;
-    margin: -20% 75%;
+    width: 200px;
+    height: 180px;
+    margin: -15% 80%;
     background-image: url("../assets/img/begin.png");
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   .begin-button {
     position: relative;
     top: 19%;
-    left: 29%;
+    left: 19%;
     color: #00d1b2;
     font-size: 35px;
     font-family: fengbi;
