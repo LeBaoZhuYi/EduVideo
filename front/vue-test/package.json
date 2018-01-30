@@ -12,7 +12,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
+    "crypto": "^1.0.1",
+    "css-loader": "^0.28.0",
     "element-ui": "^2.0.11",
+    "sass-loader": "^6.0.6",
     "tcplayer": "0.0.6",
     "vue": "^2.4.2",
     "vue-accordion": "^1.0.0",
@@ -23,10 +26,8 @@
     "vue-router": "^2.7.0",
     "vue-schart": "^0.1.4",
     "vue-simplemde": "^0.3.8",
-    "vuex": "2.0.0",
     "vue-style-loader": "3.1.1",
-    "css-loader": "^0.28.0",
-    "crypto": "^1.0.1"
+    "vuex": "2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

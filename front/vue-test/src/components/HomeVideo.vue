@@ -2,11 +2,21 @@
   <div>
   <el-header><h2>测试视频A——朗诵</h2></el-header>
   <el-main>
-    <div class="grid-content bg-purple-light">
+    <el-button @click="show2 = !show2;show1=!show1">Click Me</el-button>
+    <transition name="el-zoom-in-center">
+      <div v-show="show1" class="grid-content bg-purple-light">
+        <div class="vvv" style="background-color: #2a88bd;height: 100%;width: 100%">
+        </div>
+      </div>
+    </transition>
+    <transition name="el-zoom-in-center">
+    <div v-show="show2" class="grid-content bg-purple-light">
       <div class="video">
         <div id="id_test_video"></div>
       </div>
     </div>
+    </transition>
+
   </el-main>
   </div>
 </template>
@@ -37,7 +47,9 @@
     data() {
       return {
         title: '',
-        teacherName: ''
+        teacherName: '',
+        show2: true,
+        show1: false
       }
     },
     mounted: function () {

@@ -1,13 +1,15 @@
 <template>
   <div style="font-family: fengbi">
   <el-container>
-    <el-header><v-header></v-header></el-header>
+    <v-header></v-header>
     <el-main>
       <el-row :gutter="20">
         <el-col :span="5">
           <home-person></home-person>
         </el-col>
-        <el-col :span="14"><home-video></home-video></el-col>
+        <el-col :span="14">
+          <home-video></home-video>
+        </el-col>
         <el-col :span="5"><home-video-list></home-video-list></el-col>
       </el-row></el-main>
     <el-footer></el-footer>

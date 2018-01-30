@@ -63,7 +63,7 @@
     height: 60px;
     font-size: 22px;
     line-height: 50px;
-    background: #324157;
+    /*background: #324157;*/
     color: #fff;
   }
   .logo{
