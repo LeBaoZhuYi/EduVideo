@@ -8,7 +8,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/home'
+            redirect: '/index'
         },
       {
         path: '/b',
@@ -77,12 +77,16 @@ export default new Router({
             ]
         },
         {
+          path: '/index',
+          component: resolve => require(['../components/Index.vue'], resolve)
+        },
+        {
             path: '/home',
             component: resolve => require(['../components/Home.vue'], resolve)
         },
         {
           path: '/test',
-          component: resolve => require(['../components/Test.vue'], resolve)
+          component: resolve => require(['../components/Home.vue'], resolve)
         }
     ]
 })

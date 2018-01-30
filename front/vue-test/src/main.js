@@ -4,7 +4,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-default/index.css';    // 默认主题
+import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 import 'babel-polyfill'
 
 Vue.use(Vuex)
@@ -52,7 +52,7 @@ new Vue({
       if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
         this.$router.push('/b');
       }
-      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/home"){
+      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"){
         return;
       }
       let userId = this.getLocalStorage("userId");
