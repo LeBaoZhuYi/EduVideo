@@ -57,11 +57,11 @@
         let url = "";
         // let url = "/api/user/login?loginName=" + this.ruleForm.loginName + "&token=" + token + "&timeStamp=" + timeStamp
         if (this.ruleForm.loginName != "test") {
-          url = "http://localhost:8080/static/ErrorLoginName.json"
+          url = "/static/ErrorLoginName.json"
         } else if (this.ruleForm.password != "123456") {
-          url = "http://localhost:8080/static/ErrorPassword.json"
+          url = "/static/ErrorPassword.json"
         } else {
-          url = "http://localhost:8080/static/Login.json"
+          url = "/static/Login.json"
         }
         this.$http.get(url)
           .then((response) => {

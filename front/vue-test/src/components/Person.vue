@@ -136,7 +136,7 @@
       }
     },
     mounted: function () {
-      this.$http.get("http://localhost:8080/static/Person.json").then((response) => {
+      this.$http.get("/static/Person.json").then((response) => {
         this.stuName = response.data.data.stuName;
         this.stuIntro = response.data.data.stuIntro;
         this.remark = response.data.data.remark;

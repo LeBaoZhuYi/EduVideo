@@ -74,7 +74,7 @@
       }
       let fileId = "";
       // let url = "http://localhost:8081/video/today?userId=" + userId
-      let url = "http://localhost:8080/static/Video.json"
+      let url = "/static/Video.json"
       this.$http.get(url, {
       }).then((response) => {
         if(response.data.status == 0){
