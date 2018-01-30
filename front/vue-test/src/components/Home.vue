@@ -60,7 +60,7 @@ export default {
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
       }, {
-        backgroundImage:"url(" + require("../assets/img/index4.jpg") + ")",
+//        backgroundImage:"url(" + require("../assets/img/index4.jpg") + ")",
         isCenter: true,
         afterEnter: afterEnterAnimate,
         beforeLeave: beforeLeaveAnimate
