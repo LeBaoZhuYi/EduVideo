@@ -27,7 +27,6 @@
 import Login from './Login.vue';
 import Page from './Page.vue';
 import PageController from './PageController.vue';
-import Index4 from './Index4.vue'
 // 页面进出动画
 function afterEnterAnimate($child) {
   $child.$el.querySelector('.animate').classList.remove('move-left', 'move-right');
@@ -117,7 +116,7 @@ export default {
     }
   },
   components: {
-    Page, PageController, Login, Index4
+    Page, PageController, Login
   },
   mounted() {
     //组件开始挂载时获取用户信息

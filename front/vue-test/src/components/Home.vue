@@ -1,7 +1,7 @@
 <template>
   <div style="font-family: fengbi">
   <el-container>
-    <v-header></v-header>
+    <home-header></home-header>
     <el-main>
       <el-row :gutter="20">
         <el-col :span="5">
@@ -18,13 +18,12 @@
 </template>
 
 <style>
-  .el-header, .el-footer {
+  .el-footer {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
     line-height: 60px;
   }
-
   .el-main {
     background-color: #E9EEF3;
     color: #333;
@@ -34,7 +33,7 @@
 
 </style>
 <script>
-  import vHeader from './Header.vue'
+  import HomeHeader from './HomeHeader.vue'
   import HomePerson from './HomePerson.vue'
   import HomeVideo from './HomeVideo.vue'
   import HomeVideoList from './HomeVideoList.vue'
@@ -45,10 +44,15 @@
     components: {
       ElFooter,
       ElMain,
-      'v-header': vHeader,
+      HomeHeader,
       HomePerson,
       HomeVideo,
       HomeVideoList
+    },
+    methods: {
+      header(path){
+
+      }
     }
   }
 </script>

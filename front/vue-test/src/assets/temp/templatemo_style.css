@@ -1,25 +1,8 @@
 /*
 CSS Credit: #/
 */
-body {
-	margin: 0px;
-	padding: 0px;
-	color: #e9e9e4;
-	font-family: "Times New Roman", Times, serif;
-	font-size: 14px;
-	line-height: 1.5em;
-	background-color: #373830;
-	background-image: url(images/templatemo-body.jpg);
-	background-repeat: repeat-x;
-	background-position: top;
-}
-
-a, a:link, a:visited { color: #d1e050; text-decoration: underline; }
-a:hover { text-decoration: none; }
 
 p { margin: 0 0 10px 0; padding: 0; }
-img { border: none;}
-
 h1, h2, h3, h4, h5, h6 { color: #fff; }
 h1 { font-size: 26px; font-weight: normal; margin: 0 0 20px 0; padding: 5px 0; }
 h2 { font-size: 22px; font-weight: normal; margin: 0 0 15px 0; font-weight: normal; }
@@ -49,18 +32,12 @@ h4 { font-size: 14px; margin: 0 0 5px 0; padding: 0; }
 .image_fr { float: right; margin: 3px 0 0 15px; }
 
 blockquote { font-style: italic; margin: 0 0 0 10px;}
-cite { font-weight: bold; color:#333; }
-cite span { color: #666; }
+/*cite { font-weight: bold; color:#333; }*/
+/*cite span { color: #666; }*/
 em { color: #d1e050; }
 
 .tmo_list { margin: 20px 0 20px 20px; padding: 0; list-style: none; }
 
-.tmo_list li {
-	background: transparent url(images/templatemo-list.png) no-repeat;
-	margin:0 0 20px;
-	padding: 0 0 0 20px;
-	line-height: 1em;
-}
 
 .tmo_list li a { color: #fff; }
 .tmo_list li a:hover { color: #ff4301; }
@@ -118,12 +95,6 @@ em { color: #d1e050; }
 	padding-left: 40px;
 	text-decoration: none;
 }
-
-.service_list li .service_one { background: url(images/onebit_08.png) center left no-repeat; }
-.service_list li .service_two { background: url(images/onebit_11.png) center left no-repeat; }
-.service_list li .service_three { background: url(images/onebit_17.png) center left no-repeat; }
-.service_list li .service_four { background: url(images/onebit_21.png) center left no-repeat; }
-.service_list li .service_five { background: url(images/onebit_12.png) center left no-repeat; }
 
 #contact_form {  padding: 0; }
 #contact_form form { margin: 0px; padding: 0px; }

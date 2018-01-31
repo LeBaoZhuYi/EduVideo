@@ -5,7 +5,7 @@
         <h2>本月视频点播</h2>
       </div>
       <div v-for="o in 4" :key="o" class="text item">
-        <a href="#">{{'列表内容 ' + o }}</a>
+        <a href="#">{{'测试视频 ' + o }}</a>
       </div>
     </el-card>
   </div>
@@ -36,11 +36,6 @@
 </style>
 <script>
   export default {
-    name: "homePerson",
-    data() {
-      return {
-        name: "homePerson"
-      }
-    }
+    name: "homePerson"
   }
 </script>

@@ -52,7 +52,7 @@ new Vue({
       if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
         this.$router.push('/b');
       }
-      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"){
+      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index" || this.$route.path == "/test"){
         return;
       }
       let userId = this.getLocalStorage("userId");
