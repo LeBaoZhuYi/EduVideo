@@ -6,7 +6,7 @@
 }
 
 #header {
-  background: url(images/templatemo-content-top.jpg) no-repeat;
+  background: url(images/templatemo-content-top.png) no-repeat;
   width: 980px;
   height: 60px;
   padding: 35px 0 0 0;
@@ -26,14 +26,14 @@
 }
 
 #content {
-  background: url(images/templatemo-content-middle.jpg) no-repeat;
+  background: url(images/templatemo-content-middle.png) no-repeat;
   width: 860px;
   height: 415px;
   padding: 0 60px
 }
 
 #book,#menu {
-  background: url(images/templatemo-menu.jpg) no-repeat;
+  background: url(images/templatemo-menu.png) no-repeat;
   width: 980px;
   height: 105px;
 }
