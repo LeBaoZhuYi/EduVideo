@@ -1,11 +1,8 @@
 <template>
-  <div class="row" style="font-family: fengbi">
-    <div id="slider">
+    <div id="person-info">
 
       <div id="header">
-        <div id="sitetitle">
           <span id="my_name">{{stuName}}的主页</span>
-        </div>
       </div>
       <div id="content">
         <div class="scroll">
@@ -71,7 +68,7 @@
                   </div>
                 </div>
                 <div class="panel hide" id="4" v-show="item == 4">
-                  <span style="font-size: 80px;text-align: center;color: #e83a2e">施工中。。。</span>
+                  <span style="font-size: 80px;text-align: center;color: #ffe6eb">施工中。。。</span>
                 </div>
               </el-carousel-item>
             </el-carousel>
@@ -79,29 +76,83 @@
         </div>
       </div>
       <div id="menu">
-        <!--<ul class="navigation">-->
-          <!--<li><a href="#" @click="changeScroll('1')">主页<span class="ui_icon home"></span></a></li>-->
-          <!--<li><a href="#" @click="changeScroll('2')">个人信息<span class="ui_icon info"></span></a></li>-->
-          <!--<li><a href="#" @click="changeScroll('3')">课程历史<span class="ui_icon history"></span></a></li>-->
-          <!--<li><a href="#" @click="changeScroll('4')">图表区<span class="ui_icon chart"></span></a></li>-->
-        <!--</ul>-->
       </div>
       <div id="footer">
       </div>
 
     </div>
-  </div>
 </template>
 <style>
-  @import url('../assets/temp/coda-slider.css');
   @import url('../assets/temp/templatemo_style.css');
+  #person-info {
+    position: relative;
+    width: 980px;
+    margin: 0 auto;
+    margin-top: 45px;
+    font-family: fengbi;
+  }
 
+  #header {
+    background: url("../assets/temp/images/templatemo-content-top.png") no-repeat;
+    width: 980px;
+    height: 60px;
+    padding: 35px 0 0 0;
+    text-align: center;
+  }
+
+  #my_name{
+    border:none;
+    border-bottom:3px solid #ffffff;
+    font-size: 50px;
+    color: #ffffff;
+  }
+  #header a.header_menu {
+    float: left;
+    display: block;
+    margin-right: 40px;
+  }
+
+  #content {
+    background: url("../assets/temp/images/templatemo-content-middle.png") no-repeat;
+    width: 860px;
+    height: 415px;
+    padding: 0 60px
+  }
+
+  #menu {
+    background: url("../assets/temp/images/templatemo-menu.png") no-repeat;
+    width: 980px;
+    height: 105px;
+  }
+
+  #footer {
+    background: url("../assets/temp/images/templatemo-footer.jpg") no-repeat;
+    height: 52px;
+    width: 980px;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .scroll {
+     height: 415px;
+     width: 860px;
+     overflow: hidden;
+     position: relative;
+     clear: left;
+   }
+  .scrollContainer{
+    height: 380px;
+    width: 800px;
+    padding: 35px 30px 0 30px;
+  }
   .el-carousel{
     position: relative;
-    width: 25%;
+    width: 100%;
     height: 100%;
   }
 
+  .el-carousel__container{
+    height: 100%;
+  }
 </style>
 <script>
 
