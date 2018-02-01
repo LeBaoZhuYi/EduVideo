@@ -74,10 +74,6 @@
   -o-transition: all 0.8s ease-in-out;
   transition: all 0.8s ease-in-out;
 }
-.panel {
-  width: 25%;
-  float: left;
-}
 
 ul.navigation {
   width: 860px;
@@ -131,7 +127,3 @@ ul.navigation a:focus {
   right: -50px;
 }
 
-.hide {
-  /*display: none;*/
-  visibility: hidden;
-}

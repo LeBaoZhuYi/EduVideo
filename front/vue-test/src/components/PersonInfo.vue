@@ -93,6 +93,15 @@
 <style>
   @import url('../assets/temp/coda-slider.css');
   @import url('../assets/temp/templatemo_style.css');
+  .hide {
+    /*display: none;*/
+    /*visibility: hidden;*/
+  }
+  .panel {
+    width: 25%;
+    margin-right: 2%;
+    float: left;
+  }
 </style>
 <script>
 
