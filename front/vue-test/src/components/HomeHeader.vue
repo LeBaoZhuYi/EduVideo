@@ -3,9 +3,8 @@
     <el-header>
       <img class="logo" src="../assets/img/logo.png"/>
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-        <el-menu-item index="1">主页</el-menu-item>
-        <el-menu-item index="2">个人中心</el-menu-item>
-        <el-menu-item index="3">课程中心</el-menu-item>
+        <el-menu-item index="1" @click="open('/home');">主页</el-menu-item>
+        <el-menu-item index="2" @click="open('/person');">个人中心</el-menu-item>
       </el-menu>
     </el-header>
     <div class="header-line"></div>
@@ -41,5 +40,10 @@
         activeIndex: '1'
       };
     },
+    methods: {
+      open: function(path){
+        window.open(path);
+      }
+    }
   }
 </script>

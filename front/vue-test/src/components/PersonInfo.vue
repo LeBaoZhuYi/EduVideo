@@ -1,5 +1,4 @@
 <template>
-
   <div class="row" style="font-family: fengbi">
     <div id="slider">
 
@@ -8,18 +7,13 @@
           <span id="my_name">{{stuName}}的主页</span>
         </div>
       </div>
-
       <div id="content">
-
         <div class="scroll">
           <div class="scrollContainer" id="scrollContainer">
-
             <div class="panel" id="1" style="font-size: 20px">
               <div class="col_550 float_l">
                 <h1>学生简介</h1>
-
                 <p><em>{{stuIntro}}</em></p>
-
                 <div class="cleaner_h30"></div>
                 <h2>老师寄语</h2>
                 <div class="image_wrapper image_fl"><img src="../assets/temp/images/templatemo_image_01.jpg"
@@ -34,7 +28,6 @@
                 <div class="cleaner_h30"></div>
               </div>
             </div> <!-- end of home -->
-
             <div class="panel hide" id="2" style="font-size: 20px">
               <h1>个人信息</h1>
               <div class="col_300 float_l"><p><em>我的名字：{{stuName}}</em></p>
@@ -55,7 +48,6 @@
               <div class="image_wrapper image_fl"><img src="../assets/temp/images/fengcai3.jpg"
                                                        alt="Image 4" style="width: 230px;height: 100px"/></div>
             </div>
-
             <div class="panel hide" id="3" style="font-size: 20px">
               <h1>课程情况</h1>
               <div class="image_wrapper image_fl"><img src="../assets/temp/images/video_class.jpg"
@@ -65,7 +57,6 @@
               <p><em>我已在线完成：{{classTimes}}次课程</em></p>
               <p><em>我已在线完成：{{watchTimes}}次视频观看</em></p>
               <div class="cleaner_h30"></div>
-
               <div class="col_300 float_l"><h1>作业与成绩</h1>
                 <!--<div class="image_wrapper image_fl"><img src="../assets/temp/images/templatemo_image_04.jpg"-->
                 <!--alt="Image 4"/></div>-->
@@ -84,9 +75,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
       <div id="menu">
         <ul class="navigation">
           <li><a href="#" @click="changeScroll('1')">主页<span class="ui_icon home"></span></a></li>

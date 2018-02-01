@@ -3,7 +3,7 @@
     <el-container>
       <home-header></home-header>
       <el-main style="background: #d3dce6">
-        <old-person></old-person>
+        <person-info></person-info>
       </el-main>
       <el-footer></el-footer>
     </el-container>
@@ -17,7 +17,7 @@
   import HomePerson from './HomePerson.vue'
   import HomeVideo from './HomeVideo.vue'
   import HomeVideoList from './HomeVideoList.vue'
-  import OldPerson from './OlgPerson.vue'
+  import PersonInfo from './PersonInfo.vue'
   import ElMain from "../../node_modules/element-ui/packages/main/src/main.vue";
   import ElFooter from "../../node_modules/element-ui/packages/footer/src/main.vue";
 
@@ -29,7 +29,7 @@
       HomePerson,
       HomeVideo,
       HomeVideoList,
-      OldPerson
+      PersonInfo
     },
     methods: {
       header(path){

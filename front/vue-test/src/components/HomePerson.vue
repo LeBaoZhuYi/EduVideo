@@ -12,7 +12,7 @@
       <p><em>今日课程：{{videoTitle}}</em></p>
       <p><em>是否已看：{{isWatched}}</em></p>
       <p><em>已完成：{{classTimes}}次课程</em></p>
-      <el-button type="primary" round>更多信息</el-button>
+      <el-button type="primary" round @click="open('/person');">更多信息</el-button>
     </el-row>
   </div>
 </template>
@@ -38,6 +38,11 @@
     data() {
       return {
         name: "homePerson"
+      }
+    },
+    methods: {
+      open: function(path){
+        window.open(path);
       }
     }
   }
