@@ -56,6 +56,12 @@
 
   export default {
     name: 'homeVideo',
+    props:{
+      videoId:{
+        type: String,
+        require: false
+      }
+    },
     data() {
       return {
         title: '',
@@ -64,22 +70,20 @@
         show1: true
       }
     },
-    mounted: function () {
-    },
     components: {
       HomePreVideo
     },
     methods: {
       play: function () {
-        const player = this.$refs.player.instance
+        const player = this.$refs.player.instance;
         player && player.play()
       },
       pause: function () {
-        const player = this.$refs.player.instance
+        const player = this.$refs.player.instance;
         player && player.pause()
       },
       replay: function () {
-        const player = this.$refs.player.instance
+        const player = this.$refs.player.instance;
         player && player.replay()
       },
       start: function () {

@@ -68,7 +68,7 @@
             if (response.data.status == 0) {
               this.setLocalStorage('loginName', response.data.data.loginName);
               this.setLocalStorage('userId', response.data.data.id);
-              localStorage.setItem("isLogined", "true");
+              this.setLocalStorage("isLogined", "true");
               this.$router.push('/home');
             } else if (response.data.status > 0) {
               this.$message.error('登录失败！' + response.data.msg);

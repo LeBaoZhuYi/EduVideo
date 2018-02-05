@@ -8,7 +8,7 @@
           <home-person></home-person>
         </el-col>
         <el-col :span="14">
-          <home-video></home-video>
+          <home-video :videoId="videoId"></home-video>
         </el-col>
         <el-col :span="5"><home-video-list></home-video-list></el-col>
       </el-row></el-main>
@@ -41,6 +41,11 @@
   import ElFooter from "../../node_modules/element-ui/packages/footer/src/main.vue";
 
   export default {
+    data() {
+      return {
+        videoId: ""
+      }
+    },
     components: {
       ElFooter,
       ElMain,
@@ -48,6 +53,11 @@
       HomePerson,
       HomeVideo,
       HomeVideoList
+    },
+    mounted: function(){
+      if (this.$router.history.current.query.videoId != null){
+        this.videoId = this.$router.history.current.query.videoId;
+      }
     },
     methods: {
       header(path){

@@ -2,7 +2,7 @@
   <div class="personInfo">
     <el-row class="bg-purple">
       <h2>小六的信息</h2>
-      <p><em>我的学号：{{sex}}</em></p>
+      <p><em>我的学号：{{studyId}}</em></p>
       <p><em>破壳日：{{birthday}}</em></p>
       <p><em>我的电话：{{phone}}</em></p>
     </el-row>
@@ -37,12 +37,49 @@
     name: "homePerson",
     data() {
       return {
-        name: "homePerson"
+        studyId: "",
+        birthday: "",
+        phone: "",
+        videoTitle: "",
+        isWatched: "",
+        classTimes: ""
       }
     },
+    mounted: function (){
+      this.getUserInfoAndClassInfo();
+    },
     methods: {
-      open: function(path){
-        window.open(path);
+      getUserInfoAndClassInfo: function () {
+        let userId = this.getLocalStorage("userId");
+        if (userId == null) {
+          this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
+          this.$router.push('/');
+          return;
+        }
+        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+                this.studyId= response.data.data.studyId;
+                this.birthday= response.data.data.birthday;
+                this.phone= response.data.data.phone;
+            } else if (response.data.status > 0) {
+              this.$alert("获取用户信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
+            }
+        })
+        this.$http.get("/api/videoClass/getClassInfo", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+              this.videoTitle= response.data.data.videoTitle;
+              this.isWatched= response.data.data.isWatched;
+              this.classTimes= response.data.data.classTimes;
+            } else if (response.data.status > 0) {
+              this.$alert("获取课程信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
+            }
+          })
       }
     }
   }
