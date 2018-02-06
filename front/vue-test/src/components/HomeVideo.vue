@@ -67,7 +67,8 @@
         title: '',
         teacherName: '',
         show2: false,
-        show1: true
+        show1: true,
+        test: this.videoId
       }
     },
     components: {
@@ -91,6 +92,9 @@
           return;
         }
         let fileId = "";
+        if (this.videoId != ""){
+          this.$message.info('（测试）当前视频id为：' + this.videoId);
+        }
         // let url = "http://localhost:8081/video/today?userId=" + userId
         let url = "/static/Video.json"
         this.$http.get(url, {}).then((response) => {
@@ -99,12 +103,12 @@
             this.title = response.data.data.title;
             let player = new TcPlayer('id_test_video', {
               "m3u8": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
-              "m3u8_sd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
-              "m3u8_hd": "http://1251132611.vod2.myqcloud.com/4126dd3evodtransgzp1251132611/8a592f8b9031868222950257296/f0.f40.mp4",
+              "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
+              "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
               "autoplay" : false,
               "height": "100%",
               "width": "100%",
-              "clarity": "od",
+              "clarity": "sd",
               "clarityLabel":{
                 "od": "原画",
                 "hd": "高清",

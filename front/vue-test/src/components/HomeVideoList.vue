@@ -5,7 +5,7 @@
         <h2>本月视频点播</h2>
       </div>
       <div v-for="video in videoList" :key="o" class="text item">
-        <a href="javascript:void(0)" @click="this.playVideo(video.id)">{{video.title}}</a>
+        <a href="javascript:void(0)" @click="playVideo(video.id)">{{video.title}}</a>
       </div>
     </el-card>
   </div>
@@ -55,7 +55,8 @@
           this.$router.push('/');
           return;
         }
-        this.$http.get("/api/video/getAllowedVideoList", {params: {userId: userId}})
+        this.$http.get("/static/VideoList.json", {params: {userId: userId}})
+//        this.$http.get("/api/video/getAllowedVideoList", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.videoList = response.data.data.videoList;
@@ -67,7 +68,7 @@
           })
       },
       playVideo(videoId){
-        window.open("/test?id=test");
+        window.open("/home?id=" + videoId);
       }
     }
   }

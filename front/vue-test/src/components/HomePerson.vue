@@ -42,7 +42,8 @@
         phone: "",
         videoTitle: "",
         isWatched: "",
-        classTimes: ""
+        classTimes: "",
+        url: ""
       }
     },
     mounted: function (){
@@ -56,7 +57,8 @@
           this.$router.push('/');
           return;
         }
-        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+//        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
                 this.studyId= response.data.data.studyId;
@@ -68,7 +70,8 @@
               this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
             }
         })
-        this.$http.get("/api/videoClass/getClassInfo", {params: {userId: userId}})
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+//        this.$http.get("/api/videoClass/getClassInfo", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.videoTitle= response.data.data.videoTitle;

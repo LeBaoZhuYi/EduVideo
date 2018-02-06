@@ -25,7 +25,7 @@
   .pre-video {
     background-image: url("../assets/img/pre-video.jpg");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
     height: 100%;
     width: 100%
   }
@@ -43,7 +43,7 @@
         over: false,
         nowStart: false,
         timer: null,
-        todayClassStartTime: Date.parse(new Date()) + 1000 * 30,
+        todayClassStartTime: Date.parse(new Date()) + 1000 * 10,
         todayClassEndTime: Date.parse(new Date()) + 1000 * 30 * 3,
         mao: "/static/img/tm.png",
         hour1: "/static/img/t0.png",
