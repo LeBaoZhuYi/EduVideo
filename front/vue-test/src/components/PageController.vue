@@ -128,18 +128,18 @@ export default {
 }
 .controller-item {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-top: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(93, 93, 93, 0.3);
     transition: background-color 0.3s ease 0s;
 }
 .controller-item:hover {
     background-color: rgba(255, 255, 255, 0.7);
 }
 .controller-item.current {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(239, 128, 14, 1);
 }
 .prev-btn,.next-btn {
   cursor: pointer;
