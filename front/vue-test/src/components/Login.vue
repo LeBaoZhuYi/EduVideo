@@ -1,8 +1,8 @@
 <template>
   <div class="login-wrap">
-    <div class="begin">
-      <el-button class="begin-button" @click="loginViewController()" type="text">点击登录</el-button>
-    </div>
+    <!--<div class="begin">-->
+      <!--<el-button class="begin-button" @click="loginViewController()" type="text">点击登录</el-button>-->
+    <!--</div>-->
     <div v-show="loginShow" class="ms-login">
       <div class="login-bg"></div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
@@ -28,7 +28,7 @@
   export default {
     data: function () {
       return {
-        loginShow: false,
+        loginShow: true,
         ruleForm: {
           loginName: '',
           password: ''
