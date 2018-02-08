@@ -1,7 +1,7 @@
 <template>
   <div style="font-family: fengbi">
   <el-container>
-    <home-header></home-header>
+    <home-header :activeIndex="'2'"></home-header>
     <el-main>
       <el-row :gutter="20">
         <el-col :span="5">

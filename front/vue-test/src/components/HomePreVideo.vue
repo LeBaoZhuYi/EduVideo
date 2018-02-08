@@ -62,7 +62,8 @@
       } else if (now > this.todayClassEndTime){
         this.over = true;
       } else{
-        this.nowStart = true;
+        this.startPlay();
+//        this.nowStart = true;
       }
     },
     methods: {
@@ -71,7 +72,8 @@
         let sub = parseInt((this.todayClassStartTime - now) / 1000);
         if (sub <= 0){
           clearInterval(this.timer);
-          this.nowStart = true;
+          this.startPlay();
+//          this.nowStart = true;
           return;
         }
         let hour = parseInt(sub / 3600);

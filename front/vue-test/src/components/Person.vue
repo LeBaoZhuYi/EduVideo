@@ -1,7 +1,7 @@
 <template>
   <div style="font-family: fengbi">
     <el-container>
-      <home-header></home-header>
+      <home-header :activeIndex="'3'"></home-header>
       <el-main style="background: #d3dce6">
         <person-info></person-info>
       </el-main>

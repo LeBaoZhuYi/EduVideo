@@ -67,8 +67,7 @@
         title: '',
         teacherName: '',
         show2: false,
-        show1: true,
-        test: this.videoId
+        show1: true
       }
     },
     components: {

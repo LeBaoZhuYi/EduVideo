@@ -4,7 +4,7 @@
       <div slot="header" class="clearfix">
         <h2>本月视频点播</h2>
       </div>
-      <div v-for="video in videoList" :key="o" class="text item">
+      <div v-for="video in videoList" class="text item">
         <a href="javascript:void(0)" @click="playVideo(video.id)">{{video.title}}</a>
       </div>
     </el-card>
@@ -68,7 +68,9 @@
           })
       },
       playVideo(videoId){
-        window.open("/home?id=" + videoId);
+//        window.open("/home?id=" + videoId);
+//        this.$router.push("/home?id=" + videoId);
+        window.location.href = "/home?videoId=" + videoId;
       }
     }
   }

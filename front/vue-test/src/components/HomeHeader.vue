@@ -3,8 +3,9 @@
     <el-header>
       <img class="logo" src="../assets/img/logo.png"/>
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-        <el-menu-item index="1" @click="open('/home');">主页</el-menu-item>
-        <el-menu-item index="2" @click="open('/person');">个人中心</el-menu-item>
+        <el-menu-item index="1" @click="open('/');">主页</el-menu-item>
+        <el-menu-item index="2" @click="open('/home');">今日课程</el-menu-item>
+        <el-menu-item index="3" @click="open('/person');">个人中心</el-menu-item>
       </el-menu>
     </el-header>
     <div class="header-line"></div>
@@ -35,14 +36,22 @@
 <script>
   export default {
     name: "homeHeader",
-    data() {
-      return {
-        activeIndex: '1'
-      };
+    props:{
+      activeIndex:{
+        type: String,
+        require: false
+      }
     },
+//    data() {
+//      return {
+//        activeIndex: this.activeIndex
+//      };
+//    },
     methods: {
       open: function(path){
-        window.open(path);
+//        window.open(path);
+//        this.$router.push(path);
+        window.location.href = path;
       }
     }
   }
