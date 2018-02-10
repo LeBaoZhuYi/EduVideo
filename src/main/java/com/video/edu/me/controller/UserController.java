@@ -31,21 +31,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    @ResponseBody
-    private boolean update(User user) throws IllegalArgumentException, IllegalAccessException {
-        return userService.updateByPrimaryKey(user) != 0;
-    }
-
-    /**
-     * 获取状态在0-2的时间早于今天凌晨产生的用户，按utime排序
-     * @return
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> login(String loginName, String token, long timeStamp){
+    private Map<String, Object> login(String loginName, String token, long timeStamp) {
         Map<String, Object> res = new HashMap<>();
         try {
             Subject subject = SecurityUtils.getSubject();
@@ -54,22 +42,25 @@ public class UserController {
             UserExample userExample = new UserExample();
             userExample.createCriteria().andLoginNameEqualTo(loginName);
             User user = userService.selectByExample(userExample).get(0);
+            // 更新最后一次登录时间
+            user.setLastLoginTime(new Date());
+            userService.updateByPrimaryKey(user);
             Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
             RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.USER_USELESS_PARAMS);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", userMap);
-        } catch (UnknownAccountException ue){
+        } catch (UnknownAccountException ue) {
             logger.error("login error with status: {}, loginName: {}, exception: {}", 1, loginName, ue.getMessage());
             res.put("status", 1);
             res.put("msg", "用户名不存在");
             res.put("data", null);
-        } catch (AuthenticationException ae){
+        } catch (AuthenticationException ae) {
             logger.error("login error with status: {}, loginName: {}, exception: {}", 2, loginName, ae.getMessage());
             res.put("status", 2);
             res.put("msg", "密码错误");
             res.put("data", null);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("login error with status: {}, loginName: {}, exception: {}", -1, loginName, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
@@ -85,31 +76,19 @@ public class UserController {
 
     }
 
-    /**
-     * 获取loginName为2或3的用户
-     * @return
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     */
-    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> test2(){
+    private Map<String, Object> logout(int userId) {
         Map<String, Object> res = new HashMap<>();
         try {
-            UserExample userExample = new UserExample();
-
-            userExample.createCriteria().andLoginNameEqualTo("2");
-            userExample.or().andLoginNameEqualTo("3");
-
             res.put("status", 0);
             res.put("msg", "");
-            res.put("data", userService.selectByExample(userExample));
-        } catch(Exception e){
-            logger.error("test2 error with exception: {}", e.getMessage());
+            res.put("data", userId);
+        } catch (Exception e) {
+            logger.error("login error with params: {},  exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
-
         }
         return res;
     }

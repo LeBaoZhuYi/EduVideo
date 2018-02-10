@@ -3,12 +3,12 @@ package com.video.edu.me.service;
 import com.video.edu.me.dao.VideoClassMapper;
 import com.video.edu.me.entity.VideoClass;
 import com.video.edu.me.entity.VideoClassExample;
+import com.video.edu.me.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,14 +27,8 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
 
     public VideoClass getTodayVideoClass(){
         VideoClassExample videoClassExample = new VideoClassExample();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        Date zeroTime = calendar.getTime();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date zeroNextTime = calendar.getTime();
+        Date zeroTime = DateUtil.getTodayZeroTime();
+        Date zeroNextTime = DateUtil.getTomorrowZeroTime();
         videoClassExample.createCriteria().andStartTimeGreaterThanOrEqualTo(zeroTime).andEndTimeLessThanOrEqualTo(zeroNextTime);
         List<VideoClass> videoClassList = videoClassMapper.selectByExample(videoClassExample);
         if (videoClassList.size() == 0){

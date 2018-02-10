@@ -21,4 +21,10 @@ public class StudentService extends BaseService<Student, StudentExample> {
 		this.studentMapper = studentMapper;
 		super.setBaseDao(studentMapper);
 	}
+
+	public Student getStuIdByUserId(int userId){
+		StudentExample studentExample = new StudentExample();
+		studentExample.createCriteria().andUserIdEqualTo(userId);
+		return studentMapper.selectByExample(studentExample).get(0);
+	}
 }

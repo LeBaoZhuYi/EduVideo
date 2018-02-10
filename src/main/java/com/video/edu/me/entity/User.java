@@ -13,8 +13,6 @@ public class User {
 
     private Byte roleId;
 
-    private Byte currentOnlineCount;
-
     private Byte status;
 
     private Date ctime;
@@ -59,14 +57,6 @@ public class User {
 
     public void setRoleId(Byte roleId) {
         this.roleId = roleId;
-    }
-
-    public Byte getCurrentOnlineCount() {
-        return currentOnlineCount;
-    }
-
-    public void setCurrentOnlineCount(Byte currentOnlineCount) {
-        this.currentOnlineCount = currentOnlineCount;
     }
 
     public Byte getStatus() {

@@ -425,66 +425,6 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCurrentOnlineCountIsNull() {
-            addCriterion("current_online_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountIsNotNull() {
-            addCriterion("current_online_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountEqualTo(Byte value) {
-            addCriterion("current_online_count =", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotEqualTo(Byte value) {
-            addCriterion("current_online_count <>", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountGreaterThan(Byte value) {
-            addCriterion("current_online_count >", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountGreaterThanOrEqualTo(Byte value) {
-            addCriterion("current_online_count >=", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountLessThan(Byte value) {
-            addCriterion("current_online_count <", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountLessThanOrEqualTo(Byte value) {
-            addCriterion("current_online_count <=", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountIn(List<Byte> values) {
-            addCriterion("current_online_count in", values, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotIn(List<Byte> values) {
-            addCriterion("current_online_count not in", values, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountBetween(Byte value1, Byte value2) {
-            addCriterion("current_online_count between", value1, value2, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotBetween(Byte value1, Byte value2) {
-            addCriterion("current_online_count not between", value1, value2, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;

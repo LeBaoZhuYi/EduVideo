@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WatchAuthorityService extends BaseService<WatchAuthority, WatchAuthorityExample> {
@@ -34,6 +36,16 @@ public class WatchAuthorityService extends BaseService<WatchAuthority, WatchAuth
 			logger.error("checkAuthority error with stuId: {}, videoId: {}, exception: {}", stuId, videoId, e.getMessage());
 		}
 		return false;
+	}
 
+	public List<Integer> getVideoIdListByStuId(int stuId){
+		WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
+		watchAuthorityExample.createCriteria().andStuIdEqualTo(stuId);
+		List<WatchAuthority> watchAuthorityList = watchAuthorityMapper.selectByExample(watchAuthorityExample);
+		List<Integer> videoIdList = new ArrayList<>();
+		for(WatchAuthority watchAuthority: watchAuthorityList){
+			videoIdList.add(watchAuthority.getVideoId());
+		}
+		return videoIdList;
 	}
 }

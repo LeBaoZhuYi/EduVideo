@@ -21,4 +21,10 @@ public class HistoryService extends BaseService<History, HistoryExample> {
 		this.historyMapper = historyMapper;
 		super.setBaseDao(historyMapper);
 	}
+
+	public int countWatchTimesByStuId(int stuId){
+		HistoryExample historyExample = new HistoryExample();
+		historyExample.createCriteria().andStuIdEqualTo(stuId);
+		return historyMapper.countByExample(historyExample);
+	}
 }
