@@ -68,32 +68,22 @@
                     title: '管理操作',
                     subs: [
                       {
-                        index: 'baseform',
+                        index: 'add-class',
                         title: '添加课程'
                       },
                       {
-                        index: 'vueeditor',
-                        title: '新增用户'
+                        index: 'add-user',
+                        title: '添加学生'
                       },
                       {
-                        index: 'markdown',
-                        title: 'markdown'
+                        index: 'add-video',
+                        title: '添加视频'
                       },
                       {
-                        index: 'upload',
-                        title: '文件上传'
+                        index: 'auth-manage',
+                        title: '权限管理'
                       }
                     ]
-                  },
-                  {
-                    icon: 'el-icon-star-on',
-                    index: 'basecharts',
-                    title: '图表'
-                  },
-                  {
-                    icon: 'el-icon-upload2',
-                    index: 'drag',
-                    title: '拖拽'
                   }
                 ]
             }

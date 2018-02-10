@@ -39,32 +39,20 @@ export default new Router({
           component: resolve => require(['../components/admin/page/AddVideo.vue'], resolve)
         },
         {
-          path: '/baseform',
-          component: resolve => require(['../components/admin/page/BaseForm.vue'], resolve)
+          path: '/add-user',
+          component: resolve => require(['../components/admin/page/AddUser.vue'], resolve)
         },
         {
-          path: '/vueeditor',
-          component: resolve => require(['../components/admin/page/VueEditor.vue'], resolve)    // Vue-Quill-Editor组件
+          path: '/add-class',
+          component: resolve => require(['../components/admin/page/AddClass.vue'], resolve)
         },
         {
-          path: '/markdown',
-          component: resolve => require(['../components/admin/page/Markdown.vue'], resolve)     // Vue-Quill-Editor组件
-        },
-        {
-          path: '/upload',
-          component: resolve => require(['../components/admin/page/Upload.vue'], resolve)       // Vue-Core-Image-Upload组件
-        },
-        {
-          path: '/basecharts',
-          component: resolve => require(['../components/admin/page/BaseCharts.vue'], resolve)   // vue-schart组件
+          path: '/auth-manage',
+          component: resolve => require(['../components/admin/page/AuthManage.vue'], resolve)       // Vue-Core-Image-Upload组件
         },
         {
           path: '/login',
           component: resolve => require(['../components/admin/page/Login.vue'], resolve)
-        },
-        {
-          path: '/drag',
-          component: resolve => require(['../components/admin/page/DragList.vue'], resolve)    // 拖拽列表组件
         }
       ]
     },

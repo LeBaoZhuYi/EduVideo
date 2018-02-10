@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-02-10 12:38:25
+Date: 2018-02-11 00:29:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,7 +77,6 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL COMMENT '密码（已加密）',
   `last_login_time` datetime DEFAULT NULL COMMENT '上次登录时间',
   `role_id` tinyint(4) NOT NULL COMMENT '角色id',
-  `current_online_count` tinyint(4) NOT NULL DEFAULT '0' COMMENT '当前在线数量',
   `status` tinyint(4) NOT NULL COMMENT '状态，具体值待定',
   `ctime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `utime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
