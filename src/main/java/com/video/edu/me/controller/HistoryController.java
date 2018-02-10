@@ -1,6 +1,5 @@
 package com.video.edu.me.controller;
 
-import com.video.edu.me.entity.History;
 import com.video.edu.me.entity.Student;
 import com.video.edu.me.service.HistoryService;
 import com.video.edu.me.service.StudentService;
@@ -37,7 +36,7 @@ public class HistoryController {
             res.put("msg", "");
             res.put("data", watchTimes);
         }catch (Exception e){
-            logger.error("count error with param: {}, exception: {}", userId, e.getMessage());
+            logger.error("count history error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

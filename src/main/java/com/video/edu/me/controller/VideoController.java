@@ -5,7 +5,7 @@ import com.video.edu.me.enumeration.VideoStatus;
 import com.video.edu.me.service.*;
 import com.video.edu.me.utils.DateUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
-import com.video.edu.me.utils.RemoveEntityParamsUtil;
+import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class VideoController {
                 videoExample.createCriteria().andIdEqualTo(videoId).andStatusEqualTo(VideoStatus.NORMAL.getId());
                 List<Video> videoList = videoService.selectByExample(videoExample);
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(videoList.get(0));
-                RemoveEntityParamsUtil.removeParams(videoMap, RemoveEntityParamsUtil.VIDEO_USELESS_PARAMS);
+                AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
                 res.put("status", 0);
                 res.put("msg", "");
                 res.put("data", videoMap);
@@ -77,7 +77,7 @@ public class VideoController {
                 res.put("data", null);
             }
         } catch (Exception e) {
-            logger.error("get today video error with params: {}, exception: {}", userId, e.getMessage());
+            logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -101,14 +101,14 @@ public class VideoController {
             List<Map<String, Object>> videoMapList = new ArrayList<>();
             for(Video video: videoList){
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
-                RemoveEntityParamsUtil.reserveParams(videoMap, RemoveEntityParamsUtil.VIDEO_List_USEFUL_PARAMS);
+                AdjustEntityParamsUtil.reserveParams(videoMap, AdjustEntityParamsUtil.VIDEO_List_USEFUL_PARAMS);
                 videoMapList.add(videoMap);
             }
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoMapList);
         } catch (Exception e) {
-            logger.error("get today video error with params: {}, exception: {}", userId, e.getMessage());
+            logger.error("get videoList error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

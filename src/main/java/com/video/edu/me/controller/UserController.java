@@ -4,7 +4,7 @@ import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.service.UserService;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
-import com.video.edu.me.utils.RemoveEntityParamsUtil;
+import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -46,7 +46,7 @@ public class UserController {
             user.setLastLoginTime(new Date());
             userService.updateByPrimaryKey(user);
             Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
-            RemoveEntityParamsUtil.removeParams(userMap, RemoveEntityParamsUtil.USER_USELESS_PARAMS);
+            AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", userMap);
@@ -85,7 +85,7 @@ public class UserController {
             res.put("msg", "");
             res.put("data", userId);
         } catch (Exception e) {
-            logger.error("login error with params: {},  exception: {}", userId, e.getMessage());
+            logger.error("logout error with userId: {},  exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
