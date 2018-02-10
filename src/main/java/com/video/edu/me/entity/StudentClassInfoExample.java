@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserExample {
+public class StudentClassInfoExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public UserExample() {
+    public StudentClassInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,383 +165,253 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameIsNull() {
-            addCriterion("login_name is null");
+        public Criteria andClassIdIsNull() {
+            addCriterion("class_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameIsNotNull() {
-            addCriterion("login_name is not null");
+        public Criteria andClassIdIsNotNull() {
+            addCriterion("class_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameEqualTo(String value) {
-            addCriterion("login_name =", value, "loginName");
+        public Criteria andClassIdEqualTo(Integer value) {
+            addCriterion("class_id =", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameNotEqualTo(String value) {
-            addCriterion("login_name <>", value, "loginName");
+        public Criteria andClassIdNotEqualTo(Integer value) {
+            addCriterion("class_id <>", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameGreaterThan(String value) {
-            addCriterion("login_name >", value, "loginName");
+        public Criteria andClassIdGreaterThan(Integer value) {
+            addCriterion("class_id >", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameGreaterThanOrEqualTo(String value) {
-            addCriterion("login_name >=", value, "loginName");
+        public Criteria andClassIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("class_id >=", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameLessThan(String value) {
-            addCriterion("login_name <", value, "loginName");
+        public Criteria andClassIdLessThan(Integer value) {
+            addCriterion("class_id <", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameLessThanOrEqualTo(String value) {
-            addCriterion("login_name <=", value, "loginName");
+        public Criteria andClassIdLessThanOrEqualTo(Integer value) {
+            addCriterion("class_id <=", value, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameLike(String value) {
-            addCriterion("login_name like", value, "loginName");
+        public Criteria andClassIdIn(List<Integer> values) {
+            addCriterion("class_id in", values, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameNotLike(String value) {
-            addCriterion("login_name not like", value, "loginName");
+        public Criteria andClassIdNotIn(List<Integer> values) {
+            addCriterion("class_id not in", values, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameIn(List<String> values) {
-            addCriterion("login_name in", values, "loginName");
+        public Criteria andClassIdBetween(Integer value1, Integer value2) {
+            addCriterion("class_id between", value1, value2, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameNotIn(List<String> values) {
-            addCriterion("login_name not in", values, "loginName");
+        public Criteria andClassIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("class_id not between", value1, value2, "classId");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameBetween(String value1, String value2) {
-            addCriterion("login_name between", value1, value2, "loginName");
+        public Criteria andStuIdIsNull() {
+            addCriterion("stu_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andLoginNameNotBetween(String value1, String value2) {
-            addCriterion("login_name not between", value1, value2, "loginName");
+        public Criteria andStuIdIsNotNull() {
+            addCriterion("stu_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIsNull() {
-            addCriterion("password is null");
+        public Criteria andStuIdEqualTo(Integer value) {
+            addCriterion("stu_id =", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIsNotNull() {
-            addCriterion("password is not null");
+        public Criteria andStuIdNotEqualTo(Integer value) {
+            addCriterion("stu_id <>", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordEqualTo(String value) {
-            addCriterion("password =", value, "password");
+        public Criteria andStuIdGreaterThan(Integer value) {
+            addCriterion("stu_id >", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotEqualTo(String value) {
-            addCriterion("password <>", value, "password");
+        public Criteria andStuIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stu_id >=", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordGreaterThan(String value) {
-            addCriterion("password >", value, "password");
+        public Criteria andStuIdLessThan(Integer value) {
+            addCriterion("stu_id <", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
-            addCriterion("password >=", value, "password");
+        public Criteria andStuIdLessThanOrEqualTo(Integer value) {
+            addCriterion("stu_id <=", value, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLessThan(String value) {
-            addCriterion("password <", value, "password");
+        public Criteria andStuIdIn(List<Integer> values) {
+            addCriterion("stu_id in", values, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLessThanOrEqualTo(String value) {
-            addCriterion("password <=", value, "password");
+        public Criteria andStuIdNotIn(List<Integer> values) {
+            addCriterion("stu_id not in", values, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLike(String value) {
-            addCriterion("password like", value, "password");
+        public Criteria andStuIdBetween(Integer value1, Integer value2) {
+            addCriterion("stu_id between", value1, value2, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotLike(String value) {
-            addCriterion("password not like", value, "password");
+        public Criteria andStuIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("stu_id not between", value1, value2, "stuId");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIn(List<String> values) {
-            addCriterion("password in", values, "password");
+        public Criteria andScoreIsNull() {
+            addCriterion("score is null");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotIn(List<String> values) {
-            addCriterion("password not in", values, "password");
+        public Criteria andScoreIsNotNull() {
+            addCriterion("score is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordBetween(String value1, String value2) {
-            addCriterion("password between", value1, value2, "password");
+        public Criteria andScoreEqualTo(Integer value) {
+            addCriterion("score =", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotBetween(String value1, String value2) {
-            addCriterion("password not between", value1, value2, "password");
+        public Criteria andScoreNotEqualTo(Integer value) {
+            addCriterion("score <>", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIsNull() {
-            addCriterion("last_login_time is null");
+        public Criteria andScoreGreaterThan(Integer value) {
+            addCriterion("score >", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIsNotNull() {
-            addCriterion("last_login_time is not null");
+        public Criteria andScoreGreaterThanOrEqualTo(Integer value) {
+            addCriterion("score >=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeEqualTo(Date value) {
-            addCriterion("last_login_time =", value, "lastLoginTime");
+        public Criteria andScoreLessThan(Integer value) {
+            addCriterion("score <", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotEqualTo(Date value) {
-            addCriterion("last_login_time <>", value, "lastLoginTime");
+        public Criteria andScoreLessThanOrEqualTo(Integer value) {
+            addCriterion("score <=", value, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeGreaterThan(Date value) {
-            addCriterion("last_login_time >", value, "lastLoginTime");
+        public Criteria andScoreIn(List<Integer> values) {
+            addCriterion("score in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("last_login_time >=", value, "lastLoginTime");
+        public Criteria andScoreNotIn(List<Integer> values) {
+            addCriterion("score not in", values, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeLessThan(Date value) {
-            addCriterion("last_login_time <", value, "lastLoginTime");
+        public Criteria andScoreBetween(Integer value1, Integer value2) {
+            addCriterion("score between", value1, value2, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeLessThanOrEqualTo(Date value) {
-            addCriterion("last_login_time <=", value, "lastLoginTime");
+        public Criteria andScoreNotBetween(Integer value1, Integer value2) {
+            addCriterion("score not between", value1, value2, "score");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeIn(List<Date> values) {
-            addCriterion("last_login_time in", values, "lastLoginTime");
+        public Criteria andTeacherRemarkIsNull() {
+            addCriterion("teacher_remark is null");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotIn(List<Date> values) {
-            addCriterion("last_login_time not in", values, "lastLoginTime");
+        public Criteria andTeacherRemarkIsNotNull() {
+            addCriterion("teacher_remark is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeBetween(Date value1, Date value2) {
-            addCriterion("last_login_time between", value1, value2, "lastLoginTime");
+        public Criteria andTeacherRemarkEqualTo(String value) {
+            addCriterion("teacher_remark =", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andLastLoginTimeNotBetween(Date value1, Date value2) {
-            addCriterion("last_login_time not between", value1, value2, "lastLoginTime");
+        public Criteria andTeacherRemarkNotEqualTo(String value) {
+            addCriterion("teacher_remark <>", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIsNull() {
-            addCriterion("role_id is null");
+        public Criteria andTeacherRemarkGreaterThan(String value) {
+            addCriterion("teacher_remark >", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIsNotNull() {
-            addCriterion("role_id is not null");
+        public Criteria andTeacherRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("teacher_remark >=", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdEqualTo(Byte value) {
-            addCriterion("role_id =", value, "roleId");
+        public Criteria andTeacherRemarkLessThan(String value) {
+            addCriterion("teacher_remark <", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdNotEqualTo(Byte value) {
-            addCriterion("role_id <>", value, "roleId");
+        public Criteria andTeacherRemarkLessThanOrEqualTo(String value) {
+            addCriterion("teacher_remark <=", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdGreaterThan(Byte value) {
-            addCriterion("role_id >", value, "roleId");
+        public Criteria andTeacherRemarkLike(String value) {
+            addCriterion("teacher_remark like", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdGreaterThanOrEqualTo(Byte value) {
-            addCriterion("role_id >=", value, "roleId");
+        public Criteria andTeacherRemarkNotLike(String value) {
+            addCriterion("teacher_remark not like", value, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdLessThan(Byte value) {
-            addCriterion("role_id <", value, "roleId");
+        public Criteria andTeacherRemarkIn(List<String> values) {
+            addCriterion("teacher_remark in", values, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdLessThanOrEqualTo(Byte value) {
-            addCriterion("role_id <=", value, "roleId");
+        public Criteria andTeacherRemarkNotIn(List<String> values) {
+            addCriterion("teacher_remark not in", values, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdIn(List<Byte> values) {
-            addCriterion("role_id in", values, "roleId");
+        public Criteria andTeacherRemarkBetween(String value1, String value2) {
+            addCriterion("teacher_remark between", value1, value2, "teacherRemark");
             return (Criteria) this;
         }
 
-        public Criteria andRoleIdNotIn(List<Byte> values) {
-            addCriterion("role_id not in", values, "roleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoleIdBetween(Byte value1, Byte value2) {
-            addCriterion("role_id between", value1, value2, "roleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoleIdNotBetween(Byte value1, Byte value2) {
-            addCriterion("role_id not between", value1, value2, "roleId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountIsNull() {
-            addCriterion("current_online_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountIsNotNull() {
-            addCriterion("current_online_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountEqualTo(Byte value) {
-            addCriterion("current_online_count =", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotEqualTo(Byte value) {
-            addCriterion("current_online_count <>", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountGreaterThan(Byte value) {
-            addCriterion("current_online_count >", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountGreaterThanOrEqualTo(Byte value) {
-            addCriterion("current_online_count >=", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountLessThan(Byte value) {
-            addCriterion("current_online_count <", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountLessThanOrEqualTo(Byte value) {
-            addCriterion("current_online_count <=", value, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountIn(List<Byte> values) {
-            addCriterion("current_online_count in", values, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotIn(List<Byte> values) {
-            addCriterion("current_online_count not in", values, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountBetween(Byte value1, Byte value2) {
-            addCriterion("current_online_count between", value1, value2, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentOnlineCountNotBetween(Byte value1, Byte value2) {
-            addCriterion("current_online_count not between", value1, value2, "currentOnlineCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(Byte value) {
-            addCriterion("status =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(Byte value) {
-            addCriterion("status <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(Byte value) {
-            addCriterion("status >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("status >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(Byte value) {
-            addCriterion("status <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("status <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<Byte> values) {
-            addCriterion("status in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<Byte> values) {
-            addCriterion("status not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
-            addCriterion("status between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andTeacherRemarkNotBetween(String value1, String value2) {
+            addCriterion("teacher_remark not between", value1, value2, "teacherRemark");
             return (Criteria) this;
         }
 

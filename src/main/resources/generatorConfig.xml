@@ -8,7 +8,7 @@
     <classPathEntry location="${classPath}" />
 
     <!-- 一个数据库一个context -->
-    <context id="mifi_loan_counter">
+    <context id="edu_video">
         <!-- 注释 -->
         <commentGenerator >
             <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
@@ -57,36 +57,40 @@
                      <!--<ignoreColumn column="FRED" /> -->
             <!-- 指定列的java数据类型 -->
                       <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
-        <!--<table schema="" tableName="score" domainObjectName="Score"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table schema="" tableName="student" domainObjectName="Student"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table schema="" tableName="play_plan" domainObjectName="PlayPlan"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table schema="" tableName="history" domainObjectName="History"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table schema="" tableName="video" domainObjectName="Video"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <!--<table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-
+        <table schema="" tableName="video_class" domainObjectName="VideoClass"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="student" domainObjectName="Student"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="video" domainObjectName="Video"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="history" domainObjectName="History"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="student_class_info" domainObjectName="StudentClassInfo"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="user" domainObjectName="User"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
+        <table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
     </context>
 </generatorConfiguration>
