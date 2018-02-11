@@ -38,7 +38,7 @@
             <el-pagination
                     @current-change ="handleCurrentChange"
                     layout="prev, pager, next"
-                    :total="1000">
+                    :total=total>
             </el-pagination>
         </div>
     </div>
@@ -50,6 +50,7 @@
             return {
                 url: 'static/UserTable.json',
                 tableData: [],
+                total: 1,
                 cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',

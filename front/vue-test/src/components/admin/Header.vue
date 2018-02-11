@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">后台管理系统</div>
+      <div class="logo" ><a style="cursor: pointer" @click="home" >后台管理系统</a></div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -18,7 +18,7 @@
     export default {
         data() {
             return {
-                name: 'linxin'
+                name: 'Admin'
             }
         },
         computed:{
@@ -33,6 +33,9 @@
                     localStorage.removeItem('ms_username')
                     this.$router.push('/login');
                 }
+            },
+            home(){
+              window.location.href = '/admin';
             }
         }
     }
