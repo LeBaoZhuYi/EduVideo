@@ -44,13 +44,23 @@
           password: "",
           stuName: "",
           phone: "",
-          sex: ""
+          sex: "",
+          url: ""
         }
       }
     },
     methods: {
       onSubmit() {
-        this.$message.success('提交成功！');
+        this.$http.post(this.url, this.form).then((response) => {
+          if(response.data.status == 0){
+            this.$message.success("提交成功");
+            window.location.href = "/admin/user-table";
+          } else if(response.data.status > 0){
+            this.$message.warning("提交失败！" + response.data.msg);
+          } else{
+            this.$message.error("提交失败！请稍后重试或咨询管理员");
+          }
+        });
       }
     }
   }

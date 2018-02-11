@@ -195,7 +195,7 @@ public class VideoController {
                 file.getParentFile().mkdirs();
             }
             multipartFile.transferTo(file);
-            VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
+//            VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", fileName);

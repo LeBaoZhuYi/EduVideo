@@ -17,7 +17,7 @@ public class StudentClassInfoService extends BaseService<StudentClassInfo, Stude
 	private StudentClassInfoMapper studentClassInfoMapper;
 
 	@Resource
-	public void setStudentMapper(StudentClassInfoMapper studentClassInfoMapper){
+	public void setStudentClassInfoMapper(StudentClassInfoMapper studentClassInfoMapper){
 		this.studentClassInfoMapper = studentClassInfoMapper;
 		super.setBaseDao(studentClassInfoMapper);
 	}
