@@ -1,24 +1,19 @@
 <template>
-  <div class="login-wrap">
-    <!--<div class="begin">-->
-      <!--<el-button class="begin-button" @click="loginViewController()" type="text">点击登录</el-button>-->
-    <!--</div>-->
-    <div v-show="loginShow" class="ms-login">
-      <div class="login-bg"></div>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
-        <el-form-item prop="loginName">
-          <el-input v-model="ruleForm.loginName" placeholder="loginName"></el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input type="password" placeholder="password" v-model="ruleForm.password"
-                    @keyup.enter.native="submitForm('ruleForm')"></el-input>
-        </el-form-item>
+  <div class="">
+    <el-form  :inline="true" :model="ruleForm" :rules="rules" ref="ruleForm"  class="demo-ruleForm">
+      <el-form-item prop="loginName">
+        <el-input v-model="ruleForm.loginName" placeholder="学员登录"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" placeholder="密码" v-model="ruleForm.password"
+                  @keyup.enter.native="submitForm('ruleForm')"></el-input>
+      </el-form-item>
+      <el-form-item>
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
-        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 填写学生登录名和密码。</p>
-      </el-form>
-    </div>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -28,7 +23,6 @@
   export default {
     data: function () {
       return {
-        loginShow: true,
         ruleForm: {
           loginName: '',
           password: ''
@@ -85,64 +79,22 @@
 </script>
 
 <style scoped>
-  .begin {
+
+  .demo-ruleForm {
     position: absolute;
-    width: 200px;
-    height: 180px;
-    margin: -15% 80%;
-    background-image: url("../assets/img/begin.png");
-    background-size: contain;
-    background-repeat: no-repeat;
+    right: 1%;
+    top: 27%;
   }
 
-  .begin-button {
-    position: relative;
-    top: 19%;
-    left: 19%;
-    color: #00d1b2;
-    font-size: 35px;
-    font-family: fengbi;
-
-  }
-
-  .login-wrap {
-    position: relative;
-    margin-top: 25%;
-    width: 100%;
-    height: 100%;
-    filter: alpha(Opacity=80);
-    -moz-opacity: 0.8;
-    opacity: 0.8;
-  }
-
-  .login-bg {
-    position: relative;
-    top: -15%;
-    width: 100%;
-    height: 40%;
-    background-image: url("../assets/img/logo.jpg");
-    background-repeat: no-repeat;
-
-  }
-
-  .ms-login {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 300px;
-    height: 250px;
-    margin: -150px 0 0 -190px;
-    padding: 40px;
-    border-radius: 5px;
-    background: #fff;
+  .el-form-item {
+    width: 30%;
   }
 
   .login-btn {
     text-align: center;
   }
 
-  .login-btn button {
-    width: 100%;
-    height: 36px;
+  .login-btn {
+    width: 30%;
   }
 </style>
