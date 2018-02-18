@@ -56,4 +56,35 @@ public class StudentClassInfoController {
         return res;
     }
 
+    @RequestMapping(value = "/getBaseClassInfo", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getBaseClassInfo(int userId) {
+        Map<String, Object> res = new HashMap<>();
+        try {
+            Map<String, Object> data = new HashMap<>();
+            Student student = studentService.getStuIdByUserId(userId);
+            VideoClass todayVideoClass = videoClassService.getTodayVideoClass();
+            StudentClassInfoExample studentClassInfoExample = new StudentClassInfoExample();
+            studentClassInfoExample.createCriteria().andStuIdEqualTo(student.getId());
+            studentClassInfoExample.setOrderByClause("ctime DESC");
+            List<StudentClassInfo> studentClassInfoList = studentClassInfoService.selectByExample(studentClassInfoExample);
+            if(studentClassInfoList.size() == 0){
+
+            } else{
+                StudentClassInfo lastStudentClassInfo = studentClassInfoList.get(0);
+                Map<String, Object> studentClassInfoMap = ObjectMapTransformUtil.obj2Map(lastStudentClassInfo);
+                AdjustEntityParamsUtil.removeParams(studentClassInfoMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", studentClassInfoMap);
+            }
+        } catch (Exception e) {
+            logger.error("play video error with userId: {}, exception: {}", userId, e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
+    }
+
 }

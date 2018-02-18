@@ -24,15 +24,14 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    @RequestMapping(value = "/getBaseInfo", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> info(int userId){
+    private Map<String, Object> getBaseInfo(int userId){
         Map<String, Object> res = new HashMap<>();
         try {
             Student student = studentService.getStuIdByUserId(userId);
             Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
-            AdjustEntityParamsUtil.removeParams(studentMap, AdjustEntityParamsUtil.STUDENT_USELESS_PARAMS);
+            AdjustEntityParamsUtil.reserveParams(studentMap, AdjustEntityParamsUtil.STUDENT_BASE_INFO_PARAMS);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", studentMap);
@@ -44,5 +43,6 @@ public class StudentController {
         }
         return res;
     }
+
 }
 

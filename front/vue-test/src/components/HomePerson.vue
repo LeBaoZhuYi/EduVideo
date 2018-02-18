@@ -37,6 +37,7 @@
     name: "homePerson",
     data() {
       return {
+        studyName: "",
         studyId: "",
         birthday: "",
         phone: "",
@@ -46,7 +47,7 @@
         url: ""
       }
     },
-    mounted: function (){
+    mounted: function () {
       this.getUserInfoAndClassInfo();
     },
     methods: {
@@ -58,25 +59,26 @@
           return;
         }
         this.$http.get("/static/Person.json", {params: {userId: userId}})
-//        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
+        //        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
-                this.studyId= response.data.data.studyId;
-                this.birthday= response.data.data.birthday;
-                this.phone= response.data.data.phone;
+              this.studyName = response.data.data.stuName;
+              this.studyId = response.data.data.studyId;
+              this.birthday = response.data.data.birthday;
+              this.phone = response.data.data.phone;
             } else if (response.data.status > 0) {
               this.$alert("获取用户信息失败!" + response.data.msg, "错误");
             } else {
               this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
             }
-        })
+          })
         this.$http.get("/static/Person.json", {params: {userId: userId}})
-//        this.$http.get("/api/videoClass/getClassInfo", {params: {userId: userId}})
+        //        this.$http.get("/api/studentClassInfo/getBaseClassInfo", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.videoTitle= response.data.data.videoTitle;
-              this.isWatched= response.data.data.isWatched;
-              this.classTimes= response.data.data.classTimes;
+              this.videoTitle = response.data.data.videoTitle;
+              this.isWatched = response.data.data.isWatched;
+              this.classTimes = response.data.data.classTimes;
             } else if (response.data.status > 0) {
               this.$alert("获取课程信息失败!" + response.data.msg, "错误");
             } else {

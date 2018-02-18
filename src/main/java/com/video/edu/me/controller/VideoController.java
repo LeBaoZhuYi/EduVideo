@@ -101,7 +101,7 @@ public class VideoController {
             List<Map<String, Object>> videoMapList = new ArrayList<>();
             for(Video video: videoList){
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
-                AdjustEntityParamsUtil.reserveParams(videoMap, AdjustEntityParamsUtil.VIDEO_List_USEFUL_PARAMS);
+                AdjustEntityParamsUtil.reserveParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USEFUL_PARAMS);
                 videoMapList.add(videoMap);
             }
             res.put("status", 0);
