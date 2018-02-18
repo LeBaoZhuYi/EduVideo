@@ -7,9 +7,11 @@ public class Student {
 
     private Integer userId;
 
+    private Integer groupId;
+
     private String studyId;
 
-    private String stuName;
+    private String studyName;
 
     private Byte status;
 
@@ -17,9 +19,9 @@ public class Student {
 
     private Date utime;
 
-    private String stuIntro;
+    private String studyIntro;
 
-    private String remark;
+    private String teacherRemark;
 
     private String parentWords;
 
@@ -53,6 +55,14 @@ public class Student {
         this.userId = userId;
     }
 
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
     public String getStudyId() {
         return studyId;
     }
@@ -61,12 +71,12 @@ public class Student {
         this.studyId = studyId == null ? null : studyId.trim();
     }
 
-    public String getStuName() {
-        return stuName;
+    public String getStudyName() {
+        return studyName;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName == null ? null : stuName.trim();
+    public void setStudyName(String studyName) {
+        this.studyName = studyName == null ? null : studyName.trim();
     }
 
     public Byte getStatus() {
@@ -93,20 +103,20 @@ public class Student {
         this.utime = utime;
     }
 
-    public String getStuIntro() {
-        return stuIntro;
+    public String getStudyIntro() {
+        return studyIntro;
     }
 
-    public void setStuIntro(String stuIntro) {
-        this.stuIntro = stuIntro == null ? null : stuIntro.trim();
+    public void setStudyIntro(String studyIntro) {
+        this.studyIntro = studyIntro == null ? null : studyIntro.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getTeacherRemark() {
+        return teacherRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setTeacherRemark(String teacherRemark) {
+        this.teacherRemark = teacherRemark == null ? null : teacherRemark.trim();
     }
 
     public String getParentWords() {

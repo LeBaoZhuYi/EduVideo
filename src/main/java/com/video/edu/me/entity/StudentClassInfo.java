@@ -7,7 +7,9 @@ public class StudentClassInfo {
 
     private Integer classId;
 
-    private Integer stuId;
+    private Integer studyId;
+
+    private Byte status;
 
     private Integer score;
 
@@ -33,12 +35,20 @@ public class StudentClassInfo {
         this.classId = classId;
     }
 
-    public Integer getStuId() {
-        return stuId;
+    public Integer getStudyId() {
+        return studyId;
     }
 
-    public void setStuId(Integer stuId) {
-        this.stuId = stuId;
+    public void setStudyId(Integer studyId) {
+        this.studyId = studyId;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Integer getScore() {

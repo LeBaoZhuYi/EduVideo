@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.video.edu.me.entity.VideoClass" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, video_id, start_time, end_time, ctime, utime
+    id, video_id, group_id, start_time, end_time, ctime, utime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.VideoClassExample" >
     select
@@ -101,12 +102,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.video.edu.me.entity.VideoClass" >
-    insert into video_class (id, video_id, start_time, 
-      end_time, ctime, utime
-      )
-    values (#{id,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}
-      )
+    insert into video_class (id, video_id, group_id, 
+      start_time, end_time, ctime, 
+      utime)
+    values (#{id,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{utime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.video.edu.me.entity.VideoClass" >
     insert into video_class
@@ -116,6 +117,9 @@
       </if>
       <if test="videoId != null" >
         video_id,
+      </if>
+      <if test="groupId != null" >
+        group_id,
       </if>
       <if test="startTime != null" >
         start_time,
@@ -136,6 +140,9 @@
       </if>
       <if test="videoId != null" >
         #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
       </if>
       <if test="startTime != null" >
         #{startTime,jdbcType=TIMESTAMP},
@@ -166,6 +173,9 @@
       <if test="record.videoId != null" >
         video_id = #{record.videoId,jdbcType=INTEGER},
       </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
       <if test="record.startTime != null" >
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
       </if>
@@ -187,6 +197,7 @@
     update video_class
     set id = #{record.id,jdbcType=INTEGER},
       video_id = #{record.videoId,jdbcType=INTEGER},
+      group_id = #{record.groupId,jdbcType=INTEGER},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
@@ -200,6 +211,9 @@
     <set >
       <if test="videoId != null" >
         video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=INTEGER},
       </if>
       <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -219,6 +233,7 @@
   <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.VideoClass" >
     update video_class
     set video_id = #{videoId,jdbcType=INTEGER},
+      group_id = #{groupId,jdbcType=INTEGER},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       ctime = #{ctime,jdbcType=TIMESTAMP},

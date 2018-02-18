@@ -72,7 +72,7 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>
-        <table schema="" tableName="history" domainObjectName="History"
+        <table schema="" tableName="student_group" domainObjectName="StudentGroup"
                enableCountByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
@@ -87,10 +87,10 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>
-        <table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

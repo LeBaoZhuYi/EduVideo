@@ -7,10 +7,6 @@ public class Video {
 
     private String route;
 
-    private String name;
-
-    private String teacherName;
-
     private String title;
 
     private String comment;
@@ -37,22 +33,6 @@ public class Video {
 
     public void setRoute(String route) {
         this.route = route == null ? null : route.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public String getTitle() {

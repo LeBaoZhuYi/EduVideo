@@ -225,63 +225,123 @@ public class StudentClassInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStuIdIsNull() {
-            addCriterion("stu_id is null");
+        public Criteria andStudyIdIsNull() {
+            addCriterion("study_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdIsNotNull() {
-            addCriterion("stu_id is not null");
+        public Criteria andStudyIdIsNotNull() {
+            addCriterion("study_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdEqualTo(Integer value) {
-            addCriterion("stu_id =", value, "stuId");
+        public Criteria andStudyIdEqualTo(Integer value) {
+            addCriterion("study_id =", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdNotEqualTo(Integer value) {
-            addCriterion("stu_id <>", value, "stuId");
+        public Criteria andStudyIdNotEqualTo(Integer value) {
+            addCriterion("study_id <>", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdGreaterThan(Integer value) {
-            addCriterion("stu_id >", value, "stuId");
+        public Criteria andStudyIdGreaterThan(Integer value) {
+            addCriterion("study_id >", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("stu_id >=", value, "stuId");
+        public Criteria andStudyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("study_id >=", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdLessThan(Integer value) {
-            addCriterion("stu_id <", value, "stuId");
+        public Criteria andStudyIdLessThan(Integer value) {
+            addCriterion("study_id <", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdLessThanOrEqualTo(Integer value) {
-            addCriterion("stu_id <=", value, "stuId");
+        public Criteria andStudyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("study_id <=", value, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdIn(List<Integer> values) {
-            addCriterion("stu_id in", values, "stuId");
+        public Criteria andStudyIdIn(List<Integer> values) {
+            addCriterion("study_id in", values, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdNotIn(List<Integer> values) {
-            addCriterion("stu_id not in", values, "stuId");
+        public Criteria andStudyIdNotIn(List<Integer> values) {
+            addCriterion("study_id not in", values, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdBetween(Integer value1, Integer value2) {
-            addCriterion("stu_id between", value1, value2, "stuId");
+        public Criteria andStudyIdBetween(Integer value1, Integer value2) {
+            addCriterion("study_id between", value1, value2, "studyId");
             return (Criteria) this;
         }
 
-        public Criteria andStuIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("stu_id not between", value1, value2, "stuId");
+        public Criteria andStudyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("study_id not between", value1, value2, "studyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Byte value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Byte value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Byte value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Byte value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Byte> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Byte> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Byte value1, Byte value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
 

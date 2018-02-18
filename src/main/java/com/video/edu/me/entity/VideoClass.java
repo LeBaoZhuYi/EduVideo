@@ -7,6 +7,8 @@ public class VideoClass {
 
     private Integer videoId;
 
+    private Integer groupId;
+
     private Date startTime;
 
     private Date endTime;
@@ -29,6 +31,14 @@ public class VideoClass {
 
     public void setVideoId(Integer videoId) {
         this.videoId = videoId;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 
     public Date getStartTime() {
