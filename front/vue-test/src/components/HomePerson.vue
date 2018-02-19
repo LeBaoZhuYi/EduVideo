@@ -59,7 +59,7 @@
           return;
         }
         this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/student/getBaseInfo", {params: {userId: userId}})
+        //        this.$http.get("/api/student/info", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.studyName = response.data.data.stuName;
@@ -73,7 +73,7 @@
             }
           })
         this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/studentClassInfo/getBaseClassInfo", {params: {userId: userId}})
+        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.videoTitle = response.data.data.videoTitle;

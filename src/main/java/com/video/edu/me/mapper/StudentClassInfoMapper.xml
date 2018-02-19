@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.video.edu.me.entity.StudentClassInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="class_id" property="classId" jdbcType="INTEGER" />
-    <result column="study_id" property="studyId" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="score" property="score" jdbcType="INTEGER" />
     <result column="teacher_remark" property="teacherRemark" jdbcType="VARCHAR" />
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, class_id, study_id, status, score, teacher_remark, ctime, utime
+    id, class_id, student_id, status, score, teacher_remark, ctime, utime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.StudentClassInfoExample" >
     select
@@ -103,10 +103,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.video.edu.me.entity.StudentClassInfo" >
-    insert into student_class_info (id, class_id, study_id, 
+    insert into student_class_info (id, class_id, student_id, 
       status, score, teacher_remark, 
       ctime, utime)
-    values (#{id,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{studyId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
       #{status,jdbcType=TINYINT}, #{score,jdbcType=INTEGER}, #{teacherRemark,jdbcType=VARCHAR}, 
       #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
   </insert>
@@ -119,8 +119,8 @@
       <if test="classId != null" >
         class_id,
       </if>
-      <if test="studyId != null" >
-        study_id,
+      <if test="studentId != null" >
+        student_id,
       </if>
       <if test="status != null" >
         status,
@@ -145,8 +145,8 @@
       <if test="classId != null" >
         #{classId,jdbcType=INTEGER},
       </if>
-      <if test="studyId != null" >
-        #{studyId,jdbcType=INTEGER},
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
@@ -180,8 +180,8 @@
       <if test="record.classId != null" >
         class_id = #{record.classId,jdbcType=INTEGER},
       </if>
-      <if test="record.studyId != null" >
-        study_id = #{record.studyId,jdbcType=INTEGER},
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=INTEGER},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
@@ -207,7 +207,7 @@
     update student_class_info
     set id = #{record.id,jdbcType=INTEGER},
       class_id = #{record.classId,jdbcType=INTEGER},
-      study_id = #{record.studyId,jdbcType=INTEGER},
+      student_id = #{record.studentId,jdbcType=INTEGER},
       status = #{record.status,jdbcType=TINYINT},
       score = #{record.score,jdbcType=INTEGER},
       teacher_remark = #{record.teacherRemark,jdbcType=VARCHAR},
@@ -223,8 +223,8 @@
       <if test="classId != null" >
         class_id = #{classId,jdbcType=INTEGER},
       </if>
-      <if test="studyId != null" >
-        study_id = #{studyId,jdbcType=INTEGER},
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
@@ -247,7 +247,7 @@
   <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.StudentClassInfo" >
     update student_class_info
     set class_id = #{classId,jdbcType=INTEGER},
-      study_id = #{studyId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
       status = #{status,jdbcType=TINYINT},
       score = #{score,jdbcType=INTEGER},
       teacher_remark = #{teacherRemark,jdbcType=VARCHAR},

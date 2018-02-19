@@ -5,6 +5,8 @@ import java.util.Date;
 public class VideoClass {
     private Integer id;
 
+    private String className;
+
     private Integer videoId;
 
     private Integer groupId;
@@ -23,6 +25,14 @@ public class VideoClass {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className == null ? null : className.trim();
     }
 
     public Integer getVideoId() {

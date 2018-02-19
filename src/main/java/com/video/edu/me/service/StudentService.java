@@ -22,7 +22,7 @@ public class StudentService extends BaseService<Student, StudentExample> {
 		super.setBaseDao(studentMapper);
 	}
 
-	public Student getStuIdByUserId(int userId){
+	public Student getStudentByUserId(int userId){
 		StudentExample studentExample = new StudentExample();
 		studentExample.createCriteria().andUserIdEqualTo(userId);
 		return studentMapper.selectByExample(studentExample).get(0);

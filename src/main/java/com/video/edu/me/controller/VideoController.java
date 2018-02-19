@@ -36,9 +36,8 @@ public class VideoController {
     private Map<String, Object> play(int userId, int videoId) {
         Map<String, Object> res = new HashMap<>();
         try {
-            Student student = studentService.getStuIdByUserId(userId);
             if (videoId == -1) {
-                VideoClass videoClass = videoClassService.getTodayVideoClass();
+                VideoClass videoClass = videoClassService.getTodayVideoClassByUserId(userId);
                 if (videoClass == null) {
                     res.put("status", 1);
                     res.put("msg", "今日没有课程");
@@ -59,23 +58,12 @@ public class VideoController {
                 }
                 videoId = videoClass.getVideoId();
             }
-
-            WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
-            watchAuthorityExample.createCriteria().andStuIdEqualTo(student.getId()).andVideoIdEqualTo(videoId);
-            if (watchAuthorityService.countByExample(watchAuthorityExample) > 0) {
-                VideoExample videoExample = new VideoExample();
-                videoExample.createCriteria().andIdEqualTo(videoId).andStatusEqualTo(VideoStatus.NORMAL.getId());
-                List<Video> videoList = videoService.selectByExample(videoExample);
-                Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(videoList.get(0));
-                AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
-                res.put("status", 0);
-                res.put("msg", "");
-                res.put("data", videoMap);
-            } else{
-                res.put("status", 3);
-                res.put("msg", "您没有观看此课程的权限");
-                res.put("data", null);
-            }
+            Video video = videoService.selectByPrimaryKey(videoId);
+            Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
+            AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
+            res.put("status", 0);
+            res.put("msg", "");
+            res.put("data", videoMap);
         } catch (Exception e) {
             logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
             res.put("status", -1);
@@ -90,7 +78,7 @@ public class VideoController {
     private Map<String, Object> videoList(int userId) {
         Map<String, Object> res = new HashMap<>();
         try {
-            Student student = studentService.getStuIdByUserId(userId);
+            Student student = studentService.getStudentByUserId(userId);
             WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
             watchAuthorityExample.createCriteria().andStuIdEqualTo(student.getId());
             List<Integer> videoIdList = watchAuthorityService.getVideoIdListByStuId(student.getId());

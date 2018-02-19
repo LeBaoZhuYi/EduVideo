@@ -225,63 +225,63 @@ public class StudentClassInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdIsNull() {
-            addCriterion("study_id is null");
+        public Criteria andStudentIdIsNull() {
+            addCriterion("student_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdIsNotNull() {
-            addCriterion("study_id is not null");
+        public Criteria andStudentIdIsNotNull() {
+            addCriterion("student_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdEqualTo(Integer value) {
-            addCriterion("study_id =", value, "studyId");
+        public Criteria andStudentIdEqualTo(Integer value) {
+            addCriterion("student_id =", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdNotEqualTo(Integer value) {
-            addCriterion("study_id <>", value, "studyId");
+        public Criteria andStudentIdNotEqualTo(Integer value) {
+            addCriterion("student_id <>", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdGreaterThan(Integer value) {
-            addCriterion("study_id >", value, "studyId");
+        public Criteria andStudentIdGreaterThan(Integer value) {
+            addCriterion("student_id >", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("study_id >=", value, "studyId");
+        public Criteria andStudentIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("student_id >=", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdLessThan(Integer value) {
-            addCriterion("study_id <", value, "studyId");
+        public Criteria andStudentIdLessThan(Integer value) {
+            addCriterion("student_id <", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("study_id <=", value, "studyId");
+        public Criteria andStudentIdLessThanOrEqualTo(Integer value) {
+            addCriterion("student_id <=", value, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdIn(List<Integer> values) {
-            addCriterion("study_id in", values, "studyId");
+        public Criteria andStudentIdIn(List<Integer> values) {
+            addCriterion("student_id in", values, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdNotIn(List<Integer> values) {
-            addCriterion("study_id not in", values, "studyId");
+        public Criteria andStudentIdNotIn(List<Integer> values) {
+            addCriterion("student_id not in", values, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdBetween(Integer value1, Integer value2) {
-            addCriterion("study_id between", value1, value2, "studyId");
+        public Criteria andStudentIdBetween(Integer value1, Integer value2) {
+            addCriterion("student_id between", value1, value2, "studentId");
             return (Criteria) this;
         }
 
-        public Criteria andStudyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("study_id not between", value1, value2, "studyId");
+        public Criteria andStudentIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("student_id not between", value1, value2, "studentId");
             return (Criteria) this;
         }
 
