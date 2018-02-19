@@ -23,35 +23,43 @@ export default new Router({
           component: resolve => require(['../components/admin/page/Readme.vue'], resolve)
         },
         {
-          path: '/user-table',
-          component: resolve => require(['../components/admin/page/UserTable.vue'], resolve)
+          path: '/admin/student-table',
+          component: resolve => require(['../components/admin/page/StudentTable.vue'], resolve)
         },
         {
-          path: '/auth-table',
-          component: resolve => require(['../components/admin/page/AuthTable.vue'], resolve)
+          path: '/admin/group-table',
+          component: resolve => require(['../components/admin/page/GroupTable.vue'], resolve)
         },
         {
-          path: '/history-table',
+          path: '/admin/history-table',
           component: resolve => require(['../components/admin/page/HistoryTable.vue'], resolve)
         },
         {
-          path: '/add-video',
+          path: '/admin/video-table',
+          component: resolve => require(['../components/admin/page/VideoTable.vue'], resolve)
+        },
+        {
+          path: '/admin/class-table',
+          component: resolve => require(['../components/admin/page/ClassTable.vue'], resolve)
+        },
+        {
+          path: '/admin/add-video',
           component: resolve => require(['../components/admin/page/AddVideo.vue'], resolve)
         },
         {
-          path: '/add-user',
-          component: resolve => require(['../components/admin/page/AddUser.vue'], resolve)
+          path: '/admin/add-student',
+          component: resolve => require(['../components/admin/page/AddStudent.vue'], resolve)
         },
         {
-          path: '/add-class',
+          path: '/admin/add-class',
           component: resolve => require(['../components/admin/page/AddClass.vue'], resolve)
         },
         {
-          path: '/auth-manage',
-          component: resolve => require(['../components/admin/page/AuthManage.vue'], resolve)       // Vue-Core-Image-Upload组件
+          path: '/admin/add-group',
+          component: resolve => require(['../components/admin/page/AddGroup.vue'], resolve)       // Vue-Core-Image-Upload组件
         },
         {
-          path: '/login',
+          path: '/admin/login',
           component: resolve => require(['../components/admin/page/Login.vue'], resolve)
         }
       ]

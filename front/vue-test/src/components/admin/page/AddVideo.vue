@@ -11,9 +11,6 @@
         <el-form-item label="视频名称">
           <el-input v-model="video.title"></el-input>
         </el-form-item>
-        <el-form-item label="讲师">
-          <el-input v-model="video.teacherName"></el-input>
-        </el-form-item>
         <el-form-item label="视频描述">
           <el-input type="textarea" v-model="video.comment"></el-input>
         </el-form-item>

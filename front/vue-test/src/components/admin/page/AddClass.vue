@@ -8,8 +8,18 @@
     </div>
     <div class="form-box">
       <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="视频编号">
-          <el-input v-model="form.videoId"></el-input>
+        <el-form-item label="课程视频">
+          <el-select v-model="form.videoList" placeholder="请选择">
+            <el-option key="bbk" label="步步高" value="bbk"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="学生分组">
+          <el-select v-model="form.groupList" placeholder="请选择">
+            <el-option key="bbk" label="步步高" value="bbk"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="讲师">
+          <el-input v-model="form.teacherName"></el-input>
         </el-form-item>
         <el-form-item label="开始时间">
           <el-col :span="11">

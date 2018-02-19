@@ -7,6 +7,8 @@ public class VideoClass {
 
     private String className;
 
+    private String teacherName;
+
     private Integer videoId;
 
     private Integer groupId;
@@ -33,6 +35,14 @@ public class VideoClass {
 
     public void setClassName(String className) {
         this.className = className == null ? null : className.trim();
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public Integer getVideoId() {

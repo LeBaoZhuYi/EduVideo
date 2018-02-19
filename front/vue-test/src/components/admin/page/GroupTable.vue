@@ -3,7 +3,7 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
-        <el-breadcrumb-item>视频列表</el-breadcrumb-item>
+        <el-breadcrumb-item>分组列表</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="handle-box">

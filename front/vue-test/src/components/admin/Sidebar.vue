@@ -27,19 +27,19 @@
                     {
                         icon: 'el-icon-menu',
                         index: '1',
-                        title: '用户管理',
+                        title: '学生管理',
                         subs: [
                           {
                             index: 'user-table',
-                            title: '用户列表'
+                            title: '学生列表'
                           },
                           {
-                            index: 'auth-table',
-                            title: '用户视频权限表'
+                            index: 'group-table',
+                            title: '学生分组列表'
                           },
                           {
                             index: 'history-table',
-                            title: '用户观看历史表'
+                            title: '用户课程历史表'
                           }
                         ]
                     },
@@ -49,16 +49,12 @@
                     title: '视频管理',
                     subs: [
                       {
-                        index: 'basetable',
+                        index: 'video-table',
                         title: '视频列表'
                       },
                       {
-                        index: 'authtable',
+                        index: 'class-table',
                         title: '课程时间表'
-                      },
-                      {
-                        index: 'authtable',
-                        title: '视频观看统计表'
                       }
                     ]
                   },
@@ -68,20 +64,20 @@
                     title: '管理操作',
                     subs: [
                       {
-                        index: 'add-class',
-                        title: '添加课程'
-                      },
-                      {
-                        index: 'add-user',
-                        title: '添加学生'
-                      },
-                      {
                         index: 'add-video',
                         title: '添加视频'
                       },
                       {
-                        index: 'auth-manage',
-                        title: '权限管理'
+                        index: 'add-group',
+                        title: '添加分组'
+                      },
+                      {
+                        index: 'add-class',
+                        title: '添加课程'
+                      },
+                      {
+                        index: 'add-student',
+                        title: '添加学生'
                       }
                     ]
                   }
