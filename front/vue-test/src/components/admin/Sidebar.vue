@@ -30,7 +30,7 @@
                         title: '学生管理',
                         subs: [
                           {
-                            index: 'user-table',
+                            index: 'student-table',
                             title: '学生列表'
                           },
                           {
