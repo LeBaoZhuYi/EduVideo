@@ -16,10 +16,14 @@ export default new Router({
     },
     {
       path: '/admin',
+      redirect: '/admin/index'
+    },
+    {
+      path: '/admin',
       component: resolve => require(['../components/admin/Home.vue'], resolve),
       children: [
         {
-          path: '/',
+          path: '/admin/index',
           component: resolve => require(['../components/admin/page/Readme.vue'], resolve)
         },
         {
