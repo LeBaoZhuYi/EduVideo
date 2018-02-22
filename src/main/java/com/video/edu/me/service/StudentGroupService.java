@@ -3,11 +3,13 @@ package com.video.edu.me.service;
 import com.video.edu.me.dao.StudentGroupMapper;
 import com.video.edu.me.entity.StudentGroup;
 import com.video.edu.me.entity.StudentGroupExample;
+import com.video.edu.me.enumeration.StudentGroupStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class StudentGroupService extends BaseService<StudentGroup, StudentGroupExample> {
@@ -20,5 +22,12 @@ public class StudentGroupService extends BaseService<StudentGroup, StudentGroupE
 	public void setStudentGroupMapper(StudentGroupMapper studentGroupMapper){
 		this.studentGroupMapper = studentGroupMapper;
 		super.setBaseDao(studentGroupMapper);
+	}
+	
+	public List<StudentGroup> getAllNotDeletedStudentGroupList(){
+		StudentGroupExample studentGroupExample = new StudentGroupExample();
+		studentGroupExample.createCriteria().andStatusLessThan(StudentGroupStatus.REMOVED.getId());
+		studentGroupExample.setOrderByClause("DESC ctime");
+		return studentGroupMapper.selectByExample(studentGroupExample);
 	}
 }

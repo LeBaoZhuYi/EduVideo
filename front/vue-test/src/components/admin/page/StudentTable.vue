@@ -300,12 +300,9 @@
     },
     methods: {
       getData() {
-//                if(process.env.NODE_ENV === 'development'){
-//                    this.url = '/ms/table/list';
-//                };
-//         this.$http.get(this.url, {page: this.cur_page}).then((res) => {
-//           this.tableData = res.data.list;
-//         })
+        this.$http.get(this.url).then((response) => {
+          this.allData = response.data.data;
+        })
       },
       search() {
         this.is_search = true;

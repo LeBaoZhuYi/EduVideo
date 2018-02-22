@@ -3,11 +3,13 @@ package com.video.edu.me.service;
 import com.video.edu.me.dao.VideoMapper;
 import com.video.edu.me.entity.Video;
 import com.video.edu.me.entity.VideoExample;
+import com.video.edu.me.enumeration.VideoStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class VideoService extends BaseService<Video, VideoExample> {
@@ -25,5 +27,12 @@ public class VideoService extends BaseService<Video, VideoExample> {
         Video video = videoMapper.selectByPrimaryKey(videoId);
         video.setWatchedTimes(video.getWatchedTimes() + 1);
         videoMapper.updateByPrimaryKey(video);
+    }
+    
+    public List<Video> getAllNotDeletedVideoList(){
+        VideoExample videoExample = new VideoExample();
+        videoExample.createCriteria().andStatusLessThan(VideoStatus.REMOVED.getId());
+        videoExample.setOrderByClause("DESC ctime");
+        return videoMapper.selectByExample(videoExample);
     }
 }

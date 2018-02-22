@@ -8,6 +8,7 @@ import java.util.Set;
 import com.video.edu.me.dao.UserMapper;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
+import com.video.edu.me.enumeration.RoleType;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

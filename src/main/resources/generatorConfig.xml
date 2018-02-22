@@ -57,16 +57,16 @@
                      <!--<ignoreColumn column="FRED" /> -->
             <!-- 指定列的java数据类型 -->
                       <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
-        <!--<table schema="" tableName="video_class" domainObjectName="VideoClass"-->
-               <!--enableCountByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
-               <!--enableUpdateByExample="true">-->
-        <!--</table>-->
-        <table schema="" tableName="student" domainObjectName="Student"
+        <table schema="" tableName="video_class" domainObjectName="VideoClass"
                enableCountByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>
+        <!--<table schema="" tableName="student" domainObjectName="Student"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
         <!--<table schema="" tableName="video" domainObjectName="Video"-->
                <!--enableCountByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->

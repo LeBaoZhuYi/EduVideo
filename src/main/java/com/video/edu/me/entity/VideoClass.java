@@ -17,6 +17,8 @@ public class VideoClass {
 
     private Date endTime;
 
+    private Byte status;
+
     private Date ctime;
 
     private Date utime;
@@ -75,6 +77,14 @@ public class VideoClass {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCtime() {

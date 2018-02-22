@@ -3,8 +3,9 @@ package com.video.edu.me.utils;
 import java.util.Map;
 
 public class AdjustEntityParamsUtil {
-    public final static String [] USER_USELESS_PARAMS = {"password", "status", "utime", "ctime"};
+    public final static String [] USER_USELESS_PARAMS = {"password", "utime", "ctime"};
     public final static String [] COMMON_USELESS_PARAMS = {"id", "utime", "ctime"};
+    public final static String [] VIDEO_LIST_USELESS_PARAMS = {"route"};
     public final static String [] VIDEO_CLASS_LIST_USEFUL_PARAMS = {"id", "class_name"};
 
     public static void removeParams(Map<String, Object> entityMap, String [] paramNames){

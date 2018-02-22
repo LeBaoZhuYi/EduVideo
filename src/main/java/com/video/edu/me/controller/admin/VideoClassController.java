@@ -1,8 +1,20 @@
 package com.video.edu.me.controller.admin;
 
 
+import com.video.edu.me.entity.VideoClass;
+import com.video.edu.me.qcloud.vod.VodApi;
+import com.video.edu.me.service.VideoClassService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
+import com.video.edu.me.utils.Constants;
+import com.video.edu.me.utils.EncryptUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -10,39 +22,25 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.*;
-import com.video.edu.me.entity.Video;
-import com.video.edu.me.entity.VideoExample;
-import com.video.edu.me.service.VideoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.video.edu.me.qcloud.vod.VodApi;
-import com.video.edu.me.qcloud.vod.response.VodBaseResponse;
-import com.video.edu.me.utils.Constants;
-import com.video.edu.me.utils.EncryptUtil;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@Controller("adminVideoController")
-@RequestMapping(value = "/admin/video")
-public class VideoController {
-    private static final Logger logger = LoggerFactory.getLogger(VideoController.class);
+@Controller("adminVideoClassController")
+@RequestMapping(value = "/admin/videoClass")
+public class VideoClassController {
+    private static final Logger logger = LoggerFactory.getLogger(VideoClassController.class);
 
     @Autowired
-    VideoService videoService;
+    VideoClassService videoClassService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> create(Video video) {
+    private Map<String, Object> create(VideoClass videoClass) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = videoService.insertSelective(video);
+            int insertResult = videoClassService.insertSelective(videoClass);
             if (insertResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "未成功插入视频");
@@ -65,7 +63,7 @@ public class VideoController {
     private Map<String, Object> find(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            Video findResult = videoService.selectByPrimaryKey(id);
+            VideoClass findResult = videoClassService.selectByPrimaryKey(id);
             if (findResult == null) {
                 res.put("status", 1);
                 res.put("msg", "查找视频失败");
@@ -88,7 +86,7 @@ public class VideoController {
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = videoService.deleteByPrimaryKey(id);
+            int deleteResult = videoClassService.deleteByPrimaryKey(id);
             if (deleteResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "删除视频出错");
@@ -108,10 +106,10 @@ public class VideoController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> update(Video video) {
+    private Map<String, Object> update(VideoClass videoClass) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = videoService.updateByPrimaryKey(video);
+            int updateResult = videoClassService.updateByPrimaryKey(videoClass);
             if (updateResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "更新视频失败");
@@ -134,17 +132,17 @@ public class VideoController {
     private Map<String, Object> getList() {
         Map<String, Object> res = new HashMap<>();
         try {
-            List<Video> videoList = videoService.getAllNotDeletedVideoList();
-            List<Map<String, Object>> videoListMap = new ArrayList<>();
-            for(Video video: videoList){
-                Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
-                AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
+            List<VideoClass> videoClassList = videoClassService.getAllNotDeletedVideoClassList();
+            List<Map<String, Object>> videoClassListMap = new ArrayList<>();
+            for(VideoClass videoClass: videoClassList){
+                Map<String, Object> videoClassMap = ObjectMapTransformUtil.obj2Map(videoClass);
+                AdjustEntityParamsUtil.removeParams(videoClassMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
             }
             res.put("status", 0);
             res.put("msg", "");
-            res.put("data", videoListMap);
+            res.put("data", videoClassListMap);
         } catch (Exception e) {
-            logger.error("get video list error with exception: {}", e.getMessage());
+            logger.error("get videoClass list error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

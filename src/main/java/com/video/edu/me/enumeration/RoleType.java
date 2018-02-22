@@ -1,18 +1,20 @@
-package com.video.edu.me.utils;
+package com.video.edu.me.enumeration;
+
+import com.video.edu.me.utils.ByteUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum RoleType {
-    ADMIN(1, "admin"),
-    TEACHER(2, "teacher"),
-    USER(3, "user");
+    ADMIN(ByteUtil.intToByte(1), "admin"),
+    TEACHER(ByteUtil.intToByte(2), "teacher"),
+    USER(ByteUtil.intToByte(3), "user");
 
-    private int id;
+    private byte id;
     private String desc;
-    private static Map<Integer, RoleType> idMap = new HashMap<>();
+    private static Map<Byte, RoleType> idMap = new HashMap<>();
 
-    RoleType(int id, String desc) {
+    RoleType(byte id, String desc) {
         this.id = id;
         this.desc = desc;
     }
@@ -23,15 +25,15 @@ public enum RoleType {
         }
     }
 
-    public static RoleType getById(int id) {
+    public static RoleType getById(byte id) {
         return idMap.get(id);
     }
 
-    public int getId() {
+    public byte getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(byte id) {
         this.id = id;
     }
 

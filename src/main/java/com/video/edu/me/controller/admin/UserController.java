@@ -1,10 +1,9 @@
 package com.video.edu.me.controller.admin;
 
-import com.video.edu.me.entity.Student;
-import com.video.edu.me.entity.StudentExample;
 import com.video.edu.me.entity.User;
-import com.video.edu.me.service.StudentService;
 import com.video.edu.me.service.UserService;
+import com.video.edu.me.service.UserService;
+import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,23 +18,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Controller("adminStudentController")
-@RequestMapping(value = "/admin/student")
-public class StudentController {
+@Controller("adminUserController")
+@RequestMapping(value = "/admin/user")
+public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    StudentService studentService;
     @Autowired
     UserService userService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> create(Student student) {
+    private Map<String, Object> create(User user) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = studentService.insertSelective(student);
+            int insertResult = userService.insertSelective(user);
             if (insertResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "未成功插入数据");
@@ -58,7 +55,7 @@ public class StudentController {
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = studentService.deleteByPrimaryKey(id);
+            int deleteResult = userService.deleteByPrimaryKey(id);
             if (deleteResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "删除出错");
@@ -78,10 +75,10 @@ public class StudentController {
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> update(Student student) {
+    private Map<String, Object> update(User user) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = studentService.updateByPrimaryKey(student);
+            int updateResult = userService.updateByPrimaryKey(user);
             if (updateResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "更新失败");
@@ -104,22 +101,22 @@ public class StudentController {
     private Map<String, Object> getList() {
         Map<String, Object> res = new HashMap<>();
         try {
-            List<Student> studentList = studentService.getAllNotDeletedStudentList();
-            List<Map<String, Object>> studentListMap = new ArrayList<>();
-            for(Student student: studentList){
-                studentListMap.add(ObjectMapTransformUtil.obj2Map(student));
+            List<User> userList = userService.getAllNotDeletedUserList();
+            List<Map<String, Object>> userListMap = new ArrayList<>();
+            for(User user: userList){
+                Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
+                AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
             }
             res.put("status", 0);
             res.put("msg", "");
-            res.put("data", studentListMap);
+            res.put("data", userListMap);
         } catch (Exception e) {
-            logger.error("get student list error with exception: {}", e.getMessage());
+            logger.error("get user list error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
         }
         return res;
     }
-
 }
 

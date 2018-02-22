@@ -4,6 +4,7 @@ import com.video.edu.me.dao.VideoClassMapper;
 import com.video.edu.me.entity.Student;
 import com.video.edu.me.entity.VideoClass;
 import com.video.edu.me.entity.VideoClassExample;
+import com.video.edu.me.enumeration.VideoClassStatus;
 import com.video.edu.me.utils.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,5 +63,13 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
                 .andGroupIdEqualTo(groupId);
         List<VideoClass> videoClassList = videoClassMapper.selectByExample(videoClassExample);
         return videoClassList;
+    }
+
+
+    public List<VideoClass> getAllNotDeletedVideoClassList(){
+        VideoClassExample videoClassExample = new VideoClassExample();
+        videoClassExample.createCriteria().andStatusLessThan(VideoClassStatus.REMOVED.getId());
+        videoClassExample.setOrderByClause("DESC ctime");
+        return videoClassMapper.selectByExample(videoClassExample);
     }
 }
