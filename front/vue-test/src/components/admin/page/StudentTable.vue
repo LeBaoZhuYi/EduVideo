@@ -15,8 +15,7 @@
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
     </div>
     <div>
-      <el-table :data="data" border style="width: 100%" ref="multipleTable"
-                @selection-change="handleSelectionChange">
+      <el-table :data="data" border style="width: 100%">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -135,15 +134,13 @@
     data() {
       return {
         url: '/static/UserTable.json',
-        total: 8,
+        total: 0,
         currentPage: 1,
         pageSize: 5,
         dialogFormVisible: false,
-        multipleSelection: [],
         selectTable: {},
         select_cate: '',
         select_word: '',
-        del_list: [],
         is_search: false,
         tableData: [],
         allData: [{
@@ -284,28 +281,17 @@
       data() {
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
-          let is_del = false;
-          for (let i = 0; i < self.del_list.length; i++) {
-            if (d.studyName === self.del_list[i].studyName) {
-              is_del = true;
-              break;
-            }
+          let flag = false;
+          if (d.groupName.indexOf(self.select_cate) > -1) {
+            Object.values(d).forEach(v => {
+              if (v.indexOf(self.select_word) > -1) {
+                flag = true;
+                return;
+              }
+            });
           }
-          if (!is_del) {
-            let flag = false;
-            if (d.groupName.indexOf(self.select_cate) > -1) {
-              Object.values(d).forEach(v => {
-                let a = v;
-                a = 1;
-                if (v.indexOf(self.select_word) > -1) {
-                  flag = true;
-                  return;
-                }
-              });
-            }
-            if (flag){
-              return d;
-            }
+          if (flag) {
+            return d;
           }
         });
         self.total = self.filtedTableData.length;
@@ -324,12 +310,6 @@
       search() {
         this.is_search = true;
       },
-      formatter(row, column) {
-        return row.address;
-      },
-      filterTag(value, row) {
-        return row.tag === value;
-      },
       handleEdit(index, row) {
         this.dialogFormVisible = true;
         this.selectTable = row;
@@ -337,26 +317,13 @@
       handleDelete(index, row) {
         this.$message.error('删除第' + (index + 1) + '行');
       },
-      delAll() {
-        let length = this.multipleSelection.length;
-        let str = '';
-        this.del_list = this.del_list.concat(this.multipleSelection);
-        for (let i = 0; i < length; i++) {
-          str += this.multipleSelection[i].name + ' ';
-        }
-        this.$message.error('删除了' + str);
-        this.multipleSelection = [];
-      },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
-      },
-      handleCurrentChange(val){
+      handleCurrentChange(val) {
         this.currentPage = val;
       },
-        handleSizeChange(val) {
+      handleSizeChange(val) {
         this.pageSize = val;
       },
-      computeTableData(allData){
+      computeTableData(allData) {
         let page = this.currentPage;
         let pageSize = this.pageSize;
         return allData.slice(pageSize * (page - 1), pageSize * page);
