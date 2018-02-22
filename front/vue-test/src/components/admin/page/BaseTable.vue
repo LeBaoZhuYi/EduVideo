@@ -46,7 +46,7 @@
     export default {
         data() {
             return {
-                url: './static/vuetable.json',
+                url: '/static/vuetable.json',
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],
@@ -71,7 +71,7 @@
                         }
                     }
                     if(!is_del){
-                        if(d.address.indexOf(self.select_cate) > -1 && 
+                        if(d.address.indexOf(self.select_cate) > -1 &&
                             (d.name.indexOf(self.select_word) > -1 ||
                             d.address.indexOf(self.select_word) > -1)
                         ){
@@ -88,10 +88,10 @@
             },
             getData(){
                 let self = this;
-                if(process.env.NODE_ENV === 'development'){
-                    self.url = '/ms/table/list';
-                };
-                self.$axios.post(self.url, {page:self.cur_page}).then((res) => {
+                // if(process.env.NODE_ENV === 'development'){
+                //     self.url = '/ms/table/list';
+                // };
+                self.$http.get(self.url, {page:self.cur_page}).then((res) => {
                     self.tableData = res.data.list;
                 })
             },

@@ -7,8 +7,7 @@
       </el-breadcrumb>
     </div>
     <div class="handle-box">
-      <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-      <el-select v-model="select_cate" placeholder="筛选选项" class="handle-select mr10">
+      <el-select v-model="select_cate" placeholder="筛选分组" class="handle-select mr10">
         <el-option key="1" label="选项一" value="选项一"></el-option>
         <el-option key="2" label="选项二" value="选项二"></el-option>
       </el-select>
@@ -16,7 +15,7 @@
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
     </div>
     <div>
-      <el-table :data="tableData" border style="width: 100%" ref="multipleTable"
+      <el-table :data="data" border style="width: 100%" ref="multipleTable"
                 @selection-change="handleSelectionChange">
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -152,7 +151,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -168,7 +167,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -184,7 +183,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -200,7 +199,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -216,7 +215,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -232,7 +231,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -247,7 +246,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -262,7 +261,7 @@
           studyId: '好滋好味鸡蛋仔',
           studyName: '好滋好味鸡蛋仔',
           groupName: '',
-          ctime: new Date(),
+          ctime: (new Date()).toDateString(),
           studyIntro: '好滋好味鸡蛋仔',
           teacherRemark: '好滋好味鸡蛋仔',
           parentWords: '好滋好味鸡蛋仔',
@@ -277,27 +276,40 @@
       }
     },
     created() {
+      this.getData();
+      // this.tableData = this.allData;
       this.handleCurrentChange(1);
     },
     computed: {
       data() {
-        return this.tableData.filter(function (d) {
+        const self = this;
+        self.filtedTableData = self.allData.filter(function (d) {
           let is_del = false;
-          for (let i = 0; i < this.del_list.length; i++) {
-            if (d.name === this.del_list[i].name) {
+          for (let i = 0; i < self.del_list.length; i++) {
+            if (d.studyName === self.del_list[i].studyName) {
               is_del = true;
               break;
             }
           }
           if (!is_del) {
-            if (d.address.indexOf(this.select_cate) > -1 &&
-              (d.name.indexOf(this.select_word) > -1 ||
-                d.address.indexOf(this.select_word) > -1)
-            ) {
+            let flag = false;
+            if (d.groupName.indexOf(self.select_cate) > -1) {
+              Object.values(d).forEach(v => {
+                let a = v;
+                a = 1;
+                if (v.indexOf(self.select_word) > -1) {
+                  flag = true;
+                  return;
+                }
+              });
+            }
+            if (flag){
               return d;
             }
           }
-        })
+        });
+        self.total = self.filtedTableData.length;
+        return self.computeTableData(self.filtedTableData);
       }
     },
     methods: {
@@ -338,16 +350,16 @@
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-      handleCurrentChange(val) {
-        let page = val;
-        let pageSize = this.pageSize;
-        this.tableData = this.allData.slice(pageSize*(page-1),pageSize*page);
+      handleCurrentChange(val){
+        this.currentPage = val;
       },
-      handleSizeChange(val){
-        let page = this.currentPage;
-        let pageSize = val;
+        handleSizeChange(val) {
         this.pageSize = val;
-        this.tableData = this.allData.slice(pageSize*(page-1),pageSize*page);
+      },
+      computeTableData(allData){
+        let page = this.currentPage;
+        let pageSize = this.pageSize;
+        return allData.slice(pageSize * (page - 1), pageSize * page);
       }
     }
   }
