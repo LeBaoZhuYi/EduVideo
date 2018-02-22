@@ -8,7 +8,7 @@
       <div class="scroll">
         <div class="scrollContainer" id="scrollContainer">
           <el-carousel :autoplay=false trigger="click">
-            <el-carousel-item v-for="item in 4" :key="item">
+            <el-carousel-item v-for="item in 5" :key="item">
               <div class="panel" v-show="item == 1" style="font-size: 20px">
                 <div class="col_550 float_l">
                   <h1>学生简介</h1>
@@ -68,9 +68,45 @@
                 </div>
               </div>
               <div class="panel hide" v-show="item == 4">
-                <h1>信息修改</h1>
-                <h2><em>施工中。。。</em></h2>
-              </div>
+              <h1>基本信息修改</h1>
+              <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="我的名字">
+                  <el-input v-model="form.studyName"></el-input>
+                </el-form-item>
+                <el-form-item label="我的性别">
+                  <el-input v-model="form.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="我的生日">
+                  <el-input v-model="form.birthday"></el-input>
+                </el-form-item>
+                <el-form-item label="个人简介">
+                  <el-input v-model="form.studyIntro"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="onSubmit">提交</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+            <div class="panel hide" v-show="item == 5">
+              <h1>其它信息修改</h1>
+              <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="我的爱好">
+                  <el-input v-model="form.interest"></el-input>
+                </el-form-item>
+                <el-form-item label="我的理想">
+                  <el-input v-model="form.ideal"></el-input>
+                </el-form-item>
+                <el-form-item label="我不喜欢">
+                  <el-input v-model="form.studyIntro"></el-input>
+                </el-form-item>
+                <el-form-item label="家长评价">
+                  <el-input v-model="form.parentWords"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="onSubmit">提交</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -85,12 +121,24 @@
 </template>
 <style>
   @import url('../assets/temp/templatemo_style.css');
+
   #person-info {
     position: relative;
     width: 980px;
     margin: 0 auto;
     margin-top: 45px;
     font-family: fengbi;
+  }
+
+  em, .el-form-item__label {
+    color: #d1e050;
+  }
+
+  el-form-item__label {
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0 0 15px 0;
+    font-weight: normal;
   }
 
   #header {
@@ -101,12 +149,13 @@
     text-align: center;
   }
 
-  #my_name{
-    border:none;
-    border-bottom:3px solid #ffffff;
+  #my_name {
+    border: none;
+    border-bottom: 3px solid #ffffff;
     font-size: 50px;
     color: #ffffff;
   }
+
   #header a.header_menu {
     float: left;
     display: block;
@@ -133,6 +182,7 @@
     padding: 20px 0;
     text-align: center;
   }
+
   .scroll {
     height: 415px;
     width: 860px;
@@ -140,18 +190,20 @@
     position: relative;
     clear: left;
   }
-  .scrollContainer{
+
+  .scrollContainer {
     height: 380px;
     width: 800px;
     padding: 35px 30px 0 30px;
   }
-  .el-carousel{
+
+  .el-carousel {
     position: relative;
     width: 100%;
     height: 100%;
   }
 
-  .el-carousel__container{
+  .el-carousel__container {
     height: 100%;
   }
 </style>
@@ -180,7 +232,20 @@
         lastScore: "",
         avgScore: "",
         maxScore: "",
-        teacherHomeworkComment: ""
+        teacherHomeworkComment: "",
+        form: {
+          stuName: "",
+          stuIntro: "",
+          remark: "",
+          parentWords: "",
+          phone: "",
+          sex: "",
+          birthday: "",
+          food: "",
+          interest: "",
+          disagree: "",
+          ideal: ""
+        }
       }
     },
     mounted: function () {
