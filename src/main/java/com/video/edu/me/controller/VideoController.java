@@ -27,8 +27,6 @@ public class VideoController {
     @Autowired
     VideoClassService videoClassService;
     @Autowired
-    WatchAuthorityService watchAuthorityService;
-    @Autowired
     StudentService studentService;
 
     @RequestMapping(value = "/play", method = RequestMethod.GET)
@@ -66,37 +64,6 @@ public class VideoController {
             res.put("data", videoMap);
         } catch (Exception e) {
             logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
-            res.put("status", -1);
-            res.put("msg", e.getMessage());
-            res.put("data", null);
-        }
-        return res;
-    }
-
-    @RequestMapping(value = "/videoList", method = RequestMethod.GET)
-    @ResponseBody
-    private Map<String, Object> videoList(int userId) {
-        Map<String, Object> res = new HashMap<>();
-        try {
-            Student student = studentService.getStudentByUserId(userId);
-            WatchAuthorityExample watchAuthorityExample = new WatchAuthorityExample();
-            watchAuthorityExample.createCriteria().andStuIdEqualTo(student.getId());
-            List<Integer> videoIdList = watchAuthorityService.getVideoIdListByStuId(student.getId());
-            VideoExample videoExample = new VideoExample();
-            videoExample.createCriteria().andCtimeBetween(DateUtil.getCurrentMonthFirstDay(),
-                    DateUtil.getNextMonthFirstDay()).andIdIn(videoIdList);
-            List<Video> videoList = videoService.selectByExample(videoExample);
-            List<Map<String, Object>> videoMapList = new ArrayList<>();
-            for(Video video: videoList){
-                Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
-                AdjustEntityParamsUtil.reserveParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USEFUL_PARAMS);
-                videoMapList.add(videoMap);
-            }
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", videoMapList);
-        } catch (Exception e) {
-            logger.error("get videoList error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

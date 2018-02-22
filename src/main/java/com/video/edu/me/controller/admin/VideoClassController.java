@@ -3,7 +3,9 @@ package com.video.edu.me.controller.admin;
 
 import com.video.edu.me.entity.VideoClass;
 import com.video.edu.me.qcloud.vod.VodApi;
+import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.VideoClassService;
+import com.video.edu.me.service.VideoService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.Constants;
 import com.video.edu.me.utils.EncryptUtil;
@@ -34,6 +36,10 @@ public class VideoClassController {
 
     @Autowired
     VideoClassService videoClassService;
+    @Autowired
+    VideoService videoService;
+    @Autowired
+    StudentGroupService studentGroupService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     @ResponseBody
@@ -137,6 +143,9 @@ public class VideoClassController {
             for(VideoClass videoClass: videoClassList){
                 Map<String, Object> videoClassMap = ObjectMapTransformUtil.obj2Map(videoClass);
                 AdjustEntityParamsUtil.removeParams(videoClassMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
+                videoClassMap.put("videoTitle", videoService.getVideoTitleById(videoClass.getVideoId()));
+                videoClassMap.put("groupName", studentGroupService.getStudentGroupNameById(videoClass.getGroupId()));
+                videoClassListMap.add(videoClassMap);
             }
             res.put("status", 0);
             res.put("msg", "");

@@ -71,7 +71,7 @@
   export default {
     data() {
       return {
-        url: '/static/UserTable.json',
+        url: '/api/admin/studentGroup/getList',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -120,6 +120,7 @@
       data() {
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
+          self.formmatObjectData(d);
           let is_del = false;
           for (let i = 0; i < self.del_list.length; i++) {
             if (d.studyName === self.del_list[i].studyName) {
@@ -146,12 +147,16 @@
     },
     methods: {
       getData() {
-//                if(process.env.NODE_ENV === 'development'){
-//                    this.url = '/ms/table/list';
-//                };
-//         this.$http.get(this.url, {page: this.cur_page}).then((res) => {
-//           this.tableData = res.data.list;
-//         })
+        const self = this;
+        this.$http.get(this.url).then((response) => {
+          if (response.data.status == 0) {
+            self.allData = response.data.data;
+          } else if (response.data.status > 0) {
+            self.$message.error('获取分组列表失败！' + response.data.msg);
+          } else {
+            self.$message.error('获取分组列表失败！请稍后再试或联系管理员');
+          }
+        })
       },
       search() {
         this.is_search = true;

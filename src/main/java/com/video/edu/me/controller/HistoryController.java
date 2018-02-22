@@ -30,8 +30,8 @@ public class HistoryController {
     private Map<String, Object> count(int userId){
         Map<String, Object> res = new HashMap<>();
         try {
-            Student student = studentService.getStuIdByUserId(userId);
-            int watchTimes = historyService.countWatchTimesByStuId(student.getId());
+//            Student student = studentService.getStuIdByUserId(userId);
+            int watchTimes = 0;//historyService.countWatchTimesByStuId(student.getId());
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", watchTimes);

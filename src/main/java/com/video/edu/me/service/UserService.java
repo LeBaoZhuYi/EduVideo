@@ -28,7 +28,7 @@ public class UserService extends BaseService<User, UserExample> {
 	public List<User> getAllNotDeletedUserList(){
 		UserExample userExample = new UserExample();
 		userExample.createCriteria().andStatusLessThan(UserStatus.REMOVED.getId());
-		userExample.setOrderByClause("DESC ctime");
+		userExample.setOrderByClause("ctime DESC");
 		return userMapper.selectByExample(userExample);
 	}
 }

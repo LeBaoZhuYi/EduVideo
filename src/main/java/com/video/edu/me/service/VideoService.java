@@ -32,7 +32,12 @@ public class VideoService extends BaseService<Video, VideoExample> {
     public List<Video> getAllNotDeletedVideoList(){
         VideoExample videoExample = new VideoExample();
         videoExample.createCriteria().andStatusLessThan(VideoStatus.REMOVED.getId());
-        videoExample.setOrderByClause("DESC ctime");
+        videoExample.setOrderByClause("ctime DESC");
         return videoMapper.selectByExample(videoExample);
+    }
+
+    public String getVideoTitleById(int videoId){
+        Video video = videoMapper.selectByPrimaryKey(videoId);
+        return video.getTitle();
     }
 }

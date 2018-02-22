@@ -139,6 +139,7 @@ public class VideoController {
             for(Video video: videoList){
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
                 AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
+                videoListMap.add(videoMap);
             }
             res.put("status", 0);
             res.put("msg", "");

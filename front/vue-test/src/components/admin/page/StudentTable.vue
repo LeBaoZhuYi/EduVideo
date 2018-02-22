@@ -133,7 +133,7 @@
   export default {
     data() {
       return {
-        url: '/static/UserTable.json',
+        url: '/api/admin/student/getList',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -143,133 +143,7 @@
         select_word: '',
         is_search: false,
         tableData: [],
-        allData: [{
-          id: '1',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333',
-          loginName: 'en'
-        }, {
-          id: '2',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333',
-          loginName: 'en'
-        }, {
-          id: '3',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333',
-          loginName: 'en'
-        }, {
-          id: '4',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333',
-          loginName: 'en'
-        }, {
-          id: '5',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333',
-          loginName: 'en'
-        }, {
-          id: '6',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333'
-        }, {
-          id: '7',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333'
-        }, {
-          id: '8',
-          studyId: '好滋好味鸡蛋仔',
-          studyName: '好滋好味鸡蛋仔',
-          groupName: '',
-          ctime: (new Date()).toDateString(),
-          studyIntro: '好滋好味鸡蛋仔',
-          teacherRemark: '好滋好味鸡蛋仔',
-          parentWords: '好滋好味鸡蛋仔',
-          birthday: '江浙小吃、小吃零食',
-          food: '荷兰优质淡奶，奶香浓而不腻',
-          interest: '上海市普陀区真北路',
-          disagree: '王小虎夫妻店',
-          ideal: '10333',
-          status: '10333'
-        }]
-
+        allData: []
       }
     },
     created() {
@@ -282,6 +156,7 @@
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
           let flag = false;
+          self.formmatObjectData(d);
           if (d.groupName.indexOf(self.select_cate) > -1) {
             Object.values(d).forEach(v => {
               if (v.indexOf(self.select_word) > -1) {
@@ -300,8 +175,15 @@
     },
     methods: {
       getData() {
+        const self = this;
         this.$http.get(this.url).then((response) => {
-          this.allData = response.data.data;
+          if (response.data.status == 0) {
+            self.allData = response.data.data;
+          } else if (response.data.status > 0) {
+            self.$message.error('获取分组列表失败！' + response.data.msg);
+          } else {
+            self.$message.error('获取分组列表失败！请稍后再试或联系管理员');
+          }
         })
       },
       search() {

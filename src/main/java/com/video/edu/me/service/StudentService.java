@@ -35,7 +35,7 @@ public class StudentService extends BaseService<Student, StudentExample> {
 	public List<Student> getAllNotDeletedStudentList(){
 		StudentExample studentExample = new StudentExample();
 		studentExample.createCriteria().andStatusLessThan(StudentStatus.REMOVED.getId());
-		studentExample.setOrderByClause("DESC ctime");
+		studentExample.setOrderByClause("ctime DESC");
 		return studentMapper.selectByExample(studentExample);
 	}
 }

@@ -106,6 +106,7 @@ public class UserController {
             for(User user: userList){
                 Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
                 AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
+                userListMap.add(userMap);
             }
             res.put("status", 0);
             res.put("msg", "");

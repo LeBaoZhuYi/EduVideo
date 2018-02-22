@@ -27,7 +27,12 @@ public class StudentGroupService extends BaseService<StudentGroup, StudentGroupE
 	public List<StudentGroup> getAllNotDeletedStudentGroupList(){
 		StudentGroupExample studentGroupExample = new StudentGroupExample();
 		studentGroupExample.createCriteria().andStatusLessThan(StudentGroupStatus.REMOVED.getId());
-		studentGroupExample.setOrderByClause("DESC ctime");
+		studentGroupExample.setOrderByClause("ctime DESC");
 		return studentGroupMapper.selectByExample(studentGroupExample);
+	}
+
+	public String getStudentGroupNameById(int studentGroupId){
+		StudentGroup studentGroup = studentGroupMapper.selectByPrimaryKey(studentGroupId);
+		return studentGroup.getName();
 	}
 }

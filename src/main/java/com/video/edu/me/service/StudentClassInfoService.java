@@ -28,7 +28,7 @@ public class StudentClassInfoService extends BaseService<StudentClassInfo, Stude
         StudentClassInfoExample studentClassInfoExample = new StudentClassInfoExample();
         studentClassInfoExample.createCriteria().andClassIdEqualTo(classId)
                 .andStudentIdEqualTo(studentId);
-        studentClassInfoExample.setOrderByClause("DESC CTIME");
+        studentClassInfoExample.setOrderByClause("ctime DESC");
         List<StudentClassInfo> studentClassInfoList = studentClassInfoMapper.selectByExample(studentClassInfoExample);
         if (studentClassInfoList.size() == 0) {
             return null;

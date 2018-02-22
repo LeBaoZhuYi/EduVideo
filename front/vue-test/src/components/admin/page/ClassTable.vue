@@ -131,7 +131,7 @@
   export default {
     data() {
       return {
-        url: '/static/UserTable.json',
+        url: '/api/admin/videoClass/getList',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -142,59 +142,10 @@
         del_list: [],
         is_search: false,
         tableData: [],
-        allData: [{
-          id: '1',
-          className: '好滋好味鸡蛋仔',
-          teacherName: '奶香浓而不腻',
-          videoTitle: '1',
-          videoId: '好滋好味鸡蛋仔',
-          groupName: '奶香浓而不腻',
-          groupId: '1',
-          startTime: '好滋好味鸡蛋仔',
-          endTime: '奶香浓而不腻',
-          status: '1',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '2',
-          className: '好滋好味鸡蛋仔',
-          teacherName: '奶香浓而不腻',
-          videoTitle: '1',
-          videoId: '好滋好味鸡蛋仔',
-          groupName: '奶香浓而不腻',
-          groupId: '1',
-          startTime: '好滋好味鸡蛋仔',
-          endTime: '奶香浓而不腻',
-          status: '1',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '3',
-          className: '好滋好味鸡蛋仔',
-          teacherName: '奶香浓而不腻',
-          videoTitle: '1',
-          videoId: '好滋好味鸡蛋仔',
-          groupName: '奶香浓而不腻',
-          groupId: '1',
-          startTime: '好滋好味鸡蛋仔',
-          endTime: '奶香浓而不腻',
-          status: '1',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '4',
-          className: '好滋好味鸡蛋仔',
-          teacherName: '奶香浓而不腻',
-          videoTitle: '1',
-          videoId: '好滋好味鸡蛋仔',
-          groupName: '奶香浓而不腻',
-          groupId: '1',
-          startTime: '好滋好味鸡蛋仔',
-          endTime: '奶香浓而不腻',
-          status: '1',
-          ctime: (new Date()).toDateString()
-        }]
-
+        allData: []
       }
     },
-    created() {
+    mounted() {
       this.getData();
       // this.tableData = this.allData;
       this.handleCurrentChange(1);
@@ -204,8 +155,9 @@
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
           let flag = false;
+          self.formmatObjectData(d);
           Object.values(d).forEach(v => {
-            if (v.indexOf(self.select_word) > -1) {
+            if (String(v).indexOf(self.select_word) > -1) {
               flag = true;
               return;
             }
@@ -220,12 +172,16 @@
     },
     methods: {
       getData() {
-//                if(process.env.NODE_ENV === 'development'){
-//                    this.url = '/ms/table/list';
-//                };
-//         this.$http.get(this.url, {page: this.cur_page}).then((res) => {
-//           this.tableData = res.data.list;
-//         })
+        const self = this;
+        this.$http.get(this.url).then((response) => {
+          if (response.data.status == 0) {
+            self.allData = response.data.data;
+          } else if (response.data.status > 0) {
+            self.$message.error('获取分组列表失败！' + response.data.msg);
+          } else {
+            self.$message.error('获取分组列表失败！请稍后再试或联系管理员');
+          }
+        })
       },
       search() {
         this.is_search = true;

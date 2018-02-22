@@ -44,7 +44,7 @@ public class VideoClassController {
             res.put("msg", "");
             res.put("data", videoClassMapList);
         } catch (Exception e) {
-            logger.error("get videoList error with userId: {}, exception: {}", userId, e.getMessage());
+            logger.error("get videoClassList error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

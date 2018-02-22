@@ -69,7 +69,7 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
     public List<VideoClass> getAllNotDeletedVideoClassList(){
         VideoClassExample videoClassExample = new VideoClassExample();
         videoClassExample.createCriteria().andStatusLessThan(VideoClassStatus.REMOVED.getId());
-        videoClassExample.setOrderByClause("DESC ctime");
+        videoClassExample.setOrderByClause("ctime DESC");
         return videoClassMapper.selectByExample(videoClassExample);
     }
 }
