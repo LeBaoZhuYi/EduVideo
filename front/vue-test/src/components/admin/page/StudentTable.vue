@@ -8,8 +8,8 @@
     </div>
     <div class="handle-box">
       <el-select v-model="select_cate" placeholder="筛选分组" class="handle-select mr10">
-        <el-option key="1" label="选项一" value="选项一"></el-option>
-        <el-option key="2" label="选项二" value="选项二"></el-option>
+        <el-option v-for="group in groupList" :label="group.groupName" :value="group.groupName"
+                   :key="group.groupId"></el-option>
       </el-select>
       <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
@@ -76,7 +76,7 @@
         </el-table-column>
         <el-table-column prop="studyName" label="学生姓名" width="120">
         </el-table-column>
-        <el-table-column prop="studyGroup" label="学生分组">
+        <el-table-column prop="groupName" label="学生分组">
         </el-table-column>
         <el-table-column prop="ctime" label="创建时间">
         </el-table-column>
@@ -143,7 +143,8 @@
         select_word: '',
         is_search: false,
         tableData: [],
-        allData: []
+        allData: [],
+        groupList: []
       }
     },
     created() {
@@ -179,6 +180,17 @@
         this.$http.get(this.url).then((response) => {
           if (response.data.status == 0) {
             self.allData = response.data.data;
+            let groupMap = new Map();
+            self.allData.forEach(function (value, key, arr) {
+              if (!groupMap.has(value.groupId)) {
+                groupMap.set(value.groupId,
+                  {
+                    groupId: value.groupId,
+                    groupName: value.groupName
+                  })
+              }
+            });
+            self.groupList = Array.from(groupMap.values());
           } else if (response.data.status > 0) {
             self.$message.error('获取分组列表失败！' + response.data.msg);
           } else {

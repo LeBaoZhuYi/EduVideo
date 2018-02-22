@@ -3,6 +3,7 @@ package com.video.edu.me.controller.admin;
 import com.video.edu.me.entity.Student;
 import com.video.edu.me.entity.StudentExample;
 import com.video.edu.me.entity.User;
+import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.StudentService;
 import com.video.edu.me.service.UserService;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
@@ -27,6 +28,8 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    StudentGroupService studentGroupService;
     @Autowired
     UserService userService;
 
@@ -107,7 +110,10 @@ public class StudentController {
             List<Student> studentList = studentService.getAllNotDeletedStudentList();
             List<Map<String, Object>> studentListMap = new ArrayList<>();
             for(Student student: studentList){
-                studentListMap.add(ObjectMapTransformUtil.obj2Map(student));
+                Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
+                studentMap.put("groupName", studentGroupService.getStudentGroupNameById(student.getGroupId()));
+                studentMap.put("loginName", userService.getLoginNameById(student.getGroupId()));
+                studentListMap.add(studentMap);
             }
             res.put("status", 0);
             res.put("msg", "");

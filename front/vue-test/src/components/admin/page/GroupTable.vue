@@ -16,7 +16,7 @@
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="id" label="分组编号" sortable width="150">
         </el-table-column>
-        <el-table-column prop="date" label="分组名" sortable width="150">
+        <el-table-column prop="name" label="分组名" sortable width="150">
         </el-table-column>
         <el-table-column prop="remark" label="描述" width="120">
         </el-table-column>
@@ -83,32 +83,7 @@
         del_list: [],
         is_search: false,
         tableData: [],
-        allData: [{
-          id: '1',
-          name: '好滋好味鸡蛋仔',
-          remark: '好滋好味鸡蛋仔',
-          status: '',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '2',
-          name: '好滋好味鸡蛋仔',
-          remark: '好滋好味鸡蛋仔',
-          status: '',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '3',
-          name: '好滋好味鸡蛋仔',
-          remark: '好滋好味鸡蛋仔',
-          status: '',
-          ctime: (new Date()).toDateString()
-        }, {
-          id: '4',
-          name: '好滋好味鸡蛋仔',
-          remark: '好滋好味鸡蛋仔',
-          status: '',
-          ctime: (new Date()).toDateString()
-        }]
-
+        allData: []
       }
     },
     created() {

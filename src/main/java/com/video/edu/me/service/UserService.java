@@ -31,4 +31,8 @@ public class UserService extends BaseService<User, UserExample> {
 		userExample.setOrderByClause("ctime DESC");
 		return userMapper.selectByExample(userExample);
 	}
+	public String getLoginNameById(int userId){
+		User user = userMapper.selectByPrimaryKey(userId);
+		return user.getLoginName();
+	}
 }
