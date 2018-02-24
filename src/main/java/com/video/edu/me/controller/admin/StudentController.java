@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -33,12 +34,12 @@ public class StudentController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> create(Student student) {
+    private Map<String, Object> create(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = studentService.insertSelective(student);
+            int insertResult = 0;
             if (insertResult == 0) {
                 res.put("status", 1);
                 res.put("msg", "未成功插入数据");
@@ -56,7 +57,7 @@ public class StudentController {
         return res;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
@@ -79,7 +80,7 @@ public class StudentController {
         return res;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> update(Student student) {
         Map<String, Object> res = new HashMap<>();

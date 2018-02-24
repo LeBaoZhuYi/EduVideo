@@ -21,6 +21,8 @@ public class Student {
 
     private Date utime;
 
+    private Byte sex;
+
     private String studyIntro;
 
     private String teacherRemark;
@@ -111,6 +113,14 @@ public class Student {
 
     public void setUtime(Date utime) {
         this.utime = utime;
+    }
+
+    public Byte getSex() {
+        return sex;
+    }
+
+    public void setSex(Byte sex) {
+        this.sex = sex;
     }
 
     public String getStudyIntro() {

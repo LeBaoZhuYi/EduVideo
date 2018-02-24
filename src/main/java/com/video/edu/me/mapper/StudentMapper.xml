@@ -11,6 +11,7 @@
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
     <result column="utime" jdbcType="TIMESTAMP" property="utime" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
     <result column="study_intro" jdbcType="VARCHAR" property="studyIntro" />
     <result column="teacher_remark" jdbcType="VARCHAR" property="teacherRemark" />
     <result column="parent_words" jdbcType="VARCHAR" property="parentWords" />
@@ -81,8 +82,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, group_id, group_name, study_id, study_name, status, ctime, utime, study_intro, 
-    teacher_remark, parent_words, phone, birthday, food, interest, disagree, ideal, img_urls
+    id, user_id, group_id, group_name, study_id, study_name, status, ctime, utime, sex, 
+    study_intro, teacher_remark, parent_words, phone, birthday, food, interest, disagree, 
+    ideal, img_urls
   </sql>
   <select id="selectByExample" parameterType="com.video.edu.me.entity.StudentExample" resultMap="BaseResultMap">
     select
@@ -118,17 +120,17 @@
     insert into student (id, user_id, group_id, 
       group_name, study_id, study_name, 
       status, ctime, utime, 
-      study_intro, teacher_remark, parent_words, 
-      phone, birthday, food, 
-      interest, disagree, ideal, 
-      img_urls)
+      sex, study_intro, teacher_remark, 
+      parent_words, phone, birthday, 
+      food, interest, disagree, 
+      ideal, img_urls)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
       #{groupName,jdbcType=VARCHAR}, #{studyId,jdbcType=VARCHAR}, #{studyName,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}, 
-      #{studyIntro,jdbcType=VARCHAR}, #{teacherRemark,jdbcType=VARCHAR}, #{parentWords,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{food,jdbcType=VARCHAR}, 
-      #{interest,jdbcType=VARCHAR}, #{disagree,jdbcType=VARCHAR}, #{ideal,jdbcType=VARCHAR}, 
-      #{imgUrls,jdbcType=VARCHAR})
+      #{sex,jdbcType=TINYINT}, #{studyIntro,jdbcType=VARCHAR}, #{teacherRemark,jdbcType=VARCHAR}, 
+      #{parentWords,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{food,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, #{disagree,jdbcType=VARCHAR}, 
+      #{ideal,jdbcType=VARCHAR}, #{imgUrls,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.video.edu.me.entity.Student">
     insert into student
@@ -159,6 +161,9 @@
       </if>
       <if test="utime != null">
         utime,
+      </if>
+      <if test="sex != null">
+        sex,
       </if>
       <if test="studyIntro != null">
         study_intro,
@@ -218,6 +223,9 @@
       </if>
       <if test="utime != null">
         #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
       </if>
       <if test="studyIntro != null">
         #{studyIntro,jdbcType=VARCHAR},
@@ -287,6 +295,9 @@
       <if test="record.utime != null">
         utime = #{record.utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
       <if test="record.studyIntro != null">
         study_intro = #{record.studyIntro,jdbcType=VARCHAR},
       </if>
@@ -333,6 +344,7 @@
       status = #{record.status,jdbcType=TINYINT},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
       utime = #{record.utime,jdbcType=TIMESTAMP},
+      sex = #{record.sex,jdbcType=TINYINT},
       study_intro = #{record.studyIntro,jdbcType=VARCHAR},
       teacher_remark = #{record.teacherRemark,jdbcType=VARCHAR},
       parent_words = #{record.parentWords,jdbcType=VARCHAR},
@@ -373,6 +385,9 @@
       </if>
       <if test="utime != null">
         utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
       </if>
       <if test="studyIntro != null">
         study_intro = #{studyIntro,jdbcType=VARCHAR},
@@ -417,6 +432,7 @@
       status = #{status,jdbcType=TINYINT},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       utime = #{utime,jdbcType=TIMESTAMP},
+      sex = #{sex,jdbcType=TINYINT},
       study_intro = #{studyIntro,jdbcType=VARCHAR},
       teacher_remark = #{teacherRemark,jdbcType=VARCHAR},
       parent_words = #{parentWords,jdbcType=VARCHAR},

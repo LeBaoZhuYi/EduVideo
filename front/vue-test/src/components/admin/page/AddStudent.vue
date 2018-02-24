@@ -7,7 +7,7 @@
       </el-breadcrumb>
     </div>
     <div class="form-box">
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="form"  :rules="rules" label-width="80px">
         <el-form-item label="登录名">
           <el-input v-model="form.loginName"></el-input>
         </el-form-item>
@@ -15,7 +15,10 @@
           <el-input v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item label="学生姓名">
-          <el-input v-model="form.stuName"></el-input>
+          <el-input v-model="form.studyName"></el-input>
+        </el-form-item>
+        <el-form-item label="学生学号">
+          <el-input v-model="form.studyId"></el-input>
         </el-form-item>
         <el-form-item label="电话">
           <el-input v-model="form.phone"></el-input>
@@ -27,12 +30,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="学生分组">
-          <el-select v-model="form.groupList" placeholder="请选择">
-            <el-option key="bbk" label="步步高" value="bbk"></el-option>
+          <el-select v-model="form.groupId" placeholder="请选择">
+            <el-option v-for="group in groupList" :label="group.name" :value="group.id"
+                                                                         :key="group.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">提交</el-button>
+          <el-button type="primary" @click="create()">提交</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -41,29 +45,59 @@
 </template>
 
 <script>
+  import qs from 'qs';
   export default {
     data: function () {
       return {
         form: {
           loginName: "",
           password: "",
-          stuName: "",
+          studyName: "",
+          studyId: "",
           phone: "",
           sex: "",
-          url: ""
-        }
+          groupId: ""
+        },
+        rules:{
+          loginName: {required: true, message: '请输入登录名', trigger: 'blur'},
+          password: {required: true, message: '请输入密码', trigger: 'blur'},
+          studyName: {required: true, message: '请输入学生姓名', trigger: 'blur'},
+          studyId: {required: true, message: '请输入学号', trigger: 'blur'},
+          phone: {required: true, message: '请输入电话', trigger: 'blur'},
+          sex: {required: true, message: '请选择性别', trigger: 'blur'},
+          groupId: {required: true, message: '请选择分组', trigger: 'blur'},
+        },
+        groupList: [],
+        creaetUrl: '/api/admin/student/create',
+        getGroupListUrl: '/api/admin/studentGroup/getList',
       }
     },
+    mounted: function() {
+      this.getGroupList();
+    },
     methods: {
-      onSubmit() {
-        this.$http.post(this.url, this.form).then((response) => {
+      getGroupList() {
+        const self = this;
+        self.$http.get(self.getGroupListUrl).then((response) => {
           if(response.data.status == 0){
-            this.$message.success("提交成功");
-            window.location.href = "/admin/user-table";
+            self.groupList = response.data.data;
           } else if(response.data.status > 0){
-            this.$message.warning("提交失败！" + response.data.msg);
+            self.$message.warning("获取学生分组失败！" + response.data.msg);
           } else{
-            this.$message.error("提交失败！请稍后重试或咨询管理员");
+            self.$message.error("获取学生分组失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      create() {
+        let postData = qs.stringify(this.form)
+        this.$http.post(this.creaetUrl, postData).then((response) => {
+          if(response.data.status == 0){
+            this.$message.success("添加成功");
+            window.location.href = "/admin/student-table";
+          } else if(response.data.status > 0){
+            this.$message.warning("添加失败！" + response.data.msg);
+          } else{
+            this.$message.error("添加失败！请稍后重试或咨询管理员");
           }
         });
       }
