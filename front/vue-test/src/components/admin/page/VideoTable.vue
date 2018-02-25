@@ -7,10 +7,6 @@
       </el-breadcrumb>
     </div>
     <div class="handle-box">
-      <el-select v-model="select_cate" placeholder="筛选分组" class="handle-select mr10">
-        <el-option key="1" label="选项一" value="选项一"></el-option>
-        <el-option key="2" label="选项二" value="选项二"></el-option>
-      </el-select>
       <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
     </div>
@@ -49,9 +45,12 @@
         <el-table-column prop="ctime" label="创建时间">
         </el-table-column>
         <el-table-column label="操作" width="180">
-          <template scope="scope">
-            <el-button size="small"
-                       @click="handleEdit(scope.$index, scope.row)">编辑
+          <template slot-scope="props">
+            <el-button v-if="props.row.status == '上传失败'" size="small" type="warning"
+                       @click="restartUpload(props.$index, props.row)">重新上传
+            </el-button>
+            <el-button v-if="props.row.status == '正常' || props.row.status == '停用'" size="small"
+                       @click="handleEdit(props.$index, props.row)">编辑
             </el-button>
             <el-button size="small" type="danger"
                        @click="handleDelete(scope.$index, scope.row)">删除
@@ -78,13 +77,16 @@
           <el-form-item label="视频简介" label-width="100px">
             <el-input type="textarea" v-model="selectTable.comment"></el-input>
           </el-form-item>
-          <el-form-item label="状态" label-width="100px">
-            <el-input v-model="selectTable.status"></el-input>
+          <el-form-item label="状态">
+            <el-radio-group v-model="selectTable.status">
+              <el-radio label="正常"></el-radio>
+              <el-radio label="停用"></el-radio>
+            </el-radio-group>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="">确 定</el-button>
+          <el-button type="primary" @click="update()">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -92,10 +94,14 @@
 </template>
 
 <script>
+  import qs from 'qs'
   export default {
     data() {
       return {
-        url: '/api/admin/video/getList',
+        tableUrl: '/api/admin/video/getList',
+        updateUrl: '/api/admin/video/update',
+        deleteUrl: '/api/admin/video/delete',
+        restartUploadUrl: '/api/admin/video/restartUpload',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -110,7 +116,7 @@
 
       }
     },
-    created() {
+    mounted() {
       this.getData();
       // this.tableData = this.allData;
       this.handleCurrentChange(1);
@@ -138,7 +144,7 @@
     methods: {
       getData() {
         const self = this;
-        this.$http.get(this.url).then((response) => {
+        this.$http.get(this.tableUrl).then((response) => {
           if (response.data.status == 0) {
             self.allData = response.data.data;
           } else if (response.data.status > 0) {
@@ -156,7 +162,14 @@
         this.selectTable = row;
       },
       handleDelete(index, row) {
-        this.$message.error('删除第' + (index + 1) + '行');
+        this.$confirm('此操作将删除该记录, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.delete(row.id);
+        }).catch(() => {
+        });
       },
       handleCurrentChange(val) {
         this.currentPage = val;
@@ -168,6 +181,59 @@
         let page = this.currentPage;
         let pageSize = this.pageSize;
         return allData.slice(pageSize * (page - 1), pageSize * page);
+      },
+      update() {
+        let postData = qs.stringify(this.selectTable);
+        this.$http.post(this.updateUrl, postData).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('更新成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/video-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("更新失败！" + response.data.msg);
+          } else {
+            this.$message.error("更新失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      delete(id) {
+        let params = new URLSearchParams();
+        params.append("id", id);
+        this.$http.post(this.deleteUrl, params).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('删除成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/video-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("删除失败！" + response.data.msg);
+          } else {
+            this.$message.error("删除失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      restartUpload(index, row){
+        let params = new URLSearchParams();
+        params.append("id", row.id);
+        this.$http.post(this.restartUploadUrl, params).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('重启成功，请稍等后刷新', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/video-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("重启失败！" + response.data.msg);
+          } else {
+            this.$message.error("重启失败！请稍后重试或咨询管理员");
+          }
+        });
       }
     }
   }

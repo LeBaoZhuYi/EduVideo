@@ -1,9 +1,11 @@
 package com.video.edu.me.controller.admin;
 
 
+import com.video.edu.me.enumeration.VideoStatus;
 import com.video.edu.me.service.UploadService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -70,35 +72,7 @@ public class VideoController {
         return res;
     }
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    @ResponseBody
-    private Map<String, Object> find(int id) {
-        Map<String, Object> res = new HashMap<>();
-        try {
-            Video findResult = videoService.selectByPrimaryKey(id);
-            if (findResult == null) {
-                res.put("status", 1);
-                res.put("msg", "查找视频失败");
-            } else {
-                res.put("status", 0);
-                res.put("msg", "成功");
-            }
-            res.put("data", findResult);
-        } catch (RuntimeException re) {
-            logger.error("update videoClass error with runtimException: {}", re.getMessage());
-            res.put("status", 100);
-            res.put("msg", re.getMessage());
-            res.put("data", null);
-        } catch (Exception e) {
-            logger.error("find error with exception: {}", e.getMessage());
-            res.put("status", -1);
-            res.put("msg", e.getMessage());
-            res.put("data", null);
-        }
-        return res;
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
@@ -126,20 +100,31 @@ public class VideoController {
         return res;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> update(Video video) {
+    private Map<String, Object> update(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = videoService.updateByPrimaryKey(video);
-            if (updateResult == 0) {
+            Video video = videoService.selectByPrimaryKey(Integer.parseInt(params.get("id")));
+            if (video == null) {
                 res.put("status", 1);
-                res.put("msg", "更新视频失败");
+                res.put("msg", "未找到该视频");
+                res.put("data", null);
             } else {
-                res.put("status", 0);
-                res.put("msg", "更新成功");
+                if (params.get("title") != null) video.setTitle(params.get("title"));
+                if (params.get("comment") != null) video.setComment(params.get("comment"));
+                if (params.get("status") != null) video.setStatus(VideoStatus.getByDesc(params.get("status")).getId());
+                boolean success = (1 == videoService.updateByPrimaryKeySelective(video));
+                if (!success) {
+                    res.put("status", 1);
+                    res.put("msg", "未找到视频");
+                    res.put("data", null);
+                } else {
+                    res.put("status", 0);
+                    res.put("msg", "更新成功");
+                    res.put("data", null);
+                }
             }
-            res.put("data", updateResult);
         } catch (RuntimeException re) {
             logger.error("update videoClass error with runtimException: {}", re.getMessage());
             res.put("status", 100);
@@ -147,6 +132,37 @@ public class VideoController {
             res.put("data", null);
         } catch (Exception e) {
             logger.error("update error with exception: {}", e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
+    }
+
+    @RequestMapping(value = "/restartUpload", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> restartUpload(int id) {
+        Map<String, Object> res = new HashMap<>();
+        try {
+            Video video = videoService.selectByPrimaryKey(id);
+            if (video == null){
+                res.put("status", 1);
+                res.put("msg", "未找到视频");
+                res.put("data", null);
+            } else {
+                Thread uploadThread = new Thread(new UploadService(video.getId()));
+                uploadThread.start();
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", null);
+            }
+        } catch (RuntimeException re) {
+            logger.error("update video error with runtimeException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
+        } catch (Exception e) {
+            logger.error("update video error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -164,6 +180,7 @@ public class VideoController {
             for (Video video : videoList) {
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
                 AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
+                videoMap.put("status", VideoStatus.getById(video.getStatus()).getDesc());
                 videoListMap.add(videoMap);
             }
             res.put("status", 0);
