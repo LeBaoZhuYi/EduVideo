@@ -77,22 +77,25 @@ public class VideoController {
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = videoService.deleteByPrimaryKey(id);
-            if (deleteResult == 0) {
+            Video video = new Video();
+            video.setId(id);
+            video.setStatus(VideoStatus.REMOVED.getId());
+            int deleteResult = videoService.updateByPrimaryKeySelective(video);
+            if (deleteResult <= 0) {
                 res.put("status", 1);
-                res.put("msg", "删除视频出错");
+                res.put("msg", "未找到该视频");
             } else {
                 res.put("status", 0);
-                res.put("msg", "删除成功");
+                res.put("msg", "");
             }
             res.put("data", deleteResult);
         } catch (RuntimeException re) {
-            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            logger.error("update video error with runtimException: {}", re.getMessage());
             res.put("status", 100);
             res.put("msg", re.getMessage());
             res.put("data", null);
         } catch (Exception e) {
-            logger.error("delete error with exception: {}", e.getMessage());
+            logger.error("delete video error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -152,6 +155,8 @@ public class VideoController {
             } else {
                 Thread uploadThread = new Thread(new UploadService(video.getId()));
                 uploadThread.start();
+                video.setStatus(VideoStatus.UPLOADING.getId());
+                videoService.updateByPrimaryKeySelective(video);
                 res.put("status", 0);
                 res.put("msg", "");
                 res.put("data", null);
