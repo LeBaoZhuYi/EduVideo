@@ -35,4 +35,8 @@ public class UserService extends BaseService<User, UserExample> {
 		User user = userMapper.selectByPrimaryKey(userId);
 		return user.getLoginName();
 	}
+
+	public boolean create(User user){
+		return 1 == userMapper.insertSelective(user);
+	}
 }

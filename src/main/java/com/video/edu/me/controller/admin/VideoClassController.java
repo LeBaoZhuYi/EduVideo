@@ -41,20 +41,21 @@ public class VideoClassController {
     @Autowired
     StudentGroupService studentGroupService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> create(VideoClass videoClass) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = videoClassService.insertSelective(videoClass);
-            if (insertResult == 0) {
+            boolean success = videoClassService.create(videoClass);
+            if (!success) {
                 res.put("status", 1);
-                res.put("msg", "未成功插入视频");
+                res.put("msg", "添加出错");
+                res.put("data", null);
             } else {
                 res.put("status", 0);
-                res.put("msg", "成功啦！");
+                res.put("msg", "");
+                res.put("data", 1);
             }
-            res.put("data", insertResult);
         } catch (Exception e) {
             logger.error("create error with exception: {}", e.getMessage());
             res.put("status", -1);

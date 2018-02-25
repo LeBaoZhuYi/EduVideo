@@ -56,6 +56,7 @@
 </template>
 
 <script>
+  import qs from 'qs';
   export default {
     data: function () {
       return {
@@ -109,8 +110,13 @@
         let postData = qs.stringify(this.form)
         this.$http.post(this.createUrl, postData).then((response) => {
           if(response.data.status == 0){
-            this.$message.success("添加成功");
-            window.location.href = "/admin/student-table";
+            self.$confirm('添加成功，是否跳转到列表', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '留在此处',
+              type: 'warning'
+            }).then(() => {
+              window.location.href = "/admin/class-table";
+            });
           } else if(response.data.status > 0){
             this.$message.error("添加失败！" + response.data.msg);
           } else{

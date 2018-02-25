@@ -28,22 +28,23 @@ public class StudentGroupController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> create(StudentGroup studentGroup) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = studentGroupService.insertSelective(studentGroup);
-            if (insertResult == 0) {
+            boolean success = studentGroupService.create(studentGroup);
+            if (!success) {
                 res.put("status", 1);
-                res.put("msg", "未成功插入数据");
+                res.put("msg", "添加分组出错");
+                res.put("data", null);
             } else {
                 res.put("status", 0);
-                res.put("msg", "成功啦！");
+                res.put("msg", "");
+                res.put("data", 1);
             }
-            res.put("data", insertResult);
         } catch (Exception e) {
-            logger.error("create error with exception: {}", e.getMessage());
+            logger.error("create studentGroup error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

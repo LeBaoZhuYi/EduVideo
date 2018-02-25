@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> create(User user) {
         Map<String, Object> res = new HashMap<>();

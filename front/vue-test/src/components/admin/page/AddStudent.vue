@@ -7,7 +7,7 @@
       </el-breadcrumb>
     </div>
     <div class="form-box">
-      <el-form ref="form" :model="form"  :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="登录名">
           <el-input v-model="form.loginName"></el-input>
         </el-form-item>
@@ -46,6 +46,7 @@
 
 <script>
   import qs from 'qs';
+  import crypto from 'crypto';
   export default {
     data: function () {
       return {
@@ -80,15 +81,24 @@
         });
       },
       create() {
-        let postData = qs.stringify(this.form)
-        this.$http.post(this.createUrl, postData).then((response) => {
+        const self = this;
+        let originPassword = self.form.password;
+        self.form.password = crypto.createHash("md5").update(self.form.password).digest("hex");
+        let postData = qs.stringify(self.form);
+        self.$http.post(self.createUrl, postData).then((response) => {
+          self.form.password = originPassword;
           if(response.data.status == 0){
-            this.$message.success("添加成功");
-            window.location.href = "/admin/student-table";
+            self.$confirm('添加成功，是否跳转到列表', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '留在此处',
+              type: 'warning'
+            }).then(() => {
+              window.location.href = "/admin/student-table";
+            });
           } else if(response.data.status > 0){
-            this.$message.error("添加失败！" + response.data.msg);
+            self.$message.error("添加失败！" + response.data.msg);
           } else{
-            this.$message.error("添加失败！请稍后重试或咨询管理员");
+            self.$message.error("添加失败！请稍后重试或咨询管理员");
           }
         });
       }

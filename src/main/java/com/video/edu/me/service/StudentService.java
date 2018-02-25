@@ -38,4 +38,8 @@ public class StudentService extends BaseService<Student, StudentExample> {
 		studentExample.setOrderByClause("ctime DESC");
 		return studentMapper.selectByExample(studentExample);
 	}
+
+	public boolean create(Student student){
+		return 1 == studentMapper.insertSelective(student);
+	}
 }

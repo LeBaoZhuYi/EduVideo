@@ -35,4 +35,8 @@ public class StudentGroupService extends BaseService<StudentGroup, StudentGroupE
 		StudentGroup studentGroup = studentGroupMapper.selectByPrimaryKey(studentGroupId);
 		return studentGroup.getName();
 	}
+
+	public boolean create(StudentGroup studentGroup){
+		return 1 == studentGroupMapper.insertSelective(studentGroup);
+	}
 }

@@ -72,4 +72,8 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
         videoClassExample.setOrderByClause("ctime DESC");
         return videoClassMapper.selectByExample(videoClassExample);
     }
+
+    public boolean create(VideoClass videoClass){
+        return 1 == videoClassMapper.insertSelective(videoClass);
+    }
 }

@@ -3,6 +3,8 @@ package com.video.edu.me.controller.admin;
 import com.video.edu.me.entity.Student;
 import com.video.edu.me.entity.StudentExample;
 import com.video.edu.me.entity.User;
+import com.video.edu.me.enumeration.RoleType;
+import com.video.edu.me.enumeration.SexType;
 import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.StudentService;
 import com.video.edu.me.service.UserService;
@@ -39,17 +41,36 @@ public class StudentController {
     private Map<String, Object> create(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = 0;
-            if (insertResult == 0) {
+            User newUser = new User();
+            newUser.setLoginName(params.get("loginName"));
+            newUser.setPassword(params.get("password"));
+            newUser.setRoleId(RoleType.USER.getId());
+            Student newStudent = new Student();
+            newStudent.setStudyName(params.get("studyName"));
+            newStudent.setStudyId(params.get("studyId"));
+            newStudent.setPhone(params.get("phone"));
+            newStudent.setSex(SexType.getByDesc(params.get("sex")).getId());
+            newStudent.setGroupId(Integer.parseInt(params.get("groupId")));
+            boolean success = userService.create(newUser);
+            if (!success){
                 res.put("status", 1);
-                res.put("msg", "未成功插入数据");
-            } else {
-                res.put("status", 0);
-                res.put("msg", "成功啦！");
+                res.put("msg", "添加用户出错");
+                res.put("data", null);
+            } else{
+                newStudent.setUserId(newUser.getId());
+                success = success && studentService.create(newStudent);
+                if (!success){
+                    res.put("status", 2);
+                    res.put("msg", "添加学生出错");
+                    res.put("data", null);
+                } else{
+                    res.put("status", 0);
+                    res.put("msg", "");
+                    res.put("data", 1);
+                }
             }
-            res.put("data", insertResult);
         } catch (Exception e) {
-            logger.error("create error with exception: {}", e.getMessage());
+            logger.error("create student error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -113,7 +134,7 @@ public class StudentController {
             for(Student student: studentList){
                 Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
                 studentMap.put("groupName", studentGroupService.getStudentGroupNameById(student.getGroupId()));
-                studentMap.put("loginName", userService.getLoginNameById(student.getGroupId()));
+                studentMap.put("loginName", userService.getLoginNameById(student.getUserId()));
                 studentListMap.add(studentMap);
             }
             res.put("status", 0);

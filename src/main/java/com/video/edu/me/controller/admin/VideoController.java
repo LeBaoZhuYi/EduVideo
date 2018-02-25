@@ -37,7 +37,7 @@ public class VideoController {
     @Autowired
     VideoService videoService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> create(Video video) {
         Map<String, Object> res = new HashMap<>();

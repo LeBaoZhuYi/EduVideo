@@ -102,7 +102,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.video.edu.me.entity.User" >
+  <insert id="insert"  keyProperty="id" parameterType="com.video.edu.me.entity.User" >
     insert into user (id, login_name, password, 
       last_login_time, role_id, status, 
       ctime, utime)
@@ -110,7 +110,7 @@
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
       #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.video.edu.me.entity.User" >
+  <insert id="insertSelective" keyProperty="id" parameterType="com.video.edu.me.entity.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

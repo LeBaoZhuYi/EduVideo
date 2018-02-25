@@ -40,4 +40,7 @@ public class VideoService extends BaseService<Video, VideoExample> {
         Video video = videoMapper.selectByPrimaryKey(videoId);
         return video.getTitle();
     }
+    public boolean create(Video video){
+        return 1 == videoMapper.insertSelective(video);
+    }
 }
