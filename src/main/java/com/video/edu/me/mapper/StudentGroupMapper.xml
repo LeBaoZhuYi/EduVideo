@@ -1,35 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.video.edu.me.dao.StudentGroupMapper" >
-  <resultMap id="BaseResultMap" type="com.video.edu.me.entity.StudentGroup" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
-    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.video.edu.me.dao.StudentGroupMapper">
+  <resultMap id="BaseResultMap" type="com.video.edu.me.entity.StudentGroup">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="utime" jdbcType="TIMESTAMP" property="utime" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.video.edu.me.entity.StudentGroup" extends="BaseResultMap" >
-    <result column="student_id_list" property="studentIdList" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +38,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,202 +67,162 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
-    id, status, ctime, utime, name
+  <sql id="Base_Column_List">
+    id, status, ctime, utime, name, remark
   </sql>
-  <sql id="Blob_Column_List" >
-    student_id_list
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.video.edu.me.entity.StudentGroupExample" >
+  <select id="selectByExample" parameterType="com.video.edu.me.entity.StudentGroupExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from student_group
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.StudentGroupExample" >
-    select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from student_group
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from student_group
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student_group
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.video.edu.me.entity.StudentGroupExample" >
+  <delete id="deleteByExample" parameterType="com.video.edu.me.entity.StudentGroupExample">
     delete from student_group
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.video.edu.me.entity.StudentGroup" >
+  <insert id="insert" parameterType="com.video.edu.me.entity.StudentGroup">
     insert into student_group (id, status, ctime, 
-      utime, name, student_id_list
+      utime, name, remark
       )
     values (#{id,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, 
-      #{utime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{studentIdList,jdbcType=LONGVARCHAR}
+      #{utime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.video.edu.me.entity.StudentGroup" >
+  <insert id="insertSelective" parameterType="com.video.edu.me.entity.StudentGroup">
     insert into student_group
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="ctime != null" >
+      <if test="ctime != null">
         ctime,
       </if>
-      <if test="utime != null" >
+      <if test="utime != null">
         utime,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="studentIdList != null" >
-        student_id_list,
+      <if test="remark != null">
+        remark,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="ctime != null" >
+      <if test="ctime != null">
         #{ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="utime != null" >
+      <if test="utime != null">
         #{utime,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="studentIdList != null" >
-        #{studentIdList,jdbcType=LONGVARCHAR},
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.video.edu.me.entity.StudentGroupExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.video.edu.me.entity.StudentGroupExample" resultType="java.lang.Integer">
     select count(*) from student_group
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update student_group
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.status != null" >
+      <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
       </if>
-      <if test="record.ctime != null" >
+      <if test="record.ctime != null">
         ctime = #{record.ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.utime != null" >
+      <if test="record.utime != null">
         utime = #{record.utime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.name != null" >
+      <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.studentIdList != null" >
-        student_id_list = #{record.studentIdList,jdbcType=LONGVARCHAR},
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update student_group
     set id = #{record.id,jdbcType=INTEGER},
       status = #{record.status,jdbcType=TINYINT},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
       utime = #{record.utime,jdbcType=TIMESTAMP},
       name = #{record.name,jdbcType=VARCHAR},
-      student_id_list = #{record.studentIdList,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null" >
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.video.edu.me.entity.StudentGroup">
     update student_group
-    set id = #{record.id,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=TINYINT},
-      ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      utime = #{record.utime,jdbcType=TIMESTAMP},
-      name = #{record.name,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.video.edu.me.entity.StudentGroup" >
-    update student_group
-    <set >
-      <if test="status != null" >
+    <set>
+      <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="ctime != null" >
+      <if test="ctime != null">
         ctime = #{ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="utime != null" >
+      <if test="utime != null">
         utime = #{utime,jdbcType=TIMESTAMP},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="studentIdList != null" >
-        student_id_list = #{studentIdList,jdbcType=LONGVARCHAR},
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.video.edu.me.entity.StudentGroup" >
+  <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.StudentGroup">
     update student_group
     set status = #{status,jdbcType=TINYINT},
       ctime = #{ctime,jdbcType=TIMESTAMP},
       utime = #{utime,jdbcType=TIMESTAMP},
       name = #{name,jdbcType=VARCHAR},
-      student_id_list = #{studentIdList,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.StudentGroup" >
-    update student_group
-    set status = #{status,jdbcType=TINYINT},
-      ctime = #{ctime,jdbcType=TIMESTAMP},
-      utime = #{utime,jdbcType=TIMESTAMP},
-      name = #{name,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

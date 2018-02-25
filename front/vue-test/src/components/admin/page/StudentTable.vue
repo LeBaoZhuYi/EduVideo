@@ -49,9 +49,6 @@
               <el-form-item label="生日">
                 <span>{{ props.row.birthday }}</span>
               </el-form-item>
-              <el-form-item label="爱吃食物">
-                <span>{{ props.row.food }}</span>
-              </el-form-item>
               <el-form-item label="爱好">
                 <span>{{ props.row.interest }}</span>
               </el-form-item>
@@ -64,7 +61,7 @@
               <el-form-item label="登录账号">
                 <span>{{ props.row.loginName }}</span>
               </el-form-item>
-              <el-form-item label="学生状态">
+              <el-form-item label="用户状态">
                 <span>{{ props.row.status }}</span>
               </el-form-item>
             </el-form>
@@ -117,12 +114,25 @@
             <el-input v-model="selectTable.studyId"></el-input>
           </el-form-item>
           <el-form-item label="登录账号" label-width="100px">
-            <el-input v-model="selectTable.loginName"></el-input>
+            <el-input v-model="selectTable.loginName">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="状态">
+            <el-radio-group v-model="selectTable.status">
+              <el-radio label="正常"></el-radio>
+              <el-radio label="停用"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="学生分组">
+            <el-select v-model="selectTable.groupId" placeholder="请选择">
+              <el-option v-for="group in groupList" :label="group.name" :value="group.id"
+                         :key="group.id"></el-option>
+            </el-select>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="">确 定</el-button>
+          <el-button type="primary" @click="update()">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -130,10 +140,14 @@
 </template>
 
 <script>
+  import qs from 'qs';
+
   export default {
     data() {
       return {
-        url: '/api/admin/student/getList',
+        tableUrl: '/api/admin/student/getList',
+        updateUrl: '/api/admin/student/update',
+        deleteUrl: '/api/admin/student/delete',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -144,10 +158,12 @@
         is_search: false,
         tableData: [],
         allData: [],
-        groupList: []
+        groupList: [],
+        getNormalGroupListUrl: '/api/admin/studentGroup/getNormalList'
       }
     },
     created() {
+      this.getGroupList();
       this.getData();
       // this.tableData = this.allData;
       this.handleCurrentChange(1);
@@ -175,9 +191,21 @@
       }
     },
     methods: {
+      getGroupList() {
+        const self = this;
+        self.$http.get(self.getNormalGroupListUrl).then((response) => {
+          if(response.data.status == 0){
+            self.groupList = response.data.data;
+          } else if(response.data.status > 0){
+            self.$message.error("获取学生分组失败！" + response.data.msg);
+          } else{
+            self.$message.error("获取学生分组失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
       getData() {
         const self = this;
-        this.$http.get(this.url).then((response) => {
+        this.$http.get(this.tableUrl).then((response) => {
           if (response.data.status == 0) {
             self.allData = response.data.data;
             let groupMap = new Map();
@@ -206,7 +234,7 @@
         this.selectTable = row;
       },
       handleDelete(index, row) {
-        this.$message.error('删除第' + (index + 1) + '行');
+        this.delete(row.id);
       },
       handleCurrentChange(val) {
         this.currentPage = val;
@@ -218,6 +246,41 @@
         let page = this.currentPage;
         let pageSize = this.pageSize;
         return allData.slice(pageSize * (page - 1), pageSize * page);
+      },
+      update() {
+        let postData = qs.stringify(this.selectTable);
+        this.$http.post(this.updateUrl, postData).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('更新成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/student-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("更新失败！" + response.data.msg);
+          } else {
+            this.$message.error("更新失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      delete(id) {
+        var params = new URLSearchParams();
+        params.append("id", id);
+        this.$http.post(this.deleteUrl, params).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('删除成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/student-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("删除失败！" + response.data.msg);
+          } else {
+            this.$message.error("删除失败！请稍后重试或咨询管理员");
+          }
+        });
       }
     }
   }

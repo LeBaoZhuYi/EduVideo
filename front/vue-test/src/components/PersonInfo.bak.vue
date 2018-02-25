@@ -8,7 +8,7 @@
       <div class="scroll">
         <div class="scrollContainer" id="scrollContainer">
           <el-carousel :autoplay=false trigger="click">
-            <el-carousel-item v-for="item in 4" :key="item">
+            <el-carousel-item v-for="item in 5" :key="item">
               <div class="panel" v-show="item == 1" style="font-size: 20px">
                 <div class="col_550 float_l">
                   <h1>学生简介</h1>
@@ -29,65 +29,84 @@
               </div> <!-- end of home -->
               <div class="panel hide" v-show="item == 2" style="font-size: 20px">
                 <h1>个人信息</h1>
-                <div class="col_300 float_l">
-                  <p><em>我的名字：{{stuName}}</em></p>
+                <div class="col_300 float_l"><p><em>我的名字：{{stuName}}</em></p>
                   <p><em>我是个：{{sex}}</em></p>
-                  <p><em>我的分组：{{groupName}}</em></p>
-                  <p><em>联系方式：{{phone}}</em></p></div>
-                <div class="col_550 float_r">
                   <p><em>破壳日：{{birthday}}</em></p>
+                  <p><em>联系方式：{{phone}}</em></p></div>
+                <div class="col_550 float_r"><p><em>我爱吃：{{food}}</em></p>
                   <p><em>我喜欢：{{interest}}</em></p>
-                  <p><em>我不喜欢：{{disagree}}</em></p>
-                  <p><em>我的理想：{{ideal}}</em></p></div>
+                  <p><em>我讨厌：{{disagree}}</em></p>
+                  <p><em>我想当：{{ideal}}</em></p></div>
                 <div class="cleaner_h30"></div>
 
+                <h1>我的风采</h1>
+                <div class="image_wrapper image_fl"><img src="../assets/temp/images/fengcai1.jpg"
+                                                         alt="Image 4" style="width: 230px;height: 100px"/></div>
+                <div class="image_wrapper image_fl"><img src="../assets/temp/images/fengcai2.jpg"
+                                                         alt="Image 4" style="width: 230px;height: 100px"/></div>
+                <div class="image_wrapper image_fl"><img src="../assets/temp/images/fengcai3.jpg"
+                                                         alt="Image 4" style="width: 230px;height: 100px"/></div>
+              </div>
+              <div class="panel hide" v-show="item == 3" style="font-size: 20px">
                 <h1>课程情况</h1>
                 <div class="image_wrapper image_fl"><img src="../assets/temp/images/video_class.jpg"
                                                          alt="Image 5" style="width: 230px;height: 100px"/></div>
                 <p><em>今日课程：{{videoTitle}}</em></p>
                 <p><em>是否已看：{{isWatched}}</em></p>
                 <p><em>我已在线完成：{{classTimes}}次课程</em></p>
-              </div>
-              <div class="panel hide" v-show="item == 3">
-                <h1>基本信息修改</h1>
-                <el-form ref="form" :model="form" label-width="80px">
-                  <el-form-item label="我的名字">
-                    <el-input v-model="form.studyName"></el-input>
-                  </el-form-item>
-                  <el-form-item label="我的性别">
-                    <el-input v-model="form.sex"></el-input>
-                  </el-form-item>
-                  <el-form-item label="我的生日">
-                    <el-input v-model="form.birthday"></el-input>
-                  </el-form-item>
-                  <el-form-item label="个人简介">
-                    <el-input v-model="form.studyIntro"></el-input>
-                  </el-form-item>
-                  <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
-                  </el-form-item>
-                </el-form>
+                <p><em>我已在线完成：{{watchTimes}}次视频观看</em></p>
+                <div class="cleaner_h30"></div>
+                <div class="col_300 float_l"><h1>作业与成绩</h1>
+                  <p><em>上一次作业状况：{{isFinishedHomework}}</em></p>
+                  <p><em>上一次课程成绩：{{lastScore}}</em></p>
+                  <p><em>课程平均成绩：{{avgScore}}</em></p>
+                  <p><em>历史最好成绩：{{maxScore}}</em></p>
+                </div>
+                <div class="col_550 float_r">
+                  <h2>老师评价</h2>
+                  <p><em>{{teacherHomeworkComment}}</em></p>
+                </div>
               </div>
               <div class="panel hide" v-show="item == 4">
-                <h1>其它信息修改</h1>
-                <el-form ref="form" :model="form" label-width="80px">
-                  <el-form-item label="我的爱好">
-                    <el-input v-model="form.interest"></el-input>
-                  </el-form-item>
-                  <el-form-item label="我的理想">
-                    <el-input v-model="form.ideal"></el-input>
-                  </el-form-item>
-                  <el-form-item label="我不喜欢">
-                    <el-input v-model="form.studyIntro"></el-input>
-                  </el-form-item>
-                  <el-form-item label="家长评价">
-                    <el-input v-model="form.parentWords"></el-input>
-                  </el-form-item>
-                  <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
-                  </el-form-item>
-                </el-form>
-              </div>
+              <h1>基本信息修改</h1>
+              <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="我的名字">
+                  <el-input v-model="form.studyName"></el-input>
+                </el-form-item>
+                <el-form-item label="我的性别">
+                  <el-input v-model="form.sex"></el-input>
+                </el-form-item>
+                <el-form-item label="我的生日">
+                  <el-input v-model="form.birthday"></el-input>
+                </el-form-item>
+                <el-form-item label="个人简介">
+                  <el-input v-model="form.studyIntro"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="onSubmit">提交</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
+            <div class="panel hide" v-show="item == 5">
+              <h1>其它信息修改</h1>
+              <el-form ref="form" :model="form" label-width="80px">
+                <el-form-item label="我的爱好">
+                  <el-input v-model="form.interest"></el-input>
+                </el-form-item>
+                <el-form-item label="我的理想">
+                  <el-input v-model="form.ideal"></el-input>
+                </el-form-item>
+                <el-form-item label="我不喜欢">
+                  <el-input v-model="form.studyIntro"></el-input>
+                </el-form-item>
+                <el-form-item label="家长评价">
+                  <el-input v-model="form.parentWords"></el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="onSubmit">提交</el-button>
+                </el-form-item>
+              </el-form>
+            </div>
             </el-carousel-item>
           </el-carousel>
         </div>

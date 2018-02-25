@@ -13,7 +13,7 @@ public class StudentGroup {
 
     private String name;
 
-    private String studentIdList;
+    private String remark;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class StudentGroup {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getStudentIdList() {
-        return studentIdList;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setStudentIdList(String studentIdList) {
-        this.studentIdList = studentIdList == null ? null : studentIdList.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

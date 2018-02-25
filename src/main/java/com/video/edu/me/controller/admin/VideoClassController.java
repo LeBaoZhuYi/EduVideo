@@ -2,6 +2,7 @@ package com.video.edu.me.controller.admin;
 
 
 import com.video.edu.me.entity.VideoClass;
+import com.video.edu.me.enumeration.VideoClassStatus;
 import com.video.edu.me.qcloud.vod.VodApi;
 import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.VideoClassService;
@@ -93,22 +94,26 @@ public class VideoClassController {
         return res;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = videoClassService.deleteByPrimaryKey(id);
-            if (deleteResult == 0) {
+            VideoClass videoClass = new VideoClass();
+            videoClass.setId(id);
+            videoClass.setStatus(VideoClassStatus.REMOVED.getId());
+            int deleteResult = videoClassService.updateByPrimaryKeySelective(videoClass);
+            if (deleteResult <= 0) {
                 res.put("status", 1);
-                res.put("msg", "删除视频出错");
+                res.put("msg", "未找到该课程");
             } else {
                 res.put("status", 0);
-                res.put("msg", "删除成功");
+                res.put("msg", "");
             }
             res.put("data", deleteResult);
         } catch (Exception e) {
-            logger.error("delete error with exception: {}", e.getMessage());
+            logger.error("delete videoClass error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -116,22 +121,23 @@ public class VideoClassController {
         return res;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> update(VideoClass videoClass) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = videoClassService.updateByPrimaryKey(videoClass);
-            if (updateResult == 0) {
+            int updateResult = videoClassService.updateByPrimaryKeySelective(videoClass);
+            if (updateResult <= 0) {
                 res.put("status", 1);
-                res.put("msg", "更新视频失败");
+                res.put("msg", "未找到该课程");
+                res.put("data", null);
             } else {
                 res.put("status", 0);
-                res.put("msg", "更新成功");
+                res.put("msg", "");
+                res.put("data", null);
             }
-            res.put("data", updateResult);
         } catch (Exception e) {
-            logger.error("update error with exception: {}", e.getMessage());
+            logger.error("update videoClass error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

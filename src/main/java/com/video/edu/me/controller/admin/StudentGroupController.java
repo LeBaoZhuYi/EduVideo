@@ -1,6 +1,7 @@
 package com.video.edu.me.controller.admin;
 
 import com.video.edu.me.entity.StudentGroup;
+import com.video.edu.me.enumeration.StudentGroupStatus;
 import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.UserService;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -52,22 +54,25 @@ public class StudentGroupController {
         return res;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> delete(int id) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int deleteResult = studentGroupService.deleteByPrimaryKey(id);
-            if (deleteResult == 0) {
+            StudentGroup studentGroup = new StudentGroup();
+            studentGroup.setId(id);
+            studentGroup.setStatus(StudentGroupStatus.REMOVED.getId());
+            int deleteResult = studentGroupService.updateByPrimaryKeySelective(studentGroup);
+            if (deleteResult <= 0) {
                 res.put("status", 1);
-                res.put("msg", "删除出错");
+                res.put("msg", "未找到该分组");
             } else {
                 res.put("status", 0);
-                res.put("msg", "删除成功");
+                res.put("msg", "");
             }
             res.put("data", deleteResult);
         } catch (Exception e) {
-            logger.error("delete error with exception: {}", e.getMessage());
+            logger.error("delete studentGroup error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -75,22 +80,23 @@ public class StudentGroupController {
         return res;
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> update(StudentGroup studentGroup) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = studentGroupService.updateByPrimaryKey(studentGroup);
-            if (updateResult == 0) {
+            int updateResult = studentGroupService.updateByPrimaryKeySelective(studentGroup);
+            if (updateResult <= 0) {
                 res.put("status", 1);
-                res.put("msg", "更新失败");
+                res.put("msg", "未找到该分组");
+                res.put("data", null);
             } else {
                 res.put("status", 0);
-                res.put("msg", "更新成功");
+                res.put("msg", "");
+                res.put("data", null);
             }
-            res.put("data", updateResult);
         } catch (Exception e) {
-            logger.error("update error with exception: {}", e.getMessage());
+            logger.error("update studentGroup error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -105,7 +111,7 @@ public class StudentGroupController {
         try {
             List<StudentGroup> studentGroupList = studentGroupService.getAllNotDeletedStudentGroupList();
             List<Map<String, Object>> studentGroupListMap = new ArrayList<>();
-            for(StudentGroup studentGroup: studentGroupList){
+            for (StudentGroup studentGroup : studentGroupList) {
                 studentGroupListMap.add(ObjectMapTransformUtil.obj2Map(studentGroup));
             }
             res.put("status", 0);
@@ -127,7 +133,7 @@ public class StudentGroupController {
         try {
             List<StudentGroup> studentGroupList = studentGroupService.getNormalStudentGroupList();
             List<Map<String, Object>> studentGroupListMap = new ArrayList<>();
-            for(StudentGroup studentGroup: studentGroupList){
+            for (StudentGroup studentGroup : studentGroupList) {
                 studentGroupListMap.add(ObjectMapTransformUtil.obj2Map(studentGroup));
             }
             res.put("status", 0);
