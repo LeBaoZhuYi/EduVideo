@@ -1,5 +1,6 @@
 package com.video.edu.me.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -41,4 +42,14 @@ public class DateUtil {
         calendar.set(Calendar.SECOND, 0);
         return calendar.getTime();
     }
+    public static Date stringToDate(String dateString){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(dateString);
+        } catch (Exception e) {
+        }
+        return date;
+    }
+
 }

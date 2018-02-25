@@ -120,5 +120,26 @@ public class StudentGroupController {
         return res;
     }
 
+    @RequestMapping(value = "/getNormalList", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getNormalList() {
+        Map<String, Object> res = new HashMap<>();
+        try {
+            List<StudentGroup> studentGroupList = studentGroupService.getNormalStudentGroupList();
+            List<Map<String, Object>> studentGroupListMap = new ArrayList<>();
+            for(StudentGroup studentGroup: studentGroupList){
+                studentGroupListMap.add(ObjectMapTransformUtil.obj2Map(studentGroup));
+            }
+            res.put("status", 0);
+            res.put("msg", "");
+            res.put("data", studentGroupListMap);
+        } catch (Exception e) {
+            logger.error("get normal studentGroup list error with exception: {}", e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
+    }
 }
 

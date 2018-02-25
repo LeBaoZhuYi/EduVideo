@@ -31,6 +31,13 @@ public class StudentGroupService extends BaseService<StudentGroup, StudentGroupE
 		return studentGroupMapper.selectByExample(studentGroupExample);
 	}
 
+	public List<StudentGroup> getNormalStudentGroupList(){
+		StudentGroupExample studentGroupExample = new StudentGroupExample();
+		studentGroupExample.createCriteria().andStatusEqualTo(StudentGroupStatus.NORMAL.getId());
+		studentGroupExample.setOrderByClause("ctime DESC");
+		return studentGroupMapper.selectByExample(studentGroupExample);
+	}
+
 	public String getStudentGroupNameById(int studentGroupId){
 		StudentGroup studentGroup = studentGroupMapper.selectByPrimaryKey(studentGroupId);
 		return studentGroup.getName();

@@ -7,9 +7,11 @@ import java.util.Map;
 
 public enum VideoStatus {
 
-    NORMAL(ByteUtil.intToByte(1), "正常"),
-    PAUSE(ByteUtil.intToByte(2), "停用"),
-    REMOVED(ByteUtil.intToByte(3), "删除");
+    UPLOADING(ByteUtil.intToByte(1), "上传中"),
+    NORMAL(ByteUtil.intToByte(2), "正常"),
+    PAUSE(ByteUtil.intToByte(3), "停用"),
+    FAILED(ByteUtil.intToByte(4), "上传失败"),
+    REMOVED(ByteUtil.intToByte(5), "删除");
 
     private byte id;
     private String desc;

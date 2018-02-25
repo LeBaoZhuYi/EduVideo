@@ -6,16 +6,14 @@ import com.video.edu.me.qcloud.vod.VodApi;
 import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.VideoClassService;
 import com.video.edu.me.service.VideoService;
-import com.video.edu.me.utils.AdjustEntityParamsUtil;
-import com.video.edu.me.utils.Constants;
-import com.video.edu.me.utils.EncryptUtil;
-import com.video.edu.me.utils.ObjectMapTransformUtil;
+import com.video.edu.me.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,10 +41,17 @@ public class VideoClassController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> create(VideoClass videoClass) {
+    private Map<String, Object> create(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            boolean success = videoClassService.create(videoClass);
+            VideoClass newVideoClass = new VideoClass();
+            newVideoClass.setClassName(params.get("className"));
+            newVideoClass.setTeacherName(params.get("teacherName"));
+            newVideoClass.setGroupId(Integer.parseInt(params.get("groupId")));
+            newVideoClass.setVideoId(Integer.parseInt(params.get("videoId")));
+            newVideoClass.setStartTime(DateUtil.stringToDate(params.get("startTime")));
+            newVideoClass.setEndTime(DateUtil.stringToDate(params.get("endTime")));
+            boolean success = videoClassService.create(newVideoClass);
             if (!success) {
                 res.put("status", 1);
                 res.put("msg", "添加出错");

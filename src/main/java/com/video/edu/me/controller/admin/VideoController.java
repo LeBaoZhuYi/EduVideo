@@ -153,6 +153,30 @@ public class VideoController {
         return res;
     }
 
+    @RequestMapping(value = "/getNormalList", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> getNormalList() {
+        Map<String, Object> res = new HashMap<>();
+        try {
+            List<Video> videoList = videoService.getNormalVideoList();
+            List<Map<String, Object>> videoListMap = new ArrayList<>();
+            for(Video video: videoList){
+                Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
+                AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
+                videoListMap.add(videoMap);
+            }
+            res.put("status", 0);
+            res.put("msg", "");
+            res.put("data", videoListMap);
+        } catch (Exception e) {
+            logger.error("get normal video list error with exception: {}", e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
+    }
+
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     private Map<String, Object> upload(HttpServletRequest httpServletRequest) {

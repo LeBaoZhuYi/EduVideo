@@ -40,7 +40,7 @@
         let postData = qs.stringify(this.form)
         this.$http.post(this.createUrl, postData).then((response) => {
           if(response.data.status == 0){
-            self.$confirm('添加成功，是否跳转到列表', '提示', {
+            this.$confirm('添加成功，是否跳转到列表', '提示', {
               confirmButtonText: '确定',
               cancelButtonText: '留在此处',
               type: 'warning'

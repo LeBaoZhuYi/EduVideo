@@ -61,7 +61,7 @@
         },
         groupList: [],
         createUrl: '/api/admin/student/create',
-        getGroupListUrl: '/api/admin/studentGroup/getList',
+        getNormalGroupListUrl: '/api/admin/studentGroup/getNormalList',
       }
     },
     mounted: function() {
@@ -70,7 +70,7 @@
     methods: {
       getGroupList() {
         const self = this;
-        self.$http.get(self.getGroupListUrl).then((response) => {
+        self.$http.get(self.getNormalGroupListUrl).then((response) => {
           if(response.data.status == 0){
             self.groupList = response.data.data;
           } else if(response.data.status > 0){

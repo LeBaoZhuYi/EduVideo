@@ -34,8 +34,7 @@ Vue.prototype.getLocalStorage = function (key, value) {
     return dataObjDatatoJson;
   }
 };
-Vue.prototype.timestampToString = function(timeStamp) {
-  let date = new Date(timeStamp);
+Vue.prototype.dateToString = function(date) {
   let y = date.getFullYear();
   let m = date.getMonth() + 1;
   m = m < 10 ? ('0' + m) : m;
@@ -48,6 +47,10 @@ Vue.prototype.timestampToString = function(timeStamp) {
   minute = minute < 10 ? ('0' + minute) : minute;
   second = second < 10 ? ('0' + second) : second;
   return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+};
+Vue.prototype.timestampToString = function(timeStamp) {
+  let date = new Date(timeStamp);
+  return this.dateToString(date);
 };
 Vue.prototype.formmatObjectData = function(data) {
   Object.keys(data).forEach(k => {

@@ -28,26 +28,26 @@
         </el-form-item>
         <el-form-item label="开始时间">
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.startDate" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.startTime" style="width: 100%;"></el-date-picker>
           </el-col>
           <el-col class="line" :span="2">-</el-col>
           <el-col :span="11">
-            <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.startTime"
+            <el-time-picker type="fixed-time" placeholder="选择时间" v-model="startHMSTime"
                             style="width: 100%;"></el-time-picker>
           </el-col>
         </el-form-item>
         <el-form-item label="结束时间">
           <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择日期" v-model="form.endDate" style="width: 100%;"></el-date-picker>
+            <el-date-picker type="date" placeholder="选择日期" v-model="form.endTime" style="width: 100%;"></el-date-picker>
           </el-col>
           <el-col class="line" :span="2">-</el-col>
           <el-col :span="11">
-            <el-time-picker type="fixed-time" placeholder="选择时间" v-model="form.endTime"
+            <el-time-picker type="fixed-time" placeholder="选择时间" v-model="endHMSTime"
                             style="width: 100%;"></el-time-picker>
           </el-col>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">提交</el-button>
+          <el-button type="primary" @click="create()">提交</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -65,16 +65,16 @@
           teacherName: "",
           videoId: "",
           groupId: "",
-          startDate: "",
-          endDate: "",
           startTime: "",
           endTime: ""
         },
+        startHMSTime: "",
+        endHMSTime: "",
         groupList: [],
         videoList: [],
-        createUrl: '/api/admin/studentClass/create',
-        getGroupListUrl: '/api/admin/studentGroup/getList',
-        getVideoListUrl: '/api/admin/video/getList',
+        createUrl: '/api/admin/videoClass/create',
+        getNormalGroupListUrl: '/api/admin/studentGroup/getNormalList',
+        getNormalVideoListUrl: '/api/admin/video/getNormalList',
       }
     },
     mounted: function() {
@@ -84,7 +84,7 @@
     methods: {
       getVideoList() {
         const self = this;
-        self.$http.get(self.getVideoListUrl).then((response) => {
+        self.$http.get(self.getNormalVideoListUrl).then((response) => {
           if(response.data.status == 0){
             self.videoList = response.data.data;
           } else if(response.data.status > 0){
@@ -96,7 +96,7 @@
       },
       getGroupList() {
         const self = this;
-        self.$http.get(self.getGroupListUrl).then((response) => {
+        self.$http.get(self.getNormalGroupListUrl).then((response) => {
           if(response.data.status == 0){
             self.groupList = response.data.data;
           } else if(response.data.status > 0){
@@ -107,10 +107,20 @@
         });
       },
       create() {
-        let postData = qs.stringify(this.form)
+        let startTime = this.form.startTime;
+        let endTime = this.form.endTime;
+        startTime.setHours(this.startHMSTime.getHours());
+        startTime.setMinutes(this.startHMSTime.getMinutes());
+        startTime.setSeconds(this.startHMSTime.getSeconds());
+        endTime.setHours(this.endHMSTime.getHours());
+        endTime.setMinutes(this.endHMSTime.getMinutes());
+        endTime.setSeconds(this.endHMSTime.getSeconds());
+        this.form.startTime = this.dateToString(startTime);
+        this.form.endTime = this.dateToString(endTime);
+        let postData = qs.stringify(this.form);
         this.$http.post(this.createUrl, postData).then((response) => {
           if(response.data.status == 0){
-            self.$confirm('添加成功，是否跳转到列表', '提示', {
+            this.$confirm('添加成功，是否跳转到列表', '提示', {
               confirmButtonText: '确定',
               cancelButtonText: '留在此处',
               type: 'warning'

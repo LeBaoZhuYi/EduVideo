@@ -36,6 +36,13 @@ public class VideoService extends BaseService<Video, VideoExample> {
         return videoMapper.selectByExample(videoExample);
     }
 
+    public List<Video> getNormalVideoList(){
+        VideoExample videoExample = new VideoExample();
+        videoExample.createCriteria().andStatusEqualTo(VideoStatus.NORMAL.getId());
+        videoExample.setOrderByClause("ctime DESC");
+        return videoMapper.selectByExample(videoExample);
+    }
+
     public String getVideoTitleById(int videoId){
         Video video = videoMapper.selectByPrimaryKey(videoId);
         return video.getTitle();
