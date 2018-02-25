@@ -45,6 +45,11 @@ public class StudentGroupController {
                 res.put("msg", "");
                 res.put("data", 1);
             }
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("create studentGroup error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -71,6 +76,11 @@ public class StudentGroupController {
                 res.put("msg", "");
             }
             res.put("data", deleteResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("delete studentGroup error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -82,21 +92,36 @@ public class StudentGroupController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    private Map<String, Object> update(StudentGroup studentGroup) {
+    private Map<String, Object> update(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int updateResult = studentGroupService.updateByPrimaryKeySelective(studentGroup);
-            if (updateResult <= 0) {
+            StudentGroup studentGroup = studentGroupService.selectByPrimaryKey(Integer.parseInt(params.get("id")));
+            if (studentGroup == null) {
                 res.put("status", 1);
                 res.put("msg", "未找到该分组");
                 res.put("data", null);
             } else {
-                res.put("status", 0);
-                res.put("msg", "");
-                res.put("data", null);
+                if (params.get("name") != null) studentGroup.setName(params.get("name"));
+                if (params.get("remark") != null) studentGroup.setRemark(params.get("remark"));
+                if (params.get("status") != null) studentGroup.setStatus(StudentGroupStatus.getByDesc(params.get("status")).getId());
+                boolean success = (1 == studentGroupService.updateByPrimaryKeySelective(studentGroup));
+                if (!success) {
+                    res.put("status", 1);
+                    res.put("msg", "未找到分组");
+                    res.put("data", null);
+                } else {
+                    res.put("status", 0);
+                    res.put("msg", "更新成功");
+                    res.put("data", null);
+                }
             }
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
-            logger.error("update studentGroup error with exception: {}", e.getMessage());
+            logger.error("update student error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -112,11 +137,18 @@ public class StudentGroupController {
             List<StudentGroup> studentGroupList = studentGroupService.getAllNotDeletedStudentGroupList();
             List<Map<String, Object>> studentGroupListMap = new ArrayList<>();
             for (StudentGroup studentGroup : studentGroupList) {
-                studentGroupListMap.add(ObjectMapTransformUtil.obj2Map(studentGroup));
+                Map<String, Object> studentGroupMap = ObjectMapTransformUtil.obj2Map(studentGroup);
+                studentGroupMap.put("status", StudentGroupStatus.getById(studentGroup.getStatus()).getDesc());
+                studentGroupListMap.add(studentGroupMap);
             }
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", studentGroupListMap);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("get studentGroup list error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -139,6 +171,11 @@ public class StudentGroupController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", studentGroupListMap);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("get normal studentGroup list error with exception: {}", e.getMessage());
             res.put("status", -1);

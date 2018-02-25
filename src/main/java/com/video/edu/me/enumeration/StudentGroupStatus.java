@@ -14,11 +14,16 @@ public enum StudentGroupStatus {
     private byte id;
     private String desc;
     private static Map<Byte, StudentGroupStatus> idMap;
+    private static Map<String, StudentGroupStatus> descMap;
 
     static {
         idMap = new HashMap<>();
-        for (StudentGroupStatus videoStatus : StudentGroupStatus.values()) {
-            idMap.put(videoStatus.getId(), videoStatus);
+        descMap = new HashMap<>();
+        for (StudentGroupStatus studentGroupStatus : StudentGroupStatus.values()) {
+            idMap.put(studentGroupStatus.getId(), studentGroupStatus);
+        }
+        for (StudentGroupStatus studentGroupStatus : StudentGroupStatus.values()) {
+            descMap.put(studentGroupStatus.getDesc(), studentGroupStatus);
         }
     }
 
@@ -30,6 +35,9 @@ public enum StudentGroupStatus {
 
     public static StudentGroupStatus getById(byte id) {
         return idMap.get(id);
+    }
+    public static StudentGroupStatus getByDesc(String desc) {
+        return descMap.get(desc);
     }
 
 

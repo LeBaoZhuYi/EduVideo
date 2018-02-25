@@ -62,7 +62,7 @@ public class VideoController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoMap);
-        } catch (Exception e) {
+        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
             logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());

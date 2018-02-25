@@ -18,6 +18,7 @@ public enum StudentStatus {
 
     static {
         idMap = new HashMap<>();
+        descMap = new HashMap<>();
         for (StudentStatus videoStatus : StudentStatus.values()) {
             idMap.put(videoStatus.getId(), videoStatus);
         }

@@ -60,7 +60,7 @@ public class UserController {
             res.put("status", 2);
             res.put("msg", "密码错误");
             res.put("data", null);
-        } catch (Exception e) {
+        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
             logger.error("login error with status: {}, loginName: {}, exception: {}", -1, loginName, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
@@ -84,7 +84,7 @@ public class UserController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", userId);
-        } catch (Exception e) {
+        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
             logger.error("logout error with userId: {},  exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());

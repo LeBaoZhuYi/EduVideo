@@ -8,8 +8,8 @@
     </div>
     <div class="handle-box">
       <el-select v-model="select_cate" placeholder="筛选分组" class="handle-select mr10">
-        <el-option v-for="group in groupList" :label="group.groupName" :value="group.groupName"
-                   :key="group.groupId"></el-option>
+        <el-option v-for="group in groupList" :label="group.name" :value="group.name"
+                   :key="group.id"></el-option>
       </el-select>
       <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
@@ -123,7 +123,14 @@
               <el-radio label="停用"></el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="学生分组">
+          <el-form-item>
+          <el-alert
+            title="select框中显示的当前值为选项的id而非选项名"
+            type="info"
+            close-text="了解">
+          </el-alert>
+          </el-form-item>
+          <el-form-item label="学生分组id">
             <el-select v-model="selectTable.groupId" placeholder="请选择">
               <el-option v-for="group in groupList" :label="group.name" :value="group.id"
                          :key="group.id"></el-option>
@@ -141,7 +148,6 @@
 
 <script>
   import qs from 'qs';
-
   export default {
     data() {
       return {
@@ -162,7 +168,7 @@
         getNormalGroupListUrl: '/api/admin/studentGroup/getNormalList'
       }
     },
-    created() {
+    mounted() {
       this.getGroupList();
       this.getData();
       // this.tableData = this.allData;
@@ -208,17 +214,6 @@
         this.$http.get(this.tableUrl).then((response) => {
           if (response.data.status == 0) {
             self.allData = response.data.data;
-            let groupMap = new Map();
-            self.allData.forEach(function (value, key, arr) {
-              if (!groupMap.has(value.groupId)) {
-                groupMap.set(value.groupId,
-                  {
-                    groupId: value.groupId,
-                    groupName: value.groupName
-                  })
-              }
-            });
-            self.groupList = Array.from(groupMap.values());
           } else if (response.data.status > 0) {
             self.$message.error('获取分组列表失败！' + response.data.msg);
           } else {
@@ -234,7 +229,14 @@
         this.selectTable = row;
       },
       handleDelete(index, row) {
-        this.delete(row.id);
+        this.$confirm('此操作将删除该记录, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.delete(row.id);
+        }).catch(() => {
+        });
       },
       handleCurrentChange(val) {
         this.currentPage = val;
@@ -265,7 +267,7 @@
         });
       },
       delete(id) {
-        var params = new URLSearchParams();
+        let params = new URLSearchParams();
         params.append("id", id);
         this.$http.post(this.deleteUrl, params).then((response) => {
           if (response.data.status == 0) {

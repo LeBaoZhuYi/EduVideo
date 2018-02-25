@@ -41,6 +41,11 @@ public class UserController {
                 res.put("msg", "成功啦！");
             }
             res.put("data", insertResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("create error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -64,6 +69,11 @@ public class UserController {
                 res.put("msg", "删除成功");
             }
             res.put("data", deleteResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("delete error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -87,6 +97,11 @@ public class UserController {
                 res.put("msg", "更新成功");
             }
             res.put("data", updateResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("update error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -103,7 +118,7 @@ public class UserController {
         try {
             List<User> userList = userService.getAllNotDeletedUserList();
             List<Map<String, Object>> userListMap = new ArrayList<>();
-            for(User user: userList){
+            for (User user : userList) {
                 Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
                 AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
                 userListMap.add(userMap);
@@ -111,6 +126,11 @@ public class UserController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", userListMap);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("get user list error with exception: {}", e.getMessage());
             res.put("status", -1);

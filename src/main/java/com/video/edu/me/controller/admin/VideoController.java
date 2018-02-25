@@ -12,6 +12,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.*;
+
 import com.video.edu.me.entity.Video;
 import com.video.edu.me.entity.VideoExample;
 import com.video.edu.me.service.VideoService;
@@ -55,6 +56,11 @@ public class VideoController {
                 res.put("msg", "");
                 res.put("data", 1);
             }
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("create video error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -78,6 +84,11 @@ public class VideoController {
                 res.put("msg", "成功");
             }
             res.put("data", findResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("find error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -101,6 +112,11 @@ public class VideoController {
                 res.put("msg", "删除成功");
             }
             res.put("data", deleteResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("delete error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -124,6 +140,11 @@ public class VideoController {
                 res.put("msg", "更新成功");
             }
             res.put("data", updateResult);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("update error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -140,7 +161,7 @@ public class VideoController {
         try {
             List<Video> videoList = videoService.getAllNotDeletedVideoList();
             List<Map<String, Object>> videoListMap = new ArrayList<>();
-            for(Video video: videoList){
+            for (Video video : videoList) {
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
                 AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
                 videoListMap.add(videoMap);
@@ -148,6 +169,11 @@ public class VideoController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoListMap);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("get video list error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -164,7 +190,7 @@ public class VideoController {
         try {
             List<Video> videoList = videoService.getNormalVideoList();
             List<Map<String, Object>> videoListMap = new ArrayList<>();
-            for(Video video: videoList){
+            for (Video video : videoList) {
                 Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
                 AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.VIDEO_LIST_USELESS_PARAMS);
                 videoListMap.add(videoMap);
@@ -172,6 +198,11 @@ public class VideoController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoListMap);
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             logger.error("get normal video list error with exception: {}", e.getMessage());
             res.put("status", -1);
@@ -198,7 +229,7 @@ public class VideoController {
             imageArray.add("flv");
             imageArray.add("wmv");
             imageArray.add("vob");
-            if(!imageArray.contains(suffix.toLowerCase())){
+            if (!imageArray.contains(suffix.toLowerCase())) {
                 throw new Exception("请选择正确视频格式文件");
             }
             // 获得文件名：
@@ -206,7 +237,7 @@ public class VideoController {
 
             String filePath = Constants.FILE_PATH + fileName;
             File file = new File(filePath);
-            if(!file.getParentFile().exists()){
+            if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
             multipartFile.transferTo(file);
@@ -218,6 +249,11 @@ public class VideoController {
             res.put("status", 1);
             res.put("msg", "");
             res.put("data", "上传已取消");
+        } catch (RuntimeException re) {
+            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
         } catch (Exception e) {
             res.put("status", -1);
             res.put("msg", e.getMessage());

@@ -7,7 +7,6 @@
       </el-breadcrumb>
     </div>
     <div class="handle-box">
-      <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
       <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
       <el-button type="primary" icon="search" @click="search">搜索</el-button>
     </div>
@@ -54,13 +53,16 @@
           <el-form-item label="分组描述" label-width="100px">
             <el-input type="textarea" v-model="selectTable.remark"></el-input>
           </el-form-item>
-          <el-form-item label="分组状态" label-width="100px">
-            <el-input v-model="selectTable.status"></el-input>
+          <el-form-item label="状态">
+            <el-radio-group v-model="selectTable.status">
+              <el-radio label="正常"></el-radio>
+              <el-radio label="停用"></el-radio>
+            </el-radio-group>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="">确 定</el-button>
+          <el-button type="primary" @click="update()">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -68,10 +70,13 @@
 </template>
 
 <script>
+  import qs from 'qs';
   export default {
     data() {
       return {
-        url: '/api/admin/studentGroup/getList',
+        tableUrl: '/api/admin/studentGroup/getList',
+        updateUrl: '/api/admin/studentGroup/update',
+        deleteUrl: '/api/admin/studentGroup/delete',
         total: 0,
         currentPage: 1,
         pageSize: 5,
@@ -86,7 +91,7 @@
         allData: []
       }
     },
-    created() {
+    mounted() {
       this.getData();
       // this.tableData = this.allData;
       this.handleCurrentChange(1);
@@ -111,7 +116,7 @@
                 return;
               }
             });
-            if (flag){
+            if (flag) {
               return d;
             }
           }
@@ -123,7 +128,7 @@
     methods: {
       getData() {
         const self = this;
-        this.$http.get(this.url).then((response) => {
+        this.$http.get(this.tableUrl).then((response) => {
           if (response.data.status == 0) {
             self.allData = response.data.data;
           } else if (response.data.status > 0) {
@@ -141,31 +146,63 @@
         this.selectTable = row;
       },
       handleDelete(index, row) {
-        this.$message.error('删除第' + (index + 1) + '行');
-      },
-      delAll() {
-        let length = this.multipleSelection.length;
-        let str = '';
-        this.del_list = this.del_list.concat(this.multipleSelection);
-        for (let i = 0; i < length; i++) {
-          str += this.multipleSelection[i].name + ' ';
-        }
-        this.$message.error('删除了' + str);
-        this.multipleSelection = [];
+        this.$confirm('此操作将删除该记录, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.delete(row.id);
+        }).catch(() => {
+        });
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-      handleCurrentChange(val){
+      handleCurrentChange(val) {
         this.currentPage = val;
       },
       handleSizeChange(val) {
         this.pageSize = val;
       },
-      computeTableData(allData){
+      computeTableData(allData) {
         let page = this.currentPage;
         let pageSize = this.pageSize;
         return allData.slice(pageSize * (page - 1), pageSize * page);
+      },
+      update() {
+        let postData = qs.stringify(this.selectTable);
+        this.$http.post(this.updateUrl, postData).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('更新成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/group-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("更新失败！" + response.data.msg);
+          } else {
+            this.$message.error("更新失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      delete(id) {
+        let params = new URLSearchParams();
+        params.append("id", id);
+        this.$http.post(this.deleteUrl, params).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('删除成功', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/admin/group-table";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error("删除失败！" + response.data.msg);
+          } else {
+            this.$message.error("删除失败！请稍后重试或咨询管理员");
+          }
+        });
       }
     }
   }

@@ -14,11 +14,16 @@ public enum VideoClassStatus {
     private byte id;
     private String desc;
     private static Map<Byte, VideoClassStatus> idMap;
+    private static Map<String, VideoClassStatus> descMap = new HashMap<>();
 
     static {
         idMap = new HashMap<>();
+        descMap = new HashMap<>();
         for (VideoClassStatus videoStatus : VideoClassStatus.values()) {
             idMap.put(videoStatus.getId(), videoStatus);
+        }
+        for (VideoClassStatus videoStatus : VideoClassStatus.values()) {
+            descMap.put(videoStatus.getDesc(), videoStatus);
         }
     }
 
@@ -30,6 +35,9 @@ public enum VideoClassStatus {
 
     public static VideoClassStatus getById(byte id) {
         return idMap.get(id);
+    }
+    public static VideoClassStatus getByDesc(String desc) {
+        return descMap.get(desc);
     }
 
 
