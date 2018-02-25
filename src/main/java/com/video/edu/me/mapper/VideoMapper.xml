@@ -102,7 +102,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.video.edu.me.entity.Video" >
+  <insert id="insert" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
     insert into video (id, route, title, 
       comment, status, watched_times, 
       ctime, utime)
@@ -110,7 +110,7 @@
       #{comment,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{watchedTimes,jdbcType=INTEGER}, 
       #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.video.edu.me.entity.Video" >
+  <insert id="insertSelective" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
     insert into video
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

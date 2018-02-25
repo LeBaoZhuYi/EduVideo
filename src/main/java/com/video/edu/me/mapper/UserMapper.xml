@@ -102,7 +102,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert"  keyProperty="id" parameterType="com.video.edu.me.entity.User" >
+  <insert id="insert" keyProperty="id" parameterType="com.video.edu.me.entity.User" >
     insert into user (id, login_name, password, 
       last_login_time, role_id, status, 
       ctime, utime)

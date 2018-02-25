@@ -16,7 +16,7 @@ public class Constants {
         if (os != null && os.toLowerCase().indexOf("linux") > -1) {
             FILE_PATH = "/tmp/edu_video/";
         } else if (os != null && os.toLowerCase().indexOf("windows") > -1){
-            FILE_PATH = "C:\\Users\\Temp\\EduVideo\\";
+            FILE_PATH = "C:\\Temp\\EduVideo\\";
         } else{
             throw new RuntimeException("未知的系统环境");
         }

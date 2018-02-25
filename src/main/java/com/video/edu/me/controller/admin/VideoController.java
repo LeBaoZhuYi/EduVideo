@@ -1,6 +1,7 @@
 package com.video.edu.me.controller.admin;
 
 
+import com.video.edu.me.service.UploadService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
 import org.springframework.web.multipart.MultipartException;
@@ -42,17 +43,20 @@ public class VideoController {
     private Map<String, Object> create(Video video) {
         Map<String, Object> res = new HashMap<>();
         try {
-            int insertResult = videoService.insertSelective(video);
-            if (insertResult == 0) {
+            boolean success = videoService.create(video);
+            if (!success) {
                 res.put("status", 1);
-                res.put("msg", "未成功插入视频");
+                res.put("msg", "添加s视频出错");
+                res.put("data", null);
             } else {
+                Thread uploadThread = new Thread(new UploadService(video.getId()));
+                uploadThread.start();
                 res.put("status", 0);
-                res.put("msg", "成功啦！");
+                res.put("msg", "");
+                res.put("data", 1);
             }
-            res.put("data", insertResult);
         } catch (Exception e) {
-            logger.error("create error with exception: {}", e.getMessage());
+            logger.error("create video error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -185,7 +189,6 @@ public class VideoController {
             CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
             MultipartHttpServletRequest multipartRequest = commonsMultipartResolver.resolveMultipart(httpServletRequest);        // 获得文件：
             MultipartFile multipartFile = multipartRequest.getFile("file");
-            VodApi vodApi = new VodApi(Constants.SECRET_ID, Constants.SECRET_KEY);
             //判断后缀是否为常用视频格式
             String suffix = multipartFile.getContentType().split("/")[1];
             List<String> imageArray = new ArrayList<>();
@@ -207,7 +210,6 @@ public class VideoController {
                 file.getParentFile().mkdirs();
             }
             multipartFile.transferTo(file);
-//            VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", fileName);

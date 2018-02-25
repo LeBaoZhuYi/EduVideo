@@ -7,12 +7,12 @@
       </el-breadcrumb>
     </div>
     <div class="form-box">
-      <el-form ref="video" :model="video" class="form-video" label-width="80px">
+      <el-form ref="video" :model="form" class="form-video" label-width="80px">
         <el-form-item label="视频名称">
-          <el-input v-model="video.title"></el-input>
+          <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item label="视频描述">
-          <el-input type="textarea" v-model="video.comment"></el-input>
+          <el-input type="textarea" v-model="form.comment"></el-input>
         </el-form-item>
         <el-form-item label="文件上传">
           <el-upload
@@ -31,7 +31,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">提交</el-button>
+          <el-button type="primary" @click="create()">提交</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -41,28 +41,35 @@
 </template>
 
 <script>
+  import qs from 'qs';
   export default {
     data: function () {
       return {
-        video: {
+        form: {
           title: "",
-          teachName: "",
           comment: "",
-          fileName: ""
+          route: ""
         },
-        url: ""
+        createUrl: '/api/admin/video/create'
       }
     },
     methods: {
-      onSubmit() {
-        this.$http.post(this.url, this.video).then((response) => {
+      create() {
+        const self = this;
+        let postData = qs.stringify(self.form);
+        self.$http.post(self.createUrl, postData).then((response) => {
           if(response.data.status == 0){
-            this.$alert("提交成功", "成功");
-            window.location.href = "/admin/video-table";
+            self.$confirm('添加成功，是否跳转到列表', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '留在此处',
+              type: 'warning'
+            }).then(() => {
+              window.location.href = "/admin/video-table";
+            });
           } else if(response.data.status > 0){
-            this.$alert("提交失败！" + response.data.msg, "错误");
+            self.$message.error("添加失败！" + response.data.msg);
           } else{
-            this.$alert("提交失败！请稍后重试或咨询管理员", "错误");
+            self.$message.error("添加失败！请稍后重试或咨询管理员");
           }
         });
       },
@@ -71,12 +78,12 @@
       },
       uploadSuccess(response, file, filseList){
         if(response.status == 0){
-          this.video.fileName = response.data;
-          this.$message.success(this.video.title + "上传临时区成功");
+          this.form.route = response.data;
+          this.$message.success(this.form.title + "上传临时区成功");
         } else if(response.status > 0){
-          this.$message.warning(response.data.msg);
+          this.$message.error(response.msg);
         } else{
-          this.$message.error(response.data.msg);
+          this.$message.error(response.msg);
         }
       }
     }
