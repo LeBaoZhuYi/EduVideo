@@ -58,17 +58,8 @@
           sex: "",
           groupId: ""
         },
-        rules:{
-          loginName: {required: true, message: '请输入登录名', trigger: 'blur'},
-          password: {required: true, message: '请输入密码', trigger: 'blur'},
-          studyName: {required: true, message: '请输入学生姓名', trigger: 'blur'},
-          studyId: {required: true, message: '请输入学号', trigger: 'blur'},
-          phone: {required: true, message: '请输入电话', trigger: 'blur'},
-          sex: {required: true, message: '请选择性别', trigger: 'blur'},
-          groupId: {required: true, message: '请选择分组', trigger: 'blur'},
-        },
         groupList: [],
-        creaetUrl: '/api/admin/student/create',
+        createUrl: '/api/admin/student/create',
         getGroupListUrl: '/api/admin/studentGroup/getList',
       }
     },
@@ -82,7 +73,7 @@
           if(response.data.status == 0){
             self.groupList = response.data.data;
           } else if(response.data.status > 0){
-            self.$message.warning("获取学生分组失败！" + response.data.msg);
+            self.$message.error("获取学生分组失败！" + response.data.msg);
           } else{
             self.$message.error("获取学生分组失败！请稍后重试或咨询管理员");
           }
@@ -90,12 +81,12 @@
       },
       create() {
         let postData = qs.stringify(this.form)
-        this.$http.post(this.creaetUrl, postData).then((response) => {
+        this.$http.post(this.createUrl, postData).then((response) => {
           if(response.data.status == 0){
             this.$message.success("添加成功");
             window.location.href = "/admin/student-table";
           } else if(response.data.status > 0){
-            this.$message.warning("添加失败！" + response.data.msg);
+            this.$message.error("添加失败！" + response.data.msg);
           } else{
             this.$message.error("添加失败！请稍后重试或咨询管理员");
           }

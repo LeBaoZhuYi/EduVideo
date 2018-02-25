@@ -8,14 +8,19 @@
     </div>
     <div class="form-box">
       <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="课程名">
+          <el-input v-model="form.className"></el-input>
+        </el-form-item>
         <el-form-item label="课程视频">
-          <el-select v-model="form.videoList" placeholder="请选择">
-            <el-option key="bbk" label="步步高" value="bbk"></el-option>
+          <el-select v-model="form.videoId" placeholder="请选择">
+            <el-option v-for="video in videoList" :label="video.title" :value="video.id"
+                       :key="video.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="学生分组">
-          <el-select v-model="form.groupList" placeholder="请选择">
-            <el-option key="bbk" label="步步高" value="bbk"></el-option>
+          <el-select v-model="form.groupId" placeholder="请选择">
+            <el-option v-for="group in groupList" :label="group.name" :value="group.id"
+                       :key="group.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="讲师">
@@ -55,17 +60,63 @@
     data: function () {
       return {
         form: {
-          loginName: "",
-          password: "",
-          stuName: "",
-          phone: "",
-          sex: ""
-        }
+          className: "",
+          teacherName: "",
+          videoId: "",
+          groupId: "",
+          startDate: "",
+          endDate: "",
+          startTime: "",
+          endTime: ""
+        },
+        groupList: [],
+        videoList: [],
+        createUrl: '/api/admin/studentClass/create',
+        getGroupListUrl: '/api/admin/studentGroup/getList',
+        getVideoListUrl: '/api/admin/video/getList',
       }
     },
+    mounted: function() {
+      this.getGroupList();
+      this.getVideoList();
+    },
     methods: {
-      onSubmit() {
-        this.$message.success('提交成功！');
+      getVideoList() {
+        const self = this;
+        self.$http.get(self.getVideoListUrl).then((response) => {
+          if(response.data.status == 0){
+            self.videoList = response.data.data;
+          } else if(response.data.status > 0){
+            self.$message.error("获取学生分组失败！" + response.data.msg);
+          } else{
+            self.$message.error("获取学生分组失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      getGroupList() {
+        const self = this;
+        self.$http.get(self.getGroupListUrl).then((response) => {
+          if(response.data.status == 0){
+            self.groupList = response.data.data;
+          } else if(response.data.status > 0){
+            self.$message.error("获取学生分组失败！" + response.data.msg);
+          } else{
+            self.$message.error("获取学生分组失败！请稍后重试或咨询管理员");
+          }
+        });
+      },
+      create() {
+        let postData = qs.stringify(this.form)
+        this.$http.post(this.createUrl, postData).then((response) => {
+          if(response.data.status == 0){
+            this.$message.success("添加成功");
+            window.location.href = "/admin/student-table";
+          } else if(response.data.status > 0){
+            this.$message.error("添加失败！" + response.data.msg);
+          } else{
+            this.$message.error("添加失败！请稍后重试或咨询管理员");
+          }
+        });
       }
     }
   }
