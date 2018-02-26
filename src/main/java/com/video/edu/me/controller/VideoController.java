@@ -31,38 +31,35 @@ public class VideoController {
 
     @RequestMapping(value = "/play", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> play(int userId, int videoId) {
+    private Map<String, Object> play(int userId, int videoClassId) {
         Map<String, Object> res = new HashMap<>();
+        int videoId = 0;
         try {
-            if (videoId == -1) {
-                VideoClass videoClass = videoClassService.getTodayVideoClassByUserId(userId);
-                if (videoClass == null) {
-                    res.put("status", 1);
-                    res.put("msg", "今日没有课程");
-                    res.put("data", null);
-                    return res;
-                }
-                Date now = new Date();
-                if (now.compareTo(videoClass.getStartTime()) < 0) {
-                    res.put("status", 2);
-                    res.put("msg", "未到课程开始时间");
-                    res.put("data", null);
-                    return res;
-                } else if (now.compareTo(videoClass.getEndTime()) > 0) {
-                    res.put("status", 2);
-                    res.put("msg", "今日课程已经结束");
-                    res.put("data", null);
-                    return res;
-                }
-                videoId = videoClass.getVideoId();
+            VideoClass videoClass = null;
+            if (videoClassId == -1) {
+                videoClass = videoClassService.getTodayVideoClassByUserId(userId);
+            } else {
+                videoClass = videoClassService.selectByPrimaryKey(videoClassId);
             }
+            if (videoClass == null) {
+                res.put("status", 1);
+                res.put("msg", "未找到课程");
+                res.put("data", null);
+                return res;
+            }
+            videoId = videoClass.getVideoId();
             Video video = videoService.selectByPrimaryKey(videoId);
             Map<String, Object> videoMap = ObjectMapTransformUtil.obj2Map(video);
             AdjustEntityParamsUtil.removeParams(videoMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoMap);
-        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
+        } catch (RuntimeException re) {
+            logger.error("play video error with userId: {}, videoId: {}, runtimeException: {}", userId, videoId, re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
+        } catch (Exception e) {
             logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());

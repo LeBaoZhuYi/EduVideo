@@ -2,7 +2,7 @@
   <div id="person-info">
 
     <div id="header">
-      <span id="my_name">{{stuName}}的主页</span>
+      <span id="my_name">{{studyName}}的主页</span>
     </div>
     <div id="content">
       <div class="scroll">
@@ -12,12 +12,12 @@
               <div class="panel" v-show="item == 1" style="font-size: 20px">
                 <div class="col_550 float_l">
                   <h1>学生简介</h1>
-                  <p><em>{{stuIntro}}</em></p>
+                  <p><em>{{studyIntro}}</em></p>
                   <div class="cleaner_h30"></div>
                   <h2>老师寄语</h2>
                   <div class="image_wrapper image_fl"><img src="../assets/temp/images/templatemo_image_01.jpg"
                                                            alt="Image 1"/></div>
-                  <p>{{remark}}</p>
+                  <p>{{teacherRemark}}</p>
                 </div>
 
                 <div class="col_300 float_r">
@@ -30,7 +30,7 @@
               <div class="panel hide" v-show="item == 2" style="font-size: 20px">
                 <h1>个人信息</h1>
                 <div class="col_300 float_l">
-                  <p><em>我的名字：{{stuName}}</em></p>
+                  <p><em>我的名字：{{studyName}}</em></p>
                   <p><em>我是个：{{sex}}</em></p>
                   <p><em>我的分组：{{groupName}}</em></p>
                   <p><em>联系方式：{{phone}}</em></p></div>
@@ -54,17 +54,22 @@
                   <el-form-item label="我的名字">
                     <el-input v-model="form.studyName"></el-input>
                   </el-form-item>
-                  <el-form-item label="我的性别">
-                    <el-input v-model="form.sex"></el-input>
-                  </el-form-item>
                   <el-form-item label="我的生日">
-                    <el-input v-model="form.birthday"></el-input>
+                    <el-col :span="11">
+                      <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;"></el-date-picker>
+                    </el-col>
+                  </el-form-item>
+                  <el-form-item label="我的性别">
+                    <el-radio-group v-model="form.sex">
+                      <el-radio label="男孩"></el-radio>
+                      <el-radio label="女孩"></el-radio>
+                    </el-radio-group>
                   </el-form-item>
                   <el-form-item label="个人简介">
                     <el-input v-model="form.studyIntro"></el-input>
                   </el-form-item>
                   <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
+                    <el-button type="primary" @click="update()">提交</el-button>
                   </el-form-item>
                 </el-form>
               </div>
@@ -84,7 +89,7 @@
                     <el-input v-model="form.parentWords"></el-input>
                   </el-form-item>
                   <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
+                    <el-button type="primary" @click="update()">提交</el-button>
                   </el-form-item>
                 </el-form>
               </div>
@@ -194,35 +199,29 @@
     name: "personCenter",
     data() {
       return {
-        stuName: "",
-        stuIntro: "",
-        remark: "",
+        getStudentInfoUrl: '/api/student/myInfo',
+        getTodayClassInfoUrl: '/api/videoClass/today',
+        updateStudentInfoUrl: '/api/student/update',
+        studyName: "",
+        groupName: "",
+        studyIntro: "",
+        teacherRemark: "",
         parentWords: "",
         phone: "",
         sex: "",
         birthday: "",
-        food: "",
         interest: "",
         disagree: "",
         ideal: "",
         videoTitle: "",
         isWatched: "",
         classTimes: "",
-        watchTimes: "",
-        isFinishedHomework: "",
-        lastScore: "",
-        avgScore: "",
-        maxScore: "",
-        teacherHomeworkComment: "",
         form: {
-          stuName: "",
-          stuIntro: "",
-          remark: "",
+          studyName: "",
+          studyIntro: "",
           parentWords: "",
           phone: "",
-          sex: "",
           birthday: "",
-          food: "",
           interest: "",
           disagree: "",
           ideal: ""
@@ -230,27 +229,64 @@
       }
     },
     mounted: function () {
-      this.$http.get("/static/Person.json").then((response) => {
-        this.stuName = response.data.data.stuName;
-        this.stuIntro = response.data.data.stuIntro;
-        this.remark = response.data.data.remark;
-        this.parentWords = response.data.data.parentWords;
-        this.phone = response.data.data.phone;
-        this.sex = response.data.data.sex == "m" ? "可爱的小女孩" : "帅气的小男孩";
-        this.food = response.data.data.food;
-        this.interest = response.data.data.interest;
-        this.disagree = response.data.data.disagree;
-        this.ideal = response.data.data.ideal;
-        this.videoTitle = response.data.data.videoTitle;
-        this.isWatched = response.data.data.isWatched ? "是" : "否";
-        this.classTimes = response.data.data.classTimes;
-        this.watchTimes = response.data.data.watchTimes;
-        this.isFinishedHomework = response.data.data.isFinishedHomework ? "已完成" : "未完成";
-        this.lastScore = response.data.data.lastScore;
-        this.avgScore = response.data.data.avgScore;
-        this.maxScore = response.data.data.maxScore;
-        this.teacherHomeworkComment = response.data.data.teacherHomeworkComment;
-      })
+      let userId = this.getLocalStorage("userId");
+      if (userId == null) {
+        this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
+        this.$router.push('/');
+        return;
+      }
+      this.getUserInfoAndClassInfo(userId);
+    },
+    methods: {
+      getUserInfoAndClassInfo: function (userId) {
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+        //        this.$http.get("/api/student/info", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+              this.studyName = response.data.data.stuName;
+              this.groupName = "分组一";
+              this.studyIntro = response.data.data.stuIntro;
+              this.teacherRemark = response.data.data.remark;
+              this.parentWords = response.data.data.parentWords;
+              this.phone = response.data.data.phone;
+              this.sex = response.data.data.sex == "女孩" ? "可爱的小女孩" : "帅气的小男孩";
+              this.interest = response.data.data.interest;
+              this.disagree = response.data.data.disagree;
+              this.ideal = response.data.data.ideal;
+              this.form.studyName = response.data.data.stuName;
+              this.form.studyIntro = response.data.data.stuIntro;
+              this.form.teacherRemark = response.data.data.remark;
+              this.form.sex = "男孩";
+              this.form.birthday = response.data.data.birthday;
+              this.form.parentWords = response.data.data.parentWords;
+              this.form.phone = response.data.data.phone;
+              this.form.interest = response.data.data.interest;
+              this.form.disagree = response.data.data.disagree;
+              this.form.ideal = response.data.data.ideal;
+
+            } else if (response.data.status > 0) {
+              this.$alert("获取用户信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
+            }
+          });
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+              this.videoTitle = response.data.data.videoTitle;
+              this.isWatched = response.data.data.isWatched ? "是" : "否";
+              this.classTimes = response.data.data.classTimes;
+            } else if (response.data.status > 0) {
+              this.$alert("获取课程信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
+            }
+          });
+      },
+      update(){
+
+      }
     }
   }
 </script>

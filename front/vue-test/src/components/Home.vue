@@ -1,19 +1,24 @@
 <template>
   <div style="font-family: fengbi">
-  <el-container>
-    <home-header :activeIndex="'2'"></home-header>
-    <el-main>
-      <el-row :gutter="20">
-        <el-col :span="5">
-          <home-person :info="info" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-person>
-        </el-col>
-        <el-col :span="14">
-          <home-video :videoId="videoId" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-video>
-        </el-col>
-        <el-col :span="5"><home-video-list></home-video-list></el-col>
-      </el-row></el-main>
-    <el-footer></el-footer>
-  </el-container>
+    <el-container>
+      <home-header :activeIndex="'2'"></home-header>
+      <el-main>
+        <el-row :gutter="20">
+          <el-col :span="5">
+            <home-person :info="info" :todayClassEndTime="todayClassEndTime"
+                         :todayClassStartTime="todayClassStartTime"></home-person>
+          </el-col>
+          <el-col :span="14">
+            <home-video ref="homeVideo" :videoClassId="videoClassId" :todayClassEndTime="todayClassEndTime"
+                        :todayClassStartTime="todayClassStartTime"></home-video>
+          </el-col>
+          <el-col :span="5">
+            <home-video-list></home-video-list>
+          </el-col>
+        </el-row>
+      </el-main>
+      <el-footer></el-footer>
+    </el-container>
   </div>
 </template>
 
@@ -24,6 +29,7 @@
     text-align: center;
     line-height: 60px;
   }
+
   .el-main {
     background-color: #E9EEF3;
     color: #333;
@@ -43,11 +49,14 @@
   export default {
     data() {
       return {
-        videoId: "",
-        info:{
+        videoClassId: "",
+        getStudentInfoUrl: '/api/student/info',
+        getTodayClassInfoUrl: '/api/videoClass/today',
+        info: {
           studyName: "1",
           studyId: "2",
-          phone: "4",
+          teacherName: "3",
+          groupName: "4",
           videoTitle: "5",
           isWatched: "6",
           classTimes: "7"
@@ -64,7 +73,7 @@
       HomeVideo,
       HomeVideoList
     },
-    created(){
+    beforeMount() {
       let userId = this.getLocalStorage("userId");
       if (userId == null) {
         this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
@@ -75,34 +84,38 @@
     },
     methods: {
       getUserInfoAndClassInfo: function (userId) {
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/student/info", {params: {userId: userId}})
+        // this.$http.get("/static/Person.json", {params: {userId: userId}})
+        this.$http.get(this.getStudentInfoUrl, {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.info.studyName = response.data.data.stuName;
               this.info.studyId = response.data.data.studyId;
-              this.info.phone = response.data.data.phone;
+              this.info.groupName = response.data.data.groupName;
             } else if (response.data.status > 0) {
               this.$alert("获取用户信息失败!" + response.data.msg, "错误");
             } else {
               this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
             }
-          })
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
+          });
+        // this.$http.get("/static/Person.json", {params: {userId: userId}})
+        this.$http.get(this.getTodayClassInfoUrl, {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
               this.info.videoTitle = response.data.data.videoTitle;
               this.info.isWatched = response.data.data.isWatched;
+              this.info.teacherName = response.data.data.teacherName;
               this.info.classTimes = response.data.data.classTimes;
+              this.todayClassStartTime = response.data.data.todayClassStartTime;
+              this.todayClassEndTime = response.data.data.todayClassEndTime;
+              this.$refs.homeVideo.run();
             } else if (response.data.status > 0) {
               this.$alert("获取课程信息失败!" + response.data.msg, "错误");
             } else {
               this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
             }
           });
-        if (this.$router.history.current.query.videoId != null){
-          this.videoId = this.$router.history.current.query.videoId;
+        if (this.$router.history.current.query.videoClassId != null) {
+          this.videoClassId = this.$router.history.current.query.videoClassId;
           this.todayClassStartTime = 0;
           this.todayClassEndTime = Date.parse(new Date()) + 1000 * 10;
         }

@@ -62,6 +62,13 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
                 andEndTimeLessThan(nextMonthFirstDay)
                 .andGroupIdEqualTo(groupId);
         List<VideoClass> videoClassList = videoClassMapper.selectByExample(videoClassExample);
+        VideoClass todayVideoClass = getTodayVideoClassByGroupId(groupId);
+        for(VideoClass videoClass: videoClassList){
+            if (videoClass.getId() == todayVideoClass.getId()){
+                videoClassList.remove(videoClass);
+                break;
+            }
+        }
         return videoClassList;
     }
 

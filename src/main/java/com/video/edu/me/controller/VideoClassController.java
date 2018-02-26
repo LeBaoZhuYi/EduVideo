@@ -35,7 +35,7 @@ public class VideoClassController {
         try {
             List<VideoClass> currentMonthClassList = videoClassService.getCurrentMonthClassListByUserId(userId);
             List<Map<String, Object>> videoClassMapList = new ArrayList<>();
-            for(VideoClass videoClass: currentMonthClassList){
+            for (VideoClass videoClass : currentMonthClassList) {
                 Map<String, Object> videoClassMap = ObjectMapTransformUtil.obj2Map(videoClass);
                 AdjustEntityParamsUtil.reserveParams(videoClassMap, AdjustEntityParamsUtil.VIDEO_CLASS_LIST_USEFUL_PARAMS);
                 videoClassMapList.add(videoClassMap);
@@ -43,7 +43,12 @@ public class VideoClassController {
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", videoClassMapList);
-        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
+        } catch (RuntimeException re) {
+            logger.error("get videoClassList error with userId: {}, runtimeException: {}", userId, re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
+        } catch (Exception e) {
             logger.error("get videoClassList error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
@@ -62,15 +67,23 @@ public class VideoClassController {
             Student student = studentService.getStudentByUserId(userId);
             StudentClassInfo studentClassInfo = studentClassInfoService.getLastStudentClassInfoByClassIdAndStudentId(student.getId(), todayVideoClass.getId());
             data.put("isWatched", false);
-            if (studentClassInfo != null || studentClassInfo.getStatus() == StudentClassInfoStatus.END.getId()){
+            if (studentClassInfo != null && studentClassInfo.getStatus() == StudentClassInfoStatus.END.getId()) {
                 data.put("isWatched", true);
             }
             data.put("videoTitle", todayVideoClass.getClassName());
             data.put("classTimes", studentClassInfoService.countFinishedClassTimesByStudentId(student.getId()));
+            data.put("todayClassStartTime", todayVideoClass.getStartTime());
+            data.put("todayClassEndTime", todayVideoClass.getEndTime());
+            data.put("teacherName", todayVideoClass.getTeacherName());
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", data);
-        }  catch (RuntimeException re){            logger.error("update videoClass error with runtimException: {}", re.getMessage());            res.put("status", 100);            res.put("msg", re.getMessage());            res.put("data", null);        } catch (Exception e) {
+        } catch (RuntimeException re) {
+            logger.error("get today class info error with userId: {}, runtimeException: {}", userId, re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
+        } catch (Exception e) {
             logger.error("get today class info error with userId: {}, exception: {}", userId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());

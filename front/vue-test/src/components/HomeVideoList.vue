@@ -4,8 +4,8 @@
       <div slot="header" class="clearfix">
         <h2>本月视频点播</h2>
       </div>
-      <div v-for="video in videoList" class="text item">
-        <a href="javascript:void(0)" @click="playVideo(video.id)">{{video.title}}</a>
+      <div v-for="videoClass in videoClassList" class="text item">
+        <a href="javascript:void(0)" @click="playVideo(videoClass.id)">{{videoClass.className}}</a>
       </div>
     </el-card>
   </div>
@@ -41,7 +41,8 @@
     name: "homePerson",
     data() {
       return {
-        videoList: []
+        videoClassList: [],
+        getVideoClassListUrl: '/api/videoClass/classList'
       }
     },
     mounted: function () {
@@ -49,17 +50,12 @@
     },
     methods: {
       getVideoList: function () {
-        let userId = this.getLocalStorage("userId")
-        if (userId == null) {
-          this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
-          this.$router.push('/');
-          return;
-        }
-        this.$http.get("/static/VideoList.json", {params: {userId: userId}})
-//        this.$http.get("/api/video/getAllowedVideoList", {params: {userId: userId}})
+        let userId = this.getLocalStorage("userId");
+        // this.$http.get("/static/VideoList.json", {params: {userId: userId}})
+        this.$http.get(this.getVideoClassListUrl, {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.videoList = response.data.data.videoList;
+              this.videoClassList = response.data.data;
             } else if (response.data.status > 0) {
               this.$alert("获取视频列表失败!" + response.data.msg, "错误");
             } else {
@@ -67,10 +63,10 @@
             }
           })
       },
-      playVideo(videoId){
-//        window.open("/home?id=" + videoId);
-//        this.$router.push("/home?id=" + videoId);
-        window.location.href = "/home?videoId=" + videoId;
+      playVideo(videoClassId) {
+//        window.open("/home?id=" + videoClassId);
+//        this.$router.push("/home?id=" + videoClassId);
+        window.location.href = "/home?videoClassId=" + videoClassId;
       }
     }
   }

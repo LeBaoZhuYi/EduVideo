@@ -1,6 +1,8 @@
 package com.video.edu.me.controller;
 
 import com.video.edu.me.entity.Student;
+import com.video.edu.me.enumeration.SexType;
+import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.StudentService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
@@ -24,6 +26,9 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    StudentGroupService studentGroupService;
+
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
     private Map<String, Object> info(int userId){
@@ -32,6 +37,9 @@ public class StudentController {
             Student student = studentService.getStudentByUserId(userId);
             Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
             AdjustEntityParamsUtil.removeParams(studentMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
+            String groupName = studentGroupService.getStudentGroupNameById(student.getGroupId());
+            studentMap.put("groupName", groupName);
+            studentMap.put("sex", SexType.getById(student.getSex()).getDesc());
             res.put("status", 0);
             res.put("msg", "");
             res.put("data", studentMap);

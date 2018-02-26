@@ -5,7 +5,6 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="group_id" property="groupId" jdbcType="INTEGER" />
-    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
     <result column="study_id" property="studyId" jdbcType="VARCHAR" />
     <result column="study_name" property="studyName" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
@@ -82,9 +81,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, group_id, group_name, study_id, study_name, status, ctime, utime, sex, 
-    study_intro, teacher_remark, parent_words, phone, birthday, food, interest, disagree, 
-    ideal, img_urls
+    id, user_id, group_id, study_id, study_name, status, ctime, utime, sex, study_intro, 
+    teacher_remark, parent_words, phone, birthday, food, interest, disagree, ideal, img_urls
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.StudentExample" >
     select
@@ -118,19 +116,19 @@
   </delete>
   <insert id="insert" parameterType="com.video.edu.me.entity.Student" >
     insert into student (id, user_id, group_id, 
-      group_name, study_id, study_name, 
-      status, ctime, utime, 
-      sex, study_intro, teacher_remark, 
-      parent_words, phone, birthday, 
-      food, interest, disagree, 
-      ideal, img_urls)
+      study_id, study_name, status, 
+      ctime, utime, sex, 
+      study_intro, teacher_remark, parent_words, 
+      phone, birthday, food, 
+      interest, disagree, ideal, 
+      img_urls)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, 
-      #{groupName,jdbcType=VARCHAR}, #{studyId,jdbcType=VARCHAR}, #{studyName,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}, 
-      #{sex,jdbcType=TINYINT}, #{studyIntro,jdbcType=VARCHAR}, #{teacherRemark,jdbcType=VARCHAR}, 
-      #{parentWords,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
-      #{food,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, #{disagree,jdbcType=VARCHAR}, 
-      #{ideal,jdbcType=VARCHAR}, #{imgUrls,jdbcType=VARCHAR})
+      #{studyId,jdbcType=VARCHAR}, #{studyName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}, #{sex,jdbcType=TINYINT}, 
+      #{studyIntro,jdbcType=VARCHAR}, #{teacherRemark,jdbcType=VARCHAR}, #{parentWords,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{food,jdbcType=VARCHAR}, 
+      #{interest,jdbcType=VARCHAR}, #{disagree,jdbcType=VARCHAR}, #{ideal,jdbcType=VARCHAR}, 
+      #{imgUrls,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.video.edu.me.entity.Student" >
     insert into student
@@ -143,9 +141,6 @@
       </if>
       <if test="groupId != null" >
         group_id,
-      </if>
-      <if test="groupName != null" >
-        group_name,
       </if>
       <if test="studyId != null" >
         study_id,
@@ -205,9 +200,6 @@
       </if>
       <if test="groupId != null" >
         #{groupId,jdbcType=INTEGER},
-      </if>
-      <if test="groupName != null" >
-        #{groupName,jdbcType=VARCHAR},
       </if>
       <if test="studyId != null" >
         #{studyId,jdbcType=VARCHAR},
@@ -277,9 +269,6 @@
       <if test="record.groupId != null" >
         group_id = #{record.groupId,jdbcType=INTEGER},
       </if>
-      <if test="record.groupName != null" >
-        group_name = #{record.groupName,jdbcType=VARCHAR},
-      </if>
       <if test="record.studyId != null" >
         study_id = #{record.studyId,jdbcType=VARCHAR},
       </if>
@@ -338,7 +327,6 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       group_id = #{record.groupId,jdbcType=INTEGER},
-      group_name = #{record.groupName,jdbcType=VARCHAR},
       study_id = #{record.studyId,jdbcType=VARCHAR},
       study_name = #{record.studyName,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
@@ -367,9 +355,6 @@
       </if>
       <if test="groupId != null" >
         group_id = #{groupId,jdbcType=INTEGER},
-      </if>
-      <if test="groupName != null" >
-        group_name = #{groupName,jdbcType=VARCHAR},
       </if>
       <if test="studyId != null" >
         study_id = #{studyId,jdbcType=VARCHAR},
@@ -426,7 +411,6 @@
     update student
     set user_id = #{userId,jdbcType=INTEGER},
       group_id = #{groupId,jdbcType=INTEGER},
-      group_name = #{groupName,jdbcType=VARCHAR},
       study_id = #{studyId,jdbcType=VARCHAR},
       study_name = #{studyName,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},

@@ -1,10 +1,10 @@
 <template>
   <div>
-  <el-header class="video-title"><h2>测试视频A——朗诵</h2></el-header>
+  <el-header class="video-title"><h2>{{title}}</h2></el-header>
   <el-main>
     <transition name="el-zoom-in-center">
       <div v-show="show1" class="grid-content bg-purple-light">
-        <home-pre-video @startPlay="start" @endPlay="end" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-pre-video>
+        <home-pre-video ref="homePreVideo" @startPlay="start" @endPlay="end" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-pre-video>
       </div>
     </transition>
     <transition name="el-zoom-in-center">
@@ -57,7 +57,7 @@
   export default {
     name: 'homeVideo',
     props:{
-      videoId:{
+      videoClassId:{
         type: String,
         require: false
       },
@@ -73,10 +73,9 @@
     data() {
       return {
         title: '',
-        teacherName: '',
         show2: false,
         show1: true,
-        getVideoUrl: '/api/student/play'
+        getVideoUrl: '/api/video/play'
       }
     },
     components: {
@@ -100,38 +99,36 @@
           return;
         }
         let fileId = "";
-        let videoId = -1;
-        let userId = localStorage.getItem("userId");
-        if (this.videoId != ""){
-          videoId = this.videoId;
+        let videoClassId = -1;
+        let userId = this.getLocalStorage("userId");
+        if (this.videoClassId != ""){
+          videoClassId = this.videoClassId;
         }
-        // let url = "http://localhost:8081/video/today?userId=" + userId
-        let url = "/static/Video.json"
-        this.$http.get(url, {params: {userId: userId, videoId: videoId}}).then((response) => {
+        this.$http.get(this.getVideoUrl, {params: {userId: userId, videoClassId: videoClassId}}).then((response) => {
           if (response.data.status == 0) {
             fileId = response.data.data.route;
             this.title = response.data.data.title;
-            let player = new TcPlayer('id_test_video', {
-              "m3u8": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
-              "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
-              "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
-              "autoplay" : false,
-              "height": "100%",
-              "width": "100%",
-              "clarity": "sd",
-              "clarityLabel":{
-                "od": "原画",
-                "hd": "高清",
-                "sd": "标清"
-              },
-            });
-//           let player = new qcVideo.Player('id_test_video', {
-//             "auto_play": "0",
-//             "file_id": fileId,
-//             "stretch_full": 0,
-//             "app_id": "1255600123",
-//             "https": 1
-//           });
+            // let player = new TcPlayer('id_test_video', {
+            //   "m3u8": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
+            //   "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
+            //   "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
+            //   "autoplay" : false,
+            //   "height": "100%",
+            //   "width": "100%",
+            //   "clarity": "sd",
+            //   "clarityLabel":{
+            //     "od": "原画",
+            //     "hd": "高清",
+            //     "sd": "标清"
+            //   },
+            // });
+          let player = new qcVideo.Player('id_test_video', {
+            "auto_play": "0",
+            "file_id": fileId,
+            "stretch_full": 0,
+            "app_id": "1255600123",
+            "https": 1
+          });
           } else if (response.data.status > 0) {
             this.$message.error('获取今日课程失败！' + response.data.msg);
             return;
@@ -148,6 +145,9 @@
         videoDiv.parentNode.removeChild(videoDiv);
         this.show1 = true;
         this.show2 = false;
+      },
+      run: function(){
+        this.$refs.homePreVideo.run();
       }
     }
   }

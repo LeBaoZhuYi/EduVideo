@@ -66,7 +66,7 @@
       }
     },
     mounted: function () {
-      this.run();
+      // this.run();
 
     },
     methods: {
@@ -119,6 +119,15 @@
       },
       endPlay(){
         this.$emit("endPlay");
+      }
+    },
+    watch: {
+      todayClassStartTime(c, o){
+        this.todayClassStartTime = c;
+      },
+      todayClassEndTime(c,o){
+        this.todayClassEndTime = c;
+        this.run();
       }
     }
   }

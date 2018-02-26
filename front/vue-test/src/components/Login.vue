@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <el-form  :inline="true" :model="ruleForm" :rules="rules" ref="ruleForm"  class="demo-ruleForm">
+    <el-form :inline="true" :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
       <el-form-item prop="loginName">
         <el-input v-model="ruleForm.loginName" placeholder="学员登录"></el-input>
       </el-form-item>
@@ -34,7 +34,8 @@
           password: [
             {required: true, message: '请输入密码', trigger: 'blur'}
           ]
-        }
+        },
+        loginUrl: '/api/user/login'
       }
     },
     methods: {
@@ -48,16 +49,22 @@
         });
         let passwd = crypto.createHash("md5").update(this.ruleForm.password).digest("hex");
         let token = crypto.createHash("md5").update(passwd + String(timeStamp)).digest("hex");
-        let url = "";
-        // let url = "/api/user/login?loginName=" + this.ruleForm.loginName + "&token=" + token + "&timeStamp=" + timeStamp
-        if (this.ruleForm.loginName != "test") {
-          url = "/static/ErrorLoginName.json"
-        } else if (this.ruleForm.password != "123456") {
-          url = "/static/ErrorPassword.json"
-        } else {
-          url = "/static/Login.json"
-        }
-        this.$http.get(url)
+        // let url = "";
+        // let url = "?loginName=" + this.ruleForm.loginName + "&token=" + token + "&timeStamp=" + timeStamp
+        // if (this.ruleForm.loginName != "test") {
+        //   url = "/static/ErrorLoginName.json"
+        // } else if (this.ruleForm.password != "123456") {
+        //   url = "/static/ErrorPassword.json"
+        // } else {
+        //   url = "/static/Login.json"
+        // }
+        this.$http.get(this.loginUrl, {
+          params: {
+            loginName: this.ruleForm.loginName,
+            token: token,
+            timeStamp: timeStamp
+          }
+        })
           .then((response) => {
             if (response.data.status == 0) {
               this.setLocalStorage('loginName', response.data.data.loginName);

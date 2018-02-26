@@ -85,6 +85,9 @@ new Vue({
       if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index" || this.$route.path == "/test"){
         return;
       }
+      if (this.$route.path.indexOf("/admin") >= 0){
+        return;
+      }
       let userId = this.getLocalStorage("userId");
       if (userId == "" || userId == "undefined" || userId == undefined) {
         this.$alert('未检测到登录信息，请重新登录！', '警告', {
