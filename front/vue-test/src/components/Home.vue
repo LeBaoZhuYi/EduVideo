@@ -5,10 +5,10 @@
     <el-main>
       <el-row :gutter="20">
         <el-col :span="5">
-          <home-person></home-person>
+          <home-person :info="info" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-person>
         </el-col>
         <el-col :span="14">
-          <home-video :videoId="videoId"></home-video>
+          <home-video :videoId="videoId" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-video>
         </el-col>
         <el-col :span="5"><home-video-list></home-video-list></el-col>
       </el-row></el-main>
@@ -43,7 +43,17 @@
   export default {
     data() {
       return {
-        videoId: ""
+        videoId: "",
+        info:{
+          studyName: "1",
+          studyId: "2",
+          phone: "4",
+          videoTitle: "5",
+          isWatched: "6",
+          classTimes: "7"
+        },
+        todayClassStartTime: Date.parse(new Date()) + 1000 * 10,
+        todayClassEndTime: Date.parse(new Date()) + 1000 * 30 * 3
       }
     },
     components: {
@@ -54,14 +64,48 @@
       HomeVideo,
       HomeVideoList
     },
-    mounted: function(){
-      if (this.$router.history.current.query.videoId != null){
-        this.videoId = this.$router.history.current.query.videoId;
+    created(){
+      let userId = this.getLocalStorage("userId");
+      if (userId == null) {
+        this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
+        this.$router.push('/');
+        return;
       }
+      this.getUserInfoAndClassInfo(userId);
     },
     methods: {
-      header(path){
-
+      getUserInfoAndClassInfo: function (userId) {
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+        //        this.$http.get("/api/student/info", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+              this.info.studyName = response.data.data.stuName;
+              this.info.studyId = response.data.data.studyId;
+              this.info.phone = response.data.data.phone;
+            } else if (response.data.status > 0) {
+              this.$alert("获取用户信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
+            }
+          })
+        this.$http.get("/static/Person.json", {params: {userId: userId}})
+        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
+          .then((response) => {
+            if (response.data.status == 0) {
+              this.info.videoTitle = response.data.data.videoTitle;
+              this.info.isWatched = response.data.data.isWatched;
+              this.info.classTimes = response.data.data.classTimes;
+            } else if (response.data.status > 0) {
+              this.$alert("获取课程信息失败!" + response.data.msg, "错误");
+            } else {
+              this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
+            }
+          });
+        if (this.$router.history.current.query.videoId != null){
+          this.videoId = this.$router.history.current.query.videoId;
+          this.todayClassStartTime = 0;
+          this.todayClassEndTime = Date.parse(new Date()) + 1000 * 10;
+        }
       }
     }
   }

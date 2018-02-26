@@ -2,17 +2,17 @@
   <div class="personInfo">
     <el-row class="bg-purple">
       <h2>小六的信息</h2>
-      <p><em>我的学号：{{studyId}}</em></p>
-      <p><em>破壳日：{{birthday}}</em></p>
-      <p><em>我的电话：{{phone}}</em></p>
+      <p><em>我的学号：{{info.studyId}}</em></p>
+      <p><em>我的电话：{{info.phone}}</em></p>
     </el-row>
     <div class="line"></div>
     <el-row class="bg-purple">
       <h2>小六的课程</h2>
-      <p><em>今日课程：{{videoTitle}}</em></p>
-      <p><em>是否已看：{{isWatched}}</em></p>
-      <p><em>已完成：{{classTimes}}次课程</em></p>
-      <el-button type="primary" round @click="open('/person');">更多信息</el-button>
+      <p><em>发布时间：{{info.videoTitle}}</em></p>
+      <p><em>讲师：{{info.isWatched}}</em></p>
+      <p><em>开始时间：{{startTime}}</em></p>
+      <p><em>结束时间：{{endTime}}</em></p>
+      <el-button type="primary" round @click="open('/person')">更多信息</el-button>
     </el-row>
   </div>
 </template>
@@ -35,57 +35,40 @@
 <script>
   export default {
     name: "homePerson",
+    props: {
+      info: {
+        type: Object,
+        require: true
+      },
+      todayClassStartTime: {
+        type: Number,
+        require: false
+      },
+      todayClassEndTime: {
+        type: Number,
+        require: false
+      }
+    },
     data() {
       return {
-        studyName: "",
-        studyId: "",
-        birthday: "",
-        phone: "",
-        videoTitle: "",
-        isWatched: "",
-        classTimes: "",
-        url: ""
+        startTime: "",
+        endTime: ""
       }
     },
     mounted: function () {
-      this.getUserInfoAndClassInfo();
+      this.getTimeRange();
     },
     methods: {
-      getUserInfoAndClassInfo: function () {
-        let userId = this.getLocalStorage("userId");
-        if (userId == null) {
-          this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
-          this.$router.push('/');
-          return;
-        }
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/student/info", {params: {userId: userId}})
-          .then((response) => {
-            if (response.data.status == 0) {
-              this.studyName = response.data.data.stuName;
-              this.studyId = response.data.data.studyId;
-              this.birthday = response.data.data.birthday;
-              this.phone = response.data.data.phone;
-            } else if (response.data.status > 0) {
-              this.$alert("获取用户信息失败!" + response.data.msg, "错误");
-            } else {
-              this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
-            }
-          })
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
-        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
-          .then((response) => {
-            if (response.data.status == 0) {
-              this.videoTitle = response.data.data.videoTitle;
-              this.isWatched = response.data.data.isWatched;
-              this.classTimes = response.data.data.classTimes;
-            } else if (response.data.status > 0) {
-              this.$alert("获取课程信息失败!" + response.data.msg, "错误");
-            } else {
-              this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
-            }
-          })
+      getTimeRange() {
+        // 表示点播
+        if (this.todayClassStartTime == 0) {
+          this.startTime = "略";
+          this.endTime = "略"
+        } else{
+          this.startTime = this.timestampToString(this.todayClassStartTime).split(' ')[1];
+          this.endTime = this.timestampToString(this.todayClassEndTime).split(' ')[1];
       }
     }
+  }
   }
 </script>

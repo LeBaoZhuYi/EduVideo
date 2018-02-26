@@ -4,7 +4,7 @@
   <el-main>
     <transition name="el-zoom-in-center">
       <div v-show="show1" class="grid-content bg-purple-light">
-        <home-pre-video @startPlay="start"></home-pre-video>
+        <home-pre-video @startPlay="start" @endPlay="end" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-pre-video>
       </div>
     </transition>
     <transition name="el-zoom-in-center">
@@ -60,6 +60,14 @@
       videoId:{
         type: String,
         require: false
+      },
+      todayClassStartTime:{
+        type: Number,
+        require: false
+      },
+      todayClassEndTime:{
+        type: Number,
+        require: false
       }
     },
     data() {
@@ -67,7 +75,8 @@
         title: '',
         teacherName: '',
         show2: false,
-        show1: true
+        show1: true,
+        getVideoUrl: '/api/student/play'
       }
     },
     components: {
@@ -91,12 +100,14 @@
           return;
         }
         let fileId = "";
+        let videoId = -1;
+        let userId = localStorage.getItem("userId");
         if (this.videoId != ""){
-          this.$message.info('（测试）当前视频id为：' + this.videoId);
+          videoId = this.videoId;
         }
         // let url = "http://localhost:8081/video/today?userId=" + userId
         let url = "/static/Video.json"
-        this.$http.get(url, {}).then((response) => {
+        this.$http.get(url, {params: {userId: userId, videoId: videoId}}).then((response) => {
           if (response.data.status == 0) {
             fileId = response.data.data.route;
             this.title = response.data.data.title;
@@ -129,8 +140,14 @@
             return;
           }
         });
-        this.show1 = !this.show1;
-        this.show2 = !this.show2;
+        this.show1 = false;
+        this.show2 = true;
+      },
+      end: function(){
+        let videoDiv = document.getElementById('id_test_video');
+        videoDiv.parentNode.removeChild(videoDiv);
+        this.show1 = true;
+        this.show2 = false;
       }
     }
   }

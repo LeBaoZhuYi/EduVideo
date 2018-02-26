@@ -1,7 +1,8 @@
 <template>
   <div class="pre-video">
     <div class="clock" v-show="!over">
-      <div v-show="!nowStart">
+      <!--<div v-show="!nowStart">-->
+      <div>
         <img src="/static/img/last-time.png"/>
         <br/>
         <img :src="hour1"/>
@@ -13,7 +14,7 @@
         <img :src="sec1"/>
         <img :src="sec2"/>
       </div>
-      <a style="cursor: pointer" v-show="nowStart" @click="startPlay()"><img src="/static/img/now-start.png"/></a>
+      <!--<a style="cursor: pointer" v-show="nowStart" @click="startPlay()"><img src="/static/img/now-start.png"/></a>-->
     </div>
     <div class="over" v-show="over">
       <img src="/static/img/over.png"/>
@@ -38,13 +39,23 @@
 <script>
   export default {
     name: 'homePreVideo',
+    props: {
+      todayClassStartTime:{
+        type: Number,
+        require: false
+      },
+      todayClassEndTime:{
+        type: Number,
+        require: false
+      }
+    },
     data: function () {
       return {
         over: false,
-        nowStart: false,
+        isStart: false,
         timer: null,
-        todayClassStartTime: Date.parse(new Date()) + 1000 * 10,
-        todayClassEndTime: Date.parse(new Date()) + 1000 * 30 * 3,
+        // todayClassStartTime: Date.parse(new Date()) + 1000 * 10,
+        // todayClassEndTime: Date.parse(new Date()) + 1000 * 30 * 3,
         mao: "/static/img/tm.png",
         hour1: "/static/img/t0.png",
         hour2: "/static/img/t0.png",
@@ -55,25 +66,42 @@
       }
     },
     mounted: function () {
-      let now = Date.parse(new Date());
-      if (now < this.todayClassStartTime) {
-        this.over = false;
-        this.timer = setInterval(this.checkTime, 1000);
-      } else if (now > this.todayClassEndTime){
-        this.over = true;
-      } else{
-        this.startPlay();
-//        this.nowStart = true;
-      }
+      this.run();
+
     },
     methods: {
+      run() {
+        let now = Date.parse(new Date());
+        if (now < this.todayClassStartTime) {
+          this.over = false;
+          this.timer = setInterval(this.checkTime, 1000);
+        } else if (now > this.todayClassEndTime){
+          this.over = true;
+        } else{
+          this.startPlay();
+//        this.nowStart = true;
+        }
+      },
       checkTime() {
         let now = Date.parse(new Date());
-        let sub = parseInt((this.todayClassStartTime - now) / 1000);
+        let sub = parseInt((now - this.todayClassEndTime) / 1000);
+        if (sub >= 0){
+          if (this.isStart) {
+            this.endPlay();
+            this.isStart = false;
+            this.over = true;
+            clearInterval(this.timer);
+          }
+          return;
+        }
+        now = Date.parse(new Date());
+        sub = parseInt((this.todayClassStartTime - now) / 1000);
         if (sub <= 0){
-          clearInterval(this.timer);
-          this.startPlay();
-//          this.nowStart = true;
+          if (!this.isStart) {
+            // clearInterval(this.timer);
+            this.startPlay();
+            this.isStart = true;
+          }
           return;
         }
         let hour = parseInt(sub / 3600);
@@ -88,6 +116,9 @@
       },
       startPlay(){
         this.$emit("startPlay");
+      },
+      endPlay(){
+        this.$emit("endPlay");
       }
     }
   }
