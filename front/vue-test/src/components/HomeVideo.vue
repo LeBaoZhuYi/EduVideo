@@ -109,7 +109,7 @@
             fileId = response.data.data.route;
             this.title = response.data.data.title;
              let player = new TcPlayer('id_test_video', {
-               "m3u8": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/d953c33f7447398154852882993/BPqylNdWwo4A.mp4",
+               "m3u8": "https://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/d953c33f7447398154852882993/BPqylNdWwo4A.mp4?t=5a957204&sign=6c264f22bc067f41a62785cd9d6371f1",
 //               "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
 //               "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
                "autoplay" : false,
