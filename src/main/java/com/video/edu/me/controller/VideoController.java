@@ -38,14 +38,20 @@ public class VideoController {
             VideoClass videoClass = null;
             if (videoClassId == -1) {
                 videoClass = videoClassService.getTodayVideoClassByUserId(userId);
+                if (videoClass == null) {
+                    res.put("status", 1);
+                    res.put("msg", "今日没有课程");
+                    res.put("data", null);
+                    return res;
+                }
             } else {
                 videoClass = videoClassService.selectByPrimaryKey(videoClassId);
-            }
-            if (videoClass == null) {
-                res.put("status", 1);
-                res.put("msg", "未找到课程");
-                res.put("data", null);
-                return res;
+                if (videoClass == null) {
+                    res.put("status", 2);
+                    res.put("msg", "未找到课程");
+                    res.put("data", null);
+                    return res;
+                }
             }
             videoId = videoClass.getVideoId();
             Video video = videoService.selectByPrimaryKey(videoId);
