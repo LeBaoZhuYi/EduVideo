@@ -99,7 +99,7 @@
             }
           });
         // this.$http.get("/static/Person.json", {params: {userId: userId}})
-        if (videoClassId != null) {
+        if (videoClassId == null) {
           this.$http.get(this.getTodayClassInfoUrl, {params: {userId: userId}})
             .then((response) => {
               if (response.data.status == 0) {

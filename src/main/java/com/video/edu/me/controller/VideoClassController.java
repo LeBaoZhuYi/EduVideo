@@ -68,21 +68,22 @@ public class VideoClassController {
                 res.put("status", 1);
                 res.put("msg", "今日无课程");
                 res.put("data", data);
+            } else {
+                Student student = studentService.getStudentByUserId(userId);
+                StudentClassInfo studentClassInfo = studentClassInfoService.getLastStudentClassInfoByClassIdAndStudentId(student.getId(), todayVideoClass.getId());
+                data.put("isWatched", false);
+                if (studentClassInfo != null && studentClassInfo.getStatus() == StudentClassInfoStatus.END.getId()) {
+                    data.put("isWatched", true);
+                }
+                data.put("videoTitle", todayVideoClass.getClassName());
+                data.put("classTimes", studentClassInfoService.countFinishedClassTimesByStudentId(student.getId()));
+                data.put("todayClassStartTime", todayVideoClass.getStartTime());
+                data.put("todayClassEndTime", todayVideoClass.getEndTime());
+                data.put("teacherName", todayVideoClass.getTeacherName());
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", data);
             }
-            Student student = studentService.getStudentByUserId(userId);
-            StudentClassInfo studentClassInfo = studentClassInfoService.getLastStudentClassInfoByClassIdAndStudentId(student.getId(), todayVideoClass.getId());
-            data.put("isWatched", false);
-            if (studentClassInfo != null && studentClassInfo.getStatus() == StudentClassInfoStatus.END.getId()) {
-                data.put("isWatched", true);
-            }
-            data.put("videoTitle", todayVideoClass.getClassName());
-            data.put("classTimes", studentClassInfoService.countFinishedClassTimesByStudentId(student.getId()));
-            data.put("todayClassStartTime", todayVideoClass.getStartTime());
-            data.put("todayClassEndTime", todayVideoClass.getEndTime());
-            data.put("teacherName", todayVideoClass.getTeacherName());
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", data);
         } catch (RuntimeException re) {
             logger.error("get today class info error with userId: {}, runtimeException: {}", userId, re.getMessage());
             res.put("status", 100);

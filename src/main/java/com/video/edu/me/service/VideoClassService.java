@@ -61,13 +61,16 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
         Date nextMonthFirstDay = DateUtil.getNextMonthFirstDay();
         videoClassExample.createCriteria().andStartTimeGreaterThanOrEqualTo(currentMonthFirstDay).
                 andEndTimeLessThan(nextMonthFirstDay)
-                .andGroupIdEqualTo(groupId);
+                .andGroupIdEqualTo(groupId)
+                .andStatusEqualTo(VideoClassStatus.NORMAL.getId());
         List<VideoClass> videoClassList = videoClassMapper.selectByExample(videoClassExample);
         VideoClass todayVideoClass = getTodayVideoClassByGroupId(groupId);
-        for(VideoClass videoClass: videoClassList){
-            if (videoClass.getId() == todayVideoClass.getId()){
-                videoClassList.remove(videoClass);
-                break;
+        if (todayVideoClass != null) {
+            for (VideoClass videoClass : videoClassList) {
+                if (videoClass.getId() == todayVideoClass.getId()) {
+                    videoClassList.remove(videoClass);
+                    break;
+                }
             }
         }
         return videoClassList;
