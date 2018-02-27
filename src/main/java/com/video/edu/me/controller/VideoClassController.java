@@ -64,6 +64,11 @@ public class VideoClassController {
         try {
             Map<String, Object> data = new HashMap<>();
             VideoClass todayVideoClass = videoClassService.getTodayVideoClassByUserId(userId);
+            if (todayVideoClass == null){
+                res.put("status", 1);
+                res.put("msg", "今日无课程");
+                res.put("data", data);
+            }
             Student student = studentService.getStudentByUserId(userId);
             StudentClassInfo studentClassInfo = studentClassInfoService.getLastStudentClassInfoByClassIdAndStudentId(student.getId(), todayVideoClass.getId());
             data.put("isWatched", false);

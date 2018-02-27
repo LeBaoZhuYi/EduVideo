@@ -18,6 +18,7 @@
     </div>
     <div class="over" v-show="over">
       <img src="/static/img/over.png"/>
+      <br/>
       <img src="/static/img/review.png"/>
     </div>
   </div>

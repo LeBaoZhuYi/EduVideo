@@ -46,22 +46,29 @@ public class VideoClassController {
     private Map<String, Object> create(@RequestParam Map<String, String> params) {
         Map<String, Object> res = new HashMap<>();
         try {
-            VideoClass newVideoClass = new VideoClass();
-            newVideoClass.setClassName(params.get("className"));
-            newVideoClass.setTeacherName(params.get("teacherName"));
-            newVideoClass.setGroupId(Integer.parseInt(params.get("groupId")));
-            newVideoClass.setVideoId(Integer.parseInt(params.get("videoId")));
-            newVideoClass.setStartTime(DateUtil.stringToDate(params.get("startTime")));
-            newVideoClass.setEndTime(DateUtil.stringToDate(params.get("endTime")));
-            boolean success = videoClassService.create(newVideoClass);
-            if (!success) {
+            VideoClass oldVideoClass = videoClassService.getTodayVideoClassByGroupId(Integer.parseInt(params.get("groupId")));
+            if (oldVideoClass != null){
                 res.put("status", 1);
-                res.put("msg", "添加出错");
+                res.put("msg", "该分组今天已有课程");
                 res.put("data", null);
             } else {
-                res.put("status", 0);
-                res.put("msg", "");
-                res.put("data", 1);
+                VideoClass newVideoClass = new VideoClass();
+                newVideoClass.setClassName(params.get("className"));
+                newVideoClass.setTeacherName(params.get("teacherName"));
+                newVideoClass.setGroupId(Integer.parseInt(params.get("groupId")));
+                newVideoClass.setVideoId(Integer.parseInt(params.get("videoId")));
+                newVideoClass.setStartTime(DateUtil.stringToDate(params.get("startTime")));
+                newVideoClass.setEndTime(DateUtil.stringToDate(params.get("endTime")));
+                boolean success = videoClassService.create(newVideoClass);
+                if (!success) {
+                    res.put("status", 2);
+                    res.put("msg", "添加出错");
+                    res.put("data", null);
+                } else {
+                    res.put("status", 0);
+                    res.put("msg", "");
+                    res.put("data", 1);
+                }
             }
         } catch (RuntimeException re) {
             logger.error("update videoClass error with runtimException: {}", re.getMessage());

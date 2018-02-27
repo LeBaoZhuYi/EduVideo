@@ -41,7 +41,8 @@ public class VideoClassService extends BaseService<VideoClass, VideoClassExample
         Date zeroNextTime = DateUtil.getTomorrowZeroTime();
         videoClassExample.createCriteria().andStartTimeGreaterThanOrEqualTo(zeroTime).
                 andEndTimeLessThanOrEqualTo(zeroNextTime)
-                .andGroupIdEqualTo(groupId);
+                .andGroupIdEqualTo(groupId)
+                .andStatusEqualTo(VideoClassStatus.NORMAL.getId());
         List<VideoClass> videoClassList = videoClassMapper.selectByExample(videoClassExample);
         if (videoClassList.size() == 0) {
             return null;
