@@ -106,29 +106,29 @@
         }
         this.$http.get(this.getVideoUrl, {params: {userId: userId, videoClassId: videoClassId}}).then((response) => {
           if (response.data.status == 0) {
-            fileId = response.data.data.route;
-            this.title = response.data.data.title;
-             let player = new TcPlayer('id_test_video', {
-               "m3u8": "https://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/d953c33f7447398154852882993/BPqylNdWwo4A.mp4?t=5a957204&sign=6c264f22bc067f41a62785cd9d6371f1",
-//               "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
-//               "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
-               "autoplay" : false,
-               "height": "100%",
-               "width": "100%",
-               "clarity": "od",
-               "clarityLabel":{
-                 "od": "原画",
-//                 "hd": "高清",
-//                 "sd": "标清"
-               },
-             });
-//          let player = new qcVideo.Player('id_test_video', {
-//            "auto_play": "0",
-//            "file_id": fileId,
-//            "stretch_full": 0,
-//            "app_id": "1255600123",
-//            "https": 1
-//          });
+//            fileId = response.data.data.route;
+//            this.title = response.data.data.title;
+//             let player = new TcPlayer('id_test_video', {
+//               "m3u8": "https://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/d953c33f7447398154852882993/BPqylNdWwo4A.mp4?t=5a957204&sign=6c264f22bc067f41a62785cd9d6371f1",
+////               "m3u8_hd": "http://1255600123.vod2.myqcloud.com/cc5a8158vodgzp1255600123/3c07afbc4564972819148766178/7MCWlOa0vR4A.mp4",
+////               "m3u8_sd": "http://1255600123.vod2.myqcloud.com/80822400vodtransgzp1255600123/3c07afbc4564972819148766178/v.f20.mp4",
+//               "autoplay" : false,
+//               "height": "100%",
+//               "width": "100%",
+//               "clarity": "od",
+//               "clarityLabel":{
+//                 "od": "原画",
+////                 "hd": "高清",
+////                 "sd": "标清"
+//               },
+//             });
+          let player = new qcVideo.Player('id_test_video', {
+            "auto_play": "0",
+            "file_id": fileId,
+            "stretch_full": 0,
+            "app_id": "1255600123",
+            "https": 1
+          });
           } else if (response.data.status == 1){
             this.title = "今日没有课程";
           } else if (response.data.status > 0) {
