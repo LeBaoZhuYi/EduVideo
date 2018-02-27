@@ -111,9 +111,6 @@
             let hd = response.data.data.hd;
             this.title = response.data.data.title;
             let playerData = {
-              "m3u8": od,
-              "m3u8_hd": hd,
-              "m3u8_sd": sd,
               "autoplay" : false,
               "height": "100%",
               "width": "100%",
