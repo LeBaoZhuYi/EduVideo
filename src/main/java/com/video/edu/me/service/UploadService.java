@@ -23,19 +23,21 @@ public class UploadService implements Runnable {
         video = videoService.selectByPrimaryKey(videoId);
         String fileName = video.getFileName();
         try {
-            String fileId;
-            if (video.getFileid() == null) {
-                String filePath = Constants.FILE_PATH + fileName;
-                VodApi vodApi = new VodApi(Constants.SECRET_ID, Constants.SECRET_KEY);
-                VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
-                fileId = ((VodUploadCommitResponse) vodBaseResponse).getFileId();
-                video.setStatus(VideoStatus.NORMAL.getId());
-                video.setFileid(fileId);
-            } else{
-                fileId = video.getFileid();
+            if (video.getFileName() == null || video.getFileName().equals("")){
+                video.setStatus(VideoStatus.WAIT_COMPLETE.getId());
+            } else {
+                String fileId;
+                if (video.getFileId() == null || video.getFileId().equals("")) {
+                    String filePath = Constants.FILE_PATH + fileName;
+                    VodApi vodApi = new VodApi(Constants.SECRET_ID, Constants.SECRET_KEY);
+                    VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
+                    fileId = ((VodUploadCommitResponse) vodBaseResponse).getFileId();
+                    video.setStatus(VideoStatus.NORMAL.getId());
+                    video.setFileId(fileId);
+                } else {
+                    // 转码
+                }
             }
-//            String p = QcloudVideoApi.convertVideo(fileId);
-//            String res = QcloudVideoApi.getVideoInfo(fileId);
         } catch (Exception e){
             video.setStatus(VideoStatus.FAILED.getId());
         }

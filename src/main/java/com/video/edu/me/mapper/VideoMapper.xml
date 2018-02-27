@@ -13,7 +13,7 @@
     <result column="od" property="od" jdbcType="VARCHAR" />
     <result column="sd" property="sd" jdbcType="VARCHAR" />
     <result column="hd" property="hd" jdbcType="VARCHAR" />
-    <result column="fileId" property="fileid" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, comment, status, watched_times, ctime, utime, file_name, od, sd, hd, fileId
+    id, title, comment, status, watched_times, ctime, utime, file_name, od, sd, hd, file_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.VideoExample" >
     select
@@ -110,11 +110,11 @@
     insert into video (id, title, comment, 
       status, watched_times, ctime, 
       utime, file_name, od, 
-      sd, hd, fileId)
+      sd, hd, file_id)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{watchedTimes,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}, 
       #{utime,jdbcType=TIMESTAMP}, #{fileName,jdbcType=VARCHAR}, #{od,jdbcType=VARCHAR}, 
-      #{sd,jdbcType=VARCHAR}, #{hd,jdbcType=VARCHAR}, #{fileid,jdbcType=VARCHAR})
+      #{sd,jdbcType=VARCHAR}, #{hd,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
     insert into video
@@ -152,8 +152,8 @@
       <if test="hd != null" >
         hd,
       </if>
-      <if test="fileid != null" >
-        fileId,
+      <if test="fileId != null" >
+        file_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -190,8 +190,8 @@
       <if test="hd != null" >
         #{hd,jdbcType=VARCHAR},
       </if>
-      <if test="fileid != null" >
-        #{fileid,jdbcType=VARCHAR},
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -237,8 +237,8 @@
       <if test="record.hd != null" >
         hd = #{record.hd,jdbcType=VARCHAR},
       </if>
-      <if test="record.fileid != null" >
-        fileId = #{record.fileid,jdbcType=VARCHAR},
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -258,7 +258,7 @@
       od = #{record.od,jdbcType=VARCHAR},
       sd = #{record.sd,jdbcType=VARCHAR},
       hd = #{record.hd,jdbcType=VARCHAR},
-      fileId = #{record.fileid,jdbcType=VARCHAR}
+      file_id = #{record.fileId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -296,8 +296,8 @@
       <if test="hd != null" >
         hd = #{hd,jdbcType=VARCHAR},
       </if>
-      <if test="fileid != null" >
-        fileId = #{fileid,jdbcType=VARCHAR},
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -314,7 +314,7 @@
       od = #{od,jdbcType=VARCHAR},
       sd = #{sd,jdbcType=VARCHAR},
       hd = #{hd,jdbcType=VARCHAR},
-      fileId = #{fileid,jdbcType=VARCHAR}
+      file_id = #{fileId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

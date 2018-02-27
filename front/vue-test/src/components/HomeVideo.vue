@@ -98,7 +98,6 @@
         if (localStorage.getItem("isLogined") == "false") {
           return;
         }
-        let fileId = "";
         let videoClassId = -1;
         let userId = this.getLocalStorage("userId");
         if (this.videoClassId != ""){
@@ -106,25 +105,35 @@
         }
         this.$http.get(this.getVideoUrl, {params: {userId: userId, videoClassId: videoClassId}}).then((response) => {
           if (response.data.status == 0) {
-            fileId = response.data.data.fileId;
-            sd = response.data.data.sd;
-            od = response.data.data.od;
-            hd = response.data.data.hd;
+            let fileId = response.data.data.fileId;
+            let sd = response.data.data.sd;
+            let od = response.data.data.od;
+            let hd = response.data.data.hd;
             this.title = response.data.data.title;
-            let player = new TcPlayer('id_test_video', {
+            let playerData = {
               "m3u8": od,
               "m3u8_hd": hd,
               "m3u8_sd": sd,
               "autoplay" : false,
               "height": "100%",
               "width": "100%",
-              "clarity": "od",
+              "clarity": "sd",
               "clarityLabel":{
-                "od": "原画",
-                "hd": "高清",
-                "sd": "标清"
-              },
-            });
+              }
+            };
+            // if (od != null || od != ""){
+            //   playerData["m3u8"] = od;
+            //   playerData["clarityLabel"]["od"] = "原画";
+            // }
+            if (sd != null || sd != ""){
+              playerData["m3u8_sd"] = sd;
+              playerData["clarityLabel"]["sd"] = "标清";
+            }
+            if (hd != null || hd != ""){
+              playerData["m3u8_hd"] = hd;
+              playerData["clarityLabel"]["hd"] = "高清";
+            }
+            let player = new TcPlayer('id_test_video', playerData);
 //           let player = new qcVideo.Player('id_test_video', {
 //             "auto_play": "0",
 //             "file_id": fileId,

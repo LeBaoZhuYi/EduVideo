@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-02-28 01:43:30
+Date: 2018-02-28 02:30:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,6 @@ CREATE TABLE `video` (
   `od` varchar(511) DEFAULT NULL,
   `sd` varchar(511) DEFAULT NULL,
   `hd` varchar(511) DEFAULT NULL,
-  `fileId` varchar(255) DEFAULT NULL,
+  `file_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;

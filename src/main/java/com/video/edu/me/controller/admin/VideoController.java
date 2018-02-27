@@ -116,9 +116,10 @@ public class VideoController {
             } else {
                 if (params.get("title") != null) video.setTitle(params.get("title"));
                 if (params.get("comment") != null) video.setComment(params.get("comment"));
-                if (params.get("od") != null) video.setComment(params.get("od"));
-                if (params.get("sd") != null) video.setComment(params.get("sd"));
-                if (params.get("hd") != null) video.setComment(params.get("hd"));
+                if (params.get("od") != null) video.setOd(params.get("od"));
+                if (params.get("sd") != null) video.setSd(params.get("sd"));
+                if (params.get("hd") != null) video.setHd(params.get("hd"));
+                if (params.get("fileId") != null) video.setFileId(params.get("fileId"));
                 if (params.get("status") != null) video.setStatus(VideoStatus.getByDesc(params.get("status")).getId());
                 boolean success = (1 == videoService.updateByPrimaryKeySelective(video));
                 if (!success) {

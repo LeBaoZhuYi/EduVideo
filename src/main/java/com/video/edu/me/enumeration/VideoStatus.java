@@ -11,7 +11,8 @@ public enum VideoStatus {
     NORMAL(ByteUtil.intToByte(2), "正常"),
     PAUSE(ByteUtil.intToByte(3), "停用"),
     FAILED(ByteUtil.intToByte(4), "上传失败"),
-    REMOVED(ByteUtil.intToByte(5), "删除");
+    REMOVED(ByteUtil.intToByte(5), "删除"),
+    WAIT_COMPLETE(ByteUtil.intToByte(6), "等待手动编辑");
 
     private byte id;
     private String desc;

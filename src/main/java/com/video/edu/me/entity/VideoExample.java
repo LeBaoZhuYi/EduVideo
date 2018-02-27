@@ -825,73 +825,73 @@ public class VideoExample {
             return (Criteria) this;
         }
 
-        public Criteria andFileidIsNull() {
-            addCriterion("fileId is null");
+        public Criteria andFileIdIsNull() {
+            addCriterion("file_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFileidIsNotNull() {
-            addCriterion("fileId is not null");
+        public Criteria andFileIdIsNotNull() {
+            addCriterion("file_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFileidEqualTo(String value) {
-            addCriterion("fileId =", value, "fileid");
+        public Criteria andFileIdEqualTo(String value) {
+            addCriterion("file_id =", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidNotEqualTo(String value) {
-            addCriterion("fileId <>", value, "fileid");
+        public Criteria andFileIdNotEqualTo(String value) {
+            addCriterion("file_id <>", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidGreaterThan(String value) {
-            addCriterion("fileId >", value, "fileid");
+        public Criteria andFileIdGreaterThan(String value) {
+            addCriterion("file_id >", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidGreaterThanOrEqualTo(String value) {
-            addCriterion("fileId >=", value, "fileid");
+        public Criteria andFileIdGreaterThanOrEqualTo(String value) {
+            addCriterion("file_id >=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidLessThan(String value) {
-            addCriterion("fileId <", value, "fileid");
+        public Criteria andFileIdLessThan(String value) {
+            addCriterion("file_id <", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidLessThanOrEqualTo(String value) {
-            addCriterion("fileId <=", value, "fileid");
+        public Criteria andFileIdLessThanOrEqualTo(String value) {
+            addCriterion("file_id <=", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidLike(String value) {
-            addCriterion("fileId like", value, "fileid");
+        public Criteria andFileIdLike(String value) {
+            addCriterion("file_id like", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidNotLike(String value) {
-            addCriterion("fileId not like", value, "fileid");
+        public Criteria andFileIdNotLike(String value) {
+            addCriterion("file_id not like", value, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidIn(List<String> values) {
-            addCriterion("fileId in", values, "fileid");
+        public Criteria andFileIdIn(List<String> values) {
+            addCriterion("file_id in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidNotIn(List<String> values) {
-            addCriterion("fileId not in", values, "fileid");
+        public Criteria andFileIdNotIn(List<String> values) {
+            addCriterion("file_id not in", values, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidBetween(String value1, String value2) {
-            addCriterion("fileId between", value1, value2, "fileid");
+        public Criteria andFileIdBetween(String value1, String value2) {
+            addCriterion("file_id between", value1, value2, "fileId");
             return (Criteria) this;
         }
 
-        public Criteria andFileidNotBetween(String value1, String value2) {
-            addCriterion("fileId not between", value1, value2, "fileid");
+        public Criteria andFileIdNotBetween(String value1, String value2) {
+            addCriterion("file_id not between", value1, value2, "fileId");
             return (Criteria) this;
         }
     }

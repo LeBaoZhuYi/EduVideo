@@ -25,7 +25,7 @@ public class Video {
 
     private String hd;
 
-    private String fileid;
+    private String fileId;
 
     public Integer getId() {
         return id;
@@ -115,11 +115,11 @@ public class Video {
         this.hd = hd == null ? null : hd.trim();
     }
 
-    public String getFileid() {
-        return fileid;
+    public String getFileId() {
+        return fileId;
     }
 
-    public void setFileid(String fileid) {
-        this.fileid = fileid == null ? null : fileid.trim();
+    public void setFileId(String fileId) {
+        this.fileId = fileId == null ? null : fileId.trim();
     }
 }

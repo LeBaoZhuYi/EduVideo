@@ -49,7 +49,7 @@
             <el-button v-if="props.row.status == '上传失败'" size="small" type="warning"
                        @click="restartUpload(props.$index, props.row)">重新上传
             </el-button>
-            <el-button v-if="props.row.status == '正常' || props.row.status == '停用'" size="small"
+            <el-button v-if="props.row.status == '正常' || props.row.status == '停用' || props.row.status == '等待手动编辑'" size="small"
                        @click="handleEdit(props.$index, props.row)">编辑
             </el-button>
             <el-button size="small" type="danger"
@@ -76,6 +76,9 @@
           </el-form-item>
           <el-form-item label="视频简介" label-width="100px">
             <el-input type="textarea" v-model="selectTable.comment"></el-input>
+          </el-form-item>
+          <el-form-item label="FileId" label-width="100px">
+            <el-input type="textarea" v-model="selectTable.fileId"></el-input>
           </el-form-item>
           <el-form-item label="源地址" label-width="100px">
             <el-input type="textarea" v-model="selectTable.od"></el-input>
