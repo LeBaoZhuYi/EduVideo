@@ -5,8 +5,6 @@ import java.util.Date;
 public class Video {
     private Integer id;
 
-    private String route;
-
     private String title;
 
     private String comment;
@@ -19,20 +17,22 @@ public class Video {
 
     private Date utime;
 
+    private String fileName;
+
+    private String od;
+
+    private String sd;
+
+    private String hd;
+
+    private String fileid;
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route == null ? null : route.trim();
     }
 
     public String getTitle() {
@@ -81,5 +81,45 @@ public class Video {
 
     public void setUtime(Date utime) {
         this.utime = utime;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName == null ? null : fileName.trim();
+    }
+
+    public String getOd() {
+        return od;
+    }
+
+    public void setOd(String od) {
+        this.od = od == null ? null : od.trim();
+    }
+
+    public String getSd() {
+        return sd;
+    }
+
+    public void setSd(String sd) {
+        this.sd = sd == null ? null : sd.trim();
+    }
+
+    public String getHd() {
+        return hd;
+    }
+
+    public void setHd(String hd) {
+        this.hd = hd == null ? null : hd.trim();
+    }
+
+    public String getFileid() {
+        return fileid;
+    }
+
+    public void setFileid(String fileid) {
+        this.fileid = fileid == null ? null : fileid.trim();
     }
 }

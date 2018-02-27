@@ -77,6 +77,15 @@
           <el-form-item label="视频简介" label-width="100px">
             <el-input type="textarea" v-model="selectTable.comment"></el-input>
           </el-form-item>
+          <el-form-item label="源地址" label-width="100px">
+            <el-input type="textarea" v-model="selectTable.od"></el-input>
+          </el-form-item>
+          <el-form-item label="转码标清" label-width="100px">
+            <el-input type="textarea" v-model="selectTable.sd"></el-input>
+          </el-form-item>
+          <el-form-item label="转码高清" label-width="100px">
+            <el-input type="textarea" v-model="selectTable.hd"></el-input>
+          </el-form-item>
           <el-form-item label="状态">
             <el-radio-group v-model="selectTable.status">
               <el-radio label="正常"></el-radio>

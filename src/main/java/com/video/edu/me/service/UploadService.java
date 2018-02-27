@@ -7,10 +7,12 @@ import com.video.edu.me.qcloud.vod.response.VodBaseResponse;
 import com.video.edu.me.qcloud.vod.response.VodUploadCommitResponse;
 import com.video.edu.me.utils.BeanLoader;
 import com.video.edu.me.utils.Constants;
+import com.video.edu.me.utils.QcloudVideoApi;
 
 public class UploadService implements Runnable {
     private int videoId;
     private VideoService videoService;
+    private Video video;
 
     public UploadService(int videoId){
         videoService = BeanLoader.getBean(VideoService.class);
@@ -18,14 +20,22 @@ public class UploadService implements Runnable {
     }
     @Override
     public void run() {
-        Video video = videoService.selectByPrimaryKey(videoId);
-        String fileName = video.getRoute();
+        video = videoService.selectByPrimaryKey(videoId);
+        String fileName = video.getFileName();
         try {
-            String filePath = Constants.FILE_PATH + fileName;
-            VodApi vodApi = new VodApi(Constants.SECRET_ID, Constants.SECRET_KEY);
-            VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
-            video.setStatus(VideoStatus.NORMAL.getId());
-            video.setRoute(((VodUploadCommitResponse)vodBaseResponse).getFileId());
+            String fileId;
+            if (video.getFileid() == null) {
+                String filePath = Constants.FILE_PATH + fileName;
+                VodApi vodApi = new VodApi(Constants.SECRET_ID, Constants.SECRET_KEY);
+                VodBaseResponse vodBaseResponse = vodApi.upload(filePath);
+                fileId = ((VodUploadCommitResponse) vodBaseResponse).getFileId();
+                video.setStatus(VideoStatus.NORMAL.getId());
+                video.setFileid(fileId);
+            } else{
+                fileId = video.getFileid();
+            }
+//            String p = QcloudVideoApi.convertVideo(fileId);
+//            String res = QcloudVideoApi.getVideoInfo(fileId);
         } catch (Exception e){
             video.setStatus(VideoStatus.FAILED.getId());
         }

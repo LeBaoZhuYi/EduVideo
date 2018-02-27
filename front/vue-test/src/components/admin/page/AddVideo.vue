@@ -48,7 +48,7 @@
         form: {
           title: "",
           comment: "",
-          route: ""
+          fileName: ""
         },
         createUrl: '/api/admin/video/create'
       }
@@ -78,7 +78,7 @@
       },
       uploadSuccess(response, file, filseList){
         if(response.status == 0){
-          this.form.route = response.data;
+          this.form.fileName = response.data;
           this.$message.success(this.form.title + "上传临时区成功");
         } else if(response.status > 0){
           this.$message.error(response.msg);

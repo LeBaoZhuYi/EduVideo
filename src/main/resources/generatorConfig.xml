@@ -62,16 +62,16 @@
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
-        <table schema="" tableName="student" domainObjectName="Student"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <!--<table schema="" tableName="video" domainObjectName="Video"-->
+        <!--<table schema="" tableName="student" domainObjectName="Student"-->
                <!--enableCountByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
+        <table schema="" tableName="video" domainObjectName="Video"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
         <!--<table schema="" tableName="student_group" domainObjectName="StudentGroup"-->
                <!--enableCountByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->

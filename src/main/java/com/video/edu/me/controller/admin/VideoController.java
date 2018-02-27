@@ -49,7 +49,7 @@ public class VideoController {
             boolean success = videoService.create(video);
             if (!success) {
                 res.put("status", 1);
-                res.put("msg", "添加s视频出错");
+                res.put("msg", "添加视频出错");
                 res.put("data", null);
             } else {
                 Thread uploadThread = new Thread(new UploadService(video.getId()));
@@ -116,6 +116,9 @@ public class VideoController {
             } else {
                 if (params.get("title") != null) video.setTitle(params.get("title"));
                 if (params.get("comment") != null) video.setComment(params.get("comment"));
+                if (params.get("od") != null) video.setComment(params.get("od"));
+                if (params.get("sd") != null) video.setComment(params.get("sd"));
+                if (params.get("hd") != null) video.setComment(params.get("hd"));
                 if (params.get("status") != null) video.setStatus(VideoStatus.getByDesc(params.get("status")).getId());
                 boolean success = (1 == videoService.updateByPrimaryKeySelective(video));
                 if (!success) {

@@ -3,13 +3,17 @@
 <mapper namespace="com.video.edu.me.dao.VideoMapper" >
   <resultMap id="BaseResultMap" type="com.video.edu.me.entity.Video" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="route" property="route" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="comment" property="comment" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="watched_times" property="watchedTimes" jdbcType="INTEGER" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
     <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="od" property="od" jdbcType="VARCHAR" />
+    <result column="sd" property="sd" jdbcType="VARCHAR" />
+    <result column="hd" property="hd" jdbcType="VARCHAR" />
+    <result column="fileId" property="fileid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, route, title, comment, status, watched_times, ctime, utime
+    id, title, comment, status, watched_times, ctime, utime, file_name, od, sd, hd, fileId
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.VideoExample" >
     select
@@ -103,21 +107,20 @@
     </if>
   </delete>
   <insert id="insert" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
-    insert into video (id, route, title, 
-      comment, status, watched_times, 
-      ctime, utime)
-    values (#{id,jdbcType=INTEGER}, #{route,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{comment,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{watchedTimes,jdbcType=INTEGER}, 
-      #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP})
+    insert into video (id, title, comment, 
+      status, watched_times, ctime, 
+      utime, file_name, od, 
+      sd, hd, fileId)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{watchedTimes,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{utime,jdbcType=TIMESTAMP}, #{fileName,jdbcType=VARCHAR}, #{od,jdbcType=VARCHAR}, 
+      #{sd,jdbcType=VARCHAR}, #{hd,jdbcType=VARCHAR}, #{fileid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
     insert into video
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
-      </if>
-      <if test="route != null" >
-        route,
       </if>
       <if test="title != null" >
         title,
@@ -137,13 +140,25 @@
       <if test="utime != null" >
         utime,
       </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="od != null" >
+        od,
+      </if>
+      <if test="sd != null" >
+        sd,
+      </if>
+      <if test="hd != null" >
+        hd,
+      </if>
+      <if test="fileid != null" >
+        fileId,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="route != null" >
-        #{route,jdbcType=VARCHAR},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -163,6 +178,21 @@
       <if test="utime != null" >
         #{utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="od != null" >
+        #{od,jdbcType=VARCHAR},
+      </if>
+      <if test="sd != null" >
+        #{sd,jdbcType=VARCHAR},
+      </if>
+      <if test="hd != null" >
+        #{hd,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.video.edu.me.entity.VideoExample" resultType="java.lang.Integer" >
@@ -176,9 +206,6 @@
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.route != null" >
-        route = #{record.route,jdbcType=VARCHAR},
       </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
@@ -198,6 +225,21 @@
       <if test="record.utime != null" >
         utime = #{record.utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.od != null" >
+        od = #{record.od,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sd != null" >
+        sd = #{record.sd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hd != null" >
+        hd = #{record.hd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileid != null" >
+        fileId = #{record.fileid,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -206,13 +248,17 @@
   <update id="updateByExample" parameterType="map" >
     update video
     set id = #{record.id,jdbcType=INTEGER},
-      route = #{record.route,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       comment = #{record.comment,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       watched_times = #{record.watchedTimes,jdbcType=INTEGER},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      utime = #{record.utime,jdbcType=TIMESTAMP}
+      utime = #{record.utime,jdbcType=TIMESTAMP},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      od = #{record.od,jdbcType=VARCHAR},
+      sd = #{record.sd,jdbcType=VARCHAR},
+      hd = #{record.hd,jdbcType=VARCHAR},
+      fileId = #{record.fileid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,9 +266,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.video.edu.me.entity.Video" >
     update video
     <set >
-      <if test="route != null" >
-        route = #{route,jdbcType=VARCHAR},
-      </if>
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -241,18 +284,37 @@
       <if test="utime != null" >
         utime = #{utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="od != null" >
+        od = #{od,jdbcType=VARCHAR},
+      </if>
+      <if test="sd != null" >
+        sd = #{sd,jdbcType=VARCHAR},
+      </if>
+      <if test="hd != null" >
+        hd = #{hd,jdbcType=VARCHAR},
+      </if>
+      <if test="fileid != null" >
+        fileId = #{fileid,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.Video" >
     update video
-    set route = #{route,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       watched_times = #{watchedTimes,jdbcType=INTEGER},
       ctime = #{ctime,jdbcType=TIMESTAMP},
-      utime = #{utime,jdbcType=TIMESTAMP}
+      utime = #{utime,jdbcType=TIMESTAMP},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      od = #{od,jdbcType=VARCHAR},
+      sd = #{sd,jdbcType=VARCHAR},
+      hd = #{hd,jdbcType=VARCHAR},
+      fileId = #{fileid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
