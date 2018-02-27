@@ -19,15 +19,16 @@ module.exports = {
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+    bundleAnalyzerReport: process.env.npm_config_report,
     proxyTable: {
       '/api': {
         target: 'http://localhost:8081/',
-          changeOrigin: true,
-          pathRewrite: {
+        changeOrigin: true,
+        pathRewrite: {
           '^/api': '/'//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+        }
+      }
     }
-  }
   },
   dev: {
     env: require('./dev.env'),
