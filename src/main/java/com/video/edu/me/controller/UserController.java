@@ -99,12 +99,11 @@ public class UserController {
         String token = "";
         if (null != cookies) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName() == "token"){
+                if (cookie.getName().equals("token")) {
                     token = cookie.getValue();
                 }
             }
         }
-
         if (tokenService.getUserIdByToken(token) == -1) {
             res.put("status", -1);
             res.put("msg", "noAuth");
@@ -119,19 +118,20 @@ public class UserController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> logout(int userId) {
+    private Map<String, Object> logout(String token) {
         Map<String, Object> res = new HashMap<>();
         try {
+            tokenService.clearingToken(token);
             res.put("status", 0);
             res.put("msg", "");
-            res.put("data", userId);
+            res.put("data", null);
         } catch (RuntimeException re) {
-            logger.error("update videoClass error with runtimException: {}", re.getMessage());
+            logger.error("logout error with token: {}, runtimeException: {}", token, re.getMessage());
             res.put("status", 100);
             res.put("msg", re.getMessage());
             res.put("data", null);
         } catch (Exception e) {
-            logger.error("logout error with userId: {},  exception: {}", userId, e.getMessage());
+            logger.error("logout error with token: {},  exception: {}", token, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

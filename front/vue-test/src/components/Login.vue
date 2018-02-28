@@ -67,8 +67,7 @@
         })
           .then((response) => {
             if (response.data.status == 0) {
-              this.setLocalStorage('token', response.data.data);
-              this.setLocalStorage("isLogined", "true");
+              this.setCookie('token', response.data.data, 1);
               window.location.href = "/home";
             } else if (response.data.status > 0) {
               this.$message.error('登录失败！' + response.data.msg);

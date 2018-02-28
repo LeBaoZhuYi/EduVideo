@@ -4,6 +4,7 @@ import com.video.edu.me.entity.Student;
 import com.video.edu.me.enumeration.SexType;
 import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.StudentService;
+import com.video.edu.me.service.TokenService;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
 import org.slf4j.Logger;
@@ -28,12 +29,15 @@ public class StudentController {
 
     @Autowired
     StudentGroupService studentGroupService;
+    @Autowired
+    TokenService tokenService;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> info(int userId){
+    private Map<String, Object> info(String token){
         Map<String, Object> res = new HashMap<>();
         try {
+            int userId = tokenService.getUserIdByToken(token);
             Student student = studentService.getStudentByUserId(userId);
             Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
             AdjustEntityParamsUtil.removeParams(studentMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
@@ -44,7 +48,7 @@ public class StudentController {
             res.put("msg", "");
             res.put("data", studentMap);
         }catch (Exception e){
-            logger.error("get student info error with userId: {}, exception: {}", userId, e.getMessage());
+            logger.error("get student info error with token: {}, exception: {}", token, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

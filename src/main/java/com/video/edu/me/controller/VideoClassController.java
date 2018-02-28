@@ -27,12 +27,15 @@ public class VideoClassController {
     StudentClassInfoService studentClassInfoService;
     @Autowired
     StudentService studentService;
+    @Autowired
+    TokenService tokenService;
 
     @RequestMapping(value = "/classList", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> classList(int userId) {
+    private Map<String, Object> classList(String token) {
         Map<String, Object> res = new HashMap<>();
         try {
+            int userId = tokenService.getUserIdByToken(token);
             List<VideoClass> currentMonthClassList = videoClassService.getCurrentMonthClassListByUserId(userId);
             List<Map<String, Object>> videoClassMapList = new ArrayList<>();
             for (VideoClass videoClass : currentMonthClassList) {
@@ -44,12 +47,12 @@ public class VideoClassController {
             res.put("msg", "");
             res.put("data", videoClassMapList);
         } catch (RuntimeException re) {
-            logger.error("get videoClassList error with userId: {}, runtimeException: {}", userId, re.getMessage());
+            logger.error("get videoClassList error with token: {}, runtimeException: {}", token, re.getMessage());
             res.put("status", 100);
             res.put("msg", re.getMessage());
             res.put("data", null);
         } catch (Exception e) {
-            logger.error("get videoClassList error with userId: {}, exception: {}", userId, e.getMessage());
+            logger.error("get videoClassList error with token: {}, exception: {}", token, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
@@ -59,9 +62,10 @@ public class VideoClassController {
 
     @RequestMapping(value = "/today", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> today(int userId) {
+    private Map<String, Object> today(String token) {
         Map<String, Object> res = new HashMap<>();
         try {
+            int userId = tokenService.getUserIdByToken(token);
             Map<String, Object> data = new HashMap<>();
             VideoClass todayVideoClass = videoClassService.getTodayVideoClassByUserId(userId);
             if (todayVideoClass == null){
@@ -85,12 +89,12 @@ public class VideoClassController {
                 res.put("data", data);
             }
         } catch (RuntimeException re) {
-            logger.error("get today class info error with userId: {}, runtimeException: {}", userId, re.getMessage());
+            logger.error("get today class info error with token: {}, runtimeException: {}", token, re.getMessage());
             res.put("status", 100);
             res.put("msg", re.getMessage());
             res.put("data", null);
         } catch (Exception e) {
-            logger.error("get today class info error with userId: {}, exception: {}", userId, e.getMessage());
+            logger.error("get today class info error with token: {}, exception: {}", token, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

@@ -95,9 +95,6 @@
         player && player.replay()
       },
       start: function () {
-        if (localStorage.getItem("isLogined") == "false") {
-          return;
-        }
         let videoClassId = -1;
         let token = this.getCookie("token");
         if (this.videoClassId != ""){

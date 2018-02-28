@@ -94,7 +94,7 @@ new Vue({
     "$route": 'checkLogin'
   },
   //进入页面时
-  mounted() {
+  beforeMount() {
     this.checkLogin();
   },
   methods: {
@@ -107,16 +107,26 @@ new Vue({
         return;
       }
       if (this.$route.path.indexOf("/admin") >= 0) {
-        return;
-      }
-      let userId = this.getLocalStorage("userId");
-      if (userId == "" || userId == "undefined" || userId == undefined) {
-        this.$alert('未检测到登录信息，请重新登录！', '警告', {
-          confirmButtonText: '确定',
+        if (this.$route.path == "/admin/login") {
+          return;
+        }
+        let checkUrl = '/api/admin/user/checkLogin';
+        this.$http.get(checkUrl).then((response) => {
+          if (response.data.status != 0) {
+            this.$message.error('当前并未登录');
+            window.location.href = "/noAuth";
+            return;
+          }
         });
-        localStorage.setItem("isLogined", "false");
-        this.$router.push('/');
       }
+      let checkUrl = '/api/user/checkLogin';
+      this.$http.get(checkUrl).then((response) => {
+        if (response.data.status != 0) {
+          this.$message.error('当前并未登录');
+          window.location.href = "/noAuth";
+          return;
+        }
+      });
     }
   }
-})
+});

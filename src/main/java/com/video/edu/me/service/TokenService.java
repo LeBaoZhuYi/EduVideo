@@ -38,27 +38,30 @@ public class TokenService extends BaseService<Token, TokenExample> {
 	}
 
 	public String afterLogin(int userId) throws Exception {
-		Token token = null;
+		clearingToken(userId);
+		Token token = new Token();
 		String accessToken = generateToken(userId);
+		token.setUserId(userId);
+		token.setAccessToken(accessToken);
+		tokenMapper.insertSelective(token);
+		return accessToken;
+	}
+
+	public boolean clearingToken(String accessToken){
+		TokenExample tokenExample = new TokenExample();
+		tokenExample.createCriteria().andAccessTokenEqualTo(accessToken);
+		return 1 == tokenMapper.deleteByExample(tokenExample);
+	}
+
+	public boolean clearingToken(int userId){
 		TokenExample tokenExample = new TokenExample();
 		tokenExample.createCriteria().andUserIdEqualTo(userId);
-		List<Token> tokenList = tokenMapper.selectByExample(tokenExample);
-		if (tokenList.size() == 0){
-			token = new Token();
-			token.setUserId(userId);
-			token.setAccessToken(accessToken);
-			tokenMapper.insertSelective(token);
-		} else{
-			token = tokenList.get(0);
-			token.setAccessToken(accessToken);
-			tokenMapper.updateByPrimaryKey(token);
-		}
-		return accessToken;
+		return 1 == tokenMapper.deleteByExample(tokenExample);
 	}
 
 	private String generateToken(int userId) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		int random = (int)((Math.random()*9+1)*100000);
 		long now = System.currentTimeMillis();
-		return EncryptUtil.encoderByMd5(String.format("%d-%d-%l", userId, random, now));
+		return EncryptUtil.encoderByMd5(String.format("%d-%d-%d", userId, random, now));
 	}
 }

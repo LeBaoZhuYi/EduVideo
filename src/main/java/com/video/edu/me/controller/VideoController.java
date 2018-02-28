@@ -26,14 +26,17 @@ public class VideoController {
     VideoClassService videoClassService;
     @Autowired
     StudentService studentService;
+    @Autowired
+    TokenService tokenService;
 
     @RequestMapping(value = "/play", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> play(int userId, int videoClassId) {
+    private Map<String, Object> play(String token, int videoClassId) {
         Map<String, Object> res = new HashMap<>();
         int videoId = 0;
         try {
-            VideoClass videoClass = null;
+            int userId = tokenService.getUserIdByToken(token);
+            VideoClass videoClass;
             if (videoClassId == -1) {
                 videoClass = videoClassService.getTodayVideoClassByUserId(userId);
                 if (videoClass == null) {
@@ -59,12 +62,12 @@ public class VideoController {
             res.put("msg", "");
             res.put("data", videoMap);
         } catch (RuntimeException re) {
-            logger.error("play video error with userId: {}, videoId: {}, runtimeException: {}", userId, videoId, re.getMessage());
+            logger.error("play video error with token: {}, videoId: {}, runtimeException: {}", token, videoId, re.getMessage());
             res.put("status", 100);
             res.put("msg", re.getMessage());
             res.put("data", null);
         } catch (Exception e) {
-            logger.error("play video error with userId: {}, videoId: {}, exception: {}", userId, videoId, e.getMessage());
+            logger.error("play video error with token: {}, videoId: {}, exception: {}", token, videoId, e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);
