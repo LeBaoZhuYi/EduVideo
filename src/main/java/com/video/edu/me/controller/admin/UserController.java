@@ -209,7 +209,7 @@ public class UserController {
         String token = "";
         if (null != cookies) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("admin_token")) {
+                if (cookie.getName().equals("adminToken")) {
                     token = cookie.getValue();
                 }
             }

@@ -69,7 +69,7 @@
         })
           .then((response) => {
             if (response.data.status == 0) {
-              this.setCookie('admin_token', response.data.data, 1);
+              this.setCookie('adminToken', response.data.data, 1);
               window.location.href = "/admin/home";
             } else if (response.data.status > 0) {
               this.$message.error('登录失败！' + response.data.msg);
