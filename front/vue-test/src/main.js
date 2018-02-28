@@ -118,6 +118,7 @@ new Vue({
             return;
           }
         });
+        return;
       } else {
         let checkUrl = '/api/user/checkLogin';
         this.$http.get(checkUrl).then((response) => {

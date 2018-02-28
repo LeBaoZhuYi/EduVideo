@@ -12,7 +12,7 @@
       <p><em>讲师：{{info.teacherName}}</em></p>
       <p><em>开始时间：{{startTime}}</em></p>
       <p><em>结束时间：{{endTime}}</em></p>
-      <el-button type="primary" round @click="open('/person')">更多信息</el-button>
+      <el-button type="primary" round @click="window.location.href = '/person';">更多信息</el-button>
     </el-row>
   </div>
 </template>
