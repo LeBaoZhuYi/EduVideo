@@ -236,7 +236,7 @@
     methods: {
       getUserInfoAndClassInfo: function (token) {
 //        this.$http.get("/static/Person.json", {params: {token: token}})
-        this.$http.get("/api/student/info", {params: {userId: userId}})
+        this.$http.get("/api/student/info", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               this.studyName = response.data.data.studyName;
@@ -267,7 +267,7 @@
             }
           });
         this.$http.get("/static/Person.json", {params: {token: token}})
-        //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
+        //        this.$http.get("/api/videoClass/today", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               this.videoTitle = response.data.data.videoTitle;

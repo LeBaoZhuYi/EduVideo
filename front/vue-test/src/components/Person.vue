@@ -22,6 +22,11 @@
   import ElFooter from "../../node_modules/element-ui/packages/footer/src/main.vue";
 
   export default {
+    data() {
+      return {
+        checkLoginTimer: null
+      }
+    },
     components: {
       ElFooter,
       ElMain,
@@ -38,11 +43,20 @@
         this.$router.push('/');
         return;
       }
+      this.checkLoginTimer = setInterval(this.checkLogin, 5000)
     },
     methods: {
-      header(path){
-
-      }
+    checkLogin(){
+      let checkUrl = '/api/user/checkLogin';
+      this.$http.get(checkUrl).then((response) => {
+        if (response.data.status != 0) {
+          this.$alert("您已被踢下线", "错误");
+          clearInterval(this.checkLoginTimer);
+          window.location.href = "/noAuth";
+          return;
+        }
+      });
+    }
     }
   }
 </script>

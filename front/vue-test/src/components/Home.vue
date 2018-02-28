@@ -62,7 +62,8 @@
           classTimes: ""
         },
         todayClassStartTime: 0,
-        todayClassEndTime: 0
+        todayClassEndTime: 0,
+        checkLoginTimer: null
       }
     },
     components: {
@@ -81,6 +82,7 @@
         return;
       }
       this.getUserInfoAndClassInfo(token);
+      this.checkLoginTimer = setInterval(this.checkLogin, 5000)
     },
     methods: {
       getUserInfoAndClassInfo: function (token) {
@@ -133,6 +135,17 @@
           this.todayClassStartTime = 0;
           this.todayClassEndTime = Date.parse(new Date()) + 1000 * 60 * 60 * 60;
         }
+      },
+      checkLogin(){
+        let checkUrl = '/api/user/checkLogin';
+        this.$http.get(checkUrl).then((response) => {
+          if (response.data.status != 0) {
+            this.$alert("您已被踢下线", "错误");
+            clearInterval(this.checkLoginTimer);
+            window.location.href = "/noAuth";
+            return;
+          }
+        });
       }
     }
   }
