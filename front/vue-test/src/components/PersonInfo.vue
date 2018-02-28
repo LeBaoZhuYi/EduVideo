@@ -235,9 +235,9 @@
     },
     methods: {
       getUserInfoAndClassInfo: function (token) {
-//        this.$http.get("/static/Person.json", {params: {token: token}})
         const self = this;
-        self.$http.get("/api/student/info", {params: {token: token}})
+       this.$http.get("/static/Person.json", {params: {token: token}})
+        // self.$http.get("/api/student/info", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               self.studyName = response.data.data.studyName;
