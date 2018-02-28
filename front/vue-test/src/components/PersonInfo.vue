@@ -236,47 +236,48 @@
     methods: {
       getUserInfoAndClassInfo: function (token) {
 //        this.$http.get("/static/Person.json", {params: {token: token}})
-        this.$http.get("/api/student/info", {params: {token: token}})
+        const self = this;
+        self.$http.get("/api/student/info", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.studyName = response.data.data.studyName;
-              this.groupName = response.data.data.groupName;
-              this.studyIntro = response.data.data.studyIntro;
-              this.teacherRemark = response.data.data.teacherRemark;
-              this.parentWords = response.data.data.parentWords;
-              this.phone = response.data.data.phone;
-              this.sex = response.data.data.sex;
-              this.interest = response.data.data.interest;
-              this.disagree = response.data.data.disagree;
-              this.ideal = response.data.data.ideal;
-              this.form.studyName = response.data.data.studyName;
-              this.form.studyIntro = response.data.data.studyIntro;
-              this.form.teacherRemark = response.data.data.teacherRemark;
-              this.form.sex = response.data.data.sex;
-              this.form.birthday = response.data.data.birthday;
-              this.form.parentWords = response.data.data.parentWords;
-              this.form.phone = response.data.data.phone;
-              this.form.interest = response.data.data.interest;
-              this.form.disagree = response.data.data.disagree;
-              this.form.ideal = response.data.data.ideal;
+              self.studyName = response.data.data.studyName;
+              self.groupName = response.data.data.groupName;
+              self.studyIntro = response.data.data.studyIntro;
+              self.teacherRemark = response.data.data.teacherRemark;
+              self.parentWords = response.data.data.parentWords;
+              self.phone = response.data.data.phone;
+              self.sex = response.data.data.sex;
+              self.interest = response.data.data.interest;
+              self.disagree = response.data.data.disagree;
+              self.ideal = response.data.data.ideal;
+              self.form.studyName = response.data.data.studyName;
+              self.form.studyIntro = response.data.data.studyIntro;
+              self.form.teacherRemark = response.data.data.teacherRemark;
+              self.form.sex = response.data.data.sex;
+              self.form.birthday = response.data.data.birthday;
+              self.form.parentWords = response.data.data.parentWords;
+              self.form.phone = response.data.data.phone;
+              self.form.interest = response.data.data.interest;
+              self.form.disagree = response.data.data.disagree;
+              self.form.ideal = response.data.data.ideal;
 
             } else if (response.data.status > 0) {
-              this.$alert("获取用户信息失败!" + response.data.msg, "错误");
+              self.$alert("获取用户信息失败!" + response.data.msg, "错误");
             } else {
-              this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
+              self.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
             }
           });
-        this.$http.get("/static/Person.json", {params: {token: token}})
+        self.$http.get("/static/Person.json", {params: {token: token}})
         //        this.$http.get("/api/videoClass/today", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.videoTitle = response.data.data.videoTitle;
-              this.isWatched = response.data.data.isWatched ? "是" : "否";
-              this.classTimes = response.data.data.classTimes;
+              self.videoTitle = response.data.data.videoTitle;
+              self.isWatched = response.data.data.isWatched ? "是" : "否";
+              self.classTimes = response.data.data.classTimes;
             } else if (response.data.status > 0) {
-              this.$alert("获取课程信息失败!" + response.data.msg, "错误");
+              self.$alert("获取课程信息失败!" + response.data.msg, "错误");
             } else {
-              this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
+              self.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
             }
           });
       },

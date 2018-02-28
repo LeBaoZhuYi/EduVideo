@@ -103,7 +103,7 @@ new Vue({
         this.$router.push('/b');
       }
       if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"
-        || this.$route.path == "/test" || this.$route.path == "/noAuth" || this.$route.path == "/admin/noAuth") {
+        || this.$route.path == "/document" || this.$route.path == "/noAuth" || this.$route.path == "/admin/noAuth") {
         return;
       }
       if (this.$route.path.indexOf("/admin") >= 0) {

@@ -19,6 +19,10 @@ export default new Router({
       component: resolve => require(['../components/NoAuth.vue'], resolve)
     },
     {
+      path: '/document',
+      component: resolve => require(['../components/Document.vue'], resolve)
+    },
+    {
       path: '/admin',
       redirect: '/admin/login'
     },

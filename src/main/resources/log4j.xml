@@ -3,13 +3,53 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
+	<!--<appender name="console" class="org.apache.log4j.ConsoleAppender">-->
+		<!--<param name="Target" value="System.out" />-->
+		<!--<layout class="org.apache.log4j.PatternLayout">-->
+			<!--<param name="ConversionPattern" value="%-5p: %c - %m%n" />-->
+		<!--</layout>-->
+	<!--</appender>-->
+
+	<appender name="LOGDEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- Threshold屏蔽级别之下的日志输出 -->
+		<param name="Threshold" value="DEBUG" />
+		<param name="encoding" value="UTF-8" />
+		<param name="File" value="/home/work/project/logs/linkin-debug.log" />
+		<param name="DatePattern" value="'debug_'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%c] [%L] %p [%m]%n" />
 		</layout>
 	</appender>
-	
+
+	<appender name="LOGINFO" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- <param name="Threshold" value="INFO" /> -->
+		<param name="encoding" value="UTF-8" />
+		<param name="File" value="/home/work/project/logs/linkin-info.log" />
+		<param name="DatePattern" value="'info_'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%c] [%L] %p [%m]%n" />
+		</layout>
+		<!--限制输出级别 -->
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="INFO" />
+		</filter>
+	</appender>
+
+	<appender name="LOGERROR" class="org.apache.log4j.DailyRollingFileAppender">
+		<!-- <param name="Threshold" value="ERROR" /> -->
+		<param name="encoding" value="UTF-8" />
+		<param name="File" value="/home/work/project/logs/linkin-error.log" />
+		<param name="DatePattern" value="'error_'yyyy-MM-dd'.log'" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%c] [%L] %p [%m]%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="ERROR" />
+		</filter>
+	</appender>
+
 	<!-- Application Loggers -->
 	<logger name="com.video.edu.me.biz">
 		<level value="info" />
