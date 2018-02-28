@@ -2,13 +2,13 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
     <!-- 引入配置文件 -->
-    <!--<properties resource="db.properties"/>-->
+    <properties resource="db.properties"/>
 
     <!-- 指定数据连接驱动jar地址 -->
     <classPathEntry location="${classPath}" />
 
     <!-- 一个数据库一个context -->
-    <context id="mifi_loan_counter">
+    <context id="edu_video">
         <!-- 注释 -->
         <commentGenerator >
             <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
@@ -50,10 +50,6 @@
         </javaClientGenerator>
 
         <!-- 配置表信息,tableName 表名，domainObjectName  生成实体类名称 -->
-        <table schema="" tableName="user" domainObjectName="User"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
             <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
                 是否生成 example类   -->
 
@@ -61,32 +57,40 @@
                      <!--<ignoreColumn column="FRED" /> -->
             <!-- 指定列的java数据类型 -->
                       <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
-        </table>
-        <table schema="" tableName="student" domainObjectName="Student"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table schema="" tableName="play_plan" domainObjectName="PlayPlan"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
-        <table schema="" tableName="history" domainObjectName="History"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table schema="" tableName="video_class" domainObjectName="VideoClass"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
+        <!--<table schema="" tableName="student" domainObjectName="Student"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
         <table schema="" tableName="video" domainObjectName="Video"
                enableCountByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                enableUpdateByExample="true">
         </table>
-        <table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
-
+        <!--<table schema="" tableName="student_group" domainObjectName="StudentGroup"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
+        <!--<table schema="" tableName="student_class_info" domainObjectName="StudentClassInfo"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
+        <!--<table schema="" tableName="user" domainObjectName="User"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
+        <!--<table schema="" tableName="watch_authority" domainObjectName="WatchAuthority"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

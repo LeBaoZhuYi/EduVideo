@@ -1,7 +1,11 @@
 package com.video.edu.me.controller;
 
 import com.video.edu.me.entity.Student;
+import com.video.edu.me.enumeration.SexType;
+import com.video.edu.me.service.StudentGroupService;
 import com.video.edu.me.service.StudentService;
+import com.video.edu.me.utils.AdjustEntityParamsUtil;
+import com.video.edu.me.utils.ObjectMapTransformUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -19,28 +26,31 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @Autowired
+    StudentGroupService studentGroupService;
+
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    private boolean create(Student student) throws IllegalArgumentException, IllegalAccessException {
-        return studentService.insertSelective(student) != 0;
+    private Map<String, Object> info(int userId){
+        Map<String, Object> res = new HashMap<>();
+        try {
+            Student student = studentService.getStudentByUserId(userId);
+            Map<String, Object> studentMap = ObjectMapTransformUtil.obj2Map(student);
+            AdjustEntityParamsUtil.removeParams(studentMap, AdjustEntityParamsUtil.COMMON_USELESS_PARAMS);
+            String groupName = studentGroupService.getStudentGroupNameById(student.getGroupId());
+            studentMap.put("groupName", groupName);
+            studentMap.put("sex", SexType.getById(student.getSex()).getDesc());
+            res.put("status", 0);
+            res.put("msg", "");
+            res.put("data", studentMap);
+        }catch (Exception e){
+            logger.error("get student info error with userId: {}, exception: {}", userId, e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
     }
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    @ResponseBody
-    private Student find(int id) throws IllegalArgumentException, IllegalAccessException {
-        return studentService.selectByPrimaryKey(id);
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    @ResponseBody
-    private boolean delete(int id) throws IllegalArgumentException, IllegalAccessException {
-        return studentService.deleteByPrimaryKey(id) != 0;
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    @ResponseBody
-    private boolean update(Student student) throws IllegalArgumentException, IllegalAccessException {
-        return studentService.updateByPrimaryKey(student) != 0;
-    }
 }
 

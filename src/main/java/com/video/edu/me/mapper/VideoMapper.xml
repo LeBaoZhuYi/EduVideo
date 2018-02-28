@@ -1,37 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.video.edu.me.dao.VideoMapper">
-  <resultMap id="BaseResultMap" type="com.video.edu.me.entity.Video">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="route" jdbcType="VARCHAR" property="route" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="comment" jdbcType="VARCHAR" property="comment" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="watched_times" jdbcType="INTEGER" property="watchedTimes" />
-    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
-    <result column="utime" jdbcType="TIMESTAMP" property="utime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.video.edu.me.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.video.edu.me.entity.Video" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="watched_times" property="watchedTimes" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="utime" property="utime" jdbcType="TIMESTAMP" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="od" property="od" jdbcType="VARCHAR" />
+    <result column="sd" property="sd" jdbcType="VARCHAR" />
+    <result column="hd" property="hd" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -42,25 +44,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -71,220 +73,248 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    id, route, name, teacher_name, title, comment, status, watched_times, ctime, utime
+  <sql id="Base_Column_List" >
+    id, title, comment, status, watched_times, ctime, utime, file_name, od, sd, hd, file_id
   </sql>
-  <select id="selectByExample" parameterType="com.video.edu.me.entity.VideoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.video.edu.me.entity.VideoExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from video
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from video
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from video
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.video.edu.me.entity.VideoExample">
+  <delete id="deleteByExample" parameterType="com.video.edu.me.entity.VideoExample" >
     delete from video
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.video.edu.me.entity.Video">
-    insert into video (id, route, name, 
-      teacher_name, title, comment, 
+  <insert id="insert" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
+    insert into video (id, title, comment, 
       status, watched_times, ctime, 
-      utime)
-    values (#{id,jdbcType=INTEGER}, #{route,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{teacherName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      utime, file_name, od, 
+      sd, hd, file_id)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{watchedTimes,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}, 
-      #{utime,jdbcType=TIMESTAMP})
+      #{utime,jdbcType=TIMESTAMP}, #{fileName,jdbcType=VARCHAR}, #{od,jdbcType=VARCHAR}, 
+      #{sd,jdbcType=VARCHAR}, #{hd,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.video.edu.me.entity.Video">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.video.edu.me.entity.Video" >
     insert into video
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="route != null">
-        route,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="teacherName != null">
-        teacher_name,
-      </if>
-      <if test="title != null">
+      <if test="title != null" >
         title,
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         comment,
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status,
       </if>
-      <if test="watchedTimes != null">
+      <if test="watchedTimes != null" >
         watched_times,
       </if>
-      <if test="ctime != null">
+      <if test="ctime != null" >
         ctime,
       </if>
-      <if test="utime != null">
+      <if test="utime != null" >
         utime,
       </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="od != null" >
+        od,
+      </if>
+      <if test="sd != null" >
+        sd,
+      </if>
+      <if test="hd != null" >
+        hd,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="route != null">
-        #{route,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null">
-        #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
+      <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="watchedTimes != null">
+      <if test="watchedTimes != null" >
         #{watchedTimes,jdbcType=INTEGER},
       </if>
-      <if test="ctime != null">
+      <if test="ctime != null" >
         #{ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="utime != null">
+      <if test="utime != null" >
         #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="od != null" >
+        #{od,jdbcType=VARCHAR},
+      </if>
+      <if test="sd != null" >
+        #{sd,jdbcType=VARCHAR},
+      </if>
+      <if test="hd != null" >
+        #{hd,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.video.edu.me.entity.VideoExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.video.edu.me.entity.VideoExample" resultType="java.lang.Integer" >
     select count(*) from video
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update video
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.route != null">
-        route = #{record.route,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.teacherName != null">
-        teacher_name = #{record.teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
+      <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.comment != null">
+      <if test="record.comment != null" >
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
-      <if test="record.status != null">
+      <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
       </if>
-      <if test="record.watchedTimes != null">
+      <if test="record.watchedTimes != null" >
         watched_times = #{record.watchedTimes,jdbcType=INTEGER},
       </if>
-      <if test="record.ctime != null">
+      <if test="record.ctime != null" >
         ctime = #{record.ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.utime != null">
+      <if test="record.utime != null" >
         utime = #{record.utime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.od != null" >
+        od = #{record.od,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sd != null" >
+        sd = #{record.sd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hd != null" >
+        hd = #{record.hd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update video
     set id = #{record.id,jdbcType=INTEGER},
-      route = #{record.route,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
       title = #{record.title,jdbcType=VARCHAR},
       comment = #{record.comment,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       watched_times = #{record.watchedTimes,jdbcType=INTEGER},
       ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      utime = #{record.utime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+      utime = #{record.utime,jdbcType=TIMESTAMP},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      od = #{record.od,jdbcType=VARCHAR},
+      sd = #{record.sd,jdbcType=VARCHAR},
+      hd = #{record.hd,jdbcType=VARCHAR},
+      file_id = #{record.fileId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.video.edu.me.entity.Video">
+  <update id="updateByPrimaryKeySelective" parameterType="com.video.edu.me.entity.Video" >
     update video
-    <set>
-      <if test="route != null">
-        route = #{route,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null">
-        teacher_name = #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
+    <set >
+      <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null">
+      <if test="comment != null" >
         comment = #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+      <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="watchedTimes != null">
+      <if test="watchedTimes != null" >
         watched_times = #{watchedTimes,jdbcType=INTEGER},
       </if>
-      <if test="ctime != null">
+      <if test="ctime != null" >
         ctime = #{ctime,jdbcType=TIMESTAMP},
       </if>
-      <if test="utime != null">
+      <if test="utime != null" >
         utime = #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="od != null" >
+        od = #{od,jdbcType=VARCHAR},
+      </if>
+      <if test="sd != null" >
+        sd = #{sd,jdbcType=VARCHAR},
+      </if>
+      <if test="hd != null" >
+        hd = #{hd,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.Video">
+  <update id="updateByPrimaryKey" parameterType="com.video.edu.me.entity.Video" >
     update video
-    set route = #{route,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      teacher_name = #{teacherName,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       comment = #{comment,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       watched_times = #{watchedTimes,jdbcType=INTEGER},
       ctime = #{ctime,jdbcType=TIMESTAMP},
-      utime = #{utime,jdbcType=TIMESTAMP}
+      utime = #{utime,jdbcType=TIMESTAMP},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      od = #{od,jdbcType=VARCHAR},
+      sd = #{sd,jdbcType=VARCHAR},
+      hd = #{hd,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
