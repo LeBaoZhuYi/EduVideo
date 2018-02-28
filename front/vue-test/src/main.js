@@ -118,15 +118,16 @@ new Vue({
             return;
           }
         });
+      } else {
+        let checkUrl = '/api/user/checkLogin';
+        this.$http.get(checkUrl).then((response) => {
+          if (response.data.status != 0) {
+            this.$message.error('当前并未登录');
+            window.location.href = "/noAuth";
+            return;
+          }
+        });
       }
-      let checkUrl = '/api/user/checkLogin';
-      this.$http.get(checkUrl).then((response) => {
-        if (response.data.status != 0) {
-          this.$message.error('当前并未登录');
-          window.location.href = "/noAuth";
-          return;
-        }
-      });
     }
   }
 });

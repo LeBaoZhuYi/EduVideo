@@ -33,7 +33,8 @@ public class TokenService extends BaseService<Token, TokenExample> {
 
 	public boolean checkRole(String accessToken, RoleType goalRoleType){
 		int userId = getUserIdByToken(accessToken);
-		RoleType roleType = userService.getRoleById(userId);
+		if (userId == -1) return false;
+		RoleType roleType = userService.getRole(userId);
 		return roleType == goalRoleType;
 	}
 

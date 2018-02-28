@@ -56,7 +56,8 @@
                   </el-form-item>
                   <el-form-item label="我的生日">
                     <el-col :span="11">
-                      <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;"></el-date-picker>
+                      <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday"
+                                      style="width: 100%;"></el-date-picker>
                     </el-col>
                   </el-form-item>
                   <el-form-item label="我的性别">
@@ -234,24 +235,24 @@
     },
     methods: {
       getUserInfoAndClassInfo: function (token) {
-        this.$http.get("/static/Person.json", {params: {token: token}})
-        //        this.$http.get("/api/student/info", {params: {userId: userId}})
+//        this.$http.get("/static/Person.json", {params: {token: token}})
+        this.$http.get("/api/student/info", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.studyName = response.data.data.stuName;
-              this.groupName = "分组一";
-              this.studyIntro = response.data.data.stuIntro;
-              this.teacherRemark = response.data.data.remark;
+              this.studyName = response.data.data.studyName;
+              this.groupName = response.data.data.groupName;
+              this.studyIntro = response.data.data.studyIntro;
+              this.teacherRemark = response.data.data.teacherRemark;
               this.parentWords = response.data.data.parentWords;
               this.phone = response.data.data.phone;
-              this.sex = response.data.data.sex == "女孩" ? "可爱的小女孩" : "帅气的小男孩";
+              this.sex = response.data.data.sex;
               this.interest = response.data.data.interest;
               this.disagree = response.data.data.disagree;
               this.ideal = response.data.data.ideal;
-              this.form.studyName = response.data.data.stuName;
-              this.form.studyIntro = response.data.data.stuIntro;
-              this.form.teacherRemark = response.data.data.remark;
-              this.form.sex = "男孩";
+              this.form.studyName = response.data.data.studyName;
+              this.form.studyIntro = response.data.data.studyIntro;
+              this.form.teacherRemark = response.data.data.teacherRemark;
+              this.form.sex = response.data.data.sex;
               this.form.birthday = response.data.data.birthday;
               this.form.parentWords = response.data.data.parentWords;
               this.form.phone = response.data.data.phone;
@@ -279,7 +280,7 @@
             }
           });
       },
-      update(){
+      update() {
 
       }
     }

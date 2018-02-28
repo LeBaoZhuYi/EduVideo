@@ -92,6 +92,30 @@
               this.info.studyName = response.data.data.stuName;
               this.info.studyId = response.data.data.studyId;
               this.info.groupName = response.data.data.groupName;
+              if (videoClassId == null) {
+                this.$http.get(this.getTodayClassInfoUrl, {params: {token: token}})
+                  .then((response) => {
+                    if (response.data.status == 0) {
+                      this.info.videoTitle = response.data.data.videoTitle;
+                      this.info.isWatched = response.data.data.isWatched;
+                      this.info.teacherName = response.data.data.teacherName;
+                      this.info.classTimes = response.data.data.classTimes;
+                      this.todayClassStartTime = response.data.data.todayClassStartTime;
+                      this.todayClassEndTime = response.data.data.todayClassEndTime;
+                    } else if (response.data.status == 1) {
+                      this.info.videoTitle = "今日没有课程";
+                      this.info.isWatched = "略";
+                      this.info.teacherName = "略";
+                      this.info.classTimes = "略";
+                      this.todayClassStartTime = 0;
+                      this.todayClassEndTime = 0;
+                    } else if (response.data.status > 0) {
+                      this.$alert("获取课程信息失败!" + response.data.msg, "错误");
+                    } else {
+                      this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
+                    }
+                  });
+              }
             } else if (response.data.status > 0) {
               this.$alert("获取用户信息失败!" + response.data.msg, "错误");
             } else {
@@ -99,30 +123,7 @@
             }
           });
         // this.$http.get("/static/Person.json", {params: {userId: userId}})
-        if (videoClassId == null) {
-          this.$http.get(this.getTodayClassInfoUrl, {params: {token: token}})
-            .then((response) => {
-              if (response.data.status == 0) {
-                this.info.videoTitle = response.data.data.videoTitle;
-                this.info.isWatched = response.data.data.isWatched;
-                this.info.teacherName = response.data.data.teacherName;
-                this.info.classTimes = response.data.data.classTimes;
-                this.todayClassStartTime = response.data.data.todayClassStartTime;
-                this.todayClassEndTime = response.data.data.todayClassEndTime;
-              } else if (response.data.status == 1) {
-                this.info.videoTitle = "今日没有课程";
-                this.info.isWatched = "略";
-                this.info.teacherName = "略";
-                this.info.classTimes = "略";
-                this.todayClassStartTime = 0;
-                this.todayClassEndTime = 0;
-              } else if (response.data.status > 0) {
-                this.$alert("获取课程信息失败!" + response.data.msg, "错误");
-              } else {
-                this.$alert("获取课程信息失败！请稍后再试或联系管理员", "错误");
-              }
-            });
-        }
+
         if (videoClassId != null) {
           this.videoClassId = videoClassId;
           this.info.videoTitle = "略";

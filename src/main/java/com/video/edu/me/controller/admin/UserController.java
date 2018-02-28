@@ -155,21 +155,28 @@ public class UserController {
     private Map<String, Object> login(String loginName, String token, long timeStamp) {
         Map<String, Object> res = new HashMap<>();
         try {
-            Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(loginName, String.format("%s+%d", token, timeStamp));
-            subject.login(usernamePasswordToken);
-            UserExample userExample = new UserExample();
-            userExample.createCriteria().andLoginNameEqualTo(loginName);
-            User user = userService.selectByExample(userExample).get(0);
-            // 更新最后一次登录时间
-            user.setLastLoginTime(new Date());
-            userService.updateByPrimaryKey(user);
-            String accessToken = tokenService.afterLogin(user.getId());
-            Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
-            AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
-            res.put("status", 0);
-            res.put("msg", "");
-            res.put("data", accessToken);
+            RoleType roleType = userService.getRole(loginName);
+            if (!(roleType == RoleType.ADMIN)){
+                res.put("status", 3);
+                res.put("msg", "不允许串号登录");
+                res.put("data", null);
+            } else {
+                Subject subject = SecurityUtils.getSubject();
+                UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(loginName, String.format("%s+%d", token, timeStamp));
+                subject.login(usernamePasswordToken);
+                UserExample userExample = new UserExample();
+                userExample.createCriteria().andLoginNameEqualTo(loginName);
+                User user = userService.selectByExample(userExample).get(0);
+                // 更新最后一次登录时间
+                user.setLastLoginTime(new Date());
+                userService.updateByPrimaryKey(user);
+                String accessToken = tokenService.afterLogin(user.getId());
+                Map<String, Object> userMap = ObjectMapTransformUtil.obj2Map(user);
+                AdjustEntityParamsUtil.removeParams(userMap, AdjustEntityParamsUtil.USER_USELESS_PARAMS);
+                res.put("status", 0);
+                res.put("msg", "");
+                res.put("data", accessToken);
+            }
         } catch (UnknownAccountException ue) {
             logger.error("login error with status: {}, loginName: {}, exception: {}", 1, loginName, ue.getMessage());
             res.put("status", 1);
@@ -202,7 +209,7 @@ public class UserController {
         String token = "";
         if (null != cookies) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
+                if (cookie.getName().equals("admin_token")) {
                     token = cookie.getValue();
                 }
             }

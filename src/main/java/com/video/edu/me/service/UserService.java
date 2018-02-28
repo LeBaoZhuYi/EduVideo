@@ -37,7 +37,14 @@ public class UserService extends BaseService<User, UserExample> {
 		return user.getLoginName();
 	}
 
-	public RoleType getRoleById(int userId){
+	public RoleType getRole(String loginName){
+		UserExample userExample = new UserExample();
+		userExample.createCriteria().andLoginNameEqualTo(loginName);
+		List<User> userList = userMapper.selectByExample(userExample);
+		return RoleType.getById(userList.get(0).getRoleId());
+	}
+
+	public RoleType getRole(int userId){
 		User user = userMapper.selectByPrimaryKey(userId);
 		return RoleType.getById(user.getRoleId());
 	}

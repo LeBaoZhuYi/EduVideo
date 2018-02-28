@@ -65,10 +65,6 @@ export default new Router({
         {
           path: '/admin/add-group',
           component: resolve => require(['../components/admin/page/AddGroup.vue'], resolve)       // Vue-Core-Image-Upload组件
-        },
-        {
-          path: '/admin/login',
-          component: resolve => require(['../components/admin/page/Login.vue'], resolve)
         }
       ]
     },
@@ -83,6 +79,10 @@ export default new Router({
     {
       path: '/person',
       component: resolve => require(['../components/Person.vue'], resolve)
+    },
+    {
+      path: '/admin/login',
+      component: resolve => require(['../components/admin/page/Login.vue'], resolve)
     }
   ]
 })
