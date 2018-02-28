@@ -13,7 +13,7 @@ Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 Vue.prototype.setLocalStorage = function (key, value) {
-  if(value == null){
+  if (value == null) {
     return;
   }
   let curTime = new Date().getTime();
@@ -34,7 +34,7 @@ Vue.prototype.getLocalStorage = function (key, value) {
     return dataObjDatatoJson;
   }
 };
-Vue.prototype.dateToString = function(date) {
+Vue.prototype.dateToString = function (date) {
   let y = date.getFullYear();
   let m = date.getMonth() + 1;
   m = m < 10 ? ('0' + m) : m;
@@ -46,21 +46,21 @@ Vue.prototype.dateToString = function(date) {
   let second = date.getSeconds();
   minute = minute < 10 ? ('0' + minute) : minute;
   second = second < 10 ? ('0' + second) : second;
-  return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+  return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 };
-Vue.prototype.timestampToString = function(timeStamp) {
+Vue.prototype.timestampToString = function (timeStamp) {
   let date = new Date(timeStamp);
   return this.dateToString(date);
 };
-Vue.prototype.formatObjectData = function(data) {
+Vue.prototype.formatObjectData = function (data) {
   Object.keys(data).forEach(k => {
-    if (data[k] == undefined){
+    if (data[k] == undefined) {
       data[k] = "";
     }
     if (k == "ctime" || k == "startTime" || k == "endTime") {
       data[k] = this.timestampToString(data[k]);
-    } else{
-      data[k] =  String(data[k]);
+    } else {
+      data[k] = String(data[k]);
     }
   });
 };
@@ -74,7 +74,16 @@ Vue.prototype.setCookie = function (name, value, exDays) {
 Vue.prototype.clearCookie = function (name) {
   this.setCookie(name, "", -1);
 };
-
+Vue.prototype.getCookie = function (cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+  }
+  return "";
+};
 new Vue({
   el: '#app',
   router,
@@ -94,10 +103,10 @@ new Vue({
         this.$router.push('/b');
       }
       if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"
-        || this.$route.path == "/test" || this.$route.path == "/noAuth"){
+        || this.$route.path == "/test" || this.$route.path == "/noAuth") {
         return;
       }
-      if (this.$route.path.indexOf("/admin") >= 0){
+      if (this.$route.path.indexOf("/admin") >= 0) {
         return;
       }
       let userId = this.getLocalStorage("userId");

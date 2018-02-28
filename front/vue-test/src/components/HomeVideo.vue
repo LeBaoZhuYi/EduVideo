@@ -99,11 +99,11 @@
           return;
         }
         let videoClassId = -1;
-        let userId = this.getLocalStorage("userId");
+        let token = this.getCookie("token");
         if (this.videoClassId != ""){
           videoClassId = this.videoClassId;
         }
-        this.$http.get(this.getVideoUrl, {params: {userId: userId, videoClassId: videoClassId}}).then((response) => {
+        this.$http.get(this.getVideoUrl, {params: {token: token, videoClassId: videoClassId}}).then((response) => {
           if (response.data.status == 0) {
             let fileId = response.data.data.fileId;
             let sd = response.data.data.sd;

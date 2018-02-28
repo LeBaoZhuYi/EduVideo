@@ -229,17 +229,12 @@
       }
     },
     mounted: function () {
-      let userId = this.getLocalStorage("userId");
-      if (userId == null) {
-        this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
-        this.$router.push('/');
-        return;
-      }
-      this.getUserInfoAndClassInfo(userId);
+      let token = this.getCookie("token");
+      this.getUserInfoAndClassInfo(token);
     },
     methods: {
-      getUserInfoAndClassInfo: function (userId) {
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
+      getUserInfoAndClassInfo: function (token) {
+        this.$http.get("/static/Person.json", {params: {token: token}})
         //        this.$http.get("/api/student/info", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {
@@ -270,7 +265,7 @@
               this.$alert("获取用户信息失败！请稍后再试或联系管理员", "错误");
             }
           });
-        this.$http.get("/static/Person.json", {params: {userId: userId}})
+        this.$http.get("/static/Person.json", {params: {token: token}})
         //        this.$http.get("/api/videoClass/today", {params: {userId: userId}})
           .then((response) => {
             if (response.data.status == 0) {

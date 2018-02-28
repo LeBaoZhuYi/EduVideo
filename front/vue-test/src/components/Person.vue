@@ -31,6 +31,14 @@
       HomeVideoList,
       PersonInfo
     },
+    beforeMount() {
+      let token = this.getCookie("token");
+      if (token == null) {
+        this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
+        this.$router.push('/');
+        return;
+      }
+    },
     methods: {
       header(path){
 

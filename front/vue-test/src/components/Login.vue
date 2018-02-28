@@ -67,8 +67,7 @@
         })
           .then((response) => {
             if (response.data.status == 0) {
-              this.setLocalStorage('loginName', response.data.data.loginName);
-              this.setLocalStorage('userId', response.data.data.id);
+              this.setLocalStorage('token', response.data.data);
               this.setLocalStorage("isLogined", "true");
               window.location.href = "/home";
             } else if (response.data.status > 0) {

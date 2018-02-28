@@ -50,9 +50,9 @@
     },
     methods: {
       getVideoList: function () {
-        let userId = this.getLocalStorage("userId");
+        let token = this.getCookie("token");
         // this.$http.get("/static/VideoList.json", {params: {userId: userId}})
-        this.$http.get(this.getVideoClassListUrl, {params: {userId: userId}})
+        this.$http.get(this.getVideoClassListUrl, {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               this.videoClassList = response.data.data;

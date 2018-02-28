@@ -74,19 +74,19 @@
       HomeVideoList
     },
     beforeMount() {
-      let userId = this.getLocalStorage("userId");
-      if (userId == null) {
+      let token = this.getCookie("token");
+      if (token == null) {
         this.$alert("获取用户信息失败！当前用户为空，请重新登录", "错误");
         this.$router.push('/');
         return;
       }
-      this.getUserInfoAndClassInfo(userId);
+      this.getUserInfoAndClassInfo(token);
     },
     methods: {
-      getUserInfoAndClassInfo: function (userId) {
+      getUserInfoAndClassInfo: function (token) {
         // this.$http.get("/static/Person.json", {params: {userId: userId}})
         const videoClassId = this.$router.history.current.query.videoClassId;
-        this.$http.get(this.getStudentInfoUrl, {params: {userId: userId}})
+        this.$http.get(this.getStudentInfoUrl, {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               this.info.studyName = response.data.data.stuName;
@@ -100,7 +100,7 @@
           });
         // this.$http.get("/static/Person.json", {params: {userId: userId}})
         if (videoClassId == null) {
-          this.$http.get(this.getTodayClassInfoUrl, {params: {userId: userId}})
+          this.$http.get(this.getTodayClassInfoUrl, {params: {token: token}})
             .then((response) => {
               if (response.data.status == 0) {
                 this.info.videoTitle = response.data.data.videoTitle;
