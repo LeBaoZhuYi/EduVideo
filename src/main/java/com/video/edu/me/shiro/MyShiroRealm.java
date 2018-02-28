@@ -1,4 +1,4 @@
-package com.video.edu.me.utils;
+package com.video.edu.me.shiro;
 
 
 import java.util.HashSet;
@@ -9,6 +9,7 @@ import com.video.edu.me.dao.UserMapper;
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.enumeration.RoleType;
+import com.video.edu.me.utils.EncryptUtil;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

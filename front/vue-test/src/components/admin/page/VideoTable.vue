@@ -138,7 +138,7 @@
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
           let flag = false;
-          self.formmatObjectData(d);
+          self.formatObjectData(d);
           Object.values(d).forEach(v => {
             if (v.indexOf(self.select_word) > -1) {
               flag = true;

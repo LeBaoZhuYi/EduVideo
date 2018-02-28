@@ -67,11 +67,11 @@
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
-        <table schema="" tableName="video" domainObjectName="Video"
-               enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
-        </table>
+        <!--<table schema="" tableName="video" domainObjectName="Video"-->
+               <!--enableCountByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true"-->
+               <!--enableUpdateByExample="true">-->
+        <!--</table>-->
         <!--<table schema="" tableName="student_group" domainObjectName="StudentGroup"-->
                <!--enableCountByExample="true"-->
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
@@ -92,5 +92,10 @@
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--enableUpdateByExample="true">-->
         <!--</table>-->
+        <table schema="" tableName="token" domainObjectName="Token"
+               enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
+        </table>
     </context>
 </generatorConfiguration>

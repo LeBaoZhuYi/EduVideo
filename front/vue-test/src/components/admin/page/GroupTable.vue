@@ -100,7 +100,7 @@
       data() {
         const self = this;
         self.filtedTableData = self.allData.filter(function (d) {
-          self.formmatObjectData(d);
+          self.formatObjectData(d);
           let is_del = false;
           for (let i = 0; i < self.del_list.length; i++) {
             if (d.studyName === self.del_list[i].studyName) {

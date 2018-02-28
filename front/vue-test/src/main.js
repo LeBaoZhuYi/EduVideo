@@ -52,7 +52,7 @@ Vue.prototype.timestampToString = function(timeStamp) {
   let date = new Date(timeStamp);
   return this.dateToString(date);
 };
-Vue.prototype.formmatObjectData = function(data) {
+Vue.prototype.formatObjectData = function(data) {
   Object.keys(data).forEach(k => {
     if (data[k] == undefined){
       data[k] = "";
@@ -63,7 +63,18 @@ Vue.prototype.formmatObjectData = function(data) {
       data[k] =  String(data[k]);
     }
   });
-}
+};
+
+Vue.prototype.setCookie = function (name, value, exDays) {
+  let d = new Date();
+  d.setTime(d.getTime() + (exDays * 24 * 60 * 60 * 1000));
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + "; " + expires;
+};
+Vue.prototype.clearCookie = function (name) {
+  this.setCookie(name, "", -1);
+};
+
 new Vue({
   el: '#app',
   router,
@@ -82,7 +93,8 @@ new Vue({
       if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
         this.$router.push('/b');
       }
-      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index" || this.$route.path == "/test"){
+      if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"
+        || this.$route.path == "/test" || this.$route.path == "/noAuth"){
         return;
       }
       if (this.$route.path.indexOf("/admin") >= 0){
