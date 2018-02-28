@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum RoleType {
-    ADMIN(ByteUtil.intToByte(1), "admin"),
-    TEACHER(ByteUtil.intToByte(2), "teacher"),
-    USER(ByteUtil.intToByte(3), "user");
+    ADMIN(ByteUtil.intToByte(1), "Admin"),
+    TEACHER(ByteUtil.intToByte(2), "Teacher"),
+    USER(ByteUtil.intToByte(3), "User");
 
     private byte id;
     private String desc;

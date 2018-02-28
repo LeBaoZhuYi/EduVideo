@@ -5,6 +5,7 @@ import com.video.edu.me.entity.UserExample;
 import com.video.edu.me.enumeration.RoleType;
 import com.video.edu.me.service.TokenService;
 import com.video.edu.me.service.UserService;
+import com.video.edu.me.shiro.CustomizedToken;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import org.apache.shiro.SecurityUtils;
@@ -49,8 +50,8 @@ public class UserController {
                 res.put("data", null);
             } else {
                 Subject subject = SecurityUtils.getSubject();
-                UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(loginName, String.format("%s+%d", token, timeStamp));
-                subject.login(usernamePasswordToken);
+                CustomizedToken customizedToken = new CustomizedToken(loginName, String.format("%s+%d", token, timeStamp), RoleType.USER.getDesc());
+                subject.login(customizedToken);
                 UserExample userExample = new UserExample();
                 userExample.createCriteria().andLoginNameEqualTo(loginName);
                 User user = userService.selectByExample(userExample).get(0);

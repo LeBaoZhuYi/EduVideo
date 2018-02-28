@@ -111,7 +111,7 @@
               "autoplay" : false,
               "height": "100%",
               "width": "100%",
-              "clarity": "sd",
+              "clarity": "hd",
               "clarityLabel":{
               }
             };

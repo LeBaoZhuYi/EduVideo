@@ -83,6 +83,10 @@ export default new Router({
     {
       path: '/admin/login',
       component: resolve => require(['../components/admin/page/Login.vue'], resolve)
+    },
+    {
+      path: '/admin/noAuth',
+      component: resolve => require(['../components/admin/page/NoAdminAuth.vue'], resolve)
     }
   ]
 })

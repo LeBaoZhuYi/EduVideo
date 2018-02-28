@@ -61,7 +61,7 @@
 		<!-- 过滤链定义 -->
 		<property name="filters">
 			<map>
-				<entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+				<!--<entry key="kickout" value-ref="kickoutSessionControlFilter"/>-->
 			</map>
 		</property>
 		<property name="filterChainDefinitions">
@@ -71,20 +71,33 @@
 				/user/login = anon
 				/admin/user/checkLogin = anon
 				/admin/user/login = anon
-				/admin/** = kickout, authc,roles[admin]
-				/** = kickout, user, roles[user]
+				<!--/admin/** = kickout, authc,roles[admin]-->
+				<!--/** = kickout, user, roles[user]-->
+				/admin/** = authc,roles[Admin]
+				/** = user, roles[User]
 			</value>
 		</property>
 	</bean>
 
 	<!-- securityManager -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="myRealm" />
 		<property name="sessionManager" ref="sessionManager"/>
+		<property name="authenticator" ref="modularRealmAuthenticator"></property>
 		<property name="cacheManager" ref="shiroEhcacheManager"/>
+		<property name="realms">
+			<list>
+				<ref bean="userRealm" />
+				<ref bean="adminRealm"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="modularRealmAuthenticator" class="com.video.edu.me.shiro.CustomizedModularRealmAuthenticator">
 	</bean>
 	<!-- 自定义Realm实现 -->
 	<bean id="myRealm" class="com.video.edu.me.shiro.MyShiroRealm" />
+	<bean id="userRealm" class="com.video.edu.me.shiro.UserShiroRealm" />
+	<bean id="adminRealm" class="com.video.edu.me.shiro.AdminShiroRealm" />
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 

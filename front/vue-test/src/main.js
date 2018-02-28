@@ -103,7 +103,7 @@ new Vue({
         this.$router.push('/b');
       }
       if (this.$route.path == "/b" || this.$route.path == "/" || this.$route.path == "/index"
-        || this.$route.path == "/test" || this.$route.path == "/noAuth") {
+        || this.$route.path == "/test" || this.$route.path == "/noAuth" || this.$route.path == "/admin/noAuth") {
         return;
       }
       if (this.$route.path.indexOf("/admin") >= 0) {
@@ -114,7 +114,7 @@ new Vue({
         this.$http.get(checkUrl).then((response) => {
           if (response.data.status != 0) {
             this.$message.error('当前并未登录');
-            window.location.href = "/noAuth";
+            window.location.href = "/admin/noAuth";
             return;
           }
         });
