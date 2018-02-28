@@ -20,14 +20,14 @@ export default new Router({
     },
     {
       path: '/admin',
-      redirect: '/admin/index'
+      redirect: '/admin/login'
     },
     {
       path: '/admin',
       component: resolve => require(['../components/admin/Home.vue'], resolve),
       children: [
         {
-          path: '/admin/index',
+          path: '/admin/home',
           component: resolve => require(['../components/admin/page/Readme.vue'], resolve)
         },
         {
@@ -83,14 +83,6 @@ export default new Router({
     {
       path: '/person',
       component: resolve => require(['../components/Person.vue'], resolve)
-    },
-    {
-      path: '/test',
-      component: resolve => require(['../components/Test.vue'], resolve)
-    },
-    {
-      path: '/test2',
-      component: resolve => require(['../components/Test2.vue'], resolve)
     }
   ]
 })

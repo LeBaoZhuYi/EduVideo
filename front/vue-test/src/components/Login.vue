@@ -75,9 +75,6 @@
               this.$message.error('登录失败！请稍后再试或联系管理员');
             }
           });
-      },
-      loginViewController() {
-        this.loginShow = !(this.loginShow);
       }
     }
   }

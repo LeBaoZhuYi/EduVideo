@@ -3,8 +3,8 @@
         <div class="ms-title">后台管理系统</div>
         <div class="ms-login">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
-                <el-form-item prop="username">
-                    <el-input v-model="ruleForm.username" placeholder="username"></el-input>
+                <el-form-item prop="loginName">
+                    <el-input v-model="ruleForm.loginName" placeholder="loginName"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
                     <el-input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')"></el-input>
@@ -23,11 +23,11 @@
         data: function(){
             return {
                 ruleForm: {
-                    username: '',
+                    loginName: '',
                     password: ''
                 },
                 rules: {
-                    username: [
+                    loginName: [
                         { required: true, message: '请输入用户名', trigger: 'blur' }
                     ],
                     password: [
@@ -37,19 +37,43 @@
             }
         },
         methods: {
-            submitForm(formName) {
-                const self = this;
-                self.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            }
-        }
+          submitForm(formName) {
+            let timeStamp = new Date().getTime();
+            this.$refs[formName].validate((valid) => {
+              if (!valid) {
+                this.$message.success('参数有错误！');
+                return false;
+              }
+            });
+            let passwd = crypto.createHash("md5").update(this.ruleForm.password).digest("hex");
+            let token = crypto.createHash("md5").update(passwd + String(timeStamp)).digest("hex");
+            // let url = "";
+            // let url = "?loginName=" + this.ruleForm.loginName + "&token=" + token + "&timeStamp=" + timeStamp
+            // if (this.ruleForm.loginName != "test") {
+            //   url = "/static/ErrorLoginName.json"
+            // } else if (this.ruleForm.password != "123456") {
+            //   url = "/static/ErrorPassword.json"
+            // } else {
+            //   url = "/static/Login.json"
+            // }
+            this.$http.get(this.loginUrl, {
+              params: {
+                loginName: this.ruleForm.loginName,
+                token: token,
+                timeStamp: timeStamp
+              }
+            })
+              .then((response) => {
+                if (response.data.status == 0) {
+                  this.setCookie('token', response.data.data, 1);
+                  window.location.href = "/admin/home";
+                } else if (response.data.status > 0) {
+                  this.$message.error('登录失败！' + response.data.msg);
+                } else {
+                  this.$message.error('登录失败！请稍后再试或联系管理员');
+                }
+              });
+          }
     }
 </script>
 

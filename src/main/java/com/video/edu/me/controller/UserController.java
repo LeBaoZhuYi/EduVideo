@@ -2,6 +2,7 @@ package com.video.edu.me.controller;
 
 import com.video.edu.me.entity.User;
 import com.video.edu.me.entity.UserExample;
+import com.video.edu.me.enumeration.RoleType;
 import com.video.edu.me.service.TokenService;
 import com.video.edu.me.service.UserService;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
@@ -104,7 +105,7 @@ public class UserController {
                 }
             }
         }
-        if (tokenService.getUserIdByToken(token) == -1) {
+        if (!tokenService.checkRole(token, RoleType.USER)) {
             res.put("status", -1);
             res.put("msg", "noAuth");
             res.put("data", "noAuth");

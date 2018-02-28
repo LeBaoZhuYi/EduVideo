@@ -3,9 +3,11 @@ package com.video.edu.me.service;
 import com.video.edu.me.dao.TokenMapper;
 import com.video.edu.me.entity.Token;
 import com.video.edu.me.entity.TokenExample;
+import com.video.edu.me.enumeration.RoleType;
 import com.video.edu.me.utils.EncryptUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +26,15 @@ public class TokenService extends BaseService<Token, TokenExample> {
 	public void setTokenMapper(TokenMapper tokenMapper){
 		this.tokenMapper = tokenMapper;
 		super.setBaseDao(tokenMapper);
+	}
+
+	@Autowired
+	UserService userService;
+
+	public boolean checkRole(String accessToken, RoleType goalRoleType){
+		int userId = getUserIdByToken(accessToken);
+		RoleType roleType = userService.getRoleById(userId);
+		return roleType == goalRoleType;
 	}
 
 	public int getUserIdByToken(String accessToken){
