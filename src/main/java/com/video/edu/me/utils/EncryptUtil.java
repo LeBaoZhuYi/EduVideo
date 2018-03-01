@@ -50,7 +50,7 @@ public class EncryptUtil {
      */
     public static boolean checkPassword(String newpasswd, String oldpasswd){
         try {
-            if (encoderByMd5(newpasswd).equals(oldpasswd.toUpperCase()))
+            if (encoderByMd5(newpasswd).equals(oldpasswd.toLowerCase()))
                 return true;
             else
                 return false;
