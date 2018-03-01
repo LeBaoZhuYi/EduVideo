@@ -36,7 +36,7 @@ public class EncryptUtil {
         for (int i = 0; i < 16; i++) {
             digestHexStr.append(byteHEX(rs[i]));
         }
-        return digestHexStr.toString();
+        return digestHexStr.toString().toUpperCase();
     }
 
     /**
