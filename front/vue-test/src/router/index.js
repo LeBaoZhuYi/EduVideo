@@ -85,6 +85,10 @@ export default new Router({
       component: resolve => require(['../components/Person.vue'], resolve)
     },
     {
+      path: '/updatePassword',
+      component: resolve => require(['../components/UpdatePassword.vue'], resolve)
+    },
+    {
       path: '/admin/login',
       component: resolve => require(['../components/admin/page/Login.vue'], resolve)
     },

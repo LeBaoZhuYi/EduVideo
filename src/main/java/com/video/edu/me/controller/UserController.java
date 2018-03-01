@@ -6,6 +6,7 @@ import com.video.edu.me.enumeration.RoleType;
 import com.video.edu.me.service.TokenService;
 import com.video.edu.me.service.UserService;
 import com.video.edu.me.shiro.CustomizedToken;
+import com.video.edu.me.utils.EncryptUtil;
 import com.video.edu.me.utils.ObjectMapTransformUtil;
 import com.video.edu.me.utils.AdjustEntityParamsUtil;
 import org.apache.shiro.SecurityUtils;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
@@ -44,7 +46,7 @@ public class UserController {
         Map<String, Object> res = new HashMap<>();
         try {
             RoleType roleType = userService.getRole(loginName);
-            if (!(roleType == RoleType.USER)){
+            if (!(roleType == RoleType.USER)) {
                 res.put("status", 3);
                 res.put("msg", "不允许串号登录");
                 res.put("data", null);
@@ -94,7 +96,7 @@ public class UserController {
     private Map<String, Object> noLogin() throws IllegalArgumentException, IllegalAccessException {
         Map<String, Object> res = new HashMap<>();
         res.put("status", 101);
-        res.put("msg", "noAuth");
+        res.put("msg", "请重新登录");
         res.put("data", "noAuth");
         return res;
     }
@@ -115,7 +117,7 @@ public class UserController {
         }
         if (!tokenService.checkRole(token, RoleType.USER)) {
             res.put("status", -1);
-            res.put("msg", "noAuth");
+            res.put("msg", "请重新登录");
             res.put("data", "noAuth");
         } else {
             res.put("status", 0);
@@ -141,6 +143,56 @@ public class UserController {
             res.put("data", null);
         } catch (Exception e) {
             logger.error("logout error with token: {},  exception: {}", token, e.getMessage());
+            res.put("status", -1);
+            res.put("msg", e.getMessage());
+            res.put("data", null);
+        }
+        return res;
+    }
+
+
+    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> updatePassword(@RequestParam Map<String, String> params) {
+        Map<String, Object> res = new HashMap<>();
+        try {
+            String token = params.get("token");
+            int userId = tokenService.getUserIdByToken(token);
+            if (userId == -1) {
+                res.put("status", 102);
+                res.put("msg", "当前登录信息已失效");
+                res.put("data", null);
+                return res;
+            }
+            User user = userService.selectByPrimaryKey(userId);
+            if (user == null) {
+                res.put("status", 1);
+                res.put("msg", "未找到该学生");
+                res.put("data", null);
+            } else {
+                if (!params.get("loginName").equals(user.getLoginName())) {
+                    res.put("status", 2);
+                    res.put("msg", "未找到该学生");
+                    res.put("data", null);
+                } else if (!EncryptUtil.checkPassword(params.get("oldPassword"), user.getPassword())) {
+                    res.put("status", 3);
+                    res.put("msg", "原密码错误");
+                    res.put("data", null);
+                } else {
+                    user.setPassword(EncryptUtil.encoderByMd5(params.get("newPassword")));
+                    userService.updateByPrimaryKey(user);
+                    res.put("status", 0);
+                    res.put("msg", "更新成功");
+                    res.put("data", null);
+                }
+            }
+        } catch (RuntimeException re) {
+            logger.error("update password error with runtimeException: {}", re.getMessage());
+            res.put("status", 100);
+            res.put("msg", re.getMessage());
+            res.put("data", null);
+        } catch (Exception e) {
+            logger.error("update password error with exception: {}", e.getMessage());
             res.put("status", -1);
             res.put("msg", e.getMessage());
             res.put("data", null);

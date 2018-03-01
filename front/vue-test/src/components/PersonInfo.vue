@@ -60,11 +60,8 @@
                                       style="width: 100%;"></el-date-picker>
                     </el-col>
                   </el-form-item>
-                  <el-form-item label="我的性别">
-                    <el-radio-group v-model="form.sex">
-                      <el-radio label="男孩"></el-radio>
-                      <el-radio label="女孩"></el-radio>
-                    </el-radio-group>
+                  <el-form-item label="联系方式">
+                      <el-input v-model="form.phone"></el-input>
                   </el-form-item>
                   <el-form-item label="个人简介">
                     <el-input v-model="form.studyIntro"></el-input>
@@ -84,7 +81,7 @@
                     <el-input v-model="form.ideal"></el-input>
                   </el-form-item>
                   <el-form-item label="我不喜欢">
-                    <el-input v-model="form.studyIntro"></el-input>
+                    <el-input v-model="form.disagree"></el-input>
                   </el-form-item>
                   <el-form-item label="家长评价">
                     <el-input v-model="form.parentWords"></el-input>
@@ -195,7 +192,7 @@
   }
 </style>
 <script>
-
+  import qs from 'qs';
   export default {
     name: "personCenter",
     data() {
@@ -225,19 +222,21 @@
           birthday: "",
           interest: "",
           disagree: "",
-          ideal: ""
+          ideal: "",
+          token: ""
         }
       }
     },
     mounted: function () {
       let token = this.getCookie("token");
+      this.form.token = token;
       this.getUserInfoAndClassInfo(token);
     },
     methods: {
       getUserInfoAndClassInfo: function (token) {
         const self = this;
-       this.$http.get("/static/Person.json", {params: {token: token}})
-        // self.$http.get("/api/student/info", {params: {token: token}})
+//       this.$http.get("/static/Person.json", {params: {token: token}})
+         self.$http.get("/api/student/info", {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
               self.studyName = response.data.data.studyName;
@@ -253,7 +252,6 @@
               self.form.studyName = response.data.data.studyName;
               self.form.studyIntro = response.data.data.studyIntro;
               self.form.teacherRemark = response.data.data.teacherRemark;
-              self.form.sex = response.data.data.sex;
               self.form.birthday = response.data.data.birthday;
               self.form.parentWords = response.data.data.parentWords;
               self.form.phone = response.data.data.phone;
@@ -282,7 +280,25 @@
           });
       },
       update() {
-
+        if ((typeof this.form.birthday)!= "string") {
+          this.form.birthday = this.dateToString(this.form.birthday);
+        }
+        let postData = qs.stringify(this.form);
+        const self = this;
+        self.$http.post(self.updateStudentInfoUrl, postData).then((response) => {
+          if (response.data.status == 0) {
+            this.$alert('修改成功！', '提示', {
+              confirmButtonText: '确定',
+              callback: action => {
+                window.location.href = "/person";
+              }
+            });
+          } else if (response.data.status > 0) {
+            this.$message.error('修改失败！' + response.data.msg);
+          } else {
+            this.$message.error('修改失败！请稍后再试或联系管理员');
+          }
+        });
       }
     }
   }

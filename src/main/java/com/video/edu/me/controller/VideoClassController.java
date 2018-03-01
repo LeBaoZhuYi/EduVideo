@@ -36,6 +36,12 @@ public class VideoClassController {
         Map<String, Object> res = new HashMap<>();
         try {
             int userId = tokenService.getUserIdByToken(token);
+            if (userId == -1){
+                res.put("status", 102);
+                res.put("msg", "当前登录信息已失效");
+                res.put("data", null);
+                return res;
+            }
             List<VideoClass> currentMonthClassList = videoClassService.getCurrentMonthClassListByUserId(userId);
             List<Map<String, Object>> videoClassMapList = new ArrayList<>();
             for (VideoClass videoClass : currentMonthClassList) {
@@ -66,6 +72,12 @@ public class VideoClassController {
         Map<String, Object> res = new HashMap<>();
         try {
             int userId = tokenService.getUserIdByToken(token);
+            if (userId == -1){
+                res.put("status", 102);
+                res.put("msg", "当前登录信息已失效");
+                res.put("data", null);
+                return res;
+            }
             Map<String, Object> data = new HashMap<>();
             VideoClass todayVideoClass = videoClassService.getTodayVideoClassByUserId(userId);
             if (todayVideoClass == null){

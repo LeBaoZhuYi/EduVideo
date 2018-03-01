@@ -36,6 +36,12 @@ public class VideoController {
         int videoId = 0;
         try {
             int userId = tokenService.getUserIdByToken(token);
+            if (userId == -1){
+                res.put("status", 102);
+                res.put("msg", "当前登录信息已失效");
+                res.put("data", null);
+                return res;
+            }
             VideoClass videoClass;
             if (videoClassId == -1) {
                 videoClass = videoClassService.getTodayVideoClassByUserId(userId);

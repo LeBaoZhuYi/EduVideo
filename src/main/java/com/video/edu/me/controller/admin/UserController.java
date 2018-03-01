@@ -217,7 +217,7 @@ public class UserController {
         }
         if (!tokenService.checkRole(token, RoleType.ADMIN)) {
             res.put("status", -1);
-            res.put("msg", "noAuth");
+            res.put("msg", "请重新登录");
             res.put("data", "noAuth");
         } else {
             res.put("status", 0);

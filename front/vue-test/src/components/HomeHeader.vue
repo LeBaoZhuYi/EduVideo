@@ -6,6 +6,7 @@
         <el-menu-item index="1" @click="open('/');">主页</el-menu-item>
         <el-menu-item index="2" @click="open('/home');">今日课程</el-menu-item>
         <el-menu-item index="3" @click="open('/person');">个人中心</el-menu-item>
+        <el-menu-item index="4" @click="open('/updatePassword');">修改密码</el-menu-item>
       </el-menu>
     </el-header>
     <div class="header-line"></div>
