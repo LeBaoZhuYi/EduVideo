@@ -9,7 +9,7 @@
                          :todayClassStartTime="todayClassStartTime"></home-person>
           </el-col>
           <el-col :span="14">
-            <home-video :videoClassId="videoClassId" :todayClassEndTime="todayClassEndTime"
+            <home-video ref="homeVideo" :videoClassId="videoClassId" :todayClassEndTime="todayClassEndTime"
                         :todayClassStartTime="todayClassStartTime"></home-video>
           </el-col>
           <el-col :span="5">
@@ -49,7 +49,7 @@
   export default {
     data() {
       return {
-        videoClassId: "",
+        videoClassId: null,
         getStudentInfoUrl: '/api/student/info',
         getTodayClassInfoUrl: '/api/videoClass/today',
         info: {
@@ -83,6 +83,13 @@
       }
       this.getUserInfoAndClassInfo(token);
       this.checkLoginTimer = setInterval(this.checkLogin, 5000)
+    },
+    mounted() {
+      // this.$http.get("/static/Person.json", {params: {userId: userId}})
+
+      if (this.videoClassId != null && this.videoClassId != "") {
+        this.$refs.homeVideo.run();
+      }
     },
     methods: {
       getUserInfoAndClassInfo: function (token) {
@@ -126,7 +133,7 @@
           });
         // this.$http.get("/static/Person.json", {params: {userId: userId}})
 
-        if (videoClassId != null) {
+        if (videoClassId != null && videoClassId != "") {
           this.videoClassId = videoClassId;
           this.info.videoTitle = "略";
           this.info.isWatched = "略";

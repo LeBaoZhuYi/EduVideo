@@ -4,7 +4,7 @@
   <el-main>
     <transition name="el-zoom-in-center">
       <div v-show="show1" class="grid-content bg-purple-light">
-        <home-pre-video @startPlay="start" @endPlay="end" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-pre-video>
+        <home-pre-video ref="homePreVideo" @startPlay="start" @endPlay="end" :todayClassEndTime="todayClassEndTime" :todayClassStartTime="todayClassStartTime"></home-pre-video>
       </div>
     </transition>
     <transition name="el-zoom-in-center">
@@ -153,6 +153,9 @@
         videoDiv.parentNode.removeChild(videoDiv);
         this.show1 = true;
         this.show2 = false;
+      },
+      run(){
+        this.$refs.homePreVideo.run();
       }
     }
   }
