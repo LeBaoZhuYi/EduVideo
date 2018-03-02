@@ -78,7 +78,10 @@
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
-		<appender-ref ref="console" />
+		
+		<appender-ref ref="LOGDEBUG" />
+		<appender-ref ref="LOGINFO" />
+		<appender-ref ref="LOGERROR" />
 	</root>
 	
 </log4j:configuration>
