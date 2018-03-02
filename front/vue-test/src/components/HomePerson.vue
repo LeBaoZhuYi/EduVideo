@@ -8,7 +8,7 @@
     <div class="line"></div>
     <el-row class="bg-purple">
       <h2>今日课程</h2>
-      <p><em>发布时间：{{info.videoTitle}}</em></p>
+      <p><em>课程名：{{info.videoTitle}}</em></p>
       <p><em>讲师：{{info.teacherName}}</em></p>
       <p><em>开始时间：{{startTime}}</em></p>
       <p><em>结束时间：{{endTime}}</em></p>

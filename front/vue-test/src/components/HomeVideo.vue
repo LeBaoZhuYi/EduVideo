@@ -136,7 +136,7 @@
 //             "https": 1
 //           });
           } else if (response.data.status == 1){
-            this.title = "今日没有课程";
+            this.title = "当前没有课程";
           } else if (response.data.status > 0) {
             this.$message.error('获取今日课程失败！' + response.data.msg);
             return;
