@@ -12,7 +12,6 @@
         <p>一、访问首页http://120.27.14.244:8080</p>
         <p>二、输入账号密码，试用期统一账号test，密码123456</p>
         <p>三、完成登录即跳转到主页，等待课程开始，课程开始后页面自动弹出视频播放框，点击可播放课程视频</p>
-        <img class="pre" src="/static/img/home1.png" />
       </article>
     </div>
     <div class="ms-doc">
