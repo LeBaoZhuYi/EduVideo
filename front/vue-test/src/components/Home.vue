@@ -49,7 +49,7 @@
   export default {
     data() {
       return {
-        videoClassId: null,
+        videoClassId: "",
         getStudentInfoUrl: '/api/student/info',
         getTodayClassInfoUrl: '/api/videoClass/today',
         info: {

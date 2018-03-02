@@ -97,7 +97,7 @@
       start: function () {
         let videoClassId = -1;
         let token = this.getCookie("token");
-        if (this.videoClassId != ""){
+        if (this.videoClassId != "" && this.videoClassId != null){
           videoClassId = this.videoClassId;
         }
         this.$http.get(this.getVideoUrl, {params: {token: token, videoClassId: videoClassId}}).then((response) => {
