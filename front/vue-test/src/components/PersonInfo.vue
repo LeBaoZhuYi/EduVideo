@@ -44,9 +44,12 @@
                 <h1>课程情况</h1>
                 <div class="image_wrapper image_fl"><img src="../assets/temp/images/video_class.jpg"
                                                          alt="Image 5" style="width: 230px;height: 100px"/></div>
-                <p><em>今日课程：{{videoTitle}}</em></p>
-                <p><em>是否已看：{{isWatched}}</em></p>
-                <p><em>我已在线完成：{{classTimes}}次课程</em></p>
+                <!--<p><em>今日课程：{{videoTitle}}</em></p>-->
+                <!--<p><em>是否已看：{{isWatched}}</em></p>-->
+                <!--<p><em>我已在线完成：{{classTimes}}次课程</em></p>-->
+                <p><em>今日课程：</em></p>
+                <p><em>是否已看：</em></p>
+                <p><em>我已在线完成：</em></p>
               </div>
               <div class="panel hide" v-show="item == 3">
                 <h1>基本信息修改</h1>
