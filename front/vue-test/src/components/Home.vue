@@ -98,7 +98,7 @@
         this.$http.get(this.getStudentInfoUrl, {params: {token: token}})
           .then((response) => {
             if (response.data.status == 0) {
-              this.info.studyName = response.data.data.stuName;
+              this.info.studyName = response.data.data.studyName;
               this.info.studyId = response.data.data.studyId;
               this.info.groupName = response.data.data.groupName;
               if (videoClassId == null) {

@@ -1,7 +1,7 @@
 <template>
   <div class="personInfo">
     <el-row class="bg-purple">
-      <h2>{{info.studyName}}</h2>
+      <h2>{{info.studyName}}的信息</h2>
       <p><em>我的学号：{{info.studyId}}</em></p>
       <p><em>我的分组：{{info.groupName}}</em></p>
     </el-row>
